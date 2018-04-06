@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Classe.Modele;
+package Projet.Metier;
 
 import java.util.Objects;
 
@@ -24,7 +24,9 @@ public class Classe {
         orientation = "";
         e = null;
     }
-
+public Classe(String sigle){
+    this.sigle = sigle; 
+}
     public Enseignant getE() {
         return e;
     }

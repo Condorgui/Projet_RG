@@ -3,33 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Classe.Modele;
+package Projet.Metier;
 
-
+import Projet.Metier.Classe;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class Enseignant {
 
-   public Enseignant(){
-       
-   }
-   
-private String matricule; 
-private String nom; 
-private String prenom; 
+    public Enseignant() {
 
-public Classe Titulaire;
+    }
 
-public Classe Remplacant;
+    private String matricule;
+    private String nom;
+    private String prenom;
+
+    private Classe Titulaire;
+
+    private Classe Remplacant;
 
     public Enseignant(String matricule, String nom, String prenom) {
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
-      
+
+    }
+
+    public Enseignant(String Matricule) {
+        this.matricule = Matricule;
     }
 
     public String getMatricule() {
@@ -101,6 +105,5 @@ public Classe Remplacant;
         }
         return true;
     }
-
 
 }

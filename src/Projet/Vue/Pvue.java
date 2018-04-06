@@ -1,14 +1,23 @@
-package Classe.Vue;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Projet.Vue;
 
+import Projet.Metier.Classe;
+import Projet.Metier.Enseignant;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.Collection;
 import java.util.Scanner;
-import Classe.Modele.Classe;
-import Classe.Modele.Enseignant;
 
-public class ClasseVue {
+/**
+ *
+ * @author Guillaume.Rigaux
+ */
+public class Pvue {
 
     private Scanner sc = new Scanner(System.in);
 
@@ -17,18 +26,19 @@ public class ClasseVue {
         List<String> menu = new ArrayList<>(Arrays.asList(
                 "____1. Ajout Enseignant",
                 "____2. Ajout Classe",
-                "____3. Affichage Classes",
-                "____4. Affichage Enseignants",
-                "____5. Modifier Enseignant",
-                "____6. Modifier Classe",
-                "____7. Recherche Enseignant",
-                "____8. Recherche d'une classe",
-                "9. Quitter"));
+                "____3. Modif/suppression des enseignants",
+                "____4. Modif/suppression des classes",
+                "____5. Recherche Enseignant",
+                "____6. Recherche d'une classe",
+                "____7. Gérer les attributions",
+                //"__8. Affichage Enseignants", 
+                //"__9. Affichage Classes",
+                "8. Quitter"));
         affichageListe(menu);
 
         int choix;
         do {
-            String ch1 = getMsg("Choix ?");
+            String ch1 = getMessage("Choix ?");
             choix = Integer.parseInt(ch1);
             if (choix > 0 && choix <= menu.size()) {
                 break;
@@ -40,11 +50,11 @@ public class ClasseVue {
         } while (true);
         return choix;
     }
-
+    
     public Classe newClasse() {
-        String sigle = getMsg("Entrez le sigle : ");
-        String orientation = getMsg("Quelle est l'orientation ? ");
-        String annee = getMsg("Quelle est l'année de la classe : ");
+        String sigle = getMessage("Entrez le sigle : ");
+        String orientation = getMessage("Quelle est l'orientation ? ");
+        String annee = getMessage("Quelle est l'année de la classe : ");
         int annee2 = Integer.parseInt(annee);
 
         Classe c = new Classe(sigle, annee2, orientation);
@@ -54,15 +64,15 @@ public class ClasseVue {
 
     public Enseignant newEnseignant() {
 
-        String nom = getMsg("Entrez le nom : ");
-        String prenom = getMsg("Entrez le prénom : ");
-        String matricule = getMsg("Entrez son matricule : ");
+        String nom = getMessage("Entrez le nom : ");
+        String prenom = getMessage("Entrez le prénom : ");
+        String matricule = getMessage("Entrez son matricule : ");
         Enseignant e = new Enseignant(matricule, nom, prenom);
 
         return e;
     }
 
-    public void affClasses(Classe c) {
+   /* public void affClasses(Classe c) {
         
         affichageMessage("Classe : "+c.getSigle());
         affichageMessage("C'est une classe de "+c.getAnnee()+" ère/ème  année");
@@ -81,8 +91,8 @@ public class ClasseVue {
         affichageMessage("Matricule  :" + e.getMatricule());
         
     }
-
-    public String getMsg() {
+*/
+    public String getMessage() {
         String msg = sc.nextLine();
         return msg;
     }
@@ -91,9 +101,9 @@ public class ClasseVue {
         System.out.println(msg);
     }
 
-    public String getMsg(String msg) {
+    public String getMessage(String msg) {
         affichageMessage(msg);
-        return getMsg();
+        return getMessage();
     }
 
     public void affichageListe(Collection liste) {
@@ -103,4 +113,18 @@ public class ClasseVue {
         }
     }
 
+    public Classe rechClasse(){
+        
+        String sigle = getMessage("Quel est le sigle à rechercher ? ");
+        Classe cRech = new Classe(sigle); 
+        return cRech; 
+    }
+    
+    public Enseignant rechEnseignant(){
+        
+        String matricule = getMessage("Matricule de l'enseignant à rechercher :");
+        Enseignant eRech = new Enseignant(matricule);
+        return eRech; 
+    }
+    
 }
