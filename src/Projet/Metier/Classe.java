@@ -92,7 +92,8 @@ public Classe(String sigle){
 
     @Override
     public String toString() {
-        return "Classe{" + "Sigle=" + sigle + ", Annee=" + annee + ", Orientation=" + orientation + "Enseignant="+e+ '}';
+        return "Classe de "+annee+" ème année et d'orientation "+orientation+" dont l'enseignant est : "+e;
+       
     }
 
 }

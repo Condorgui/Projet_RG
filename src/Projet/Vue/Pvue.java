@@ -24,16 +24,17 @@ public class Pvue {
     public int menuPrincipal() {
 
         List<String> menu = new ArrayList<>(Arrays.asList(
-                "____1. Ajout Enseignant",
-                "____2. Ajout Classe",
-                "____3. Modif/suppression des enseignants",
-                "____4. Modif/suppression des classes",
-                "____5. Recherche Enseignant",
-                "____6. Recherche d'une classe",
-                "____7. Gérer les attributions",
+                " Ajout Enseignant",
+                " Ajout Classe",
+                " Modif/suppression des enseignants",
+                " Modif/suppression des classes",
+                " Recherche Enseignant",
+                " Recherche d'une classe",
+                " Affichage",
+                " Gérer les attributions",
                 //"__8. Affichage Enseignants", 
                 //"__9. Affichage Classes",
-                "8. Quitter"));
+                 "Quitter"));
         affichageListe(menu);
 
         int choix;
@@ -42,15 +43,14 @@ public class Pvue {
             choix = Integer.parseInt(ch1);
             if (choix > 0 && choix <= menu.size()) {
                 break;
+            } else {
+                affichageMessage("Recommencez");
             }
-            else{
-               affichageMessage("Recommencez"); 
-            }
-            
+
         } while (true);
         return choix;
     }
-    
+
     public Classe newClasse() {
         String sigle = getMessage("Entrez le sigle : ");
         String orientation = getMessage("Quelle est l'orientation ? ");
@@ -72,26 +72,24 @@ public class Pvue {
         return e;
     }
 
-   /* public void affClasses(Classe c) {
-        
-        affichageMessage("Classe : "+c.getSigle());
-        affichageMessage("C'est une classe de "+c.getAnnee()+" ère/ème  année");
+    public void affClasses(Classe c) {
+
+        affichageMessage("Classe : " + c.getSigle());
+        affichageMessage("C'est une classe de " + c.getAnnee() + " ère/ème  année");
         //préciser classe 
-        affichageMessage("Classe d'orientation : "+c.getOrientation());
-        
+        affichageMessage("Classe d'orientation : " + c.getOrientation());
+
         affichageMessage("L'enseignant de cette classe :" + c.getE());
-        
-      
+
     }
-    
- 
+
     public void affEnseignant(Enseignant e) {
         affichageMessage("Nom de l'enseignant :" + e.getNom());
         affichageMessage("Prénom de l'enseignant :" + e.getPrenom());
         affichageMessage("Matricule  :" + e.getMatricule());
-        
+
     }
-*/
+
     public String getMessage() {
         String msg = sc.nextLine();
         return msg;
@@ -113,18 +111,18 @@ public class Pvue {
         }
     }
 
-    public Classe rechClasse(){
-        
+    public Classe rechClasse() {
+
         String sigle = getMessage("Quel est le sigle à rechercher ? ");
-        Classe cRech = new Classe(sigle); 
-        return cRech; 
+        Classe cRech = new Classe(sigle);
+        return cRech;
     }
-    
-    public Enseignant rechEnseignant(){
-        
+
+    public Enseignant rechEnseignant() {
+
         String matricule = getMessage("Matricule de l'enseignant à rechercher :");
         Enseignant eRech = new Enseignant(matricule);
-        return eRech; 
+        return eRech;
     }
-    
+
 }

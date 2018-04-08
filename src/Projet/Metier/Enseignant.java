@@ -78,7 +78,7 @@ public class Enseignant {
 
     @Override
     public String toString() {
-        return "Enseignant{" + "matricule=" + matricule + ", nom=" + nom + ", prenom=" + prenom + ", Titulaire=" + Titulaire + ", Remplacant=" + Remplacant + '}';
+        return " => Enseignant "+nom+" "+prenom+" au matricule "+matricule;
     }
 
     @Override

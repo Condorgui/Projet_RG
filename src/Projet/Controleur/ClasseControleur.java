@@ -9,6 +9,7 @@ import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
 import Projet.Modele.ClasseModele;
 import Projet.Vue.Pvue;
+import java.util.List;
 
 /**
  *
@@ -44,24 +45,24 @@ public class ClasseControleur {
                     ajoutClasse();
                     break;
                 case 3:
-             //       modifyE();
+                    modifyE();
                     break;
 
                 case 4:
-              //      modifyC();
+                    modifyC();
                     break;
                 case 5:
-                    pv.affichageMessage("Matricule à rechercher : ");
-              //      rechEnseignant();
+
+                    rechEnseignant();
                     break;
                 case 6:
-                    pv.affichageMessage("Sigle à rechercher : ");
-               //     rechClasse();
+
+                    rechClasse();
                     break;
-                /* case 7:
-                    gestionAttribution(); 
+                case 7:
+                    affichage();
                     break;
-                 */
+
                 case 8:
                     pv.affichageMessage("Fin");
                     break;
@@ -85,96 +86,77 @@ public class ClasseControleur {
         pv.affichageMessage(msg);
 
     }
-    /*
-    public void vendreVehicule() {
-        Voiture oRech = rechVoiture();
 
-        if (oRech != null) {
-            gv.affMsg("la voiture trouvée est :");
-            gv.affVoiture(oRech);
-        } else {
-            gv.affMsg("voiture introuvable");
-            return;
-        }
-        if (oRech.estVendue()) {
-            gv.affMsg("voiture déjà vendue");
-            return;
-        }
-        Client cliRech = rechClient();
-        if (cliRech == null) {
-            gv.affMsg("client introuvable");
-            return;
-        }
-        gv.affMsg("le client trouvé est :");
-        gv.affClient(cliRech);
-        String msg = gm.vendre(oRech, cliRech);
-        gv.affMsg(msg);
+    private void rechClasse() {
+        Classe cl = pv.rechClasse();
+        pv.affichageMessage(cm.getClasse(cl));
     }
 
-    public void changementAdresse() {
-
-        Client cliRech = rechClient();
-        if (cliRech == null) {
-            gv.affMsg("client introuvable");
-            return;
-        }
-        gv.affClient(cliRech);
-        String nvadr = gv.getMsg("nouvelle adresse :");
-        String msg = gm.changeAdresse(cliRech, nvadr);
-        gv.affMsg(msg);
+    private void rechEnseignant() {
+        Enseignant es = pv.rechEnseignant();
+        pv.affichageMessage(cm.getEnseignant(es));
     }
 
-    public Client rechClient() {
-        Client cRech = gv.formRechClient();
-        return gm.getClient(cRech);
+    private void modifyC() {
+
+        int choix = Integer.parseInt(pv.getMessage(""
+                + "1. Modification de la classe"
+                + "       2. Suppression de la classe"));
+        Classe cRech = pv.rechClasse();
+        Classe tmpC = cm.getClasse(cRech);
+        if (choix == 1) {
+
+            pv.getMessage("Modification de la classe");
+
+            pv.affichageMessage(tmpC);
+            Classe nvClasse = pv.newClasse();
+            pv.affichageMessage(cm.modifyC(nvClasse, tmpC));
+
+        } else if (choix == 2) {
+            pv.affichageMessage("--- Suppression de la classe --- ");
+            pv.affichageMessage(tmpC);
+            pv.affichageMessage(cm.deleteCl(tmpC));
+        }
     }
 
-    public Voiture rechVoiture() {
-        String numChassis = gv.formRechVoiture();
-        return gm.getVoiture(numChassis);
-    }
+    private void modifyE() {
+        int choix = Integer.parseInt(pv.getMessage(""
+                + "1. Modification de l'enseignant"
+                + "      2. Suppression de l'enseignant"));
+        Enseignant eRech = pv.rechEnseignant();
+        Enseignant tmpE = cm.getEnseignant(eRech);
+        if (choix == 1) {
 
-    public void proprietaire() {
-        Voiture vRech = rechVoiture();
-        if (vRech == null) {
-            gv.affMsg("voiture introuvable");
-            return;
-        }
-        Client cRech = gm.getAcheteur(vRech);
-        if (cRech == null) {
-            gv.affMsg("voiture encore en vente");
-            return;
-        }
-        gv.affClient(cRech);
-    }
+            pv.getMessage(" --- Modification de l'enseignant ---");
 
-    public void proprietes() {
-        Client cl = rechClient();
-        if (cl == null) {
-            gv.affMsg("client introuvable ");
-            return;
+            pv.affichageMessage(tmpE);
+            Enseignant nvEns = pv.newEnseignant();
+            pv.affichageMessage(cm.modifyE(nvEns, tmpE));
+
+        } else if (choix == 2) {
+            pv.affichageMessage("--- Suppression de l'enseignant ---");
+            pv.affichageMessage(tmpE);
+            pv.affichageMessage(cm.deleteE(tmpE));
         }
-        List<Voiture> lv = gm.getVoituresClient(cl);
-        gv.affListe(lv);
 
     }
 
-    public void listeVoitures() {
-        String chs = gv.getMsg("1.tri par chassis 2.tri par prix ");
-        int ch = Integer.parseInt(chs);
-        List<Voiture> lv = gm.toutesVoitures(ch);
-        if (lv == null) {
-            gv.affMsg("mode incorrect");
-            return;
+    private void affichage() {
+        int choix = Integer.parseInt(pv.getMessage(""
+                + "1. Affichage des enseignants"
+                + "      2. Affichage des classes"));
+
+        if (choix == 1) {
+
+            List<Enseignant> le = cm.tousEns();
+            pv.affichageMessage(le);
+
+        } else if (choix == 2) {
+            List<Classe> lc = cm.toutesClasses();
+            pv.affichageMessage(lc);
         }
-        gv.affListe(lv);
+
     }
 
-    public void listeClients() {
-        List<Client> lc = gm.tousClients();
-        gv.affListe(lc);
-    }
-
-}
-     */
+    
 }

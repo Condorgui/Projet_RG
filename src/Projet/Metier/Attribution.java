@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class Attribution {
 
-    private Classe Classe;
-    private Classe Enseignant;
+    protected Classe Classe;
+    protected Classe Enseignant;
 
     public Attribution() {
 
@@ -60,10 +60,7 @@ public class Attribution {
             return false;
         }
         final Attribution other = (Attribution) obj;
-        if (!Objects.equals(this.Enseignant, other.Enseignant)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.Enseignant, other.Enseignant);
     }
     
 

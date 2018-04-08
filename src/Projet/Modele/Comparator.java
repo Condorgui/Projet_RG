@@ -6,6 +6,7 @@ public class Comparator {
 
     public abstract class compareEns implements java.util.Comparator<Enseignant> {
 
+        @Override
         public int compare(Enseignant c1, Enseignant c2) {
             if (!c1.getNom().equals(c2.getNom())) {
                 return c1.getNom().compareTo(c2.getNom());

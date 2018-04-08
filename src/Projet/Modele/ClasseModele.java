@@ -7,6 +7,7 @@ package Projet.Modele;
 
 import Projet.Metier.Enseignant;
 import Projet.Metier.Classe;
+import Projet.Metier.Attribution;
 import java.util.*;
 
 /**
@@ -15,19 +16,18 @@ import java.util.*;
  */
 public class ClasseModele {
 
-    /**
-     * liste de tous les clients
-     */
-    protected List<Enseignant> tousLesEns = new ArrayList<>();
-    /**
-     * liste de toutes les voitures
-     */
-    protected List<Classe> toutesLesClasses = new ArrayList<>();
+    private List<Enseignant> tousLesEns;
+    private List<Classe> toutesLesClasses;
+    private List<Attribution> toutesLesAttributions;
 
     /**
      * constructeur par défaut
      */
     public ClasseModele() {
+
+        tousLesEns = new ArrayList<>();
+        toutesLesClasses = new ArrayList<>();
+        toutesLesAttributions = new ArrayList<>();
 
     }
 
@@ -35,7 +35,11 @@ public class ClasseModele {
         if (c == null) {
             return "Classe inexistante";
         }
-        toutesLesClasses.add(c);
+        if (toutesLesClasses.contains(c)) {
+            return "Classe existe déjà";
+        } else {
+            toutesLesClasses.add(c);
+        }
         return "Création de la classe effectuée";
     }
 
@@ -50,173 +54,80 @@ public class ClasseModele {
         return "Ajout de l'enseignant";
     }
 
-    public Classe getClasse(String sigle) {
-        Classe rech = new Classe(sigle);
-        int p = toutesLesClasses.indexOf(rech);
-        if (p < 0) {
+    public Classe getClasse(Classe cl) {
+
+        int i = toutesLesClasses.indexOf(cl);
+        if (i < 0) {
             return null;
         } else {
-            return toutesLesClasses.get(p);
+            return toutesLesClasses.get(i);
         }
     }
 
     public Enseignant getEnseignant(Enseignant aRech) {
-        int p = tousLesEns.indexOf(aRech);
-        if (p < 0) {
+        int i = tousLesEns.indexOf(aRech);
+        if (i < 0) {
             return null;
         } else {
-            return tousLesEns.get(p);
+            return tousLesEns.get(i);
         }
     }
 
-    /**
-     * méthode permettant de retrouver tous les clients
-     *
-     * @return tous les clients de la liste
-     */
+    public String modifyC(Classe nvClasse, Classe tmpC) {
+
+        int i = toutesLesClasses.indexOf(tmpC);
+        if (i < 0) {
+            return "Classe introuvable";
+
+        } else {
+            toutesLesClasses.set(i, nvClasse);
+        }
+        return "Modification effectuée";
+
+    }
+
+    public String modifyE(Enseignant nvEns, Enseignant tmpE) {
+        int i = tousLesEns.indexOf(tmpE);
+        if (i < 0) {
+            return "Enseignant introuvable";
+
+        } else {
+            tousLesEns.set(i, nvEns);
+        }
+        return "Modification effectuée";
+
+    }
+
+    public String deleteE(Enseignant es) {
+        int i = tousLesEns.indexOf(es);
+        if (i < 0) {
+            return "Enseignant introuvable";
+
+        } else {
+            tousLesEns.remove(i);
+        }
+        return "Suppression effectuée";
+    }
+
+    public String deleteCl(Classe cl) {
+        int i = toutesLesClasses.indexOf(cl);
+        if (i < 0) {
+            return "Classe introuvable";
+
+        } else {
+            toutesLesClasses.remove(i);
+        }
+        return "Suppression effectuée";
+    }
+
     public List<Enseignant> tousEns() {
         return tousLesEns;
+    }
+
+    public List<Classe> toutesClasses() {
+
+        return toutesLesClasses;
 
     }
 
-    /*
-     * méthode permettant de trouver toutes les voitures d'un client
-     *
-     * @param c client propriétaire
-     * @return toutes les voitures du client
-     
-    public List<Enseignant> getVoituresClient(Client c) {
-        List<Voiture> listev = new ArrayList<>();
-        if (c == null) {
-            return listev;
-        }
-        if (mesVoitures.isEmpty()) {
-            return listev;
-        }
-
-        for (Voiture v : mesVoitures) {
-            if (!v.estVendue()) {
-                continue;
-            }
-            Client ca = v.getAcheteur();
-            if (ca.equals(c)) {
-                listev.add(v);
-            }
-        }
-        if (listev.isEmpty()) {
-            return null;
-        }
-        return listev;
-    }
-
-    
-     * méthode retournant l'acheteur d'une voiture
-     *
-     * @param v voiture achetée
-     * @return propriétaire ou null si encore en vente
-     
-    public Client getAcheteur(Voiture v) {
-        if (!v.estVendue()) {
-            return null;
-        }
-        return v.getAcheteur();
-    }
-
-    /**
-     * méthode retournant toutes les voitures triées
-     *
-     * @param mode mode de tri (1 ou 2)
-     * @return liste des voitures triées
-     
-    public List<Voiture> toutesVoitures(int mode) {
-        switch (mode) {
-            case 1:
-                mesVoitures.sort(new ChassisComparator());
-                //Collections.sort(mesVoitures,new ChassisComparator());
-                break;
-            case 2:
-                mesVoitures.sort(new PrixComparator());
-                break;
-            default:
-                return null;
-
-        }
-        return mesVoitures;
-
-    }
-
-    /**
-     * méthode permettant de changer l'adresse d'un client
-     *
-     * @param cl client dont on désire changer l'adresse
-     * @param adr nouvelle adresse
-     * @return diagnostic du changement
-     
-    public String changeAdresse(Client cl, String adr) {
-        cl.setAdresse(adr);
-        return "changement d'adresse effectué";
-    }
-
-    /**
-     * méthode permettant de vendre une voiture à un client
-     *
-     * @param v voiture à vendre
-     * @param cl acheteur
-     * @return diagnostic de la vente
-     
-    public String vendre(Voiture v, Client cl) {
-        String msg = v.vendre(cl);
-        return msg;
-    }
-
-    /**
-     * méthode permettant de supprimer une voiture
-     *
-     * @param v voiture à supprimer
-     * @return diagnostic de la suppression
-     
-    public String suppVoiture(Voiture v) {
-        boolean ok = mesVoitures.remove(v);
-        if (ok) {
-            return "voiture supprimée";
-        } else {
-            return "voiture introuvable ou suppression impossible";
-        }
-    }
-
-    /**
-     * méthode permettant de supprimer un client
-     *
-     * @param cl client à supprimer
-     * @return diagnostic de la suppression
-     
-    public String suppClient(Client cl) {
-        List<Voiture> lv = getVoituresClient(cl);
-        if (!lv.isEmpty()) {
-            return "suppression impossible car le client possède des voitures,supprimez d'abord ces voitures";
-        }
-        boolean ok = mesClients.remove(cl);
-        if (!ok) {
-            return "client introuvable ou suppression impossible";
-        }
-        return "client supprimé";
-    }
-
-    /**
-     * méthode permettant d'alimenter artificiellement les listes de base
-     
-    public void populate() {
-        mesVoitures.addAll(Arrays.asList(
-                new Voiture("AXR345", "Citroën", "c3", 2010, 105000, 3500),
-                new Voiture("BZR443", "VW", "Passat", 2008, 205000, 5000),
-                new Voiture("XYZ322", "Kia", "Rio", 2012, 80000, 4000))
-        );
-        mesClients.addAll(Arrays.asList(
-                new Client("Lenoir", "Eric", "0456778899", "Mons"),
-                new Client("Levert", "Aline", "0478223344", "BXL"),
-                new Client("Lerouge", "Carine", "0498662277", "La Louvière"))
-        );
-        mesVoitures.get(1).vendre(mesClients.get(2));
-*/
-    }
-
+}
