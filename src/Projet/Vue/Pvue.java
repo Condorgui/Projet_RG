@@ -19,8 +19,13 @@ import java.util.Scanner;
  */
 public class Pvue {
 
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Menu principal
+     *
+     * @return le choix de la section du menu
+     */
     public int menuPrincipal() {
 
         List<String> menu = new ArrayList<>(Arrays.asList(
@@ -34,7 +39,7 @@ public class Pvue {
                 " Gérer les attributions",
                 //"__8. Affichage Enseignants", 
                 //"__9. Affichage Classes",
-                 "Quitter"));
+                "Quitter"));
         affichageListe(menu);
 
         int choix;
@@ -51,6 +56,11 @@ public class Pvue {
         return choix;
     }
 
+    /**
+     * Méthode newClasse encode les informations d'une classe
+     *
+     * @return c = la classe créée sur base de l'encodage
+     */
     public Classe newClasse() {
         String sigle = getMessage("Entrez le sigle : ");
         String orientation = getMessage("Quelle est l'orientation ? ");
@@ -62,6 +72,11 @@ public class Pvue {
         return c;
     }
 
+    /**
+     * Méthode newEnseignant encode les informations d'un enseignant
+     *
+     * @return e = l'enseignant crée sur base de l'encodage
+     */
     public Enseignant newEnseignant() {
 
         String nom = getMessage("Entrez le nom : ");
@@ -72,6 +87,12 @@ public class Pvue {
         return e;
     }
 
+    /**
+     * Méthode affClasses Affiche les informations d'une classe == toString
+     * Classe
+     *
+     * @param c = la classe à afficher
+     */
     public void affClasses(Classe c) {
 
         affichageMessage("Classe : " + c.getSigle());
@@ -83,6 +104,12 @@ public class Pvue {
 
     }
 
+    /**
+     * Méthode affEnseignant Affiche les informations d'un enseignant ==
+     * toString Enseignant
+     *
+     * @param e = l'enseignant à afficher
+     */
     public void affEnseignant(Enseignant e) {
         affichageMessage("Nom de l'enseignant :" + e.getNom());
         affichageMessage("Prénom de l'enseignant :" + e.getPrenom());
@@ -90,20 +117,41 @@ public class Pvue {
 
     }
 
+    /**
+     * Méthode getMessage permet à l'utilisateur d'encoder le message
+     *
+     * @return le message entré
+     */
     public String getMessage() {
         String msg = sc.nextLine();
         return msg;
     }
 
+    /**
+     * Méthode afficheMessage permet d'afficher le message reçu en paramètre
+     *
+     * @param msg == message à afficher
+     */
     public void affichageMessage(Object msg) {
         System.out.println(msg);
     }
 
+    /**
+     * Surcharge de getMessage Permet d'afficher un message et d'en encoder un
+     *
+     * @param msg le message à afficher
+     * @return la méthode getMessage pour l'encodage
+     */
     public String getMessage(String msg) {
         affichageMessage(msg);
         return getMessage();
     }
 
+    /**
+     * Méthode affichageListe Permet d'afficher une liste
+     *
+     * @param liste la liste à afficher
+     */
     public void affichageListe(Collection liste) {
         int i = 1;
         for (Object o : liste) {
@@ -111,13 +159,25 @@ public class Pvue {
         }
     }
 
+    /**
+     * Méthode rechClass Permet de rechercher une classe sur base de son sigle
+     *
+     * @return cRech == la classe trouvée
+     */
     public Classe rechClasse() {
 
         String sigle = getMessage("Quel est le sigle à rechercher ? ");
         Classe cRech = new Classe(sigle);
         return cRech;
+
     }
 
+    /**
+     * Méthode rechEnseignant Permet de retrouver un enseignant sur base de son
+     * matricule
+     *
+     * @return eRech == l'enseignant trouvé
+     */
     public Enseignant rechEnseignant() {
 
         String matricule = getMessage("Matricule de l'enseignant à rechercher :");

@@ -15,9 +15,10 @@ import Projet.Vue.Pvue;
  */
 public class Launcher {
     
-    private ClasseControleur ctrl; 
-    private ClasseModele cml; 
-    private Pvue pv; 
+    
+    private final ClasseControleur ctrl; 
+    private final ClasseModele cml; 
+    private final Pvue pv; 
     
     public Launcher(){
         

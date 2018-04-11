@@ -13,58 +13,133 @@ import java.util.Objects;
  */
 public class Classe {
 
+    /**
+     * Sigle de la classe
+     */
     private String sigle;
+
+    /**
+     * Année de la classe
+     */
     private int annee;
+    /**
+     * Orientation de la classe
+     */
     private String orientation;
+    /**
+     * Enseignant attitré à la classe
+     */
     private Enseignant e;
 
+    /**
+     * Constructeur par défaut
+     */
     public Classe() {
         sigle = "";
         annee = 0;
         orientation = "";
         e = null;
     }
-public Classe(String sigle){
-    this.sigle = sigle; 
-}
-    public Enseignant getE() {
-        return e;
-    }
 
-    public void setE(Enseignant e) {
-        this.e = e;
-    }
-
+    /**
+     * Constructeur paramétré
+     *
+     * @param Sigle
+     * @param Annee
+     * @param Orientation
+     */
     public Classe(String Sigle, int Annee, String Orientation) {
         this.sigle = Sigle;
         this.annee = Annee;
         this.orientation = Orientation;
     }
 
+    /**
+     * Constructeur avec un seul paramètre
+     *
+     * @param sigle qui recherchera la classe sur base de son sigle unique
+     */
+    public Classe(String sigle) {
+        this.sigle = sigle;
+    }
+
+    /**
+     * Getter de l'enseignant
+     *
+     * @return l'enseignant de la classe
+     */
+    public Enseignant getE() {
+        return e;
+    }
+
+    /**
+     * Setter de l'enseignant
+     *
+     * @param e définit l'enseignant
+     */
+    public void setE(Enseignant e) {
+        this.e = e;
+    }
+
+    /**
+     * Getter du sigle
+     *
+     * @return le sigle de la classe
+     */
     public String getSigle() {
         return sigle;
     }
 
+    /**
+     * Setter du sigle
+     *
+     * @param Sigle définit le sigle
+     */
     public void setSigle(String Sigle) {
         this.sigle = Sigle;
     }
 
+    /**
+     * Getter de l'année
+     *
+     * @return l'année de la classe
+     */
     public int getAnnee() {
         return annee;
     }
 
+    /**
+     * Setter de l'année
+     *
+     * @param Annee définit l'année
+     */
     public void setAnnee(int Annee) {
         this.annee = Annee;
     }
 
+    /**
+     * Getter de l'orientation
+     *
+     * @return l'orientation de la classe
+     */
     public String getOrientation() {
         return orientation;
     }
 
+    /**
+     * Setter de l'orientation
+     *
+     * @param Orientation définit l'orientation
+     */
     public void setOrientation(String Orientation) {
         this.orientation = Orientation;
     }
 
+    /**
+     * Méthode hashCode
+     *
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -72,6 +147,12 @@ public Classe(String sigle){
         return hash;
     }
 
+    /**
+     * Méthode equals
+     *
+     * @param obj
+     * @return résultat de la comparaison de l'obj
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -90,10 +171,15 @@ public Classe(String sigle){
         return true;
     }
 
+    /**
+     * Méthode toString
+     *
+     * @return les informations détaillées
+     */
     @Override
     public String toString() {
-        return "Classe de "+annee+" ème année et d'orientation "+orientation+" dont l'enseignant est : "+e;
-       
+        return "Classe de " + annee + " ème année et d'orientation " + orientation + " dont l'enseignant est : " + e;
+
     }
 
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -13,34 +13,64 @@ import java.util.Objects;
  */
 public class Attribution {
 
+    /**
+     * Classe attribuée
+     */
     protected Classe Classe;
+
+    /**
+     * Enseignant attribué
+     */
     protected Classe Enseignant;
 
+    /**
+     * Constructeur par défaut non paramétré
+     */
     public Attribution() {
 
     }
 
+    /**
+     * Getter de la classe
+     *
+     * @return la classe
+     */
     public Classe getClasse() {
         return Classe;
     }
 
+    /**
+     * Setter de la classe
+     *
+     * @param Classe
+     */
     public void setClasse(Classe Classe) {
         this.Classe = Classe;
     }
 
+    /**
+     * Getter de l'enseignant
+     *
+     * @return l'enseignant
+     */
     public Classe getEnseignant() {
         return Enseignant;
     }
 
+    /**
+     * Setter de l'enseignant
+     *
+     * @param Enseignant l'enseignant
+     */
     public void setEnseignant(Classe Enseignant) {
         this.Enseignant = Enseignant;
     }
 
-    @Override
-    public String toString() {
-        return "Attribution{" + "Classe=" + Classe + ", Enseignant=" + Enseignant + '}';
-    }
-
+    /**
+     * Méthode hashCode
+     *
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -48,6 +78,12 @@ public class Attribution {
         return hash;
     }
 
+    /**
+     * Méthode equals param obj
+     *
+     * @param obj
+     * @return résultat de comparaison de l'obj
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -62,6 +98,15 @@ public class Attribution {
         final Attribution other = (Attribution) obj;
         return Objects.equals(this.Enseignant, other.Enseignant);
     }
-    
+
+    /**
+     * Méthode toString
+     *
+     * @return les informations détaillées
+     */
+    @Override
+    public String toString() {
+        return "Attribution{" + "Classe=" + Classe + ", Enseignant=" + Enseignant + '}';
+    }
 
 }

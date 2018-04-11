@@ -17,22 +17,41 @@ import java.util.List;
  */
 public class ClasseControleur {
 
+    /**
+     * Variable cm de type ClasseModele
+     */
     private ClasseModele cm;
+
+    /**
+     * Variable pv de type Pvue
+     */
     private Pvue pv;
 
+    /**
+     * Constructeur par défaut
+     */
     public ClasseControleur() {
 
     }
 
+    /**
+     * Constructeur paramétré
+     *
+     * @param cm le modèle
+     * @param pv la vue
+     */
     public ClasseControleur(ClasseModele cm, Pvue pv) {
 
         this.cm = cm;
         this.pv = pv;
     }
 
+    /**
+     * Méthode gestion
+     *
+     */
     public void gestion() {
 
-        //TODO rendre cohérent la liste des switch cases et la liste des éléments du menu
         int ch;
         do {
             ch = pv.menuPrincipal();
@@ -45,11 +64,13 @@ public class ClasseControleur {
                     ajoutClasse();
                     break;
                 case 3:
-                    modifyE();
+                    modificationE();
+                    //SuppE();
                     break;
 
                 case 4:
-                    modifyC();
+                    modificationC();
+                    //  SuppC(); 
                     break;
                 case 5:
 
@@ -73,13 +94,26 @@ public class ClasseControleur {
 
     }
 
+    /**
+     * Méthode ajoutClasse Permet l'ajout d'une classe Appelle le formulaire de
+     * création d'une classe de la vue Appelle le formulaire d'ajout d'une
+     * classe du modèle
+     *
+     */
     public void ajoutClasse() {
         Classe cl = pv.newClasse();
         String msg = cm.ajouterClasse(cl);
+        //ajouterClasse retourne un message 
         pv.affichageMessage(msg);
+        //affiche le message retourné
 
     }
 
+    /**
+     * Méthode ajoutEnseignant Permet l'ajout d'un enseignant Appelle le
+     * formulaire de création de la vue Appelle le formulaire d'ajout du
+     * controleur
+     */
     public void ajoutEnseignant() {
         Enseignant es = pv.newEnseignant();
         String msg = cm.ajouterEnseignant(es);
@@ -87,26 +121,45 @@ public class ClasseControleur {
 
     }
 
+    /**
+     * Méthode rechClasse
+     * Appelle le formulaire de recherche d'une classe de la vue 
+     * Affiche le résultat de la recherche 
+     */
     private void rechClasse() {
         Classe cl = pv.rechClasse();
         pv.affichageMessage(cm.getClasse(cl));
     }
 
+    /**
+     * Méthode rechEnseignant
+     * Appelle le formulaire de recherche d'un enseignant de la vue 
+     * Affiche le résultat de la recherche 
+     */
     private void rechEnseignant() {
         Enseignant es = pv.rechEnseignant();
         pv.affichageMessage(cm.getEnseignant(es));
     }
 
-    private void modifyC() {
+    /**
+     * Méthode modificationC
+     * Modifie ou supprime une classe
+     * Appelle le formulaire de recherche d'une classe sur base du sigle
+     * Appelle le formulaire de modification (modifyC) ou suppression (deleteCl)
+     * 
+     */
+    
+    private void modificationC() {
 
         int choix = Integer.parseInt(pv.getMessage(""
                 + "1. Modification de la classe"
                 + "       2. Suppression de la classe"));
         Classe cRech = pv.rechClasse();
+        //  Classe test = cm.getClasse(pv.rechClasse());
         Classe tmpC = cm.getClasse(cRech);
         if (choix == 1) {
 
-            pv.getMessage("Modification de la classe");
+            pv.affichageMessage("Modification de la classe");
 
             pv.affichageMessage(tmpC);
             Classe nvClasse = pv.newClasse();
@@ -119,7 +172,31 @@ public class ClasseControleur {
         }
     }
 
-    private void modifyE() {
+    /*  private void SuppE() {
+
+        Enseignant aDel = pv.rechEnseignant();
+        Enseignant sec = cm.getEnseignant(aDel);
+        pv.affichageMessage(sec);
+        pv.affichageMessage(cm.deleteE(sec));
+    }
+     */
+ /*  private void SuppC() {
+
+        Classe aDel = pv.rechClasse();
+        Classe sec = cm.getClasse(aDel);
+        pv.affichageMessage(sec);
+        pv.affichageMessage(cm.deleteC(sec));
+    }
+     */
+    
+      /**
+     * Méthode modificationE
+     * Modifie ou supprime un enseignant
+     * Appelle le formulaire de recherche d'un enseignant sur base du matricule
+     * Appelle le formulaire de modification (modifyE) ou suppression (deleteE)
+     * 
+     */
+    private void modificationE() {
         int choix = Integer.parseInt(pv.getMessage(""
                 + "1. Modification de l'enseignant"
                 + "      2. Suppression de l'enseignant"));
@@ -127,13 +204,14 @@ public class ClasseControleur {
         Enseignant tmpE = cm.getEnseignant(eRech);
         if (choix == 1) {
 
-            pv.getMessage(" --- Modification de l'enseignant ---");
+            pv.affichageMessage(" --- Modification de l'enseignant ---");
 
             pv.affichageMessage(tmpE);
             Enseignant nvEns = pv.newEnseignant();
             pv.affichageMessage(cm.modifyE(nvEns, tmpE));
 
         } else if (choix == 2) {
+
             pv.affichageMessage("--- Suppression de l'enseignant ---");
             pv.affichageMessage(tmpE);
             pv.affichageMessage(cm.deleteE(tmpE));
@@ -141,6 +219,13 @@ public class ClasseControleur {
 
     }
 
+      /**
+     * Méthode affichage
+     * Affichage les enseignant ou les classes
+     * récupère les enseignants dans une liste et affiche son contenu 
+     * récupère les classes dans une liste et affiche son contenu 
+     * 
+     */
     private void affichage() {
         int choix = Integer.parseInt(pv.getMessage(""
                 + "1. Affichage des enseignants"
@@ -158,5 +243,4 @@ public class ClasseControleur {
 
     }
 
-    
 }
