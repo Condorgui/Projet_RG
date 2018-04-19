@@ -161,7 +161,7 @@ public class Enseignant {
      */
     @Override
     public String toString() {
-        return " => Enseignant " + nom + " " + prenom + " au matricule " + matricule;
+        return " => Enseignant " + nom + " " + prenom + " au matricule " + matricule + " " +Remplacant +" "+ Titulaire;
     }
 
     /**

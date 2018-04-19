@@ -17,13 +17,21 @@ public class Attribution {
     /**
      * Enseignant attribué
      */
-    protected Classe Enseignant;
+    protected Enseignant Enseignant;
 
     /**
      * Constructeur par défaut non paramétré
      */
     public Attribution() {
+        
+        
 
+    }
+    
+    public Attribution (Classe classe, Enseignant enseignant){
+        
+        this.Classe = classe; 
+        this.Enseignant = enseignant; 
     }
 
     /**
@@ -49,7 +57,7 @@ public class Attribution {
      *
      * @return l'enseignant
      */
-    public Classe getEnseignant() {
+    public Enseignant getEnseignant() {
         return Enseignant;
     }
 
@@ -58,8 +66,8 @@ public class Attribution {
      *
      * @param Enseignant l'enseignant
      */
-    public void setEnseignant(Classe Enseignant) {
-        this.Enseignant = Enseignant;
+    public void setEnseignant(Enseignant enseignant) {
+        this.Enseignant = enseignant;
     }
 
     /**

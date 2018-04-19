@@ -7,6 +7,7 @@ package Projet.Vue;
 
 import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
+import Projet.Metier.Attribution;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,8 +49,6 @@ public class Pvue {
             choix = Integer.parseInt(ch1);
             if (choix > 0 && choix <= menu.size()) {
                 break;
-            } else {
-                affichageMessage("Recommencez");
             }
 
         } while (true);
@@ -85,6 +84,69 @@ public class Pvue {
         Enseignant e = new Enseignant(matricule, nom, prenom);
 
         return e;
+    }
+
+    public Attribution newAttribution(List<Classe> toutesLesClasses, List<Enseignant> tousEns) {
+
+        affichageListe(toutesLesClasses);
+        String ch1 = getMessage("Choisissez la classe : ");
+        boolean flag = false;
+        int ens = 0; //choix de l'enseignant 
+        int cl = 0; //choix de la classe 
+        int att = 0; //choix de l'attribution
+
+        int chx = Integer.parseInt(ch1);
+        if (chx > 0 && chx <= toutesLesClasses.size()) {
+            cl = chx - 1;
+        } else {
+            flag = true;
+
+            affichageMessage("Entrez un entier : ");
+
+        }
+
+        affichageListe(tousEns);
+        String ch2 = getMessage("Choisissez un enseignant : ");
+
+        chx = Integer.parseInt(ch2);
+        if (chx > 0 && chx <= tousEns.size()) {
+            ens = chx - 1;
+        } else {
+
+            affichageMessage("Entrez un entier : ");
+
+        }
+        ch2 = getMessage("Entrez son statut : \n -- 1 pour les titulaires"
+                + " \n -- 2 pour les remplacants");
+
+        chx = Integer.parseInt(ch2);
+        if (chx >= 1 && chx <= 2) {
+            att = chx;
+        } else {
+
+            affichageMessage("Choisissez l'une des 2 propositions ");
+
+        }
+
+        Classe c = toutesLesClasses.get(cl);
+        Enseignant e = tousEns.get(ens);
+
+        if (e.getRemplacant() != null || e.getTitulaire() != null) {
+            affichageMessage("Déjà attribution : " + e.getRemplacant() + e.getTitulaire());
+            
+        } else {
+            if (att == 1) {
+                e.setTitulaire(c);
+            }
+            if (att == 2) {
+                e.setRemplacant(c);
+            }
+        }
+
+        Attribution a = new Attribution(c, e);
+
+        return a;
+
     }
 
     /**

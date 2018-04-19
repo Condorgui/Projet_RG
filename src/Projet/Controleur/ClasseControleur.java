@@ -5,9 +5,11 @@
  */
 package Projet.Controleur;
 
+import Projet.Metier.Attribution;
 import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
 import Projet.Modele.ClasseModele;
+
 import Projet.Vue.Pvue;
 import java.util.List;
 
@@ -87,17 +89,20 @@ public class ClasseControleur {
                         break;
 
                     case 8:
-                        pv.affichageMessage("Fin");
+                        gestionAttribution();
+                       
                         break;
+                    case 9: 
+                        pv.affichageMessage("Fin");
                     default:
                         pv.affichageMessage("Choix invalide");
                 }
 
             } catch (Exception e) {
-                       pv.affichageMessage(e);
+                pv.affichageMessage(e);
             }
 
-        } while (ch != 8);
+        } while (ch != 9);
     }
 
     /**
@@ -106,7 +111,7 @@ public class ClasseControleur {
      * classe du modèle
      *
      */
-    public void ajoutClasse() {
+    private void ajoutClasse() {
         Classe cl = pv.newClasse();
         String msg = cm.ajouterClasse(cl);
         //ajouterClasse retourne un message 
@@ -120,11 +125,18 @@ public class ClasseControleur {
      * formulaire de création de la vue Appelle le formulaire d'ajout du
      * controleur
      */
-    public void ajoutEnseignant() {
+    private void ajoutEnseignant() {
         Enseignant es = pv.newEnseignant();
         String msg = cm.ajouterEnseignant(es);
         pv.affichageMessage(msg);
 
+    }
+
+    private void gestionAttribution() {
+
+        Attribution a = pv.newAttribution(cm.toutesClasses(), cm.tousEns());
+        String msg = cm.ajouterAttribution(a);
+        pv.affichageMessage(msg);
     }
 
     /**
@@ -156,22 +168,27 @@ public class ClasseControleur {
         int choix = Integer.parseInt(pv.getMessage(""
                 + "1. Modification de la classe"
                 + "       2. Suppression de la classe"));
+
         Classe cRech = pv.rechClasse();
         //  Classe test = cm.getClasse(pv.rechClasse());
         Classe tmpC = cm.getClasse(cRech);
-        if (choix == 1) {
-
-            pv.affichageMessage("Modification de la classe");
-
-            pv.affichageMessage(tmpC);
-            Classe nvClasse = pv.newClasse();
-            pv.affichageMessage(cm.modifyC(nvClasse, tmpC));
-
-        } else if (choix == 2) {
-            pv.affichageMessage("--- Suppression de la classe --- ");
-            pv.affichageMessage(tmpC);
-            pv.affichageMessage(cm.deleteCl(tmpC));
+        switch (choix) {
+            case 1:
+                pv.affichageMessage("Modification de la classe");
+                pv.affichageMessage(tmpC);
+                Classe nvClasse = pv.newClasse();
+                pv.affichageMessage(cm.modifyC(nvClasse, tmpC));
+                break;
+            case 2:
+                pv.affichageMessage("--- Suppression de la classe --- ");
+                pv.affichageMessage(tmpC);
+                pv.affichageMessage(cm.deleteCl(tmpC));
+                break;
+            default:
+                pv.affichageMessage("Entrez un choix valide ");
+                break;
         }
+
     }
 
     /*  private void SuppE() {
@@ -202,19 +219,21 @@ public class ClasseControleur {
                 + "      2. Suppression de l'enseignant"));
         Enseignant eRech = pv.rechEnseignant();
         Enseignant tmpE = cm.getEnseignant(eRech);
-        if (choix == 1) {
-
-            pv.affichageMessage(" --- Modification de l'enseignant ---");
-
-            pv.affichageMessage(tmpE);
-            Enseignant nvEns = pv.newEnseignant();
-            pv.affichageMessage(cm.modifyE(nvEns, tmpE));
-
-        } else if (choix == 2) {
-
-            pv.affichageMessage("--- Suppression de l'enseignant ---");
-            pv.affichageMessage(tmpE);
-            pv.affichageMessage(cm.deleteE(tmpE));
+        switch (choix) {
+            case 1:
+                pv.affichageMessage(" --- Modification de l'enseignant ---");
+                pv.affichageMessage(tmpE);
+                Enseignant nvEns = pv.newEnseignant();
+                pv.affichageMessage(cm.modifyE(nvEns, tmpE));
+                break;
+            case 2:
+                pv.affichageMessage("--- Suppression de l'enseignant ---");
+                pv.affichageMessage(tmpE);
+                pv.affichageMessage(cm.deleteE(tmpE));
+                break;
+            default:
+                pv.affichageMessage("Entrez un choix valide");
+                break;
         }
 
     }
@@ -226,18 +245,29 @@ public class ClasseControleur {
      *
      */
     private void affichage() {
-        int choix = Integer.parseInt(pv.getMessage(""
-                + "1. Affichage des enseignants"
-                + "      2. Affichage des classes"));
 
-        if (choix == 1) {
+        try {
+            int choix = Integer.parseInt(pv.getMessage(""
+                    + "1. Affichage des enseignants"
+                    + "      2. Affichage des classes"
+                    + "             3. Affichage des attributions"));
 
-            List<Enseignant> le = cm.tousEns();
-            pv.affichageMessage(le);
+            if (choix == 1) {
 
-        } else if (choix == 2) {
-            List<Classe> lc = cm.toutesClasses();
-            pv.affichageMessage(lc);
+                List<Enseignant> le = cm.tousEns();
+                pv.affichageMessage(le);
+
+            }
+            if (choix == 2) {
+                List<Classe> lc = cm.toutesClasses();
+                pv.affichageMessage(lc);
+            }
+            if (choix == 3) {
+                List<Attribution> la = cm.toutesLesAttributions();
+                pv.affichageMessage(la);
+            }
+        }catch(Exception e){
+            pv.affichageMessage("Entrez un nombre");
         }
 
     }
