@@ -189,6 +189,7 @@ public class ClasseModele {
      */
     public List<Enseignant> tousEns() {
         return tousLesEns;
+       
     }
 
     /**
