@@ -52,46 +52,52 @@ public class ClasseControleur {
      */
     public void gestion() {
 
-        int ch;
+        int ch = 0;
         do {
-            ch = pv.menuPrincipal();
+            try {
 
-            switch (ch) {
-                case 1:
-                    ajoutEnseignant();
-                    break;
-                case 2:
-                    ajoutClasse();
-                    break;
-                case 3:
-                    modificationE();
-                    //SuppE();
-                    break;
+                ch = pv.menuPrincipal();
 
-                case 4:
-                    modificationC();
-                    //  SuppC(); 
-                    break;
-                case 5:
+                switch (ch) {
+                    case 1:
+                        ajoutEnseignant();
+                        break;
+                    case 2:
+                        ajoutClasse();
+                        break;
+                    case 3:
+                        modificationE();
+                        //SuppE();
+                        break;
 
-                    rechEnseignant();
-                    break;
-                case 6:
+                    case 4:
+                        modificationC();
+                        //  SuppC(); 
+                        break;
+                    case 5:
 
-                    rechClasse();
-                    break;
-                case 7:
-                    affichage();
-                    break;
+                        rechEnseignant();
+                        break;
+                    case 6:
 
-                case 8:
-                    pv.affichageMessage("Fin");
-                    break;
-                default:
-                    pv.affichageMessage("Choix invalide");
+                        rechClasse();
+                        break;
+                    case 7:
+                        affichage();
+                        break;
+
+                    case 8:
+                        pv.affichageMessage("Fin");
+                        break;
+                    default:
+                        pv.affichageMessage("Choix invalide");
+                }
+
+            } catch (Exception e) {
+                       pv.affichageMessage(e);
             }
-        } while (ch != 8);
 
+        } while (ch != 8);
     }
 
     /**
@@ -122,9 +128,8 @@ public class ClasseControleur {
     }
 
     /**
-     * Méthode rechClasse
-     * Appelle le formulaire de recherche d'une classe de la vue 
-     * Affiche le résultat de la recherche 
+     * Méthode rechClasse Appelle le formulaire de recherche d'une classe de la
+     * vue Affiche le résultat de la recherche
      */
     private void rechClasse() {
         Classe cl = pv.rechClasse();
@@ -132,9 +137,8 @@ public class ClasseControleur {
     }
 
     /**
-     * Méthode rechEnseignant
-     * Appelle le formulaire de recherche d'un enseignant de la vue 
-     * Affiche le résultat de la recherche 
+     * Méthode rechEnseignant Appelle le formulaire de recherche d'un enseignant
+     * de la vue Affiche le résultat de la recherche
      */
     private void rechEnseignant() {
         Enseignant es = pv.rechEnseignant();
@@ -142,13 +146,11 @@ public class ClasseControleur {
     }
 
     /**
-     * Méthode modificationC
-     * Modifie ou supprime une classe
-     * Appelle le formulaire de recherche d'une classe sur base du sigle
-     * Appelle le formulaire de modification (modifyC) ou suppression (deleteCl)
-     * 
+     * Méthode modificationC Modifie ou supprime une classe Appelle le
+     * formulaire de recherche d'une classe sur base du sigle Appelle le
+     * formulaire de modification (modifyC) ou suppression (deleteCl)
+     *
      */
-    
     private void modificationC() {
 
         int choix = Integer.parseInt(pv.getMessage(""
@@ -188,13 +190,11 @@ public class ClasseControleur {
         pv.affichageMessage(cm.deleteC(sec));
     }
      */
-    
-      /**
-     * Méthode modificationE
-     * Modifie ou supprime un enseignant
-     * Appelle le formulaire de recherche d'un enseignant sur base du matricule
-     * Appelle le formulaire de modification (modifyE) ou suppression (deleteE)
-     * 
+    /**
+     * Méthode modificationE Modifie ou supprime un enseignant Appelle le
+     * formulaire de recherche d'un enseignant sur base du matricule Appelle le
+     * formulaire de modification (modifyE) ou suppression (deleteE)
+     *
      */
     private void modificationE() {
         int choix = Integer.parseInt(pv.getMessage(""
@@ -219,12 +219,11 @@ public class ClasseControleur {
 
     }
 
-      /**
-     * Méthode affichage
-     * Affichage les enseignant ou les classes
-     * récupère les enseignants dans une liste et affiche son contenu 
-     * récupère les classes dans une liste et affiche son contenu 
-     * 
+    /**
+     * Méthode affichage Affichage les enseignant ou les classes récupère les
+     * enseignants dans une liste et affiche son contenu récupère les classes
+     * dans une liste et affiche son contenu
+     *
      */
     private void affichage() {
         int choix = Integer.parseInt(pv.getMessage(""
