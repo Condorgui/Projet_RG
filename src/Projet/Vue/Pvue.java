@@ -90,7 +90,7 @@ public class Pvue {
 
         affichageListe(toutesLesClasses);
         String ch1 = getMessage("Choisissez la classe : ");
-        boolean flag = false;
+
         int ens = 0; //choix de l'enseignant 
         int cl = 0; //choix de la classe 
         int att = 0; //choix de l'attribution
@@ -99,7 +99,6 @@ public class Pvue {
         if (chx > 0 && chx <= toutesLesClasses.size()) {
             cl = chx - 1;
         } else {
-            flag = true;
 
             affichageMessage("Entrez un entier : ");
 
@@ -133,7 +132,7 @@ public class Pvue {
 
         if (e.getRemplacant() != null || e.getTitulaire() != null) {
             affichageMessage("Déjà attribution : " + e.getRemplacant() + e.getTitulaire());
-            
+
         } else {
             if (att == 1) {
                 e.setTitulaire(c);
