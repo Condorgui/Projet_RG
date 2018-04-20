@@ -90,9 +90,9 @@ public class ClasseControleur {
 
                     case 8:
                         gestionAttribution();
-                       
+
                         break;
-                    case 9: 
+                    case 9:
                         pv.affichageMessage("Fin");
                     default:
                         pv.affichageMessage("Choix invalide");
@@ -134,9 +134,32 @@ public class ClasseControleur {
 
     private void gestionAttribution() {
 
-        Attribution a = pv.newAttribution(cm.toutesClasses(), cm.tousEns());
-        String msg = cm.ajouterAttribution(a);
-        pv.affichageMessage(msg);
+        try {
+            int choix = Integer.parseInt(pv.getMessage(""
+                    + "1. Ajouter une attribution"
+                    + "      2. Modifier une attribution "
+                    + "             3. Supprimer une attribution"));
+
+            if (choix == 1) {
+
+                Attribution a = pv.newAttribution(cm.toutesClasses(), cm.tousEns());
+                String msg = cm.ajouterAttribution(a);
+                pv.affichageMessage(msg);
+
+            }
+            if (choix == 2) {
+                
+               
+                pv.affichageMessage("Modification à venir ");
+            }
+            if (choix == 3) {
+              
+                pv.affichageMessage("Suppression à venir");
+            }
+        } catch (Exception e) {
+            pv.affichageMessage("Entrez un nombre");
+        }
+        ;
     }
 
     /**
@@ -266,7 +289,7 @@ public class ClasseControleur {
                 List<Attribution> la = cm.toutesLesAttributions();
                 pv.affichageMessage(la);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             pv.affichageMessage("Entrez un nombre");
         }
 
