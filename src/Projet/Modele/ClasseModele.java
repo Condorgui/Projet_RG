@@ -77,9 +77,10 @@ public class ClasseModele {
         tousLesEns.add(e);
         return "Ajout de l'enseignant";
     }
-    public String ajouterAttribution(Attribution a){
-    if (a == null) {
-            return "Attribution inexistant";
+
+    public String ajouterAttribution(Attribution a) {
+        if (a == null) {
+            return "Attribution inexistante";
         }
         if (toutesLesAttributions.contains(a)) {
             return "Attribution déjà créée";
@@ -87,7 +88,6 @@ public class ClasseModele {
         toutesLesAttributions.add(a);
         return "Ajout de l'attribution";
     }
-
 
     /**
      * Méthode getClasse Permet de retrouver une classe
@@ -213,9 +213,9 @@ public class ClasseModele {
         return toutesLesClasses;
 
     }
-    
-    public List<Attribution> toutesLesAttributions(){
-        
+
+    public List<Attribution> toutesLesAttributions() {
+
         return toutesLesAttributions;
     }
 
