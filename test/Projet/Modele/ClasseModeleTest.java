@@ -5,6 +5,7 @@
  */
 package Projet.Modele;
 
+import Projet.Metier.Attribution;
 import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class ClasseModeleTest {
     @Test
     public void testGetEnseignant() {
         System.out.println("getEnseignant");
-        Enseignant e = new Enseignant("Mat1234","Nom", "Prénom");
+        Enseignant e = new Enseignant("Mat1234", "Nom", "Prénom");
         ClasseModele instance = new ClasseModele();
         instance.ajouterEnseignant(e);
         Enseignant expResult = e;
@@ -119,8 +120,8 @@ public class ClasseModeleTest {
     @Test
     public void testModifyE() {
         System.out.println("modifyE");
-        Enseignant nvEns = new Enseignant("MATNEW","Rigaux","Patrick");
-        Enseignant tmpE = new Enseignant("MAT1","Rigaux","Guillaume");
+        Enseignant nvEns = new Enseignant("MATNEW", "Rigaux", "Patrick");
+        Enseignant tmpE = new Enseignant("MAT1", "Rigaux", "Guillaume");
         ClasseModele instance = new ClasseModele();
         instance.ajouterEnseignant(tmpE);
         String expResult = "Modification effectuée";
@@ -174,16 +175,13 @@ public class ClasseModeleTest {
         instance.ajouterEnseignant(e2);
         expResult.add(e2);
         List<Enseignant> result = instance.tousEns();
-        for (Enseignant eTrouve : expResult) {
-            if (!result.contains(eTrouve)) {
-                fail("Enseignant non présent dans la liste : " + eTrouve);
-            }
+        expResult.stream().filter((eTrouve) -> (!result.contains(eTrouve))).forEachOrdered((eTrouve) -> {
+            fail("Enseignant non présent dans la liste : " + eTrouve);
+        });
 
-        }
-
-        for (Enseignant eTrouve : expResult) {
+        expResult.forEach((eTrouve) -> {
             instance.deleteE(eTrouve);
-        }
+        });
 
     }
 
@@ -202,17 +200,87 @@ public class ClasseModeleTest {
         instance.ajouterClasse(c2);
         expResult.add(c2);
         List<Classe> result = instance.toutesClasses();
-        for (Classe cTrouve : expResult) {
-            if (!result.contains(cTrouve)) {
-                fail("Classe non présente dans la liste : " + cTrouve);
-            }
+        expResult.stream().filter((cTrouve) -> (!result.contains(cTrouve))).forEachOrdered((cTrouve) -> {
+            fail("Classe non présente dans la liste : " + cTrouve);
+        });
 
-        }
-
-        for (Classe cTrouve : expResult) {
+        expResult.forEach((cTrouve) -> {
             instance.deleteCl(cTrouve);
-        }
+        });
 
     }
 
+    /**
+     * Test of ajouterAttribution method, of class ClasseModele.
+     */
+    @Test
+    public void testAjouterAttribution() {
+
+        System.out.println("ajouterAttribution");
+        Enseignant e = new Enseignant("MAT1", "Rigaux", "Guillaume");
+        Classe c = new Classe("S123", 4, "Compta");
+        Attribution att = new Attribution(c, e);
+        ClasseModele instance = new ClasseModele();
+        String expResult = "Ajout de l'attribution";
+        String result = instance.ajouterAttribution(att);
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of toutesLesAttributions method, of class ClasseModele.
+     */
+    @Test
+
+    public void testToutesLesAttributions() {
+
+        System.out.println("toutesLesAttribution");
+        List<Attribution> expResult = new ArrayList<>();
+        ClasseModele instance = new ClasseModele();
+        Classe c = new Classe("ABC", 5, "Economie");
+        Enseignant e = new Enseignant("MAX2", "Rigaux", "Patrick");
+        instance.ajouterClasse(c);
+        instance.ajouterEnseignant(e);
+        Attribution a = new Attribution(c, e);
+        List<Attribution> result = instance.toutesLesAttributions();
+        expResult.stream().filter((cTrouve) -> (!result.contains(cTrouve))).forEachOrdered((cTrouve) -> {
+            fail("Attribution inexistante: " + cTrouve);
+        });
+
+    }
+
+    /**
+     * Test of modifEtudMax method, of class ClasseModele.
+     
+    @Test
+    public void testModifEtudMax() {
+        System.out.println("modifEtudMax");
+        Classe c = new Classe();
+        c.setN_etudiants(10);
+        int etudMax = 40;
+        ClasseModele instance = new ClasseModele();
+        boolean expResult = true;
+        boolean result = instance.modifEtudMax(c, etudMax);
+        assertEquals(expResult, result);
+        Classe c2 = new Classe();
+        c2.setN_etudiants(23);
+        etudMax = 40;
+        instance = new ClasseModele();
+        expResult = true;
+        result = instance.modifEtudMax(c, etudMax);
+        assertEquals(expResult, result);
+
+        Classe c3 = new Classe();
+        c3.setN_etudiants(65);
+        etudMax = 40;
+        instance = new ClasseModele();
+        result = instance.modifEtudMax(c, etudMax);
+        if(c3.getN_etudiants() < etudMax){
+            expResult = false;
+            
+        }
+        assertEquals(expResult, result);
+
+    }
+*/
 }

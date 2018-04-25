@@ -245,5 +245,16 @@ public class Pvue {
         Enseignant eRech = new Enseignant(matricule);
         return eRech;
     }
+    
+       public Attribution rechAttribution() {
+
+        String matricule = getMessage("Recherche sur l'enseignant  ");
+        Enseignant ens  = new Enseignant(matricule);
+        String sigle = getMessage("Recherche sur la classe : ");
+        Classe cl = new Classe(sigle); 
+        
+        Attribution a = new Attribution(cl,ens);
+        return a;
+    }
 
 }

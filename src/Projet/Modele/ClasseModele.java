@@ -78,6 +78,12 @@ public class ClasseModele {
         return "Ajout de l'enseignant";
     }
 
+    /**
+     * Méthode ajouterAttribution Permet d'ajouter une attribution
+     *
+     * @param a l'attribution à ajouter
+     * @return le résultat de l'ajout
+     */
     public String ajouterAttribution(Attribution a) {
         if (a == null) {
             return "Attribution inexistante";
@@ -217,6 +223,27 @@ public class ClasseModele {
     public List<Attribution> toutesLesAttributions() {
 
         return toutesLesAttributions;
+    }
+
+    
+    public Attribution getAttribution(Attribution aRech){
+        int i = toutesLesAttributions.indexOf(aRech);
+        if (i < 0) {
+            return null;
+        } else {
+            return toutesLesAttributions.get(i);
+        }
+    }
+    
+     public String deleteA(Attribution aDel) {
+        int i = toutesLesAttributions.indexOf(aDel);
+        if (i < 0) {
+            return null;
+
+        } else {
+            toutesLesAttributions.remove(i);
+        }
+        return "Suppression effectuée";
     }
 
 }

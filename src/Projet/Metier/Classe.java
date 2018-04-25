@@ -25,6 +25,9 @@ public class Classe {
     /**
      * Orientation de la classe
      */
+    
+    private int n_etudiants; 
+    
     private String orientation;
     /**
      * Enseignant attitré à la classe
@@ -39,6 +42,8 @@ public class Classe {
         annee = 0;
         orientation = "";
         e = null;
+        this.n_etudiants = 0; 
+        
     }
 
     /**
@@ -52,8 +57,10 @@ public class Classe {
         this.sigle = Sigle;
         this.annee = Annee;
         this.orientation = Orientation;
+        this.n_etudiants = 0;
     }
 
+    
     /**
      * Constructeur avec un seul paramètre
      *
@@ -135,6 +142,16 @@ public class Classe {
         this.orientation = Orientation;
     }
 
+    
+    public int getN_etudiants() {
+        return n_etudiants;
+    }
+
+    public void setN_etudiants(int n_etudiants) {
+        this.n_etudiants = n_etudiants;
+    }
+
+    
     /**
      * Méthode hashCode
      *
@@ -178,7 +195,7 @@ public class Classe {
      */
     @Override
     public String toString() {
-        return "Classe de " + annee + " ème année et d'orientation " + orientation + " dont l'enseignant est : " + e;
+        return  sigle + "Classe de " + annee +" ème année et d'orientation " + orientation;
 
     }
 

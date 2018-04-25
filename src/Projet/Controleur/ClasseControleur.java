@@ -94,6 +94,7 @@ public class ClasseControleur {
                         break;
                     case 9:
                         pv.affichageMessage("Fin");
+
                     default:
                         pv.affichageMessage("Choix invalide");
                 }
@@ -132,6 +133,10 @@ public class ClasseControleur {
 
     }
 
+    /**
+     * Méthode gestionAttribution Permet de gérer les attribution ajout d'une
+     * attribution modification d'une attribution suppression d'une attribution
+     */
     private void gestionAttribution() {
 
         try {
@@ -148,18 +153,20 @@ public class ClasseControleur {
 
             }
             if (choix == 2) {
-                
-               
-                pv.affichageMessage("Modification à venir ");
+                Attribution a = pv.rechAttribution();
+                pv.affichageMessage(cm.getAttribution(a));
+
             }
             if (choix == 3) {
-              
-                pv.affichageMessage("Suppression à venir");
+                
+                Attribution a = pv.rechAttribution();
+                pv.affichageMessage(cm.getAttribution(a));
+               // pv.affichageMessage(a);
+                pv.affichageMessage(cm.deleteA(a));
             }
         } catch (Exception e) {
             pv.affichageMessage("Entrez un nombre");
         }
-        ;
     }
 
     /**
