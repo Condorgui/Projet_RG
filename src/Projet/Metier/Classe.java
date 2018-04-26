@@ -195,7 +195,7 @@ public class Classe {
      */
     @Override
     public String toString() {
-        return  sigle + "Classe de " + annee +" ème année et d'orientation " + orientation;
+        return  sigle + " Classe de " + annee +" ème année et d'orientation " + orientation +"\n";
 
     }
 

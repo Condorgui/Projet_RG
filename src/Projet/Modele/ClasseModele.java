@@ -245,5 +245,37 @@ public class ClasseModele {
         }
         return "Suppression effectuée";
     }
+     
+      public String modifyA(Attribution ancA, Attribution nvA) {
+        int i = toutesLesAttributions.indexOf(nvA);
+        if (i < 0) {
+            return null;
+
+        } else {
+            toutesLesAttributions.set(i,nvA);
+        }
+        return "Modification effectuée";
+
+    }
+      
+       public void populate(){
+       tousLesEns.addAll(Arrays.asList(
+               new Enseignant("MAT007","Rigaux","Guillaume"),
+               new Enseignant("MAT123","Crombez","Rodrigue"),
+               new Enseignant("MAT456","Lété","Quentin"),
+               new Enseignant("MAT100","Urbain","Jérome"),
+               new Enseignant("MAT111","Rigaux","Baptiste"))
+               );
+       toutesLesClasses.addAll(Arrays.asList(
+               new Classe("MATH1",4,"Mathématiques"),
+               new Classe("ANGLAIS3",5,"Langues"),
+               new Classe("JAVA6",7,"Programmation"),
+               new Classe("BDD",4,"Base de données"),
+               new Classe("BIO5",5,"Biologie"),
+               new Classe("PHTML",1,"Programmation Web "))
+       );
+       
+       
+   }
 
 }

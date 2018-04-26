@@ -32,6 +32,12 @@ public class Enseignant {
      * Prénom de l'enseignant
      */
     private String prenom;
+
+    /**
+     * Correspond au mail l'enseignant
+     */
+    private String mail;
+
     /**
      * Correspond au statut de l'enseignant titulaire
      */
@@ -161,7 +167,7 @@ public class Enseignant {
      */
     @Override
     public String toString() {
-        return " => Enseignant " + nom + " " + prenom + " au matricule " + matricule + " " +Remplacant +" "+ Titulaire;
+        return " => Enseignant " + nom + " " + prenom + " au matricule " + matricule +"\n";
     }
 
     /**

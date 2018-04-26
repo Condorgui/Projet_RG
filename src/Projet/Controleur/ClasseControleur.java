@@ -158,10 +158,10 @@ public class ClasseControleur {
 
             }
             if (choix == 3) {
-                
+
                 Attribution a = pv.rechAttribution();
                 pv.affichageMessage(cm.getAttribution(a));
-               // pv.affichageMessage(a);
+                // pv.affichageMessage(a);
                 pv.affichageMessage(cm.deleteA(a));
             }
         } catch (Exception e) {
@@ -237,6 +237,8 @@ public class ClasseControleur {
         pv.affichageMessage(cm.deleteC(sec));
     }
      */
+    
+    
     /**
      * Méthode modificationE Modifie ou supprime un enseignant Appelle le
      * formulaire de recherche d'un enseignant sur base du matricule Appelle le
@@ -302,4 +304,7 @@ public class ClasseControleur {
 
     }
 
+
 }
+
+
