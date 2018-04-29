@@ -192,9 +192,48 @@ public class ClasseModele {
         int i = toutesLesClasses.indexOf(cl);
         if (i < 0) {
             return "Classe introuvable";
+        }
+        Classe c = toutesLesClasses.get(i);
 
+        for (Enseignant e : tousLesEns) {
+            Classe c1 = e.getTitulaire();
+            Classe c2 = e.getRemplacant();
+            if (c1 != null && c2 != null) {
+
+                return "Supprimez d'abord les attributions de l'enseignant";
+            }
+        }
+        toutesLesClasses.remove(i);
+        return "Suppression effectuée";
+    }
+
+    /**
+     * Méthode deleteA permet de supprimer une attribution
+     *
+     * @param aDel l'attribution à supprimer La méthode vérifie que
+     * l'attribution existe Si un enseignant est titulaire ou remplacant de
+     * l'attribution -> réinitialise le statut de titulaire ou remplacant de
+     * l'enseignant à null
+     * @return le résultat de la suppression
+     */
+    public String deleteA(Attribution aDel) {
+
+        int i = toutesLesAttributions.indexOf(aDel);
+        if (i < 0) {
+            return "Attribution à supprimer introuvable";
         } else {
-            toutesLesClasses.remove(i);
+            Enseignant e = new Enseignant();
+            e = toutesLesAttributions.get(i).getEnseignant();
+
+            if (e.getTitulaire() != null) {
+                e.setTitulaire(null);
+                e.getTitulaire();
+            }
+            if (e.getRemplacant() != null) {
+                e.setRemplacant(null);
+                e.getRemplacant();
+            }
+            toutesLesAttributions.remove(i);
         }
         return "Suppression effectuée";
     }
@@ -220,13 +259,24 @@ public class ClasseModele {
 
     }
 
+    /**
+     * Méthode toutesLesAttributions
+     *
+     * @return la liste toutesLesAttributions
+     */
     public List<Attribution> toutesLesAttributions() {
 
         return toutesLesAttributions;
     }
 
-    
-    public Attribution getAttribution(Attribution aRech){
+    /**
+     * Méthode getAttribution
+     *
+     * @param aRech l'attribution recherchée (le sigle de la classe, le
+     * matricule de l'enseignant)
+     * @return l'attribution ou null
+     */
+    public Attribution getAttribution(Attribution aRech) {
         int i = toutesLesAttributions.indexOf(aRech);
         if (i < 0) {
             return null;
@@ -234,48 +284,48 @@ public class ClasseModele {
             return toutesLesAttributions.get(i);
         }
     }
+
+    /**
+     * Méthode modifyA
+     *
+     * @param nvA la nouvelle attribution
+     * @param tmpA l'ancienne attribution à modifier
+     * @return le résultat de la modification
+     */
     
-     public String deleteA(Attribution aDel) {
-        int i = toutesLesAttributions.indexOf(aDel);
+    public String modifyA(Attribution nvA, Attribution tmpA) {
+        int i = toutesLesAttributions.indexOf(tmpA);
         if (i < 0) {
             return null;
 
         } else {
-            toutesLesAttributions.remove(i);
-        }
-        return "Suppression effectuée";
-    }
-     
-      public String modifyA(Attribution ancA, Attribution nvA) {
-        int i = toutesLesAttributions.indexOf(nvA);
-        if (i < 0) {
-            return null;
-
-        } else {
-            toutesLesAttributions.set(i,nvA);
+            toutesLesAttributions.set(i, nvA);
         }
         return "Modification effectuée";
 
     }
-      
-       public void populate(){
-       tousLesEns.addAll(Arrays.asList(
-               new Enseignant("MAT007","Rigaux","Guillaume"),
-               new Enseignant("MAT123","Crombez","Rodrigue"),
-               new Enseignant("MAT456","Lété","Quentin"),
-               new Enseignant("MAT100","Urbain","Jérome"),
-               new Enseignant("MAT111","Rigaux","Baptiste"))
-               );
-       toutesLesClasses.addAll(Arrays.asList(
-               new Classe("MATH1",4,"Mathématiques"),
-               new Classe("ANGLAIS3",5,"Langues"),
-               new Classe("JAVA6",7,"Programmation"),
-               new Classe("BDD",4,"Base de données"),
-               new Classe("BIO5",5,"Biologie"),
-               new Classe("PHTML",1,"Programmation Web "))
-       );
-       
-       
-   }
+
+    /**
+     * Méthode populate
+     * permet de remplir les list Enseignants et Classes automatiquement
+     */
+    public void populate() {
+        tousLesEns.addAll(Arrays.asList(
+                new Enseignant("MAT007", "Rigaux", "Guillaume"),
+                new Enseignant("MAT123", "Crombez", "Rodrigue"),
+                new Enseignant("MAT456", "Lété", "Quentin"),
+                new Enseignant("MAT100", "Urbain", "Jérome"),
+                new Enseignant("MAT111", "Rigaux", "Baptiste"))
+        );
+        toutesLesClasses.addAll(Arrays.asList(
+                new Classe("MATH1", 4, "Mathématiques"),
+                new Classe("ANGLAIS3", 5, "Langues"),
+                new Classe("JAVA6", 7, "Programmation"),
+                new Classe("BDD", 4, "Base de données"),
+                new Classe("BIO5", 5, "Biologie"),
+                new Classe("PHTML", 1, "Programmation Web "))
+        );
+
+    }
 
 }

@@ -4,7 +4,15 @@
  */
 package Projet.Metier;
 
-
+/**
+ *
+ * @author guill
+ */
 public interface Observateur {
+
+    /**
+     *
+     * @param texte
+     */
     public void actualise(String texte);
 }

@@ -29,17 +29,14 @@ public class Pvue {
      */
     public int menuPrincipal() {
 
-        List<String> menu = new ArrayList<>(Arrays.asList(
-                " Ajout Enseignant",
-                " Ajout Classe",
-                " Modif/suppression des enseignants",
-                " Modif/suppression des classes",
+        List<String> menu;
+        menu = new ArrayList<>(Arrays.asList(
+                " Gestion des Enseignants",
+                " Gestion des Classes",
+                " Gestion des attributions",
                 " Recherche Enseignant",
                 " Recherche d'une classe",
                 " Affichage",
-                " Gérer les attributions",
-                //"__8. Affichage Enseignants", 
-                //"__9. Affichage Classes",
                 "Quitter"));
         affichageListe(menu);
 
@@ -86,7 +83,15 @@ public class Pvue {
         return e;
     }
 
-    public Attribution newAttribution(List<Classe> toutesLesClasses, List<Enseignant> tousEns) {
+    /**
+     * Méthode création d'une attribution
+     * @param toutesLesClasses liste des classes pour associer l'attributions
+     * @param tousEns liste des enseignants pour associer l'attributions
+     * @param toutesLesAttributions liste des attributions 
+     * Actualise le statut titulaire/remplacant de l'enseignant
+     * @return la nouvelle attribution
+     */
+    public Attribution newAttribution(List<Classe> toutesLesClasses, List<Enseignant> tousEns, List<Attribution> toutesLesAttributions) {
 
         affichageListe(toutesLesClasses);
         String ch1 = getMessage("Choisissez la classe : ");
@@ -131,21 +136,32 @@ public class Pvue {
         Enseignant e = tousEns.get(ens);
 
         if (e.getRemplacant() != null || e.getTitulaire() != null) {
-            affichageMessage("Déjà attribution : " + e.getRemplacant() + e.getTitulaire());
+            affichageMessage("Il y a déjà une attribution pour cet enseignant : ");
+            return null;
 
         } else {
             if (att == 1) {
-                e.setTitulaire(c);
+
+                for (Attribution a : toutesLesAttributions) {
+                    Enseignant eCher = a.getEnseignant();
+                    if (eCher.getTitulaire() == c) {
+                        affichageMessage("Déjà un titulaire ! ");
+                        return null;
+                    }
+                    e.setTitulaire(c);
+                    e.setRemplacant(null);
+                }
+                if (att == 2) {
+                    e.setRemplacant(c);
+                    e.setTitulaire(null);
+                }
             }
-            if (att == 2) {
-                e.setRemplacant(c);
-            }
+
+            Attribution a = new Attribution(c, e);
+
+            return a;
+
         }
-
-        Attribution a = new Attribution(c, e);
-
-        return a;
-
     }
 
     /**
@@ -245,16 +261,21 @@ public class Pvue {
         Enseignant eRech = new Enseignant(matricule);
         return eRech;
     }
-    
-       public Attribution rechAttribution() {
 
-        String matricule = getMessage("Recherche sur l'enseignant  ");
-        Enseignant ens  = new Enseignant(matricule);
-        String sigle = getMessage("Recherche sur la classe : ");
-        Classe cl = new Classe(sigle); 
-        
-        Attribution a = new Attribution(cl,ens);
-        return a;
+    /**
+     * Méthode rechAttribution 
+     * Recherche l'attribution sur base du matricule et du sigle de l'enseignant
+     * @return aRech == l'attribution trouvée
+     */
+    public Attribution rechAttribution() {
+
+        String matricule = getMessage("Recherchez le matricule : ");
+        Enseignant ens = new Enseignant(matricule);
+        String sigle = getMessage("Recherchez le sigle : ");
+        Classe cl = new Classe(sigle);
+
+        Attribution aRech = new Attribution(cl, ens);
+        return aRech;
     }
 
 }

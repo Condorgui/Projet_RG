@@ -23,21 +23,36 @@ import static org.junit.Assert.*;
  */
 public class ClasseModeleTest {
 
+    /**
+     *
+     */
     public ClasseModeleTest() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
@@ -247,6 +262,64 @@ public class ClasseModeleTest {
             fail("Attribution inexistante: " + cTrouve);
         });
 
+    }
+
+    /**
+     * Test of deleteA method, of class ClasseModele.
+     */
+    @Test
+    public void testDeleteA() {
+        System.out.println("deleteA");
+        Attribution aDel = null;
+        ClasseModele instance = new ClasseModele();
+        String expResult = "";
+        String result = instance.deleteA(aDel);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAttribution method, of class ClasseModele.
+     */
+    @Test
+    public void testGetAttribution() {
+        System.out.println("getAttribution");
+        Attribution aRech = null;
+        ClasseModele instance = new ClasseModele();
+        Attribution expResult = null;
+        Attribution result = instance.getAttribution(aRech);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of modifyA method, of class ClasseModele.
+     */
+    @Test
+    public void testModifyA() {
+        System.out.println("modifyA");
+        Attribution ancA = null;
+        Attribution nvA = null;
+        ClasseModele instance = new ClasseModele();
+        String expResult = "";
+        String result = instance.modifyA(ancA, nvA);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of populate method, of class ClasseModele.
+     */
+    @Test
+    public void testPopulate() {
+        System.out.println("populate");
+        ClasseModele instance = new ClasseModele();
+        instance.populate();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**

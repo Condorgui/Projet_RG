@@ -62,37 +62,25 @@ public class ClasseControleur {
 
                 switch (ch) {
                     case 1:
-                        ajoutEnseignant();
+                        gestionEnseignants();
+                        //  ajoutEnseignant();
                         break;
                     case 2:
-                        ajoutClasse();
+                        gestionClasses();
                         break;
                     case 3:
-                        modificationE();
-                        //SuppE();
+                        gestionAttribution();
                         break;
-
                     case 4:
-                        modificationC();
-                        //  SuppC(); 
-                        break;
-                    case 5:
-
                         rechEnseignant();
                         break;
-                    case 6:
-
+                    case 5:
                         rechClasse();
                         break;
-                    case 7:
+                    case 6:
                         affichage();
                         break;
-
-                    case 8:
-                        gestionAttribution();
-
-                        break;
-                    case 9:
+                    case 7:
                         pv.affichageMessage("Fin");
 
                     default:
@@ -100,10 +88,11 @@ public class ClasseControleur {
                 }
 
             } catch (Exception e) {
-                pv.affichageMessage(e);
+                // pv.affichageMessage(e);
+                pv.affichageMessage(e + "Entrez un nombrez valide !");
             }
 
-        } while (ch != 9);
+        } while (ch != 7);
     }
 
     /**
@@ -140,31 +129,45 @@ public class ClasseControleur {
     private void gestionAttribution() {
 
         try {
+
+            List<Enseignant> le = cm.tousEns();
+            List<Classe> lc = cm.toutesClasses();
+            List<Attribution> la = cm.toutesLesAttributions();
+
             int choix = Integer.parseInt(pv.getMessage(""
                     + "1. Ajouter une attribution"
                     + "      2. Modifier une attribution "
                     + "             3. Supprimer une attribution"));
 
             if (choix == 1) {
-
-                Attribution a = pv.newAttribution(cm.toutesClasses(), cm.tousEns());
+                pv.affichageMessage(" --- Ajout d'une attribution ---");
+                Attribution a = pv.newAttribution(cm.toutesClasses(), cm.tousEns(), cm.toutesLesAttributions());
                 String msg = cm.ajouterAttribution(a);
                 pv.affichageMessage(msg);
 
             }
             if (choix == 2) {
-                Attribution a = pv.rechAttribution();
-                pv.affichageMessage(cm.getAttribution(a));
+                pv.affichageMessage(" --- Modification de l'attribution ---");
+                pv.affichageMessage(le);
+                pv.affichageMessage(lc);
+                Attribution aRech = pv.rechAttribution();
+                Attribution att = cm.getAttribution(aRech);
+                //   pv.affichageMessage(aRech);
+                Attribution nvAtt = pv.newAttribution(cm.toutesClasses(), cm.tousEns(), cm.toutesLesAttributions());
+                pv.affichageMessage(cm.modifyA(nvAtt, att));
 
             }
             if (choix == 3) {
-
-                Attribution a = pv.rechAttribution();
-                pv.affichageMessage(cm.getAttribution(a));
+                pv.affichageMessage(" --- Suppression de l'attribution ---");
+                pv.affichageMessage(le);
+                pv.affichageMessage(lc);
+                Attribution aRech = pv.rechAttribution();
+                Attribution att = cm.getAttribution(aRech);
+                pv.affichageMessage(cm.getAttribution(att));
                 // pv.affichageMessage(a);
-                pv.affichageMessage(cm.deleteA(a));
+                pv.affichageMessage(cm.deleteA(att));
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             pv.affichageMessage("Entrez un nombre");
         }
     }
@@ -188,95 +191,16 @@ public class ClasseControleur {
     }
 
     /**
-     * Méthode modificationC Modifie ou supprime une classe Appelle le
-     * formulaire de recherche d'une classe sur base du sigle Appelle le
-     * formulaire de modification (modifyC) ou suppression (deleteCl)
-     *
-     */
-    private void modificationC() {
-
-        int choix = Integer.parseInt(pv.getMessage(""
-                + "1. Modification de la classe"
-                + "       2. Suppression de la classe"));
-
-        Classe cRech = pv.rechClasse();
-        //  Classe test = cm.getClasse(pv.rechClasse());
-        Classe tmpC = cm.getClasse(cRech);
-        switch (choix) {
-            case 1:
-                pv.affichageMessage("Modification de la classe");
-                pv.affichageMessage(tmpC);
-                Classe nvClasse = pv.newClasse();
-                pv.affichageMessage(cm.modifyC(nvClasse, tmpC));
-                break;
-            case 2:
-                pv.affichageMessage("--- Suppression de la classe --- ");
-                pv.affichageMessage(tmpC);
-                pv.affichageMessage(cm.deleteCl(tmpC));
-                break;
-            default:
-                pv.affichageMessage("Entrez un choix valide ");
-                break;
-        }
-
-    }
-
-    /*  private void SuppE() {
-
-        Enseignant aDel = pv.rechEnseignant();
-        Enseignant sec = cm.getEnseignant(aDel);
-        pv.affichageMessage(sec);
-        pv.affichageMessage(cm.deleteE(sec));
-    }
-     */
- /*  private void SuppC() {
-
-        Classe aDel = pv.rechClasse();
-        Classe sec = cm.getClasse(aDel);
-        pv.affichageMessage(sec);
-        pv.affichageMessage(cm.deleteC(sec));
-    }
-     */
-    
-    
-    /**
-     * Méthode modificationE Modifie ou supprime un enseignant Appelle le
-     * formulaire de recherche d'un enseignant sur base du matricule Appelle le
-     * formulaire de modification (modifyE) ou suppression (deleteE)
-     *
-     */
-    private void modificationE() {
-        int choix = Integer.parseInt(pv.getMessage(""
-                + "1. Modification de l'enseignant"
-                + "      2. Suppression de l'enseignant"));
-        Enseignant eRech = pv.rechEnseignant();
-        Enseignant tmpE = cm.getEnseignant(eRech);
-        switch (choix) {
-            case 1:
-                pv.affichageMessage(" --- Modification de l'enseignant ---");
-                pv.affichageMessage(tmpE);
-                Enseignant nvEns = pv.newEnseignant();
-                pv.affichageMessage(cm.modifyE(nvEns, tmpE));
-                break;
-            case 2:
-                pv.affichageMessage("--- Suppression de l'enseignant ---");
-                pv.affichageMessage(tmpE);
-                pv.affichageMessage(cm.deleteE(tmpE));
-                break;
-            default:
-                pv.affichageMessage("Entrez un choix valide");
-                break;
-        }
-
-    }
-
-    /**
      * Méthode affichage Affichage les enseignant ou les classes récupère les
      * enseignants dans une liste et affiche son contenu récupère les classes
      * dans une liste et affiche son contenu
      *
      */
     private void affichage() {
+
+        List<Enseignant> le = cm.tousEns();
+        List<Classe> lc = cm.toutesClasses();
+        List<Attribution> la = cm.toutesLesAttributions();
 
         try {
             int choix = Integer.parseInt(pv.getMessage(""
@@ -286,25 +210,104 @@ public class ClasseControleur {
 
             if (choix == 1) {
 
-                List<Enseignant> le = cm.tousEns();
                 pv.affichageMessage(le);
 
             }
             if (choix == 2) {
-                List<Classe> lc = cm.toutesClasses();
+
                 pv.affichageMessage(lc);
             }
             if (choix == 3) {
-                List<Attribution> la = cm.toutesLesAttributions();
+
                 pv.affichageMessage(la);
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             pv.affichageMessage("Entrez un nombre");
         }
 
     }
 
+    /**
+     * Méthode gestionEnseignant Gère les ajouts, modifications ou suppression
+     * des enseignants
+     */
+    private void gestionEnseignants() {
+        List<Enseignant> le = cm.tousEns();
+        int choix = Integer.parseInt(pv.getMessage(""
+                + "1. Ajout de l'enseignant"
+                + "      2. Modification de l'enseignant"
+                + "           3. Suppression de l'enseignant"));
+
+        switch (choix) {
+            case 1:
+                pv.affichageMessage(" --- Ajout de l'enseignant ---");
+                ajoutEnseignant();
+                break;
+
+            case 2:
+                Enseignant eRech = pv.rechEnseignant();
+                Enseignant tmpE = cm.getEnseignant(eRech);
+                pv.affichageMessage(le);
+                pv.affichageMessage(" --- Modification de l'enseignant ---");
+                pv.affichageMessage(tmpE);
+                Enseignant nvEns = pv.newEnseignant();
+                pv.affichageMessage(cm.modifyE(nvEns, tmpE));
+                break;
+
+            case 3:
+                eRech = pv.rechEnseignant();
+                tmpE = cm.getEnseignant(eRech);
+                pv.affichageMessage(le);
+                pv.affichageMessage("--- Suppression de l'enseignant ---");
+                pv.affichageMessage(tmpE);
+                pv.affichageMessage(cm.deleteE(tmpE));
+                break;
+
+            default:
+                pv.affichageMessage("Entrez un choix valide");
+                break;
+        }
+
+    }
+
+    /**
+     * Méthode gestionClasse Gère les ajouts, modifications ou suppression des
+     * classes
+     */
+    private void gestionClasses() {
+
+        List<Classe> lc = cm.toutesClasses();
+        int choix = Integer.parseInt(pv.getMessage(""
+                + "1. Ajout de la classe"
+                + "       2. Modification de la classe"
+                + "               3. Suppression de la classe"
+        ));
+
+        switch (choix) {
+            case 1:
+                ajoutClasse();
+                break;
+            case 2:
+                Classe cRech = pv.rechClasse();
+                Classe tmpC = cm.getClasse(cRech);
+                pv.affichageMessage(lc);
+                pv.affichageMessage("Modification de la classe");
+                pv.affichageMessage(tmpC);
+                Classe nvClasse = pv.newClasse();
+                pv.affichageMessage(cm.modifyC(nvClasse, tmpC));
+                break;
+            case 3:
+                cRech = pv.rechClasse();
+                tmpC = cm.getClasse(cRech);
+                pv.affichageMessage(lc);
+                pv.affichageMessage("--- Suppression de la classe --- ");
+                pv.affichageMessage(tmpC);
+                pv.affichageMessage(cm.deleteCl(tmpC));
+                break;
+            default:
+                pv.affichageMessage("Entrez un choix valide ");
+                break;
+        }
+    }
 
 }
-
-

@@ -28,6 +28,11 @@ public class Attribution {
 
     }
     
+    /**
+     *
+     * @param classe
+     * @param enseignant
+     */
     public Attribution (Classe classe, Enseignant enseignant){
         
         this.Classe = classe; 
@@ -64,7 +69,7 @@ public class Attribution {
     /**
      * Setter de l'enseignant
      *
-     * @param Enseignant l'enseignant
+     * @param enseignant
      */
     public void setEnseignant(Enseignant enseignant) {
         this.Enseignant = enseignant;

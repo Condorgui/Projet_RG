@@ -142,11 +142,18 @@ public class Classe {
         this.orientation = Orientation;
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public int getN_etudiants() {
         return n_etudiants;
     }
 
+    /**
+     *
+     * @param n_etudiants
+     */
     public void setN_etudiants(int n_etudiants) {
         this.n_etudiants = n_etudiants;
     }
