@@ -200,10 +200,7 @@ public class Enseignant {
             return false;
         }
         final Enseignant other = (Enseignant) obj;
-        if (!Objects.equals(this.matricule, other.matricule)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.matricule, other.matricule);
     }
 
 }

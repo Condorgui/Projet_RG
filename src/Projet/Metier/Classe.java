@@ -189,10 +189,7 @@ public class Classe {
             return false;
         }
         final Classe other = (Classe) obj;
-        if (!Objects.equals(this.sigle, other.sigle)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.sigle, other.sigle);
     }
 
     /**
