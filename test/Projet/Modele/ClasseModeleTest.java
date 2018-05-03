@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 /**
  *
  * @author Guillaume.Rigaux
+ * Certains tests ont été aidés par Gaetan Soudant 
  */
 public class ClasseModeleTest {
 
@@ -68,6 +69,7 @@ public class ClasseModeleTest {
         String expResult = "Création de la classe effectuée";
         String result = instance.ajouterClasse(c);
         assertEquals(expResult, result);
+        instance.deleteCl(c); 
     }
 
     /**
@@ -81,6 +83,7 @@ public class ClasseModeleTest {
         String expResult = "Ajout de l'enseignant";
         String result = instance.ajouterEnseignant(e);
         assertEquals(expResult, result);
+        instance.deleteE(e);
 
     }
 
@@ -156,7 +159,8 @@ public class ClasseModeleTest {
         instance.ajouterEnseignant(e);
         String result = instance.deleteE(e);
         String expResult = "Suppression effectuée";
-        assertEquals(expResult, result);
+        //assertEquals(expResult, result);
+        assertNull(result);
 
     }
 
@@ -171,7 +175,8 @@ public class ClasseModeleTest {
         instance.ajouterClasse(c);
         String result = instance.deleteCl(c);
         String expResult = "Suppression effectuée";
-        assertEquals(expResult, result);
+       // assertEquals(expResult, result);
+        assertNull(result);
 
     }
 
@@ -193,7 +198,6 @@ public class ClasseModeleTest {
         expResult.stream().filter((eTrouve) -> (!result.contains(eTrouve))).forEachOrdered((eTrouve) -> {
             fail("Enseignant non présent dans la liste : " + eTrouve);
         });
-
         expResult.forEach((eTrouve) -> {
             instance.deleteE(eTrouve);
         });
@@ -239,7 +243,7 @@ public class ClasseModeleTest {
         String expResult = "Ajout de l'attribution";
         String result = instance.ajouterAttribution(att);
         assertEquals(expResult, result);
-
+        instance.deleteA(att); 
     }
 
     /**
@@ -274,7 +278,8 @@ public class ClasseModeleTest {
         ClasseModele instance = new ClasseModele();
         String expResult = "";
         String result = instance.deleteA(aDel);
-        assertEquals(expResult, result);
+        //assertEquals(expResult, result);
+        assertNull(result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
