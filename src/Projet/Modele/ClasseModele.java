@@ -219,7 +219,7 @@ public class ClasseModele {
     public String deleteA(Attribution aDel) {
 
         int i = toutesLesAttributions.indexOf(aDel);
-        
+
         if (i < 0) {
             return "Attribution à supprimer introuvable";
         } else {
@@ -238,7 +238,7 @@ public class ClasseModele {
         }
         return "Suppression effectuée";
     }
-    
+
     /**
      * Méthode tousEns
      *
@@ -317,15 +317,18 @@ public class ClasseModele {
                 new Enseignant("MAT100", "Urbain", "Jérome"),
                 new Enseignant("MAT111", "Rigaux", "Baptiste"))
         );
-        toutesLesClasses.addAll(Arrays.asList(
-                new Classe("MATH1", 4, "Mathématiques"),
-                new Classe("ANGLAIS3", 5, "Langues"),
-                new Classe("JAVA6", 7, "Programmation"),
-                new Classe("BDD", 4, "Base de données"),
-                new Classe("BIO5", 5, "Biologie"),
-                new Classe("PHTML", 1, "Programmation Web "))
-        );
+        try {
+            toutesLesClasses.addAll(Arrays.asList(                  
+                new Classe.ClasseBuilder().setSigle("MA123").setAnnee(4).setOrientation("eee").build(),
+                new Classe.ClasseBuilder().setSigle("BIO4").setAnnee(3).setOrientation("Biologie").build(),
+                new Classe.ClasseBuilder().setSigle("PHYS1").setAnnee(1).setOrientation("Physique").build(),
+
+                new Classe.ClasseBuilder().setSigle("POO5").setAnnee(6).setOrientation("Progra").build())
+            );
+
+        } catch (Exception e) {
+            System.out.println("erreur de création " + e);
+        }
 
     }
-
 }

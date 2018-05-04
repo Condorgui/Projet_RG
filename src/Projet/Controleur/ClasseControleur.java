@@ -75,12 +75,15 @@ public class ClasseControleur {
                         rechEnseignant();
                         break;
                     case 5:
-                        rechClasse();
+                        rechAttribution();
                         break;
                     case 6:
-                        affichage();
+                        rechClasse();
                         break;
                     case 7:
+                        affichage();
+                        break;
+                    case 8:
                         pv.affichageMessage("Fin");
 
                     default:
@@ -92,7 +95,7 @@ public class ClasseControleur {
                 pv.affichageMessage(e + "Entrez un nombrez valide !");
             }
 
-        } while (ch != 7);
+        } while (ch != 8);
     }
 
     /**
@@ -170,6 +173,11 @@ public class ClasseControleur {
         } catch (NumberFormatException e) {
             pv.affichageMessage("Entrez un nombre");
         }
+    }
+
+    private void rechAttribution() {
+        Attribution a = pv.rechAttribution();
+        pv.affichageMessage(cm.getAttribution(a));
     }
 
     /**
