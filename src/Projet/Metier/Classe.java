@@ -42,7 +42,7 @@ public class Classe {
         annee = 0;
         orientation = "";
         e = null;
-        this.n_etudiants = 0; 
+       // this.n_etudiants = 0; 
         
     }
 
@@ -57,7 +57,7 @@ public class Classe {
         this.sigle = Sigle;
         this.annee = Annee;
         this.orientation = Orientation;
-        this.n_etudiants = 0;
+      //  this.n_etudiants = 0;
     }
 
     

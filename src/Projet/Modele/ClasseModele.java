@@ -19,17 +19,17 @@ public class ClasseModele {
     /**
      * Liste de tous les enseignants
      */
-    private final List<Enseignant> tousLesEns;
+    public List<Enseignant> tousLesEns;
 
     /**
      * Liste de toutes les classes
      */
-    private final List<Classe> toutesLesClasses;
+    public List<Classe> toutesLesClasses;
 
     /**
      * Listes des attributions
      */
-    private final List<Attribution> toutesLesAttributions;
+    public List<Attribution> toutesLesAttributions;
 
     /**
      * constructeur par défaut
@@ -219,6 +219,7 @@ public class ClasseModele {
     public String deleteA(Attribution aDel) {
 
         int i = toutesLesAttributions.indexOf(aDel);
+        
         if (i < 0) {
             return "Attribution à supprimer introuvable";
         } else {
@@ -237,7 +238,7 @@ public class ClasseModele {
         }
         return "Suppression effectuée";
     }
-
+    
     /**
      * Méthode tousEns
      *
@@ -292,7 +293,6 @@ public class ClasseModele {
      * @param tmpA l'ancienne attribution à modifier
      * @return le résultat de la modification
      */
-    
     public String modifyA(Attribution nvA, Attribution tmpA) {
         int i = toutesLesAttributions.indexOf(tmpA);
         if (i < 0) {
@@ -306,8 +306,8 @@ public class ClasseModele {
     }
 
     /**
-     * Méthode populate
-     * permet de remplir les list Enseignants et Classes automatiquement
+     * Méthode populate permet de remplir les list Enseignants et Classes
+     * automatiquement
      */
     public void populate() {
         tousLesEns.addAll(Arrays.asList(
