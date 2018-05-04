@@ -3,15 +3,21 @@ package myconnections;
 import java.sql.*;
 import java.util.*;
 
+/**
+ *
+ * @author guill
+ */
 public class DBConnection {
 
      private static Connection dbConnect = null;
 
   private DBConnection(){}   
      
-     
-     
-     public static Connection getConnection() {
+    /**
+     *
+     * @return
+     */
+    public static Connection getConnection() {
         if (dbConnect!=null)return dbConnect;
         PropertyResourceBundle properties = 
                 (PropertyResourceBundle) PropertyResourceBundle.getBundle("resources.application");
@@ -34,6 +40,9 @@ public class DBConnection {
         }
     }
     
+    /**
+     *
+     */
     public static void closeConnection(){
        
         try{

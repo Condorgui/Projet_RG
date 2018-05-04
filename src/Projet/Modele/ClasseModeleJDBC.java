@@ -17,11 +17,18 @@ import java.util.List;
 import myconnections.DBConnection;
 import Projet.Metier.*;
 
+/**
+ *
+ * @author guill
+ */
 public class ClasseModeleJDBC extends ClasseModele {
 
     Connection dbconnect;
 //Connexion à la BDD
 
+    /**
+     *
+     */
     public ClasseModeleJDBC() {
         dbconnect = DBConnection.getConnection();
         if (dbconnect == null) {
@@ -31,6 +38,9 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
     }
 
+    /**
+     *
+     */
     public void close() {
         try {
             dbconnect.close();
@@ -44,6 +54,11 @@ public class ClasseModeleJDBC extends ClasseModele {
         //ne rien faire car données déjà présentes dans DB
     }
 
+    /**
+     *
+     * @param mode
+     * @return
+     */
     public List<Enseignant> tousEns(int mode) {
         //mode = soit tri par numéro chassis soit par prix soit par prenom
         String critere = "";
@@ -100,6 +115,11 @@ public class ClasseModeleJDBC extends ClasseModele {
         return le;
     }
 
+    /**
+     *
+     * @param mode
+     * @return
+     */
     public List<Classe> toutesLesClasses(int mode) {
         //mode = soit tri par sigle soit par année, soit orientation
         String critere = "";
@@ -151,7 +171,11 @@ public class ClasseModeleJDBC extends ClasseModele {
         return lc;
     }
 
-
+    /**
+     *
+     * @param mode
+     * @return
+     */
     public List<Attribution> toutesLesAttributions(int mode) {
         //mode = tri
         String critere = "";

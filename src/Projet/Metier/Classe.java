@@ -29,22 +29,42 @@ public class Classe {
     }
 //Plus que des getters 
 
+    /**
+     *
+     * @return
+     */
     public String getSigle() {
         return sigle;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAnnee() {
         return annee;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getOrientation() {
         return orientation;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getN_etudiants() {
         return n_etudiants;
     }
 
+    /**
+     *
+     * @return
+     */
     public Enseignant getE() {
         return e;
     }
@@ -67,6 +87,9 @@ public class Classe {
         return hash;
     }
 
+    /**
+     *
+     */
     public static class ClasseBuilder {
 
         private String sigle;
@@ -75,36 +98,69 @@ public class Classe {
         private int annee;
         private Enseignant e;
 
+        /**
+         *
+         */
         public ClasseBuilder() {
         }
 //Les setters se trouvent dans le personne builder
 
+        /**
+         *
+         * @param sigle
+         * @return
+         */
         public ClasseBuilder setSigle(String sigle) {
             this.sigle = sigle;
             return this;
         }
 
+        /**
+         *
+         * @param orientation
+         * @return
+         */
         public ClasseBuilder setOrientation(String orientation) {
             this.orientation = orientation;
             return this;
         }
 
+        /**
+         *
+         * @param n_etudiants
+         * @return
+         */
         public ClasseBuilder setN_etudiants(int n_etudiants) {
             this.n_etudiants = n_etudiants;
             return this;
             //L'objet se retourne lui même via this
         }
 
+        /**
+         *
+         * @param e
+         * @return
+         */
         public ClasseBuilder setEnseignant(Enseignant e) {
             this.e = e;
             return this;
         }
         
-         public ClasseBuilder setAnnee(int annee) {
+        /**
+         *
+         * @param annee
+         * @return
+         */
+        public ClasseBuilder setAnnee(int annee) {
             this.annee = annee;
             return this;
         }
 
+        /**
+         *
+         * @return
+         * @throws Exception
+         */
         public Classe build() throws Exception {
             if (sigle == null) {
                 throw new Exception("informations de base manquantes");
