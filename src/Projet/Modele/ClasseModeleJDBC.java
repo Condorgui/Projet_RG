@@ -57,22 +57,11 @@ public class ClasseModeleJDBC extends ClasseModele {
      * @param mode
      * @return
      */
-    public List<Enseignant> tousEns(int mode) {
+    @Override
+    public List<Enseignant> tousEns() {
         //mode = soit tri par numéro chassis soit par prix soit par prenom
-        String critere = "";
-        switch (mode) {
-            case 1:
-                critere = "order by nom";
-                break;
-            case 2:
-                critere = "order by matricule";
-                break;
-            case 3:
-                critere = "order by prenom";
-                break;
 
-        }
-        String query = "select * from ENSEIGNANT ";
+        String query = "select * from ENSEIGNANT order by MATRICULE";
         List<Enseignant> le = new ArrayList<>();
         Statement stm = null;
         ResultSet rs = null;
@@ -87,6 +76,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 Enseignant e = new Enseignant(matricule, nom, prenom);
 
                 le.add(e);
+
             }
         } catch (SQLException ex) {
             System.err.println("erreur lors de la recherche de l'enseignant " + ex);
@@ -114,22 +104,9 @@ public class ClasseModeleJDBC extends ClasseModele {
      * @param mode
      * @return
      */
-    public List<Classe> toutesLesClasses(int mode) {
-        //mode = soit tri par sigle soit par année, soit orientation
-        String critere = "";
-        switch (mode) {
-            case 1:
-                critere = "order by sigle";
-                break;
-            case 2:
-                critere = "order by annee";
-                break;
-            case 3:
-                critere = "order by orientation";
-                break;
+    public List<Classe> toutesClasses() {
 
-        }
-        String query = "select * from CLASSE " + critere;
+        String query = "select * from CLASSE order by SIGLE";
         List<Classe> lc = new ArrayList<>();
         Statement stm = null;
         ResultSet rs = null;
@@ -176,7 +153,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     @Override
     public Enseignant getEnseignant(Enseignant aRech) {
-        //Faire switch pour recherche sur 2 critères
+     
         String query = "SELECT * FROM ENSEIGNANT WHERE MATRICULE = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -185,13 +162,15 @@ public class ClasseModeleJDBC extends ClasseModele {
             pstm.setString(1, aRech.getMatricule());
             rs = pstm.executeQuery();
             if (rs.next()) {
-                String nom = rs.getString(1);
-                String prenom = rs.getString(2);
+                String matricule = rs.getString(1);
+                String nom = rs.getString(4);
+                String prenom = rs.getString(5);
                 //     String cl_titulaire = rs.getString(3);
-                String matricule = rs.getString(4);
+                
                 //     String cl_remplacant = rs.getString(5);
                 Enseignant e = new Enseignant(nom, prenom, matricule);
                 return e;
+
             } else {
                 return null;
             }
@@ -214,13 +193,12 @@ public class ClasseModeleJDBC extends ClasseModele {
                 System.err.println("erreur de fermeture de preparedstatement " + e);
             }
         }
-
     }
 
     @Override
     public Classe getClasse(Classe aRech) {
         //Faire switch pour recherche sur 2 critères
-        Classe classe = null; 
+        Classe classe = null;
         String query = "SELECT * FROM CLASSE WHERE SIGLE = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -266,9 +244,9 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
 
     }
-    
+
     @Override
-     public String ajouterClasse(Classe c) {
+    public String ajouterClasse(Classe c) {
         String msg;
         String query = "insert into CLASSE(annee,sigle,orientation) values(?,?,?)";
         PreparedStatement pstm = null;
@@ -297,9 +275,9 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return msg;
     }
-     
-      @Override
-     public String ajouterEnseignant(Enseignant e) {
+
+    @Override
+    public String ajouterEnseignant(Enseignant e) {
         String msg;
         String query = "insert into ENSEIGNANT(matricule,nom,prenom) values(?,?,?)";
         PreparedStatement pstm = null;

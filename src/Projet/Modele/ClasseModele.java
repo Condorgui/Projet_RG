@@ -34,6 +34,16 @@ public class ClasseModele {
     /**
      * constructeur par défaut
      */
+    private static ClasseModele instance = null;
+
+    public static ClasseModele getInstance() {
+        if (instance == null) {
+            return instance = new ClasseModele();
+        } else {
+            return instance;
+        }
+    }
+
     public ClasseModele() {
 
         tousLesEns = new ArrayList<>();
@@ -318,12 +328,11 @@ public class ClasseModele {
                 new Enseignant("MAT111", "Rigaux", "Baptiste"))
         );
         try {
-            toutesLesClasses.addAll(Arrays.asList(                  
-                new Classe.ClasseBuilder().setSigle("MA123").setAnnee(4).setOrientation("eee").build(),
-                new Classe.ClasseBuilder().setSigle("BIO4").setAnnee(3).setOrientation("Biologie").build(),
-                new Classe.ClasseBuilder().setSigle("PHYS1").setAnnee(1).setOrientation("Physique").build(),
-
-                new Classe.ClasseBuilder().setSigle("POO5").setAnnee(6).setOrientation("Progra").build())
+            toutesLesClasses.addAll(Arrays.asList(
+                    new Classe.ClasseBuilder().setSigle("MA123").setAnnee(4).setOrientation("eee").build(),
+                    new Classe.ClasseBuilder().setSigle("BIO4").setAnnee(3).setOrientation("Biologie").build(),
+                    new Classe.ClasseBuilder().setSigle("PHYS1").setAnnee(1).setOrientation("Physique").build(),
+                    new Classe.ClasseBuilder().setSigle("POO5").setAnnee(6).setOrientation("Progra").build())
             );
 
         } catch (Exception e) {
