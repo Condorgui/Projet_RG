@@ -5,8 +5,6 @@
  */
 package Projet.Modele;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,7 +42,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     public void close() {
         try {
             dbconnect.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("erreur lors de la fermeture de la connexion " + e);
         }
     }
@@ -85,10 +83,6 @@ public class ClasseModeleJDBC extends ClasseModele {
                 String matricule = rs.getString(1);
                 String nom = rs.getString(4);
                 String prenom = rs.getString(5);
-                /* int km = rs.getInt(5);
-                int annee = rs.getInt(6);
-                double prix = rs.getDouble(7);
-                 */
 
                 Enseignant e = new Enseignant(matricule, nom, prenom);
 
@@ -146,9 +140,18 @@ public class ClasseModeleJDBC extends ClasseModele {
                 String sigle = rs.getString(1);
                 int annee = rs.getInt(2);
                 String orientation = rs.getString(3);
-                Classe c = new Classe(sigle, annee, orientation);
+                Classe classe = null;
 
-                lc.add(c);
+                Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+                c.setSigle(sigle).setOrientation(orientation).setAnnee(annee);
+                try {
+                    classe = c.build();
+
+                } catch (Exception e) {
+                    System.out.println("Erreur de création" + e);
+                }
+
+                lc.add(classe);
             }
         } catch (SQLException e) {
             System.err.println("erreur lors de la recherche de la classe " + e);
@@ -171,37 +174,42 @@ public class ClasseModeleJDBC extends ClasseModele {
         return lc;
     }
 
-    /**
-     *
-     * @param mode
-     * @return
-     */
-    public List<Attribution> toutesLesAttributions(int mode) {
-        //mode = tri
+    
+
+      public Enseignant getEnseignant(Enseignant aRech, int mode) {
+        //mode = soit recherche sur le matricule soit recherche sur le nom
         String critere = "";
         switch (mode) {
             case 1:
-                critere = "order by matricule"; //tri sur matricule de l'enseignant
+                critere = "where MATRICULE = ?";
                 break;
             case 2:
-                critere = "order by sigle"; //tri sur le sigle de la classe
-                break;         
+                critere = "where NOM = ?  ";
+                 break;
+
         }
-        String query = "select * from ATTRIBUTION " + critere;
-        List<Attribution> la = new ArrayList<>();
+        String query = "select * from ENSEIGNANT " + critere;
         Statement stm = null;
         ResultSet rs = null;
         try {
             stm = dbconnect.createStatement();
             rs = stm.executeQuery(query);
             while (rs.next()) {
-                
-                int matricule = rs.getInt(1); 
-                String sigle = rs.getString(2); ;
-                
-               
+                String sigle = rs.getString(1);
+                int annee = rs.getInt(2);
+                String orientation = rs.getString(3);
+                Classe classe = null;
 
-                la.add(a);
+                Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+                c.setSigle(sigle).setOrientation(orientation).setAnnee(annee);
+                try {
+                    classe = c.build();
+
+                } catch (Exception e) {
+                    System.out.println("Erreur de création" + e);
+                }
+
+                lc.add(classe);
             }
         } catch (SQLException e) {
             System.err.println("erreur lors de la recherche de la classe " + e);
@@ -221,7 +229,8 @@ public class ClasseModeleJDBC extends ClasseModele {
                 System.err.println("erreur de fermeture de statement " + e);
             }
         }
-        return la;
+        return lc;
     }
 
+    
 }

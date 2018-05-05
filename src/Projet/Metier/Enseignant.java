@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author Guillaume.Rigaux
  */
-public class Enseignant {
+public class Enseignant extends Sujet{
 
     /**
      *
@@ -131,6 +131,14 @@ public class Enseignant {
      */
     public Classe getTitulaire() {
         return Titulaire;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     /**

@@ -92,7 +92,7 @@ public class ClasseControleur {
 
             } catch (Exception e) {
                 // pv.affichageMessage(e);
-                pv.affichageMessage(e + "Entrez un nombrez valide !");
+                pv.affichageMessage(e + "Entrez un nombre valide !");
             }
 
         } while (ch != 8);
@@ -171,7 +171,7 @@ public class ClasseControleur {
                 pv.affichageMessage(cm.deleteA(att));
             }
         } catch (NumberFormatException e) {
-            pv.affichageMessage("Entrez un nombre");
+            pv.affichageMessage(e.getMessage()+"Entrez un nombre");
         }
     }
 
@@ -241,6 +241,8 @@ public class ClasseControleur {
      */
     private void gestionEnseignants() {
         List<Enseignant> le = cm.tousEns();
+        
+        
         int choix = Integer.parseInt(pv.getMessage(""
                 + "1. Ajout de l'enseignant"
                 + "      2. Modification de l'enseignant"
