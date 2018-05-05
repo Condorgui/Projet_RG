@@ -72,7 +72,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 break;
 
         }
-        String query = "select * from ENSEIGNANT " + critere;
+        String query = "select * from ENSEIGNANT ";
         List<Enseignant> le = new ArrayList<>();
         Statement stm = null;
         ResultSet rs = null;
@@ -88,22 +88,22 @@ public class ClasseModeleJDBC extends ClasseModele {
 
                 le.add(e);
             }
-        } catch (SQLException e) {
-            System.err.println("erreur lors de la recherche de l'enseignant " + e);
+        } catch (SQLException ex) {
+            System.err.println("erreur lors de la recherche de l'enseignant " + ex);
         } finally {
             try {
                 if (rs != null) {
                     rs.close();
                 }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de resultset " + e);
+            } catch (SQLException ex) {
+                System.err.println("erreur de fermeture de resultset " + ex);
             }
             try {
                 if (stm != null) {
                     stm.close();
                 }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de statement " + e);
+            } catch (SQLException ex) {
+                System.err.println("erreur de fermeture de statement " + ex);
             }
         }
         return le;
