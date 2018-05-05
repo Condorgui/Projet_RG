@@ -174,45 +174,30 @@ public class ClasseModeleJDBC extends ClasseModele {
         return lc;
     }
 
-    
-
-      public Enseignant getEnseignant(Enseignant aRech, int mode) {
-        //mode = soit recherche sur le matricule soit recherche sur le nom
-        String critere = "";
-        switch (mode) {
-            case 1:
-                critere = "where MATRICULE = ?";
-                break;
-            case 2:
-                critere = "where NOM = ?  ";
-                 break;
-
-        }
-        String query = "select * from ENSEIGNANT " + critere;
-        Statement stm = null;
+    @Override
+    public Enseignant getEnseignant(Enseignant aRech) {
+        //Faire switch pour recherche sur 2 critères
+        String query = "SELECT * FROM ENSEIGNANT WHERE MATRICULE = ?";
+        PreparedStatement pstm = null;
         ResultSet rs = null;
         try {
-            stm = dbconnect.createStatement();
-            rs = stm.executeQuery(query);
-            while (rs.next()) {
-                String sigle = rs.getString(1);
-                int annee = rs.getInt(2);
-                String orientation = rs.getString(3);
-                Classe classe = null;
-
-                Classe.ClasseBuilder c = new Classe.ClasseBuilder();
-                c.setSigle(sigle).setOrientation(orientation).setAnnee(annee);
-                try {
-                    classe = c.build();
-
-                } catch (Exception e) {
-                    System.out.println("Erreur de création" + e);
-                }
-
-                lc.add(classe);
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, aRech.getMatricule());
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                String nom = rs.getString(1);
+                String prenom = rs.getString(2);
+                //     String cl_titulaire = rs.getString(3);
+                String matricule = rs.getString(4);
+                //     String cl_remplacant = rs.getString(5);
+                Enseignant e = new Enseignant(nom, prenom, matricule);
+                return e;
+            } else {
+                return null;
             }
         } catch (SQLException e) {
-            System.err.println("erreur lors de la recherche de la classe " + e);
+            System.err.println("erreur de recherche de l'enseignant " + e);
+            return null;
         } finally {
             try {
                 if (rs != null) {
@@ -222,15 +207,63 @@ public class ClasseModeleJDBC extends ClasseModele {
                 System.err.println("erreur de fermeture de resultset " + e);
             }
             try {
-                if (stm != null) {
-                    stm.close();
+                if (pstm != null) {
+                    pstm.close();
                 }
             } catch (SQLException e) {
-                System.err.println("erreur de fermeture de statement " + e);
+                System.err.println("erreur de fermeture de preparedstatement " + e);
             }
         }
-        return lc;
+
     }
 
-    
+    public Classe getClasse(Classe aRech) {
+        //Faire switch pour recherche sur 2 critères
+        Classe classe = null; 
+        String query = "SELECT * FROM CLASSE WHERE SIGLE = ?";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, aRech.getSigle());
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                String sigle = rs.getString(1);
+                int annee = rs.getInt(2);
+                //     String cl_titulaire = rs.getString(3);
+                String orientation = rs.getString(3);
+                //     String cl_remplacant = rs.getString(5);
+                Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+                c.setSigle(sigle).setOrientation(orientation).setAnnee(annee);
+                try {
+                    classe = c.build();
+                } catch (Exception e) {
+                    System.out.println("Erreur de création" + e);
+                }
+                return classe;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur de recherche de la classe " + e);
+            return null;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                System.err.println("erreur de fermeture de resultset " + e);
+            }
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                System.err.println("erreur de fermeture de preparedstatement " + e);
+            }
+        }
+
+    }
+
 }
