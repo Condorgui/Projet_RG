@@ -217,6 +217,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     }
 
+    @Override
     public Classe getClasse(Classe aRech) {
         //Faire switch pour recherche sur 2 critères
         Classe classe = null; 
@@ -264,6 +265,68 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
         }
 
+    }
+    
+    @Override
+     public String ajouterClasse(Classe c) {
+        String msg;
+        String query = "insert into CLASSE(annee,sigle,orientation) values(?,?,?)";
+        PreparedStatement pstm = null;
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setInt(1, c.getAnnee());
+            pstm.setString(2, c.getSigle());
+            pstm.setString(3, c.getOrientation());
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "Ajout de la classe effectué";
+            } else {
+                msg = "Classe non ajoutée ";
+            }
+        } catch (SQLException e) {
+            msg = "erreur lors de l'ajout " + e;
+        } finally {
+
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                System.err.println("erreur de fermeture de preparedstatement " + e);
+            }
+        }
+        return msg;
+    }
+     
+      @Override
+     public String ajouterEnseignant(Enseignant e) {
+        String msg;
+        String query = "insert into ENSEIGNANT(matricule,nom,prenom) values(?,?,?)";
+        PreparedStatement pstm = null;
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, e.getMatricule());
+            pstm.setString(2, e.getNom());
+            pstm.setString(3, e.getPrenom());
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "Ajout de l'enseignant effectué";
+            } else {
+                msg = "Enseignant non ajouté ";
+            }
+        } catch (SQLException ex) {
+            msg = "erreur lors de l'ajout " + ex;
+        } finally {
+
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println("erreur de fermeture de preparedstatement " + ex);
+            }
+        }
+        return msg;
     }
 
 }
