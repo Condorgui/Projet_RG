@@ -85,6 +85,7 @@ public class ClasseControleur {
                         break;
                     case 8:
                         pv.affichageMessage("Fin");
+                        break;
 
                     default:
                         pv.affichageMessage("Choix invalide");
@@ -164,6 +165,8 @@ public class ClasseControleur {
                 pv.affichageMessage(" --- Suppression de l'attribution ---");
                 pv.affichageMessage(le);
                 pv.affichageMessage(lc);
+                pv.affichageMessage("------ Liste des attributions ----");
+                pv.affichageMessage(la); 
                 Attribution aRech = pv.rechAttribution();
                 Attribution att = cm.getAttribution(aRech);
                 pv.affichageMessage(cm.getAttribution(att));

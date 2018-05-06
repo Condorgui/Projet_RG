@@ -104,6 +104,7 @@ public class ClasseModeleJDBC extends ClasseModele {
      * @param mode
      * @return
      */
+    @Override
     public List<Classe> toutesClasses() {
 
         String query = "select * from CLASSE order by SIGLE";
@@ -306,5 +307,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return msg;
     }
+    
+   
 
 }

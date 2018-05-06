@@ -181,16 +181,29 @@ public class ClasseModele {
      * @param es l'enseignant à supprimer
      * @return le résultat de la suppression
      */
-    public String deleteE(Enseignant es) {
+  public String deleteE(Enseignant es) {
         int i = tousLesEns.indexOf(es);
         if (i < 0) {
             return "Enseignant introuvable";
 
-        } else {
-            tousLesEns.remove(i);
         }
+        Enseignant e = tousLesEns.get(i);
+        for (Enseignant f : tousLesEns) {
+            Classe a = e.getRemplacant();
+            Classe b = e.getTitulaire();
+            if (!e.equals(a) && !e.equals(b)) {
+                
+                return "Supprimez d'abord les attributions de cet enseignant";
+
+            }
+        }
+
+        tousLesEns.remove(i);
+
         return "Suppression effectuée";
     }
+
+
 
     /**
      * Méthode deleteCl Permet de supprimer une classe
@@ -208,8 +221,8 @@ public class ClasseModele {
         for (Enseignant e : tousLesEns) {
             Classe c1 = e.getTitulaire();
             Classe c2 = e.getRemplacant();
-            if (c1 != null && c2 != null) {
-
+            if (!c.equals(cl) && !c.equals(c2)) {
+            } else {
                 return "Supprimez d'abord les attributions de l'enseignant";
             }
         }
