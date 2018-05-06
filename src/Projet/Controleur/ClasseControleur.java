@@ -233,7 +233,8 @@ public class ClasseControleur {
                 pv.affichageMessage(la);
             }
         } catch (NumberFormatException e) {
-            pv.affichageMessage("Entrez un nombre");
+            String message = e.getMessage();
+            pv.affichageMessage(message+"Entrez un nombre");
         }
 
     }

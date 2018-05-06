@@ -307,7 +307,38 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return msg;
     }
+   
     
+
+    public String deleteE(Enseignant ens, String matricule) {
+        String query = "DELETE FROM ENSEIGNANT WHERE MATRICULE = ? ";
+        PreparedStatement pstm = null;
+        String msg;
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, matricule);
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "Suppression effectuée ";
+            } else {
+                msg = "Suppression non effectuée";
+            }
+
+        } catch (SQLException e) {
+            msg = "erreur lors de la suppression " + e;
+        } finally {
+
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                msg = "erreur de fermeture de preparedstatement " + e;
+            }
+
+        }
+        return msg;
+    }
    
 
 }
