@@ -33,6 +33,8 @@ public class ClasseModeleJDBC extends ClasseModele {
             System.err.println("erreur de connexion => arrêt du pgm");
             //err = canal d'affichage des erreurs, affichera en rouge
             System.exit(1);
+        }else{
+            System.out.println("Connexion établie");
         }
     }
 

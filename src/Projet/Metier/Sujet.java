@@ -6,8 +6,7 @@ package Projet.Metier;
  */
 
 /**
- *
- * @author Michel
+
  */
 import java.util.*;
 public abstract class Sujet {

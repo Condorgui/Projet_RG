@@ -98,13 +98,14 @@ public class ClasseModele {
         if (a == null) {
             return "Attribution inexistante";
         }
-        Enseignant e = a.getEnseignant(); 
+        Enseignant e = a.getEnseignant();
         e.getTitulaire();
-        
+
         if (toutesLesAttributions.contains(a) || toutesLesAttributions.contains(e)) {
             return "Attribution déjà créée";
         }
         toutesLesAttributions.add(a);
+
         return "Ajout de l'attribution";
     }
 
@@ -184,7 +185,7 @@ public class ClasseModele {
      * @param es l'enseignant à supprimer
      * @return le résultat de la suppression
      */
-  public String deleteE(Enseignant es) {
+    public String deleteE(Enseignant es) {
         int i = tousLesEns.indexOf(es);
         if (i < 0) {
             return "Enseignant introuvable";
@@ -195,7 +196,7 @@ public class ClasseModele {
             Classe a = e.getRemplacant();
             Classe b = e.getTitulaire();
             if (!e.equals(a) && !e.equals(b)) {
-                
+
                 return "Supprimez d'abord les attributions de cet enseignant";
 
             }
@@ -205,8 +206,6 @@ public class ClasseModele {
 
         return "Suppression effectuée";
     }
-
-
 
     /**
      * Méthode deleteCl Permet de supprimer une classe
