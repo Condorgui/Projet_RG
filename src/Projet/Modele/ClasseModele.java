@@ -98,7 +98,10 @@ public class ClasseModele {
         if (a == null) {
             return "Attribution inexistante";
         }
-        if (toutesLesAttributions.contains(a)) {
+        Enseignant e = a.getEnseignant(); 
+        e.getTitulaire();
+        
+        if (toutesLesAttributions.contains(a) || toutesLesAttributions.contains(e)) {
             return "Attribution déjà créée";
         }
         toutesLesAttributions.add(a);
