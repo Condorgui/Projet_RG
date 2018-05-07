@@ -35,6 +35,7 @@ public class Pvue {
                 " Gestion des Classes",
                 " Gestion des attributions",
                 " Recherche Enseignant",
+                " Recherche d'une attribution",
                 " Recherche d'une classe",
                 " Affichage",
                 "Quitter"));
@@ -58,14 +59,20 @@ public class Pvue {
      * @return c = la classe créée sur base de l'encodage
      */
     public Classe newClasse() {
+        Classe classe = null;
         String sigle = getMessage("Entrez le sigle : ");
         String orientation = getMessage("Quelle est l'orientation ? ");
         String annee = getMessage("Quelle est l'année de la classe : ");
         int annee2 = Integer.parseInt(annee);
 
-        Classe c = new Classe(sigle, annee2, orientation);
-
-        return c;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle(sigle).setOrientation(orientation).setAnnee(annee2);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        return classe;
     }
 
     /**
@@ -85,83 +92,77 @@ public class Pvue {
 
     /**
      * Méthode création d'une attribution
+     *
      * @param toutesLesClasses liste des classes pour associer l'attributions
      * @param tousEns liste des enseignants pour associer l'attributions
-     * @param toutesLesAttributions liste des attributions 
-     * Actualise le statut titulaire/remplacant de l'enseignant
+     * @param toutesLesAttributions liste des attributions Actualise le statut
+     * titulaire/remplacant de l'enseignant
      * @return la nouvelle attribution
      */
+    //Méthode attribution faite sur base et avec l'aide de Gaetan Soudan
+    //La mienne ne prenait pas en compte le doublon de titulaires
     public Attribution newAttribution(List<Classe> toutesLesClasses, List<Enseignant> tousEns, List<Attribution> toutesLesAttributions) {
 
         affichageListe(toutesLesClasses);
-        String ch1 = getMessage("Choisissez la classe : ");
+        boolean flag;
+        boolean drap = false;
+        String choix = getMessage("Choisissez la classe : ");
 
-        int ens = 0; //choix de l'enseignant 
-        int cl = 0; //choix de la classe 
-        int att = 0; //choix de l'attribution
-
-        int chx = Integer.parseInt(ch1);
-        if (chx > 0 && chx <= toutesLesClasses.size()) {
-            cl = chx - 1;
-        } else {
-
-            affichageMessage("Entrez un entier : ");
-
-        }
-
-        affichageListe(tousEns);
-        String ch2 = getMessage("Choisissez un enseignant : ");
-
-        chx = Integer.parseInt(ch2);
-        if (chx > 0 && chx <= tousEns.size()) {
-            ens = chx - 1;
-        } else {
-
-            affichageMessage("Entrez un entier : ");
-
-        }
-        ch2 = getMessage("Entrez son statut : \n -- 1 pour les titulaires"
-                + " \n -- 2 pour les remplacants");
-
-        chx = Integer.parseInt(ch2);
-        if (chx >= 1 && chx <= 2) {
-            att = chx;
-        } else {
-
-            affichageMessage("Choisissez l'une des 2 propositions ");
-
-        }
-
-        Classe c = toutesLesClasses.get(cl);
-        Enseignant e = tousEns.get(ens);
-
-        if (e.getRemplacant() != null || e.getTitulaire() != null) {
-            affichageMessage("Il y a déjà une attribution pour cet enseignant : ");
-            return null;
-
-        } else {
-            if (att == 1) {
-
-                for (Attribution a : toutesLesAttributions) {
-                    Enseignant eCher = a.getEnseignant();
-                    if (eCher.getTitulaire() == c) {
-                        affichageMessage("Déjà un titulaire ! ");
-                        return null;
-                    }
-                    e.setTitulaire(c);
-                    e.setRemplacant(null);
-                }
-                if (att == 2) {
-                    e.setRemplacant(c);
-                    e.setTitulaire(null);
-                }
+        int chC = 0, chE = 0, chA = 0;
+        do{
+            int chx = Integer.parseInt(choix);
+            if (chx > 0 && chx <= toutesLesClasses.size()) {
+                chC = chx - 1;
+            } else {
+                drap = true;
             }
-
-            Attribution a = new Attribution(c, e);
-
-            return a;
-
+        }while(drap); 
+        
+        affichageListe(tousEns);
+        do {
+            choix = getMessage("Choisissez l'enseignant : ");
+            if (choix.trim().equals("")) {
+                affichageMessage("Veuillez entrer un choix correct");
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } while (flag);
+        do {
+            int chx = Integer.parseInt(choix);
+            if (chx > 0 && chx <= tousEns.size()) {
+                chE = chx - 1;
+            } else {
+                affichageMessage("Veuillez entrer un choix correct");
+                drap = true;
+            }
+        } while(drap);
+   
+        do {
+            choix = getMessage(" --- 1 pour les titulaires "
+                    + "\n --- 2 pour les remplaçants");
+            if (choix.trim().equals("")) {
+                affichageMessage("Veuillez entrer un choix correct");
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } while (flag);
+        
+        try {
+            int chx = Integer.parseInt(choix);
+            if (chx >= 1 && chx <= 2) {
+                chA = chx;
+            } else {
+                drap = true;
+            }
+        } catch (NumberFormatException nfe) {
+            affichageMessage("Veuillez entrer un choix correct");
+            drap = true;
         }
+        if (drap) {
+            return newAttribution(toutesLesClasses, tousEns, toutesLesAttributions);
+       
     }
 
     /**
@@ -243,10 +244,18 @@ public class Pvue {
      */
     public Classe rechClasse() {
 
+        Classe cRech = null;
         String sigle = getMessage("Quel est le sigle à rechercher ? ");
-        Classe cRech = new Classe(sigle);
-        return cRech;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle(sigle);
+        try {
+            cRech = c.build();
+            return cRech;
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
 
+        return null;
     }
 
     /**
@@ -263,18 +272,26 @@ public class Pvue {
     }
 
     /**
-     * Méthode rechAttribution 
-     * Recherche l'attribution sur base du matricule et du sigle de l'enseignant
+     * Méthode rechAttribution Recherche l'attribution sur base du matricule et
+     * du sigle de l'enseignant
+     *
      * @return aRech == l'attribution trouvée
      */
     public Attribution rechAttribution() {
 
+        Classe cRech = null;
         String matricule = getMessage("Recherchez le matricule : ");
         Enseignant ens = new Enseignant(matricule);
         String sigle = getMessage("Recherchez le sigle : ");
-        Classe cl = new Classe(sigle);
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle(sigle);
+        try {
+            cRech = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
 
-        Attribution aRech = new Attribution(cl, ens);
+        Attribution aRech = new Attribution(cRech, ens);
         return aRech;
     }
 
