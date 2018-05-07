@@ -109,15 +109,15 @@ public class Pvue {
         String choix = getMessage("Choisissez la classe : ");
 
         int chC = 0, chE = 0, chA = 0;
-        do{
+        do {
             int chx = Integer.parseInt(choix);
             if (chx > 0 && chx <= toutesLesClasses.size()) {
                 chC = chx - 1;
             } else {
                 drap = true;
             }
-        }while(drap); 
-        
+        } while (drap);
+
         affichageListe(tousEns);
         do {
             choix = getMessage("Choisissez l'enseignant : ");
@@ -136,8 +136,8 @@ public class Pvue {
                 affichageMessage("Veuillez entrer un choix correct");
                 drap = true;
             }
-        } while(drap);
-   
+        } while (drap);
+
         do {
             choix = getMessage(" --- 1 pour les titulaires "
                     + "\n --- 2 pour les remplaçants");
@@ -148,7 +148,7 @@ public class Pvue {
                 flag = false;
             }
         } while (flag);
-        
+
         try {
             int chx = Integer.parseInt(choix);
             if (chx >= 1 && chx <= 2) {
@@ -156,13 +156,46 @@ public class Pvue {
             } else {
                 drap = true;
             }
-        } catch (NumberFormatException nfe) {
-            affichageMessage("Veuillez entrer un choix correct");
+        } catch (NumberFormatException e) {
+            affichageMessage(e+"Veuillez entrer un choix correct");
             drap = true;
         }
         if (drap) {
             return newAttribution(toutesLesClasses, tousEns, toutesLesAttributions);
-       
+        } else {
+            Classe c = toutesLesClasses.get(chC);
+            Enseignant e = tousEns.get(chE);
+            if ((e.getTitulaire() != null || e.getRemplacant() != null)) {
+                affichageMessage("Cet enseignant est déjà titulaire ou remplacant");
+                return null;
+            } else {
+                if (chA == 1) {
+                    for (Attribution a : toutesLesAttributions) {
+                        Enseignant eAtt = a.getEnseignant();
+                        if (eAtt.getTitulaire() == c) {
+                            affichageMessage("Il y a déjà un titulaire attitré");
+                            return null;
+                        }
+                        if (eAtt == e && !eAtt.getMatricule().equals(e.
+                                getMatricule())) {
+                            return null;
+                        }
+                    }
+                    e.setTitulaire(c);
+                } else if (chA == 2) {
+                    for (Attribution a : toutesLesAttributions) {
+                        Enseignant eAtt = a.getEnseignant();
+                        if (eAtt == e && !eAtt.getMatricule().equals(e.getMatricule())) {
+                            return null;
+                        }
+                    }
+                    e.setRemplacant(c);
+                }
+            }
+            Attribution a = new Attribution(c, e);
+
+            return a;
+        }
     }
 
     /**
