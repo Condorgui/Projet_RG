@@ -82,9 +82,19 @@ public class Pvue {
      */
     public Enseignant newEnseignant() {
 
-        String nom = getMessage("Entrez le nom : ");
-        String prenom = getMessage("Entrez le prénom : ");
-        String matricule = getMessage("Entrez son matricule : ");
+        boolean flag;
+        String nom, prenom, matricule;
+        do {
+            nom = getMessage("Entrez le nom : ");
+            prenom = getMessage("Entrez le prénom : ");
+            matricule = getMessage("Entrez son matricule : ");
+            if (nom.trim().equals("") || prenom.trim().equals("") || matricule.trim().equals("")) {
+                affichageMessage("Veuillez compléter tous les champs");
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } while (flag);
         Enseignant e = new Enseignant(matricule, nom, prenom);
 
         return e;
@@ -157,14 +167,18 @@ public class Pvue {
                 drap = true;
             }
         } catch (NumberFormatException e) {
-            affichageMessage(e+"Veuillez entrer un choix correct");
+            affichageMessage(e + "Veuillez entrer un choix correct");
             drap = true;
         }
         if (drap) {
+
             return newAttribution(toutesLesClasses, tousEns, toutesLesAttributions);
+
         } else {
+
             Classe c = toutesLesClasses.get(chC);
             Enseignant e = tousEns.get(chE);
+
             if ((e.getTitulaire() != null || e.getRemplacant() != null)) {
                 affichageMessage("Cet enseignant est déjà titulaire ou remplacant");
                 return null;
@@ -298,8 +312,18 @@ public class Pvue {
      * @return eRech == l'enseignant trouvé
      */
     public Enseignant rechEnseignant() {
+        String matricule;
+        boolean flag;
+        do {
+            matricule = getMessage("Matricule de l'enseignant à rechercher :");
+            if (matricule.trim().equals("")) {
+                affichageMessage("Veuillez entrer un choix correct");
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } while (flag);
 
-        String matricule = getMessage("Matricule de l'enseignant à rechercher :");
         Enseignant eRech = new Enseignant(matricule);
         return eRech;
     }
