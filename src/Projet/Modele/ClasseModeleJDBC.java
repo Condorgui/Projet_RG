@@ -171,7 +171,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 //     String cl_titulaire = rs.getString(3);
                 
                 //     String cl_remplacant = rs.getString(5);
-                Enseignant e = new Enseignant(nom, prenom, matricule);
+                Enseignant e = new Enseignant(matricule,nom,prenom);
                 return e;
 
             } else {

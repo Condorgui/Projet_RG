@@ -5,5 +5,7 @@
 package Projet.Metier; 
 
 public interface Observateur {
+    
     public void actualise(String texte);
+    
 }

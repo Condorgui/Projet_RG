@@ -175,7 +175,7 @@ public class Enseignant extends Sujet{
      */
     @Override
     public String toString() {
-        return " => Enseignant " + nom + " " + prenom + " au matricule " + matricule +"\n";
+        return " => Enseignant " + nom + " " + prenom + " au matricule " + matricule + "\n" ;
     }
 
     /**

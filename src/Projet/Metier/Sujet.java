@@ -10,7 +10,9 @@ package Projet.Metier;
  */
 import java.util.*;
 public abstract class Sujet {
+    
     protected ArrayList<Observateur> observateurs = new ArrayList<Observateur>();
+    
     public void ajoute(Observateur o){
         observateurs.add(o);
     }

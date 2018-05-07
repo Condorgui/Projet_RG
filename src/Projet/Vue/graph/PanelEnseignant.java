@@ -36,11 +36,11 @@ public class PanelEnseignant extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        nomEnseignant = new javax.swing.JTextField();
+        prenomEns = new javax.swing.JTextField();
+        matEns = new javax.swing.JTextField();
+        boutonValider = new javax.swing.JButton();
+        boutonAnnuler = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -79,62 +79,71 @@ public class PanelEnseignant extends javax.swing.JPanel {
         jLabel3.setText("Entrez le matricule de l'enseignant : ");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 153, -1, -1));
 
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        nomEnseignant.setText("jTextField1");
+        nomEnseignant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                nomEnseignantActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 59, 190, -1));
+        add(nomEnseignant, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 59, 190, -1));
 
-        jTextField2.setText("jTextField1");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        prenomEns.setText("jTextField1");
+        prenomEns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                prenomEnsActionPerformed(evt);
             }
         });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 103, 190, -1));
+        add(prenomEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 103, 190, -1));
 
-        jTextField3.setText("jTextField1");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        matEns.setText("jTextField1");
+        matEns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                matEnsActionPerformed(evt);
             }
         });
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 147, 190, -1));
+        add(matEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 147, 190, -1));
 
-        jButton1.setText("Valider");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 220, -1, -1));
-
-        jButton2.setText("Annuler");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        boutonValider.setText("Valider");
+        boutonValider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                boutonValiderActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 220, -1, -1));
+        add(boutonValider, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 220, -1, -1));
+
+        boutonAnnuler.setText("Annuler");
+        boutonAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonAnnulerActionPerformed(evt);
+            }
+        });
+        add(boutonAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 220, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void nomEnseignantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomEnseignantActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_nomEnseignantActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void prenomEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prenomEnsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_prenomEnsActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void matEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matEnsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_matEnsActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void boutonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonAnnulerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_boutonAnnulerActionPerformed
+
+    private void boutonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonValiderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boutonValiderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton boutonAnnuler;
+    private javax.swing.JButton boutonValider;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFrame jFrame1;
@@ -143,9 +152,9 @@ public class PanelEnseignant extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTextField matEns;
+    private javax.swing.JTextField nomEnseignant;
+    private javax.swing.JTextField prenomEns;
     // End of variables declaration//GEN-END:variables
 }
