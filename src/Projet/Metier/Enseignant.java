@@ -5,369 +5,190 @@
  */
 package Projet.Metier;
 
-import java.util.Objects;
+import java.util.*;
 
 /**
  *
  * @author Guillaume.Rigaux
  */
-public class Enseignant {
-
-    private String sigle;
-    private int annee;
-    private String orientation;
-    private int n_etudiants;
-    private Enseignant e;
-
-    private Classe(ClasseBuilder cb) {
-        this.sigle = cb.sigle;
-        this.annee = cb.annee;
-        this.orientation = cb.orientation;
-       // this.n_etudiants = n_etudiants;
-       // this.e = e;
-
-    }
-//Plus que des getters 
-
-    /**
-     *
-     * @return
-     */
-    public String getSigle() {
-        return sigle;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getAnnee() {
-        return annee;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getOrientation() {
-        return orientation;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getN_etudiants() {
-        return n_etudiants;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Enseignant getE() {
-        return e;
-    }
-
-    /**
-     * Méthode toString
-     *
-     * @return les informations détaillées
-     */
-    @Override
-    public String toString() {
-        return sigle + " Classe de " + annee + " ème année et d'orientation " + orientation + "\n";
-
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.sigle);
-        return hash;
-    }
+public class Enseignant extends Sujet{
 
     /**
      *
      */
-    public static class ClasseBuilder {
-
-        private String sigle;
-        private String orientation;
-        private int n_etudiants;
-        private int annee;
-        private Enseignant e;
-
-        /**
-         *
-         */
-        public ClasseBuilder() {
-        }
-//Les setters se trouvent dans le personne builder
-
-        /**
-         *
-         * @param sigle
-         * @return
-         */
-        public ClasseBuilder setSigle(String sigle) {
-            this.sigle = sigle;
-            return this;
-        }
-
-        /**
-         *
-         * @param orientation
-         * @return
-         */
-        public ClasseBuilder setOrientation(String orientation) {
-            this.orientation = orientation;
-            return this;
-        }
-
-        /**
-         *
-         * @param n_etudiants
-         * @return
-         */
-        public ClasseBuilder setN_etudiants(int n_etudiants) {
-            this.n_etudiants = n_etudiants;
-            return this;
-            //L'objet se retourne lui même via this
-        }
-
-        /**
-         *
-         * @param e
-         * @return
-         */
-        public ClasseBuilder setEnseignant(Enseignant e) {
-            this.e = e;
-            return this;
-        }
-        
-        /**
-         *
-         * @param annee
-         * @return
-         */
-        public ClasseBuilder setAnnee(int annee) {
-            this.annee = annee;
-            return this;
-        }
-
-        /**
-         *
-         * @return
-         * @throws Exception
-         */
-        public Classe build() throws Exception {
-            if (sigle == null) {
-                throw new Exception("informations de base manquantes");
-            }
-            if (sigle.trim().equals("")) {
-                throw new Exception("informations de base manquantes");
-            }
-            return new Classe(this);
-        }
+    public Enseignant() {
 
     }
 
     /**
-     * Méthode equals
-     *
-     * @param obj
-     * @return résultat de la comparaison de l'obj
+     * Matricule de l'enseignant
      */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Classe other = (Classe) obj;
-        return Objects.equals(this.sigle, other.sigle);
-    }
-
-    
-}
-
-
-/* ANCIENNE CLASSE
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
-
-package Projet.Metier;
-
-import java.util.Objects;
-
-/**
- *
- * @author Guillaume.Rigaux
- 
-public class Classe {
+    private String matricule;
+    /**
+     * Nom de l'enseignant
+     */
+    private String nom;
+    /**
+     * Prénom de l'enseignant
+     */
+    private String prenom;
 
     /**
-     * Sigle de la classe
-     
-    private String sigle;
+     * Correspond au mail l'enseignant
+     */
+    private String mail;
 
     /**
-     * Année de la classe
-     
-    private int annee;
+     * Correspond au statut de l'enseignant titulaire
+     */
+    private Classe Titulaire;
     /**
-     * Orientation de la classe
-     
-    
-    private int n_etudiants; 
-    
-    private String orientation;
-    /**
-     * Enseignant attitré à la classe
-     
-    private Enseignant e;
-
-    /**
-     * Constructeur par défaut
-     
-    public Classe() {
-        sigle = "";
-        annee = 0;
-        orientation = "";
-        e = null;
-       // this.n_etudiants = 0; 
-        
-    }
+     * Correspond au statut de l'enseignant remplacant
+     */
+    private Classe Remplacant;
 
     /**
      * Constructeur paramétré
      *
-     * @param Sigle
-     * @param Annee
-     * @param Orientation
-     
-    public Classe(String Sigle, int Annee, String Orientation) {
-        this.sigle = Sigle;
-        this.annee = Annee;
-        this.orientation = Orientation;
-      //  this.n_etudiants = 0;
+     * @param matricule
+     * @param nom
+     * @param prenom Le statut Titulaire ou Remplacant doit lui être affecté
+     */
+    public Enseignant(String matricule, String nom, String prenom) {
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+
     }
 
-    
     /**
      * Constructeur avec un seul paramètre
      *
-     * @param sigle qui recherchera la classe sur base de son sigle unique
-     
-    public Classe(String sigle) {
-        this.sigle = sigle;
+     * @param Matricule qui recherchera l'enseignant sur base de son matricule
+     */
+    public Enseignant(String Matricule) {
+        this.matricule = Matricule;
     }
 
     /**
-     * Getter de l'enseignant
+     * Getter du matricule
      *
-     * @return l'enseignant de la classe
-     
-    public Enseignant getE() {
-        return e;
+     * @return le matricule
+     */
+    public String getMatricule() {
+        return matricule;
     }
 
     /**
-     * Setter de l'enseignant
+     * Setter du matricule
      *
-     * @param e définit l'enseignant
-     
-    public void setE(Enseignant e) {
-        this.e = e;
+     * @param matricule définit le matricule
+     */
+    public void setMatricule(String matricule) {
+        this.matricule = matricule;
     }
 
     /**
-     * Getter du sigle
+     * Getter du nom
      *
-     * @return le sigle de la classe
-    
-    public String getSigle() {
-        return sigle;
+     * @return le nom
+     */
+    public String getNom() {
+        return nom;
     }
 
     /**
-     * Setter du sigle
+     * Setter du nom
      *
-     * @param Sigle définit le sigle
-     
-    public void setSigle(String Sigle) {
-        this.sigle = Sigle;
+     * @param nom qui définit le nom
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     /**
-     * Getter de l'année
+     * Getter du prénom
      *
-     * @return l'année de la classe
-     
-    public int getAnnee() {
-        return annee;
+     * @return le prénom
+     */
+    public String getPrenom() {
+        return prenom;
     }
 
     /**
-     * Setter de l'année
+     * Setter du prénom
      *
-     * @param Annee définit l'année
-     
-    public void setAnnee(int Annee) {
-        this.annee = Annee;
+     * @param prenom définit le prénom
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     /**
-     * Getter de l'orientation
+     * Getter du titulaire
      *
-     * @return l'orientation de la classe
-     
-    public String getOrientation() {
-        return orientation;
+     * @return le titulaire
+     */
+    public Classe getTitulaire() {
+        return Titulaire;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     /**
-     * Setter de l'orientation
+     * Setter du titulaire
      *
-     * @param Orientation définit l'orientation
-     
-    public void setOrientation(String Orientation) {
-        this.orientation = Orientation;
+     * @param Titulaire définit le titulaire
+     */
+    public void setTitulaire(Classe Titulaire) {
+        this.Titulaire = Titulaire;
     }
 
     /**
+     * Getter du remplacant
      *
-     * @return
-     
-    public int getN_etudiants() {
-        return n_etudiants;
+     * @return le remplacant
+     */
+    public Classe getRemplacant() {
+        return Remplacant;
     }
 
     /**
+     * Setter du remplacant
      *
-     * @param n_etudiants
-     
-    public void setN_etudiants(int n_etudiants) {
-        this.n_etudiants = n_etudiants;
+     * @param Remplacant définit le remplacant
+     */
+    public void setRemplacant(Classe Remplacant) {
+        this.Remplacant = Remplacant;
     }
 
-    
+    /**
+     * Méthode toString
+     *
+     * @return les informations détaillées
+     */
+    @Override
+    public String toString() {
+        return "  Enseignant " + nom + " " + prenom + " au matricule " + matricule + "\n" +
+                " -- Titulaire de la classe : " + Titulaire +"\n" +
+                " -- Remplacant de la classe : " + Remplacant +"\n\n";
+    }
+
     /**
      * Méthode hashCode
      *
      * @return hash
-     
+     */
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.sigle);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.matricule);
         return hash;
     }
 
@@ -375,8 +196,8 @@ public class Classe {
      * Méthode equals
      *
      * @param obj
-     * @return résultat de la comparaison de l'obj
-     
+     * @return résultat de la comparaison
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -388,20 +209,8 @@ public class Classe {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Classe other = (Classe) obj;
-        return Objects.equals(this.sigle, other.sigle);
-    }
-
-    /**
-     * Méthode toString
-     *
-     * @return les informations détaillées
-     
-    @Override
-    public String toString() {
-        return  sigle + " Classe de " + annee +" ème année et d'orientation " + orientation +"\n";
-
+        final Enseignant other = (Enseignant) obj;
+        return Objects.equals(this.matricule, other.matricule);
     }
 
 }
-*/

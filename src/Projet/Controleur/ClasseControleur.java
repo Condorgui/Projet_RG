@@ -261,7 +261,6 @@ public class ClasseControleur {
             case 2:
                 Enseignant eRech = pv.rechEnseignant();
                 Enseignant tmpE = cm.getEnseignant(eRech);
-                pv.affichageMessage(le);
                 pv.affichageMessage(" --- Modification de l'enseignant ---");
                 pv.affichageMessage(tmpE);
                 Enseignant nvEns = pv.newEnseignant();

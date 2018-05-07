@@ -342,7 +342,7 @@ public class ClasseModele {
         );
         try {
             toutesLesClasses.addAll(Arrays.asList(
-                    new Classe.ClasseBuilder().setSigle("MA123").setAnnee(4).setOrientation("eee").build(),
+                    new Classe.ClasseBuilder().setSigle("MA123").setAnnee(4).setOrientation("Economie").build(),
                     new Classe.ClasseBuilder().setSigle("BIO4").setAnnee(3).setOrientation("Biologie").build(),
                     new Classe.ClasseBuilder().setSigle("PHYS1").setAnnee(1).setOrientation("Physique").build(),
                     new Classe.ClasseBuilder().setSigle("POO5").setAnnee(6).setOrientation("Progra").build())

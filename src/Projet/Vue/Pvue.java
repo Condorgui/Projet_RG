@@ -83,21 +83,23 @@ public class Pvue {
     public Enseignant newEnseignant() {
 
         boolean flag;
-        String nom, prenom, matricule;
         do {
-            nom = getMessage("Entrez le nom : ");
-            prenom = getMessage("Entrez le prénom : ");
-            matricule = getMessage("Entrez son matricule : ");
-            if (nom.trim().equals("") || prenom.trim().equals("") || matricule.trim().equals("")) {
-                affichageMessage("Veuillez compléter tous les champs");
+
+            String nom = getMessage("Entrez le nom : ");
+            String prenom = getMessage("Entrez le prénom : ");
+            String matricule = getMessage("Entrez son matricule : ");
+            if (matricule.trim().equals("") || nom.trim().equals("") || prenom.trim().equals("")) {
+                affichageMessage("Entrez les caractères correctement ");
                 flag = true;
             } else {
                 flag = false;
+                Enseignant e = new Enseignant(matricule, nom, prenom);
+                return e;
             }
         } while (flag);
-        Enseignant e = new Enseignant(matricule, nom, prenom);
 
-        return e;
+        return null;
+
     }
 
     /**
@@ -312,20 +314,21 @@ public class Pvue {
      * @return eRech == l'enseignant trouvé
      */
     public Enseignant rechEnseignant() {
-        String matricule;
         boolean flag;
         do {
-            matricule = getMessage("Matricule de l'enseignant à rechercher :");
+            String matricule = getMessage("Matricule de l'enseignant à rechercher :");
             if (matricule.trim().equals("")) {
-                affichageMessage("Veuillez entrer un choix correct");
+                affichageMessage("Entrez les caractères correctement ");
                 flag = true;
             } else {
                 flag = false;
+                Enseignant eRech = new Enseignant(matricule);
+                return eRech;
             }
         } while (flag);
 
-        Enseignant eRech = new Enseignant(matricule);
-        return eRech;
+        return null;
+
     }
 
     /**
@@ -337,8 +340,19 @@ public class Pvue {
     public Attribution rechAttribution() {
 
         Classe cRech = null;
-        String matricule = getMessage("Recherchez le matricule : ");
-        Enseignant ens = new Enseignant(matricule);
+        Enseignant ens = null;
+        boolean flag;
+        do {
+            String matricule = getMessage("Recherchez le matricule : ");
+            if (matricule.trim().equals("")) {
+                affichageMessage("Entrez les caractères correctement");
+                flag = true;
+            } else {
+                flag = false;
+                ens = new Enseignant(matricule);
+            }
+
+        } while (flag);
         String sigle = getMessage("Recherchez le sigle : ");
         Classe.ClasseBuilder c = new Classe.ClasseBuilder();
         c.setSigle(sigle);
