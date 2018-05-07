@@ -29,7 +29,7 @@ public class Attribution {
     }
     
     /**
-     *
+     * Constructeur paramétré 
      * @param classe
      * @param enseignant
      */

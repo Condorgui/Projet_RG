@@ -23,8 +23,8 @@ public class Classe {
         this.sigle = cb.sigle;
         this.annee = cb.annee;
         this.orientation = cb.orientation;
-       // this.n_etudiants = n_etudiants;
-       // this.e = e;
+        // this.n_etudiants = n_etudiants;
+        // this.e = e;
 
     }
 //Plus que des getters 
@@ -80,6 +80,9 @@ public class Classe {
 
     }
 
+    /** Hashcode 
+     * @return le hash
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -87,8 +90,8 @@ public class Classe {
         return hash;
     }
 
-    /**
-     *
+    /** Constructeur ClasseBuilder
+     * 
      */
     public static class ClasseBuilder {
 
@@ -106,7 +109,7 @@ public class Classe {
 //Les setters se trouvent dans le personne builder
 
         /**
-         *
+         * Setter du sigle du classBuilder
          * @param sigle
          * @return
          */
@@ -116,7 +119,7 @@ public class Classe {
         }
 
         /**
-         *
+         * Setter de l'orientation du classBuilder
          * @param orientation
          * @return
          */
@@ -126,7 +129,7 @@ public class Classe {
         }
 
         /**
-         *
+         * Setter du n_etudiants du classBuilder
          * @param n_etudiants
          * @return
          */
@@ -137,7 +140,7 @@ public class Classe {
         }
 
         /**
-         *
+         * Setter de l'enseignant du classBuilder
          * @param e
          * @return
          */
@@ -145,9 +148,9 @@ public class Classe {
             this.e = e;
             return this;
         }
-        
+
         /**
-         *
+         * Setter de l'année du classbuilder
          * @param annee
          * @return
          */
@@ -157,9 +160,8 @@ public class Classe {
         }
 
         /**
-         *
-         * @return
-         * @throws Exception
+         * builder des informations essentielles
+         * @return @throws Exception
          */
         public Classe build() throws Exception {
             if (sigle == null) {
@@ -194,7 +196,6 @@ public class Classe {
         return Objects.equals(this.sigle, other.sigle);
     }
 
-    
 }
 
 
@@ -404,4 +405,4 @@ public class Classe {
     }
 
 }
-*/
+ */

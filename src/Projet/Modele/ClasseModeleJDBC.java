@@ -25,7 +25,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 //Connexion à la BDD
 
     /**
-     *
+     * Constructeur du JDBC Se charge de la connexion à la BDD
      */
     public ClasseModeleJDBC() {
         dbconnect = DBConnection.getConnection();
@@ -33,13 +33,13 @@ public class ClasseModeleJDBC extends ClasseModele {
             System.err.println("erreur de connexion => arrêt du pgm");
             //err = canal d'affichage des erreurs, affichera en rouge
             System.exit(1);
-        }else{
+        } else {
             System.out.println("Connexion établie");
         }
     }
 
     /**
-     *
+     * Fermeture de la session
      */
     public void close() {
         try {
@@ -55,9 +55,9 @@ public class ClasseModeleJDBC extends ClasseModele {
     }
 
     /**
+     * Méthode affichage de la liste des enseignants
      *
-     * @param mode
-     * @return
+     * @return la liste
      */
     @Override
     public List<Enseignant> tousEns() {
@@ -102,9 +102,9 @@ public class ClasseModeleJDBC extends ClasseModele {
     }
 
     /**
+     * Méthode affichage de la liste des classes
      *
-     * @param mode
-     * @return
+     * @return la liste
      */
     @Override
     public List<Classe> toutesClasses() {
@@ -154,9 +154,15 @@ public class ClasseModeleJDBC extends ClasseModele {
         return lc;
     }
 
+    /**
+     * Méthode qui recherche un enseignant
+     *
+     * @param aRech l'enseignant à rechercher
+     * @return l'enseignant trouvé sur base du matricule
+     */
     @Override
     public Enseignant getEnseignant(Enseignant aRech) {
-     
+
         String query = "SELECT * FROM ENSEIGNANT WHERE MATRICULE = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -169,9 +175,9 @@ public class ClasseModeleJDBC extends ClasseModele {
                 String nom = rs.getString(4);
                 String prenom = rs.getString(5);
                 //     String cl_titulaire = rs.getString(3);
-                
+
                 //     String cl_remplacant = rs.getString(5);
-                Enseignant e = new Enseignant(matricule,nom,prenom);
+                Enseignant e = new Enseignant(matricule, nom, prenom);
                 return e;
 
             } else {
@@ -198,6 +204,12 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
     }
 
+    /**
+     * Méthode qui recherche une classe
+     *
+     * @param aRech la classe à rechercher
+     * @return la classe trouvée sur base du sigle
+     */
     @Override
     public Classe getClasse(Classe aRech) {
         //Faire switch pour recherche sur 2 critères
@@ -248,6 +260,12 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     }
 
+    /**
+     * Méthode qui ajoute une classe
+     *
+     * @param c la classe à ajouter
+     * @return msg le résultat de l'ajout
+     */
     @Override
     public String ajouterClasse(Classe c) {
         String msg;
@@ -279,6 +297,12 @@ public class ClasseModeleJDBC extends ClasseModele {
         return msg;
     }
 
+    /**
+     * Méthode qui ajoute un enseignant 
+     *
+     * @param e l'enseignant à ajouter
+     * @return msg le résultat de l'ajout
+     */
     @Override
     public String ajouterEnseignant(Enseignant e) {
         String msg;
@@ -309,9 +333,13 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return msg;
     }
-   
-    
 
+    /**
+     * Méthode deleteE supprime un enseignant sur base de son matricule
+     * @param ens
+     * @param matricule
+     * @return
+     */
     public String deleteE(Enseignant ens, String matricule) {
         String query = "DELETE FROM ENSEIGNANT WHERE MATRICULE = ? ";
         PreparedStatement pstm = null;
@@ -341,6 +369,5 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return msg;
     }
-   
 
 }

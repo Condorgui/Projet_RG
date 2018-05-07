@@ -133,10 +133,18 @@ public class Enseignant extends Sujet{
         return Titulaire;
     }
 
+    /**
+     * Getter du mail 
+     * @return le mail 
+     */
     public String getMail() {
         return mail;
     }
 
+    /**
+     *
+     * @param mail
+     */
     public void setMail(String mail) {
         this.mail = mail;
     }

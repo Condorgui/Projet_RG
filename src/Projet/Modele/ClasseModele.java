@@ -36,6 +36,10 @@ public class ClasseModele {
      */
     private static ClasseModele instance = null;
 
+    /**
+     * Méthode qui récupère l'instance de ClasseModele
+     * @return instanciation d'un modèle ou modèle courant
+     */
     public static ClasseModele getInstance() {
         if (instance == null) {
             return instance = new ClasseModele();
@@ -44,6 +48,9 @@ public class ClasseModele {
         }
     }
 
+    /**
+     * Constructeur
+     */
     public ClasseModele() {
 
         tousLesEns = new ArrayList<>();
