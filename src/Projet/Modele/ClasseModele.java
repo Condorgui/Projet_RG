@@ -139,6 +139,7 @@ public class ClasseModele {
     public Enseignant getEnseignant(Enseignant aRech) {
         int i = tousLesEns.indexOf(aRech);
         if (i < 0) {
+            
             return null;
         } else {
             return tousLesEns.get(i);

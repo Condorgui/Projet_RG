@@ -151,14 +151,20 @@ public class ClasseControleur {
 
             }
             if (choix == 2) {
-                pv.affichageMessage(" --- Modification de l'attribution ---");
-                pv.affichageMessage(le);
-                pv.affichageMessage(lc);
+                pv.affichageMessage(" --- Modification de l'attribution --- \n\n");
+                // pv.affichageMessage(le);
+                // pv.affichageMessage(lc);
+                pv.affichageMessage(la);
                 Attribution aRech = pv.rechAttribution();
                 Attribution att = cm.getAttribution(aRech);
+                if (la.contains(att)) {
+                    Attribution nvAtt = pv.newAttribution(cm.toutesClasses(), cm.tousEns(), cm.toutesLesAttributions());
+                    pv.affichageMessage(cm.modifyA(nvAtt, att));
+
+                } else {
+                    pv.affichageMessage("Attribution introuvable");
+                }
                 //   pv.affichageMessage(aRech);
-                Attribution nvAtt = pv.newAttribution(cm.toutesClasses(), cm.tousEns(), cm.toutesLesAttributions());
-                pv.affichageMessage(cm.modifyA(nvAtt, att));
 
             }
             if (choix == 3) {
@@ -166,7 +172,7 @@ public class ClasseControleur {
                 pv.affichageMessage(le);
                 pv.affichageMessage(lc);
                 pv.affichageMessage("------ Liste des attributions ----");
-                pv.affichageMessage(la); 
+                pv.affichageMessage(la);
                 Attribution aRech = pv.rechAttribution();
                 Attribution att = cm.getAttribution(aRech);
                 pv.affichageMessage(cm.getAttribution(att));
@@ -174,7 +180,7 @@ public class ClasseControleur {
                 pv.affichageMessage(cm.deleteA(att));
             }
         } catch (NumberFormatException e) {
-            pv.affichageMessage(e.getMessage()+"Entrez un nombre");
+            pv.affichageMessage(e.getMessage() + "Entrez un nombre");
         }
     }
 
@@ -234,7 +240,7 @@ public class ClasseControleur {
             }
         } catch (NumberFormatException e) {
             String message = e.getMessage();
-            pv.affichageMessage(message+"Entrez un nombre");
+            pv.affichageMessage(message + "Entrez un nombre");
         }
 
     }
@@ -245,8 +251,7 @@ public class ClasseControleur {
      */
     private void gestionEnseignants() {
         List<Enseignant> le = cm.tousEns();
-        
-        
+
         int choix = Integer.parseInt(pv.getMessage(""
                 + "1. Ajout de l'enseignant"
                 + "      2. Modification de l'enseignant"
@@ -261,19 +266,28 @@ public class ClasseControleur {
             case 2:
                 Enseignant eRech = pv.rechEnseignant();
                 Enseignant tmpE = cm.getEnseignant(eRech);
-                pv.affichageMessage(" --- Modification de l'enseignant ---");
                 pv.affichageMessage(tmpE);
-                Enseignant nvEns = pv.newEnseignant();
-                pv.affichageMessage(cm.modifyE(nvEns, tmpE));
+                if (le.contains(eRech)) {
+                    pv.affichageMessage(" --- Modification de l'enseignant ---");
+                    Enseignant nvEns = pv.newEnseignant();
+                    pv.affichageMessage(cm.modifyE(nvEns, tmpE));
+                } else {
+                    pv.affichageMessage("Enseignant introuvable");
+                }
                 break;
 
             case 3:
                 eRech = pv.rechEnseignant();
                 tmpE = cm.getEnseignant(eRech);
-                pv.affichageMessage(le);
-                pv.affichageMessage("--- Suppression de l'enseignant ---");
                 pv.affichageMessage(tmpE);
-                pv.affichageMessage(cm.deleteE(tmpE));
+                if (le.contains(tmpE)) {
+                    pv.affichageMessage("--- Suppression de l'enseignant ---");
+                    pv.affichageMessage(tmpE);
+                    pv.affichageMessage(cm.deleteE(tmpE));
+                } else {
+                    pv.affichageMessage("Enseignant introuvable");
+                }
+
                 break;
 
             default:
@@ -303,19 +317,28 @@ public class ClasseControleur {
             case 2:
                 Classe cRech = pv.rechClasse();
                 Classe tmpC = cm.getClasse(cRech);
-                pv.affichageMessage(lc);
-                pv.affichageMessage("Modification de la classe");
-                pv.affichageMessage(tmpC);
-                Classe nvClasse = pv.newClasse();
-                pv.affichageMessage(cm.modifyC(nvClasse, tmpC));
+
+                if (lc.contains(tmpC)) {
+                    pv.affichageMessage(tmpC);
+                    pv.affichageMessage("Modification de la classe");
+                    Classe nvClasse = pv.newClasse();
+                    pv.affichageMessage(cm.modifyC(nvClasse, tmpC));
+                } else {
+                    pv.affichageMessage("Classe introuvable");
+                }
                 break;
             case 3:
                 cRech = pv.rechClasse();
                 tmpC = cm.getClasse(cRech);
-                pv.affichageMessage(lc);
-                pv.affichageMessage("--- Suppression de la classe --- ");
-                pv.affichageMessage(tmpC);
-                pv.affichageMessage(cm.deleteCl(tmpC));
+                if (lc.contains(tmpC)) {
+
+                    pv.affichageMessage(lc);
+                    pv.affichageMessage("--- Suppression de la classe --- ");
+                    pv.affichageMessage(tmpC);
+                    pv.affichageMessage(cm.deleteCl(tmpC));
+                }else{
+                    pv.affichageMessage("Classe introuvable");
+                }
                 break;
             default:
                 pv.affichageMessage("Entrez un choix valide ");

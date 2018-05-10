@@ -101,6 +101,48 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return le;
     }
+    
+    @Override
+    public List<Attribution> toutesLesAttributions() {
+        //mode = soit tri par numéro chassis soit par prix soit par prenom
+
+        String query = "select * from ATTRIBUTION";
+        List<Attribution> la = new ArrayList<>();
+        Statement stm = null;
+        ResultSet rs = null;
+        try {
+            stm = dbconnect.createStatement();
+            rs = stm.executeQuery(query);
+            while (rs.next()) {
+                String matricule = rs.getString(1);
+                String sigle = rs.getString(2);
+
+               Attribution a = new Attribution(matricule,sigle);
+
+                la.add(a);
+
+            }
+        } catch (SQLException ex) {
+            System.err.println("erreur lors de la recherche de l'enseignant " + ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println("erreur de fermeture de resultset " + ex);
+            }
+            try {
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println("erreur de fermeture de statement " + ex);
+            }
+        }
+        return la;
+    }
+
 
     /**
      * Méthode affichage de la liste des classes
@@ -390,6 +432,43 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         } catch (SQLException e) {
             msg = "erreur lors de la suppression " + e;
+        } finally {
+
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                msg = "erreur de fermeture de preparedstatement " + e;
+            }
+
+        }
+        return msg;
+    }
+    
+     @Override
+    public String modifyC(Classe nvClasse, Classe tmpC) {
+        
+        String ancSigle = null;    
+        String query = "UPDATE CLASSE set SIGLE = ?";
+        ancSigle = tmpC.getSigle();
+        PreparedStatement pstm = null;
+        String msg;
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, adr);
+            pstm.setString(2, cl.getNom());
+            pstm.setString(3, cl.getPrenom());
+            pstm.setString(4, cl.getTel());
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "changement d'adresse effectué";
+            } else {
+                msg = "changement d'adresse non effectué";
+            }
+
+        } catch (SQLException e) {
+            msg = "erreur lors du changement d'adresse " + e;
         } finally {
 
             try {
