@@ -116,6 +116,7 @@ public class Pvue {
     public Attribution newAttribution(List<Classe> toutesLesClasses, List<Enseignant> tousEns, List<Attribution> toutesLesAttributions) {
 
         affichageListe(toutesLesClasses);
+        affichageListe(tousEns);
         boolean flag;
         boolean drap = false;
         String choix = getMessage("Choisissez la classe : ");
@@ -128,10 +129,7 @@ public class Pvue {
             } else {
                 drap = true;
             }
-        } while (drap);
 
-        affichageListe(tousEns);
-        do {
             choix = getMessage("Choisissez l'enseignant : ");
             if (choix.trim().equals("")) {
                 affichageMessage("Veuillez entrer un choix correct");
@@ -139,11 +137,10 @@ public class Pvue {
             } else {
                 flag = false;
             }
-        } while (flag);
-        do {
-            int chx = Integer.parseInt(choix);
-            if (chx > 0 && chx <= tousEns.size()) {
-                chE = chx - 1;
+
+            int ch = Integer.parseInt(choix);
+            if (ch > 0 && ch <= tousEns.size()) {
+                chE = ch - 1;
             } else {
                 affichageMessage("Veuillez entrer un choix correct");
                 drap = true;

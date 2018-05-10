@@ -222,17 +222,7 @@ public class ClasseModele {
         int i = toutesLesClasses.indexOf(cl);
         if (i < 0) {
             return "Classe introuvable";
-        }
-        Classe c = toutesLesClasses.get(i);
-
-        for (Enseignant e : tousLesEns) {
-            Classe c1 = e.getTitulaire();
-            Classe c2 = e.getRemplacant();
-            if (!c.equals(cl) && !c.equals(c2)) {
-            } else {
-                return "Supprimez d'abord les attributions de l'enseignant";
-            }
-        }
+        }   
         toutesLesClasses.remove(i);
         return "Suppression effectuée";
     }

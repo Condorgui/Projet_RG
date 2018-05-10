@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import myconnections.DBConnection;
 import Projet.Metier.*;
+import java.sql.CallableStatement;
 
 /**
  *
@@ -153,6 +154,8 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return lc;
     }
+    
+ 
 
     /**
      * Méthode qui recherche un enseignant
@@ -340,13 +343,44 @@ public class ClasseModeleJDBC extends ClasseModele {
      * @param matricule
      * @return
      */
-    public String deleteE(Enseignant ens, String matricule) {
+    public String deleteE(Enseignant ens) {
         String query = "DELETE FROM ENSEIGNANT WHERE MATRICULE = ? ";
         PreparedStatement pstm = null;
         String msg;
         try {
             pstm = dbconnect.prepareStatement(query);
-            pstm.setString(1, matricule);
+            pstm.setString(1, ens.getMatricule());
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "Suppression effectuée ";
+            } else {
+                msg = "Suppression non effectuée";
+            }
+
+        } catch (SQLException e) {
+            msg = "erreur lors de la suppression " + e;
+        } finally {
+
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                msg = "erreur de fermeture de preparedstatement " + e;
+            }
+
+        }
+        return msg;
+    }
+
+
+    public String deleteCl(Classe cl) {
+        String query = "DELETE FROM CLASSE WHERE SIGLE = ? ";
+        PreparedStatement pstm = null;
+        String msg;
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1,cl.getSigle());
             int n = pstm.executeUpdate();
             if (n == 1) {
                 msg = "Suppression effectuée ";
