@@ -38,6 +38,7 @@ public class ClasseModele {
 
     /**
      * Méthode qui récupère l'instance de ClasseModele
+     *
      * @return instanciation d'un modèle ou modèle courant
      */
     public static ClasseModele getInstance() {
@@ -105,7 +106,7 @@ public class ClasseModele {
         if (a == null) {
             return "Attribution inexistante";
         }
-       
+
         if (toutesLesAttributions.contains(a)) {
             return "Attribution déjà créée";
         }
@@ -139,7 +140,7 @@ public class ClasseModele {
     public Enseignant getEnseignant(Enseignant aRech) {
         int i = tousLesEns.indexOf(aRech);
         if (i < 0) {
-            
+
             return null;
         } else {
             return tousLesEns.get(i);
@@ -159,6 +160,9 @@ public class ClasseModele {
         if (i < 0) {
             return "Classe introuvable";
 
+        }
+        if (toutesLesClasses.contains(nvClasse) && !nvClasse.getSigle().equals(tmpC.getSigle())) {
+            return "Entrez un autre sigle";
         } else {
             toutesLesClasses.set(i, nvClasse);
         }
@@ -178,6 +182,10 @@ public class ClasseModele {
         if (i < 0) {
             return "Enseignant introuvable";
 
+        }
+        Enseignant e = new Enseignant();
+        if (tousLesEns.contains(nvEns) && !nvEns.getMatricule().equals(tmpE.getMatricule())) {
+            return "Entrez un autre matricule";
         } else {
             tousLesEns.set(i, nvEns);
         }
@@ -223,7 +231,7 @@ public class ClasseModele {
         int i = toutesLesClasses.indexOf(cl);
         if (i < 0) {
             return "Classe introuvable";
-        }   
+        }
         toutesLesClasses.remove(i);
         return "Suppression effectuée";
     }
