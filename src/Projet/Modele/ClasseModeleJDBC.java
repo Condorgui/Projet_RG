@@ -101,7 +101,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return le;
     }
-    
+
     @Override
     public List<Attribution> toutesLesAttributions() {
         //mode = soit tri par numéro chassis soit par prix soit par prenom
@@ -117,7 +117,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 String matricule = rs.getString(1);
                 String sigle = rs.getString(2);
 
-               Attribution a = new Attribution(matricule,sigle);
+                Attribution a = new Attribution(matricule, sigle);
 
                 la.add(a);
 
@@ -142,7 +142,6 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return la;
     }
-
 
     /**
      * Méthode affichage de la liste des classes
@@ -196,8 +195,6 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return lc;
     }
-    
- 
 
     /**
      * Méthode qui recherche un enseignant
@@ -343,7 +340,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     }
 
     /**
-     * Méthode qui ajoute un enseignant 
+     * Méthode qui ajoute un enseignant
      *
      * @param e l'enseignant à ajouter
      * @return msg le résultat de l'ajout
@@ -381,6 +378,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     /**
      * Méthode deleteE supprime un enseignant sur base de son matricule
+     *
      * @param ens
      * @param matricule
      * @return
@@ -415,14 +413,14 @@ public class ClasseModeleJDBC extends ClasseModele {
         return msg;
     }
 
-
+    @Override
     public String deleteCl(Classe cl) {
         String query = "DELETE FROM CLASSE WHERE SIGLE = ? ";
         PreparedStatement pstm = null;
         String msg;
         try {
             pstm = dbconnect.prepareStatement(query);
-            pstm.setString(1,cl.getSigle());
+            pstm.setString(1, cl.getSigle());
             int n = pstm.executeUpdate();
             if (n == 1) {
                 msg = "Suppression effectuée ";
@@ -445,26 +443,31 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return msg;
     }
-    
-     @Override
+
+    @Override
     public String modifyC(Classe nvClasse, Classe tmpC) {
-        
-        String ancSigle = null;    
-        String query = "UPDATE CLASSE set SIGLE = ?";
-        ancSigle = tmpC.getSigle();
+
+        //nvClasse = la nouvelle classe 
+        //tmpC = l'ancienne classe à modifier 
+        String query = "update classe set SIGLE = ?, ANNEE = ? , ORIENTATION = ? where SIGLE = ?";
         PreparedStatement pstm = null;
-        String msg;
+        ResultSet rs = null;
+        String msg; 
+        int annee = nvClasse.getAnnee();
+        String sigle = nvClasse.getSigle();
+        String orientation = nvClasse.getOrientation();
+
         try {
             pstm = dbconnect.prepareStatement(query);
-            pstm.setString(1, adr);
-            pstm.setString(2, cl.getNom());
-            pstm.setString(3, cl.getPrenom());
-            pstm.setString(4, cl.getTel());
+            pstm.setString(1, sigle);
+            pstm.setInt(2, annee);
+            pstm.setString(3, orientation);
+            pstm.setString(4,tmpC.getSigle()); 
             int n = pstm.executeUpdate();
             if (n == 1) {
-                msg = "changement d'adresse effectué";
+                msg = "changement de classe effectué";
             } else {
-                msg = "changement d'adresse non effectué";
+                msg = "changement de classe non effectué";
             }
 
         } catch (SQLException e) {

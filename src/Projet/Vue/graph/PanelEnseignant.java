@@ -5,17 +5,30 @@
  */
 package Projet.Vue.graph;
 
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import Projet.Metier.Enseignant;
+import Projet.Modele.ClasseModele;
+
 /**
  *
  * @author Guillaume.Rigaux
  */
 public class PanelEnseignant extends javax.swing.JPanel {
 
+    private ClasseModele cm;
+
     /**
      * Creates new form PanelEnseignant
      */
     public PanelEnseignant() {
         initComponents();
+    }
+
+    public void setModele(ClasseModele cm) {
+        this.cm = cm;
     }
 
     /**
@@ -79,7 +92,7 @@ public class PanelEnseignant extends javax.swing.JPanel {
         jLabel3.setText("Entrez le matricule de l'enseignant : ");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 153, -1, -1));
 
-        nomEnseignant.setText("jTextField1");
+        nomEnseignant.setText("nomEns");
         nomEnseignant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomEnseignantActionPerformed(evt);
@@ -87,7 +100,7 @@ public class PanelEnseignant extends javax.swing.JPanel {
         });
         add(nomEnseignant, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 59, 190, -1));
 
-        prenomEns.setText("jTextField1");
+        prenomEns.setText("prenomEns");
         prenomEns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prenomEnsActionPerformed(evt);
@@ -95,7 +108,7 @@ public class PanelEnseignant extends javax.swing.JPanel {
         });
         add(prenomEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 103, 190, -1));
 
-        matEns.setText("jTextField1");
+        matEns.setText("matEns");
         matEns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 matEnsActionPerformed(evt);
@@ -133,11 +146,63 @@ public class PanelEnseignant extends javax.swing.JPanel {
     }//GEN-LAST:event_matEnsActionPerformed
 
     private void boutonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonAnnulerActionPerformed
-        // TODO add your handling code here:
+        matEns.setText("");
+        nomEnseignant.setText("");
+        prenomEns.setText("");
+        matEns.setBackground(Color.white);
+        nomEnseignant.setBackground(Color.white);
+        prenomEns.setBackground(Color.white);
     }//GEN-LAST:event_boutonAnnulerActionPerformed
 
     private void boutonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonValiderActionPerformed
-        // TODO add your handling code here:
+        matEns.setBackground(Color.white);
+        nomEnseignant.setBackground(Color.white);
+        prenomEns.setBackground(Color.white);
+        boolean errors = false;
+        String mat = matEns.getText();
+        int matricule = 0;
+        try {
+
+            matricule = Integer.parseInt(mat);
+        } catch (NumberFormatException nfe) {
+
+            errors = true;
+            matEns.setBackground(Color.red);
+        }
+        String nom = nomEnseignant.getText();
+        if (nom.trim().equals("")) {
+
+            errors = true;
+            nomEnseignant.setBackground(Color.red);
+        }
+        String prenom = prenomEns.getText();
+        if (prenom.trim().equals("")) {
+
+            errors = true;
+            prenomEns.setBackground(Color.red);
+        }
+        if (!errors) {
+
+            
+            try {
+                Enseignant e = new Enseignant(mat, nom , prenom);
+                String message = cm.ajouterEnseignant(e);
+                JOptionPane.showMessageDialog(this, message, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+                matEns.setText("");
+                nomEnseignant.setText("");
+                prenomEns.setText("");
+             
+                matEns.setBackground(Color.white);
+                nomEnseignant.setBackground(Color.white);
+                prenomEns.setBackground(Color.white);
+
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(this, "Erreur de création: " + e, "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }//GEN-LAST:event_boutonValiderActionPerformed
 
 

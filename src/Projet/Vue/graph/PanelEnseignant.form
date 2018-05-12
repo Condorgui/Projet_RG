@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="nomEnseignant">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="text" type="java.lang.String" value="nomEns"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomEnseignantActionPerformed"/>
@@ -111,7 +111,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="prenomEns">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="text" type="java.lang.String" value="prenomEns"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prenomEnsActionPerformed"/>
@@ -124,7 +124,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="matEns">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="text" type="java.lang.String" value="matEns"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="matEnsActionPerformed"/>

@@ -17,7 +17,7 @@ public class FrameEnseignant extends javax.swing.JFrame {
     public FrameEnseignant() {
         initComponents();
         ClasseModele cm = ClasseModele.getInstance(); 
-    //    PanelEnseignant.setModele(cm); 
+        panelEnseignant1.setModele(cm); 
         
     }
 
