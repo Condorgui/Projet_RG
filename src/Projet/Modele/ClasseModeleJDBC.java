@@ -15,6 +15,7 @@ import java.util.List;
 import myconnections.DBConnection;
 import Projet.Metier.*;
 import java.sql.CallableStatement;
+import java.sql.*;
 
 /**
  *
@@ -120,17 +121,17 @@ public class ClasseModeleJDBC extends ClasseModele {
                 String matricule = rs.getString(1);
                 String sigle = rs.getString(2);
 
-                Enseignant e = getEnseignant(new Enseignant(matricule));
+                Enseignant ens = getEnseignant(new Enseignant(matricule));
                 Classe classe = null;
                 Classe.ClasseBuilder c = new Classe.ClasseBuilder();
                 c.setSigle(sigle);
                 try {
                     classe = c.build();
 
-                } catch (Exception ex) {
+                } catch (Exception e) {
                     System.out.println("Erreur de création" + e);
                 }
-                Attribution a = new Attribution(classe, e);
+                Attribution a = new Attribution(classe, ens);
 
                 la.add(a);
 
@@ -314,6 +315,57 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     }
 
+    @Override
+    public Attribution getAttribution(Attribution aRech) {
+        //Faire switch pour recherche sur 2 critères
+        String query = "SELECT * FROM ATTRIBUTION WHERE MATRICULE = ? AND SIGLE = ?";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, aRech.getEnseignant().getMatricule());
+            pstm.setString(2, aRech.getClasse().getSigle());
+
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                Classe classe = null;
+                String sigle = rs.getString(1);
+                String matricule = rs.getString(2);
+                Enseignant ens = getEnseignant(new Enseignant(matricule));
+                Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+                c.setSigle(sigle);
+                try {
+                    classe = c.build();
+                } catch (Exception e) {
+                    System.out.println("Erreur de création" + e);
+                }
+                Attribution a = new Attribution(classe, ens);
+                return a;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur de recherche de l'attribution " + e);
+            return null;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                System.err.println("erreur de fermeture de resultset " + e);
+            }
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                System.err.println("erreur de fermeture de preparedstatement " + e);
+            }
+        }
+
+    }
+
     /**
      * Méthode qui ajoute une classe
      *
@@ -323,12 +375,12 @@ public class ClasseModeleJDBC extends ClasseModele {
     @Override
     public String ajouterClasse(Classe c) {
         String msg;
-        String query = "insert into CLASSE(annee,sigle,orientation) values(?,?,?)";
+        String query = "insert into CLASSE(sigle,annee,orientation) values(?,?,?)";
         PreparedStatement pstm = null;
         try {
             pstm = dbconnect.prepareStatement(query);
-            pstm.setInt(1, c.getAnnee());
-            pstm.setString(2, c.getSigle());
+            pstm.setString(1, c.getSigle());
+            pstm.setInt(2, c.getAnnee());
             pstm.setString(3, c.getOrientation());
             int n = pstm.executeUpdate();
             if (n == 1) {
@@ -336,17 +388,10 @@ public class ClasseModeleJDBC extends ClasseModele {
             } else {
                 msg = "Classe non ajoutée ";
             }
-        } catch (SQLException e) {
-            msg = "erreur lors de l'ajout " + e;
-        } finally {
-
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de preparedstatement " + e);
-            }
+        } catch (SQLIntegrityConstraintViolationException pk) {
+            return "Erreur de PK"+pk;
+        } catch (SQLException ec) {
+            return "Erreur d'ajout de la classe " + ec;
         }
         return msg;
     }
@@ -360,7 +405,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     @Override
     public String ajouterEnseignant(Enseignant e) {
         String msg;
-        String query = "insert into ENSEIGNANT(matricule,nom,prenom) values(?,?,?,?)";
+        String query = "insert into ENSEIGNANT(matricule,nom,prenom,mail) values(?,?,?,?)";
         PreparedStatement pstm = null;
         try {
             pstm = dbconnect.prepareStatement(query);
@@ -374,18 +419,12 @@ public class ClasseModeleJDBC extends ClasseModele {
             } else {
                 msg = "Enseignant non ajouté ";
             }
-        } catch (SQLException ex) {
-            msg = "erreur lors de l'ajout " + ex;
-        } finally {
-
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException ex) {
-                System.err.println("erreur de fermeture de preparedstatement " + ex);
-            }
+        } catch (SQLIntegrityConstraintViolationException pk) {
+            return "Erreur de PK" + pk;
+        } catch (SQLException ec) {
+            return "Erreur d'ajout de la classe " + ec;
         }
+
         return msg;
     }
 
@@ -393,7 +432,6 @@ public class ClasseModeleJDBC extends ClasseModele {
      * Méthode deleteE supprime un enseignant sur base de son matricule
      *
      * @param ens
-     * @param matricule
      * @return
      */
     @Override

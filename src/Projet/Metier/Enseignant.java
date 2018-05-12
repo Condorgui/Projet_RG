@@ -53,6 +53,7 @@ public class Enseignant extends Sujet{
      * @param matricule
      * @param nom
      * @param prenom Le statut Titulaire ou Remplacant doit lui être affecté
+     * @param mail
      */
     public Enseignant(String matricule, String nom, String prenom, String mail) {
         this.matricule = matricule;
