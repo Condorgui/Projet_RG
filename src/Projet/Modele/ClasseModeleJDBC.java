@@ -389,7 +389,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 msg = "Classe non ajoutée ";
             }
         } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK"+pk;
+            return "Erreur de PK" + pk;
         } catch (SQLException ec) {
             return "Erreur d'ajout de la classe " + ec;
         }
@@ -522,6 +522,8 @@ public class ClasseModeleJDBC extends ClasseModele {
                 msg = "changement de classe non effectué";
             }
 
+        } catch (SQLIntegrityConstraintViolationException pk) {
+            return "Erreur de PK" + pk;
         } catch (SQLException e) {
             msg = "erreur lors du changement d'adresse " + e;
         } finally {
@@ -566,6 +568,8 @@ public class ClasseModeleJDBC extends ClasseModele {
                 msg = "changement d'enseignant non effectué";
             }
 
+        } catch (SQLIntegrityConstraintViolationException pk) {
+            return "Erreur de PK" + pk;
         } catch (SQLException e) {
             msg = "erreur lors du changement d'adresse " + e;
         } finally {
