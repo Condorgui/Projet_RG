@@ -383,6 +383,7 @@ public class ClasseModeleJDBC extends ClasseModele {
      * @param matricule
      * @return
      */
+    @Override
     public String deleteE(Enseignant ens) {
         String query = "DELETE FROM ENSEIGNANT WHERE MATRICULE = ? ";
         PreparedStatement pstm = null;
@@ -468,6 +469,47 @@ public class ClasseModeleJDBC extends ClasseModele {
                 msg = "changement de classe effectué";
             } else {
                 msg = "changement de classe non effectué";
+            }
+
+        } catch (SQLException e) {
+            msg = "erreur lors du changement d'adresse " + e;
+        } finally {
+
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                msg = "erreur de fermeture de preparedstatement " + e;
+            }
+
+        }
+        return msg;
+    }
+    
+    public String modifyE(Enseignant nvEns, Enseignant tmpE) {
+
+        //nvClasse = la nouvelle classe 
+        //tmpC = l'ancienne classe à modifier 
+        String query = "update enseignant set MATRICULE = ?, NOM = ? , PRENOM = ? where MATRICULE = ?";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String msg; 
+        String matricule = nvEns.getMatricule();
+        String nom = nvEns.getNom();
+        String prenom = nvEns.getPrenom();
+
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, matricule);
+            pstm.setString(2,nom);
+            pstm.setString(3,prenom);
+            pstm.setString(4,tmpE.getMatricule()); 
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "changement d'enseignant effectué";
+            } else {
+                msg = "changement d'enseignant non effectué";
             }
 
         } catch (SQLException e) {
