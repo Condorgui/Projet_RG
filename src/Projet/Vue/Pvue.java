@@ -52,6 +52,10 @@ public class Pvue {
         } while (true);
         return choix;
     }
+    
+    public void notif(){
+        affichageMessage("===><====");
+    }
 
     /**
      * Méthode newClasse encode les informations d'une classe
@@ -83,17 +87,28 @@ public class Pvue {
     public Enseignant newEnseignant() {
 
         boolean flag;
+        String nom, prenom, mail, matricule;
         do {
 
-            String nom = getMessage("Entrez le nom : ");
-            String prenom = getMessage("Entrez le prénom : ");
-            String matricule = getMessage("Entrez son matricule : ");
-            if (matricule.trim().equals("") || nom.trim().equals("") || prenom.trim().equals("")) {
+            nom = getMessage("Entrez le nom : ");
+            prenom = getMessage("Entrez le prénom : ");
+            do {
+                mail = getMessage("Entrez l'adresse e-mail :");
+                if (!mail.matches("^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[A-Za-z]{2,3}$")) {
+                    affichageMessage("L'adresse doit être au format texte@domaine.com");
+                    flag = true;
+                } else {
+                    flag = false;
+                }
+            } while (flag);
+
+            matricule = getMessage("Entrez son matricule : ");
+            if (matricule.trim().equals("") || nom.trim().equals("") || prenom.trim().equals("") || mail.trim().equals("")) {
                 affichageMessage("Entrez les caractères correctement ");
                 flag = true;
             } else {
                 flag = false;
-                Enseignant e = new Enseignant(matricule, nom, prenom);
+                Enseignant e = new Enseignant(matricule, nom, prenom, mail);
                 return e;
             }
         } while (flag);
@@ -238,7 +253,7 @@ public class Pvue {
         affichageMessage("Nom de l'enseignant :" + e.getNom());
         affichageMessage("Prénom de l'enseignant :" + e.getPrenom());
         affichageMessage("Matricule  :" + e.getMatricule());
-
+        affichageMessage("Mail : " + e.getMail());
     }
 
     /**

@@ -73,10 +73,13 @@ public class ClasseModeleJDBC extends ClasseModele {
             rs = stm.executeQuery(query);
             while (rs.next()) {
                 String matricule = rs.getString(1);
+                String titulaire = rs.getString(2);
+                String remplacant = rs.getString(3);
                 String nom = rs.getString(4);
                 String prenom = rs.getString(5);
+                String mail = rs.getString(6);
 
-                Enseignant e = new Enseignant(matricule, nom, prenom);
+                Enseignant e = new Enseignant(matricule, nom, prenom, mail);
 
                 le.add(e);
 
@@ -108,16 +111,26 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         String query = "select * from ATTRIBUTION";
         List<Attribution> la = new ArrayList<>();
-        Statement stm = null;
+        PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            stm = dbconnect.createStatement();
-            rs = stm.executeQuery(query);
+            stm = dbconnect.prepareStatement(query);
+            rs = stm.executeQuery();
             while (rs.next()) {
                 String matricule = rs.getString(1);
                 String sigle = rs.getString(2);
 
-                Attribution a = new Attribution(matricule, sigle);
+                Enseignant e = getEnseignant(new Enseignant(matricule));
+                Classe classe = null;
+                Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+                c.setSigle(sigle);
+                try {
+                    classe = c.build();
+
+                } catch (Exception ex) {
+                    System.out.println("Erreur de création" + e);
+                }
+                Attribution a = new Attribution(classe, e);
 
                 la.add(a);
 
@@ -214,12 +227,13 @@ public class ClasseModeleJDBC extends ClasseModele {
             rs = pstm.executeQuery();
             if (rs.next()) {
                 String matricule = rs.getString(1);
+                String cl_titulaire = rs.getString(2);
+                String cl_remplacant = rs.getString(3);
                 String nom = rs.getString(4);
                 String prenom = rs.getString(5);
-                //     String cl_titulaire = rs.getString(3);
+                String mail = rs.getString(6);
 
-                //     String cl_remplacant = rs.getString(5);
-                Enseignant e = new Enseignant(matricule, nom, prenom);
+                Enseignant e = new Enseignant(matricule, nom, prenom, mail);
                 return e;
 
             } else {
@@ -266,9 +280,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             if (rs.next()) {
                 String sigle = rs.getString(1);
                 int annee = rs.getInt(2);
-                //     String cl_titulaire = rs.getString(3);
                 String orientation = rs.getString(3);
-                //     String cl_remplacant = rs.getString(5);
                 Classe.ClasseBuilder c = new Classe.ClasseBuilder();
                 c.setSigle(sigle).setOrientation(orientation).setAnnee(annee);
                 try {
@@ -348,13 +360,14 @@ public class ClasseModeleJDBC extends ClasseModele {
     @Override
     public String ajouterEnseignant(Enseignant e) {
         String msg;
-        String query = "insert into ENSEIGNANT(matricule,nom,prenom) values(?,?,?)";
+        String query = "insert into ENSEIGNANT(matricule,nom,prenom) values(?,?,?,?)";
         PreparedStatement pstm = null;
         try {
             pstm = dbconnect.prepareStatement(query);
             pstm.setString(1, e.getMatricule());
             pstm.setString(2, e.getNom());
             pstm.setString(3, e.getPrenom());
+            pstm.setString(4, e.getMail());
             int n = pstm.executeUpdate();
             if (n == 1) {
                 msg = "Ajout de l'enseignant effectué";
@@ -453,7 +466,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         String query = "update classe set SIGLE = ?, ANNEE = ? , ORIENTATION = ? where SIGLE = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String msg; 
+        String msg;
         int annee = nvClasse.getAnnee();
         String sigle = nvClasse.getSigle();
         String orientation = nvClasse.getOrientation();
@@ -463,7 +476,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             pstm.setString(1, sigle);
             pstm.setInt(2, annee);
             pstm.setString(3, orientation);
-            pstm.setString(4,tmpC.getSigle()); 
+            pstm.setString(4, tmpC.getSigle());
             int n = pstm.executeUpdate();
             if (n == 1) {
                 msg = "changement de classe effectué";
@@ -486,25 +499,28 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
         return msg;
     }
-    
+
+    @Override
     public String modifyE(Enseignant nvEns, Enseignant tmpE) {
 
         //nvClasse = la nouvelle classe 
         //tmpC = l'ancienne classe à modifier 
-        String query = "update enseignant set MATRICULE = ?, NOM = ? , PRENOM = ? where MATRICULE = ?";
+        String query = "update enseignant set MATRICULE = ?, NOM = ? , PRENOM = ?, MAIL = ? where MATRICULE = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String msg; 
+        String msg;
         String matricule = nvEns.getMatricule();
         String nom = nvEns.getNom();
         String prenom = nvEns.getPrenom();
+        String mail = nvEns.getMail();
 
         try {
             pstm = dbconnect.prepareStatement(query);
             pstm.setString(1, matricule);
-            pstm.setString(2,nom);
-            pstm.setString(3,prenom);
-            pstm.setString(4,tmpE.getMatricule()); 
+            pstm.setString(2, nom);
+            pstm.setString(3, prenom);
+            pstm.setString(4, mail);
+            pstm.setString(5, tmpE.getMatricule());
             int n = pstm.executeUpdate();
             if (n == 1) {
                 msg = "changement d'enseignant effectué";

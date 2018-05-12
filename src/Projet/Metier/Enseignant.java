@@ -54,10 +54,11 @@ public class Enseignant extends Sujet{
      * @param nom
      * @param prenom Le statut Titulaire ou Remplacant doit lui être affecté
      */
-    public Enseignant(String matricule, String nom, String prenom) {
+    public Enseignant(String matricule, String nom, String prenom, String mail) {
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
+        this.mail = mail; 
 
     }
 
@@ -183,7 +184,7 @@ public class Enseignant extends Sujet{
      */
     @Override
     public String toString() {
-        return "  Enseignant " + nom + " " + prenom + " au matricule " + matricule + "\n" +
+        return "  Enseignant " + nom + " " + prenom + " son adresse mail : "+mail+ " et son matricule " + matricule + "\n" +
                 " -- Titulaire de la classe : " + Titulaire +"\n" +
                 " -- Remplacant de la classe : " + Remplacant +"\n\n";
     }

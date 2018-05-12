@@ -183,7 +183,6 @@ public class ClasseModele {
             return "Enseignant introuvable";
 
         }
-        Enseignant e = new Enseignant();
         if (tousLesEns.contains(nvEns) && !nvEns.getMatricule().equals(tmpE.getMatricule())) {
             return "Entrez un autre matricule";
         } else {
@@ -243,14 +242,15 @@ public class ClasseModele {
      * l'attribution existe Si un enseignant est titulaire ou remplacant de
      * l'attribution -> réinitialise le statut de titulaire ou remplacant de
      * l'enseignant à null
-     * @return le résultat de la suppression
+     * @return le résultat de la suppression Aide de Gaetan Soudant pour la
+     * suppression
      */
     public String deleteA(Attribution aDel) {
 
         int i = toutesLesAttributions.indexOf(aDel);
 
         if (i < 0) {
-            return "Attribution à supprimer introuvable";
+            return "Attribution introuvable";
         } else {
             Enseignant e = new Enseignant();
             e = toutesLesAttributions.get(i).getEnseignant();
@@ -340,11 +340,11 @@ public class ClasseModele {
      */
     public void populate() {
         tousLesEns.addAll(Arrays.asList(
-                new Enseignant("MAT007", "Rigaux", "Guillaume"),
-                new Enseignant("MAT123", "Crombez", "Rodrigue"),
-                new Enseignant("MAT456", "Lété", "Quentin"),
-                new Enseignant("MAT100", "Urbain", "Jérome"),
-                new Enseignant("MAT111", "Rigaux", "Baptiste"))
+                new Enseignant("MAT007", "Rigaux", "Guillaume", "guillaumerigaux@condorcet.be"),
+                new Enseignant("MAT123", "Crombez", "Rodrigue", "rodriguecr@condorcet.be"),
+                new Enseignant("MAT456", "Lété", "Quentin", "quentinlt@condorcet.be"),
+                new Enseignant("MAT100", "Urbain", "Jérome", "jurbain@condorcet.be"),
+                new Enseignant("MAT111", "Rigaux", "Baptiste", "baptrig@condorcet.be"))
         );
         try {
             toutesLesClasses.addAll(Arrays.asList(
