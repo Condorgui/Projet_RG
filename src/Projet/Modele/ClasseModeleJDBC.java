@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+-----NOTES ----
+13/05/18 
+Les gestions des attributions pour le modèle et le modèleJDBC ont été 
+faites avec l'aide de Gaetan Soudant. 
  */
 package Projet.Modele;
 
@@ -366,6 +367,55 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     }
 
+    @Override
+    public String ajouterAttribution(Attribution a) {
+
+        String msg;
+        String query = "insert into ATTRIBUTION(matricule,sigle) values(?,?)";
+        PreparedStatement pstm = null;
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, a.getEnseignant().getMatricule());
+            pstm.setString(2, a.getClasse().getSigle());
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "Ajout de l'enseignant effectué";
+            } else {
+                msg = "Enseignant non ajouté ";
+            }
+            if (a.getEnseignant().getTitulaire() != null) {
+                a.getEnseignant().setTitulaire(a.getClasse());
+                String query2 = "update ENSEIGNANT set TITULAIRE = ? WHERE MATRICULE = ?";
+                pstm.setString(1, a.getClasse().getSigle());
+                pstm.setString(2, a.getEnseignant().getMatricule());
+                int nb = pstm.executeUpdate(query2);
+                if (nb == 1) {
+                    msg = "Modification attribution effectuée";
+                } else {
+                    msg = "Modification non effectuée ";
+                }
+            }
+            if (a.getEnseignant().getRemplacant() != null) {
+                String query3 = "update ENSEIGNANT set REMPLACANT = ? WHERE MATRICULE = ?";
+                pstm.setString(1, a.getClasse().getSigle());
+                pstm.setString(2, a.getEnseignant().getMatricule());
+                int nbr = pstm.executeUpdate(query3);
+                if (nbr == 1) {
+                    msg = "Modification attribution effectuée";
+                } else {
+                    msg = "Modification non effectuée ";
+                }
+
+            }
+            return "Attribution créée ! ";
+        } catch (SQLIntegrityConstraintViolationException pk) {
+            return "Erreur de PK" + pk;
+        } catch (SQLException ec) {
+            return "Erreur d'ajout de la classe " + ec;
+        }
+
+    }
+
     /**
      * Méthode qui ajoute une classe
      *
@@ -389,7 +439,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 msg = "Classe non ajoutée ";
             }
         } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK" + pk;
+            return "Erreur de PK (" + pk + ")";
         } catch (SQLException ec) {
             return "Erreur d'ajout de la classe " + ec;
         }
@@ -420,7 +470,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 msg = "Enseignant non ajouté ";
             }
         } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK" + pk;
+            return "Erreur de PK (" + pk + ")";
         } catch (SQLException ec) {
             return "Erreur d'ajout de la classe " + ec;
         }
@@ -498,7 +548,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     @Override
     public String modifyC(Classe nvClasse, Classe tmpC) {
-
+        boolean flag;
         //nvClasse = la nouvelle classe 
         //tmpC = l'ancienne classe à modifier 
         String query = "update classe set SIGLE = ?, ANNEE = ? , ORIENTATION = ? where SIGLE = ?";
@@ -508,36 +558,39 @@ public class ClasseModeleJDBC extends ClasseModele {
         int annee = nvClasse.getAnnee();
         String sigle = nvClasse.getSigle();
         String orientation = nvClasse.getOrientation();
-
-        try {
-            pstm = dbconnect.prepareStatement(query);
-            pstm.setString(1, sigle);
-            pstm.setInt(2, annee);
-            pstm.setString(3, orientation);
-            pstm.setString(4, tmpC.getSigle());
-            int n = pstm.executeUpdate();
-            if (n == 1) {
-                msg = "changement de classe effectué";
-            } else {
-                msg = "changement de classe non effectué";
-            }
-
-        } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK" + pk;
-        } catch (SQLException e) {
-            msg = "erreur lors du changement d'adresse " + e;
-        } finally {
-
+        do {
             try {
-                if (pstm != null) {
-                    pstm.close();
+                pstm = dbconnect.prepareStatement(query);
+                pstm.setString(1, sigle);
+                pstm.setInt(2, annee);
+                pstm.setString(3, orientation);
+                pstm.setString(4, tmpC.getSigle());
+                int n = pstm.executeUpdate();
+                if (n == 1) {
+                    msg = "changement de classe effectué";
+                    flag = false;
+                } else {
+                    flag = true;
+                    msg = "changement de classe non effectué";
                 }
-            } catch (SQLException e) {
-                msg = "erreur de fermeture de preparedstatement " + e;
-            }
 
-        }
-        return msg;
+            } catch (SQLIntegrityConstraintViolationException pk) {
+                return "Erreur de PK (" + pk + ")";
+            } catch (SQLException e) {
+                msg = "erreur lors du changement d'adresse " + e;
+            } finally {
+
+                try {
+                    if (pstm != null) {
+                        pstm.close();
+                    }
+                } catch (SQLException e) {
+                    msg = "erreur de fermeture de preparedstatement " + e;
+                }
+
+            }
+            return msg;
+        } while (flag);
     }
 
     @Override

@@ -54,6 +54,8 @@ public class PanelEnseignant extends javax.swing.JPanel {
         matEns = new javax.swing.JTextField();
         boutonValider = new javax.swing.JButton();
         boutonAnnuler = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -122,7 +124,7 @@ public class PanelEnseignant extends javax.swing.JPanel {
                 boutonValiderActionPerformed(evt);
             }
         });
-        add(boutonValider, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 220, -1, -1));
+        add(boutonValider, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
 
         boutonAnnuler.setText("Annuler");
         boutonAnnuler.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +132,13 @@ public class PanelEnseignant extends javax.swing.JPanel {
                 boutonAnnulerActionPerformed(evt);
             }
         });
-        add(boutonAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 220, -1, -1));
+        add(boutonAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
+
+        jTextField1.setText("mailEns");
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 180, -1));
+
+        jLabel4.setText("Entrez le mail de l'enseignant : ");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void nomEnseignantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomEnseignantActionPerformed
@@ -185,7 +193,7 @@ public class PanelEnseignant extends javax.swing.JPanel {
 
             
             try {
-                Enseignant e = new Enseignant(mat, nom , prenom);
+                Enseignant e = new Enseignant(mat, nom , prenom,mail);
                 String message = cm.ajouterEnseignant(e);
                 JOptionPane.showMessageDialog(this, message, "Résultat", JOptionPane.INFORMATION_MESSAGE);
                 matEns.setText("");
@@ -216,7 +224,9 @@ public class PanelEnseignant extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField matEns;
     private javax.swing.JTextField nomEnseignant;

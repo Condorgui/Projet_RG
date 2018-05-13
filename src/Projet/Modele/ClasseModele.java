@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+-----NOTES ----
+13/05/18 
+Les gestions des attributions pour le modèle et le modèleJDBC ont été 
+faites avec l'aide de Gaetan Soudant. 
  */
 package Projet.Modele;
 
