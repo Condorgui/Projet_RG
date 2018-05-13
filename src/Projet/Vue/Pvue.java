@@ -52,8 +52,8 @@ public class Pvue {
         } while (true);
         return choix;
     }
-    
-    public void notif(){
+
+    public void notif() {
         affichageMessage("===><====");
     }
 
@@ -64,7 +64,7 @@ public class Pvue {
      */
     public Classe newClasse() {
         Classe classe = null;
-        String sigle = getMessage("Entrez le sigle : ");
+        String sigle = getMessagePK("Entrez le sigle : ");
         String orientation = getMessage("Quelle est l'orientation ? ");
         String annee = getMessage("Quelle est l'année de la classe : ");
         int annee2 = Integer.parseInt(annee);
@@ -102,7 +102,7 @@ public class Pvue {
                 }
             } while (flag);
 
-            matricule = getMessage("Entrez son matricule : ");
+            matricule = getMessagePK("Entrez son matricule : ");
             if (matricule.trim().equals("") || nom.trim().equals("") || prenom.trim().equals("") || mail.trim().equals("")) {
                 affichageMessage("Entrez les caractères correctement ");
                 flag = true;
@@ -266,6 +266,11 @@ public class Pvue {
         return msg;
     }
 
+    public String getMessagePK() {
+        String msg = sc.nextLine();
+        return msg.toUpperCase();
+    }
+
     /**
      * Méthode afficheMessage permet d'afficher le message reçu en paramètre
      *
@@ -284,6 +289,11 @@ public class Pvue {
     public String getMessage(String msg) {
         affichageMessage(msg);
         return getMessage();
+    }
+
+    public String getMessagePK(String msg) {
+        affichageMessage(msg);
+        return getMessagePK();
     }
 
     /**
@@ -306,7 +316,7 @@ public class Pvue {
     public Classe rechClasse() {
 
         Classe cRech = null;
-        String sigle = getMessage("Quel est le sigle à rechercher ? ");
+        String sigle = getMessagePK("Quel est le sigle à rechercher ? ");
         Classe.ClasseBuilder c = new Classe.ClasseBuilder();
         c.setSigle(sigle);
         try {
@@ -328,7 +338,7 @@ public class Pvue {
     public Enseignant rechEnseignant() {
         boolean flag;
         do {
-            String matricule = getMessage("Matricule de l'enseignant à rechercher :");
+            String matricule = getMessagePK("Matricule de l'enseignant à rechercher :");
             if (matricule.trim().equals("")) {
                 affichageMessage("Entrez les caractères correctement ");
                 flag = true;
@@ -355,7 +365,7 @@ public class Pvue {
         Enseignant ens = null;
         boolean flag;
         do {
-            String matricule = getMessage("Recherchez le matricule : ");
+            String matricule = getMessagePK("Recherchez le matricule : ");
             if (matricule.trim().equals("")) {
                 affichageMessage("Entrez les caractères correctement");
                 flag = true;
@@ -365,7 +375,7 @@ public class Pvue {
             }
 
         } while (flag);
-        String sigle = getMessage("Recherchez le sigle : ");
+        String sigle = getMessagePK("Recherchez le sigle : ");
         Classe.ClasseBuilder c = new Classe.ClasseBuilder();
         c.setSigle(sigle);
         try {

@@ -121,7 +121,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             while (rs.next()) {
                 String matricule = rs.getString(1);
                 String sigle = rs.getString(2);
-
+                
                 Enseignant ens = getEnseignant(new Enseignant(matricule));
                 Classe classe = getClasse(new Classe(sigle));
                 Attribution a = new Attribution(classe, ens);
@@ -321,18 +321,12 @@ public class ClasseModeleJDBC extends ClasseModele {
 
             rs = pstm.executeQuery();
             if (rs.next()) {
-                Classe classe = null;
-                String sigle = rs.getString(1);
-                String matricule = rs.getString(2);
+                String matricule = rs.getString(1);
+                String sigle = rs.getString(2);
+              
                 Enseignant ens = getEnseignant(new Enseignant(matricule));
-                Classe.ClasseBuilder c = new Classe.ClasseBuilder();
-                c.setSigle(sigle);
-                try {
-                    classe = c.build();
-                } catch (Exception e) {
-                    System.out.println("Erreur de création" + e);
-                }
-                Attribution a = new Attribution(classe, ens);
+                Classe c = getClasse(new Classe(sigle));
+                Attribution a = new Attribution(c, ens);
                 return a;
             } else {
                 return null;
@@ -550,7 +544,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         int annee = nvClasse.getAnnee();
         String sigle = nvClasse.getSigle();
         String orientation = nvClasse.getOrientation();
-        do {
+    
             try {
                 pstm = dbconnect.prepareStatement(query);
                 pstm.setString(1, sigle);
@@ -582,7 +576,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
             }
             return msg;
-        } while (flag);
+    
     }
 
     @Override
