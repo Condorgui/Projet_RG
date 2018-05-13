@@ -123,15 +123,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 String sigle = rs.getString(2);
 
                 Enseignant ens = getEnseignant(new Enseignant(matricule));
-                Classe classe = null;
-                Classe.ClasseBuilder c = new Classe.ClasseBuilder();
-                c.setSigle(sigle);
-                try {
-                    classe = c.build();
-
-                } catch (Exception e) {
-                    System.out.println("Erreur de création" + e);
-                }
+                Classe classe = getClasse(new Classe(sigle));
                 Attribution a = new Attribution(classe, ens);
 
                 la.add(a);

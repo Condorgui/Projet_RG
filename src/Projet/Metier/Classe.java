@@ -19,13 +19,17 @@ public class Classe {
     private int n_etudiants;
     private Enseignant e;
 
+    
+    public Classe(String sigle){
+        this.sigle = sigle; 
+    }
+
     private Classe(ClasseBuilder cb) {
         this.sigle = cb.sigle;
         this.annee = cb.annee;
         this.orientation = cb.orientation;
         // this.n_etudiants = n_etudiants;
-        // this.e = e;
-
+        // this.e = e
     }
 //Plus que des getters 
 
@@ -80,7 +84,9 @@ public class Classe {
 
     }
 
-    /** Hashcode 
+    /**
+     * Hashcode
+     *
      * @return le hash
      */
     @Override
@@ -90,8 +96,9 @@ public class Classe {
         return hash;
     }
 
-    /** Constructeur ClasseBuilder
-     * 
+    /**
+     * Constructeur ClasseBuilder
+     *
      */
     public static class ClasseBuilder {
 
@@ -110,6 +117,7 @@ public class Classe {
 
         /**
          * Setter du sigle du classBuilder
+         *
          * @param sigle
          * @return
          */
@@ -120,6 +128,7 @@ public class Classe {
 
         /**
          * Setter de l'orientation du classBuilder
+         *
          * @param orientation
          * @return
          */
@@ -130,6 +139,7 @@ public class Classe {
 
         /**
          * Setter du n_etudiants du classBuilder
+         *
          * @param n_etudiants
          * @return
          */
@@ -141,6 +151,7 @@ public class Classe {
 
         /**
          * Setter de l'enseignant du classBuilder
+         *
          * @param e
          * @return
          */
@@ -151,6 +162,7 @@ public class Classe {
 
         /**
          * Setter de l'année du classbuilder
+         *
          * @param annee
          * @return
          */
@@ -161,6 +173,7 @@ public class Classe {
 
         /**
          * builder des informations essentielles
+         *
          * @return @throws Exception
          */
         public Classe build() throws Exception {
