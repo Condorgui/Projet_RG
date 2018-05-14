@@ -80,8 +80,19 @@ public class ClasseModeleJDBC extends ClasseModele {
                 String nom = rs.getString(4);
                 String prenom = rs.getString(5);
                 String mail = rs.getString(6);
-
                 Enseignant e = new Enseignant(matricule, nom, prenom, mail);
+
+                if (titulaire != null || remplacant != null) {
+                    if (titulaire != null) {
+                        Classe c = getClasse(new Classe(titulaire));
+                        e.setTitulaire(c);
+                    }
+                    else{
+                        Classe c = getClasse(new Classe(remplacant)); 
+                        e.setRemplacant(c);
+                    }
+
+                }
 
                 le.add(e);
 
@@ -121,7 +132,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             while (rs.next()) {
                 String matricule = rs.getString(1);
                 String sigle = rs.getString(2);
-                
+
                 Enseignant ens = getEnseignant(new Enseignant(matricule));
                 Classe classe = getClasse(new Classe(sigle));
                 Attribution a = new Attribution(classe, ens);
@@ -221,13 +232,26 @@ public class ClasseModeleJDBC extends ClasseModele {
             rs = pstm.executeQuery();
             if (rs.next()) {
                 String matricule = rs.getString(1);
-                String cl_titulaire = rs.getString(2);
-                String cl_remplacant = rs.getString(3);
+                String titulaire = rs.getString(2);
+                String remplacant = rs.getString(3);
                 String nom = rs.getString(4);
                 String prenom = rs.getString(5);
                 String mail = rs.getString(6);
 
                 Enseignant e = new Enseignant(matricule, nom, prenom, mail);
+                
+                 if (titulaire != null || remplacant != null) {
+                    if (titulaire != null) {
+                        Classe c = getClasse(new Classe(titulaire));
+                        e.setTitulaire(c);
+                    }
+                    else{
+                        Classe c = getClasse(new Classe(remplacant)); 
+                        e.setRemplacant(c);
+                    }
+
+                }
+                 //voir pour faire une méthode
                 return e;
 
             } else {
@@ -323,7 +347,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             if (rs.next()) {
                 String matricule = rs.getString(1);
                 String sigle = rs.getString(2);
-              
+
                 Enseignant ens = getEnseignant(new Enseignant(matricule));
                 Classe c = getClasse(new Classe(sigle));
                 Attribution a = new Attribution(c, ens);
@@ -357,39 +381,34 @@ public class ClasseModeleJDBC extends ClasseModele {
     public String ajouterAttribution(Attribution a) {
 
         String msg;
-        String query = "insert into ATTRIBUTION(matricule,sigle) values(?,?)";
+        String query = "insert into ATTRIBUTION(MATRICULE,SIGLE) values(?,?)";
         PreparedStatement pstm = null;
         try {
             pstm = dbconnect.prepareStatement(query);
             pstm.setString(1, a.getEnseignant().getMatricule());
             pstm.setString(2, a.getClasse().getSigle());
-            int n = pstm.executeUpdate();
-            if (n == 1) {
-                msg = "Ajout de l'enseignant effectué";
-            } else {
-                msg = "Enseignant non ajouté ";
-            }
+            pstm.executeUpdate();
+
             if (a.getEnseignant().getTitulaire() != null) {
-                a.getEnseignant().setTitulaire(a.getClasse());
                 String query2 = "update ENSEIGNANT set TITULAIRE = ? WHERE MATRICULE = ?";
                 pstm.setString(1, a.getClasse().getSigle());
                 pstm.setString(2, a.getEnseignant().getMatricule());
-                int nb = pstm.executeUpdate(query2);
-                if (nb == 1) {
-                    msg = "Modification attribution effectuée";
+                //a.getEnseignant().setTitulaire(a.getClasse());
+                int nbr = pstm.executeUpdate(query2);
+                if (nbr == 1) {
+                    msg = "Attribution effectuée";
                 } else {
-                    msg = "Modification non effectuée ";
+                    msg = "Attribution non effectuée ";
                 }
-            }
-            if (a.getEnseignant().getRemplacant() != null) {
+            } else if (a.getEnseignant().getRemplacant() != null) {
                 String query3 = "update ENSEIGNANT set REMPLACANT = ? WHERE MATRICULE = ?";
                 pstm.setString(1, a.getClasse().getSigle());
                 pstm.setString(2, a.getEnseignant().getMatricule());
                 int nbr = pstm.executeUpdate(query3);
                 if (nbr == 1) {
-                    msg = "Modification attribution effectuée";
+                    msg = "Attribution effectuée";
                 } else {
-                    msg = "Modification non effectuée ";
+                    msg = "Attribution non effectuée ";
                 }
 
             }
@@ -458,7 +477,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         } catch (SQLIntegrityConstraintViolationException pk) {
             return "Erreur de PK (" + pk + ")";
         } catch (SQLException ec) {
-            return "Erreur d'ajout de la classe " + ec;
+            return "Erreur d'ajout de l'enseignant" + ec;
         }
 
         return msg;
@@ -544,39 +563,39 @@ public class ClasseModeleJDBC extends ClasseModele {
         int annee = nvClasse.getAnnee();
         String sigle = nvClasse.getSigle();
         String orientation = nvClasse.getOrientation();
-    
-            try {
-                pstm = dbconnect.prepareStatement(query);
-                pstm.setString(1, sigle);
-                pstm.setInt(2, annee);
-                pstm.setString(3, orientation);
-                pstm.setString(4, tmpC.getSigle());
-                int n = pstm.executeUpdate();
-                if (n == 1) {
-                    msg = "changement de classe effectué";
-                    flag = false;
-                } else {
-                    flag = true;
-                    msg = "changement de classe non effectué";
-                }
 
-            } catch (SQLIntegrityConstraintViolationException pk) {
-                return "Erreur de PK (" + pk + ")";
-            } catch (SQLException e) {
-                msg = "erreur lors du changement d'adresse " + e;
-            } finally {
-
-                try {
-                    if (pstm != null) {
-                        pstm.close();
-                    }
-                } catch (SQLException e) {
-                    msg = "erreur de fermeture de preparedstatement " + e;
-                }
-
+        try {
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, sigle);
+            pstm.setInt(2, annee);
+            pstm.setString(3, orientation);
+            pstm.setString(4, tmpC.getSigle());
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "changement de classe effectué";
+                flag = false;
+            } else {
+                flag = true;
+                msg = "changement de classe non effectué";
             }
-            return msg;
-    
+
+        } catch (SQLIntegrityConstraintViolationException pk) {
+            return "Erreur de PK (" + pk + ")";
+        } catch (SQLException e) {
+            msg = "erreur  " + e;
+        } finally {
+
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                msg = "erreur de fermeture de preparedstatement " + e;
+            }
+
+        }
+        return msg;
+
     }
 
     @Override
@@ -610,7 +629,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         } catch (SQLIntegrityConstraintViolationException pk) {
             return "Erreur de PK" + pk;
         } catch (SQLException e) {
-            msg = "erreur lors du changement d'adresse " + e;
+            msg = "erreur " + e;
         } finally {
 
             try {
