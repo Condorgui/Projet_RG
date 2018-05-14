@@ -26,8 +26,8 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     Connection dbconnect;
 //Connexion à la BDD
-    
-    private static ClasseModeleJDBC cm = null; 
+
+    private static ClasseModeleJDBC cm = null;
 
     /**
      * Constructeur du JDBC Se charge de la connexion à la BDD
@@ -42,8 +42,8 @@ public class ClasseModeleJDBC extends ClasseModele {
             System.out.println("Connexion établie");
         }
     }
-    
-        public static ClasseModeleJDBC getInstance() {
+
+    public static ClasseModeleJDBC getInstance() {
         if (cm == null) {
             return cm = new ClasseModeleJDBC();
         } else {
@@ -303,7 +303,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
         } catch (SQLException e) {
             System.err.println("erreur de recherche de l'attribution " + e);
-            return null;
+
         } finally {
             try {
                 if (rs != null) {
@@ -314,52 +314,39 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
 
         }
-
+        return null;
     }
 
     @Override
     public String ajouterAttribution(Attribution a) {
 
-        String msg;
-        String query = "insert into ATTRIBUTION(MATRICULE,SIGLE) values(?,?)";
-
-        try (PreparedStatement pstm = dbconnect.prepareStatement(query);) {
-
-            pstm.setString(1, a.getEnseignant().getMatricule());
-            pstm.setString(2, a.getClasse().getSigle());
-            pstm.executeUpdate();
-
-            if (a.getEnseignant().getTitulaire() != null) {
-                String query2 = "update ENSEIGNANT set TITULAIRE = ? WHERE MATRICULE = ?";
-                pstm.setString(1, a.getClasse().getSigle());
-                pstm.setString(2, a.getEnseignant().getMatricule());
-                //a.getEnseignant().setTitulaire(a.getClasse());
-                int nbr = pstm.executeUpdate(query2);
-                if (nbr == 1) {
-                    msg = "Attribution effectuée";
-                } else {
-                    msg = "Attribution non effectuée ";
+       String query = "insert into ATTRIBUTION(MATRICULE,SIGLE) values(?,?)";
+        if (a != null) {
+            try (CallableStatement callableStatement = dbconnect.prepareCall(query)) {
+                callableStatement.setString(1, a.getEnseignant().getMatricule());
+                callableStatement.setString(2, a.getClasse().getSigle());
+                callableStatement.executeUpdate();
+                if (a.getEnseignant().getTitulaire() != null) {
+                    PreparedStatement preparedStatement = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = ? WHERE MATRICULE = ?");
+                    preparedStatement.setString(1, a.getClasse().getSigle());
+                    preparedStatement.setString(2, a.getEnseignant().getMatricule());
+                    preparedStatement.executeUpdate();
+                } else if (a.getEnseignant().getRemplacant() != null) {
+                    PreparedStatement preparedStatement = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = ? WHERE MATRICULE = ?");
+                    preparedStatement.setString(1, a.getClasse().getSigle());
+                    preparedStatement.setString(2, a.getEnseignant().getMatricule());
+                    preparedStatement.executeUpdate();
                 }
-            } else if (a.getEnseignant().getRemplacant() != null) {
-                String query3 = "update ENSEIGNANT set REMPLACANT = ? WHERE MATRICULE = ?";
-                pstm.setString(1, a.getClasse().getSigle());
-                pstm.setString(2, a.getEnseignant().getMatricule());
-                int nbr = pstm.executeUpdate(query3);
-                if (nbr == 1) {
-                    msg = "Attribution effectuée";
-                } else {
-                    msg = "Attribution non effectuée ";
-                }
-
+                return "Attribution ajoutée";
+            } catch (SQLIntegrityConstraintViolationException PkException) {
+                return "Attribution déjà existante";
+            } catch (SQLException e) {
+                System.err.println("Erreur d'ajout de l'attribution " + e);
             }
-            return "Attribution créée ! ";
-        } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK" + pk;
-        } catch (SQLException ec) {
-            return "Erreur d'ajout de la classe " + ec;
         }
-
+        return "Attribution null";
     }
+
 
     /**
      * Méthode qui ajoute une classe
@@ -372,8 +359,8 @@ public class ClasseModeleJDBC extends ClasseModele {
         String msg;
         String query = "insert into CLASSE(sigle,annee,orientation) values(?,?,?)";
 
-        try(PreparedStatement pstm = dbconnect.prepareStatement(query);) {
-          
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query);) {
+
             pstm.setString(1, c.getSigle());
             pstm.setInt(2, c.getAnnee());
             pstm.setString(3, c.getOrientation());
@@ -401,8 +388,8 @@ public class ClasseModeleJDBC extends ClasseModele {
     public String ajouterEnseignant(Enseignant e) {
         String msg;
         String query = "insert into ENSEIGNANT(matricule,nom,prenom,mail) values(?,?,?,?) ";
-        try(PreparedStatement pstm = dbconnect.prepareStatement(query)){
-           
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+
             pstm.setString(1, e.getMatricule());
             pstm.setString(2, e.getNom());
             pstm.setString(3, e.getPrenom());
@@ -433,8 +420,8 @@ public class ClasseModeleJDBC extends ClasseModele {
         String query = "DELETE FROM ENSEIGNANT WHERE MATRICULE = ? ";
 
         String msg;
-        try(PreparedStatement pstm = dbconnect.prepareStatement(query)){
-            
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+
             pstm.setString(1, ens.getMatricule());
             int n = pstm.executeUpdate();
             if (n == 1) {
@@ -445,7 +432,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         } catch (SQLException e) {
             msg = "erreur lors de la suppression " + e;
-        } 
+        }
         return msg;
     }
 
@@ -454,8 +441,8 @@ public class ClasseModeleJDBC extends ClasseModele {
         String query = "DELETE FROM CLASSE WHERE SIGLE = ? ";
 
         String msg;
-        try(PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-            
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+
             pstm.setString(1, cl.getSigle());
             int n = pstm.executeUpdate();
             if (n == 1) {
@@ -466,7 +453,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         } catch (SQLException e) {
             msg = "erreur lors de la suppression " + e;
-        } 
+        }
         return msg;
     }
 
@@ -482,8 +469,8 @@ public class ClasseModeleJDBC extends ClasseModele {
         String sigle = nvClasse.getSigle();
         String orientation = nvClasse.getOrientation();
 
-        try(PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-            
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+
             pstm.setString(1, sigle);
             pstm.setInt(2, annee);
             pstm.setString(3, orientation);
@@ -501,7 +488,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             return "Erreur de PK (" + pk + ")";
         } catch (SQLException e) {
             msg = "erreur  " + e;
-        } 
+        }
         return msg;
 
     }
@@ -519,8 +506,8 @@ public class ClasseModeleJDBC extends ClasseModele {
         String prenom = nvEns.getPrenom();
         String mail = nvEns.getMail();
 
-        try(PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-            
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+
             pstm.setString(1, matricule);
             pstm.setString(2, nom);
             pstm.setString(3, prenom);
@@ -537,8 +524,47 @@ public class ClasseModeleJDBC extends ClasseModele {
             return "Erreur de PK" + pk;
         } catch (SQLException e) {
             msg = "erreur " + e;
-        } 
+        }
         return msg;
     }
+
+
+
+    @Override
+    public String deleteA(Attribution aDel){
+
+        
+    String query = "DELETE FROM ATTRIBUTION WHERE SIGLE = ? AND MATRICULE = ? ";
+    PreparedStatement pstm = null; 
+        String msg;
+        try{
+            pstm = dbconnect.prepareStatement(query);
+            pstm.setString(1, aDel.getEnseignant().getMatricule());
+            pstm.setString(2, aDel.getClasse().getSigle());
+            pstm.executeUpdate();
+            pstm = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
+            pstm.setString(1,aDel.getEnseignant().getMatricule());
+            pstm.executeUpdate();
+            pstm = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
+            pstm.setString(1,aDel.getEnseignant().getMatricule());
+            pstm.executeUpdate();
+            
+            return "Suppression effectuée !";
+
+        } catch (SQLException e) {
+            msg = "erreur lors de la suppression " + e;
+        }
+        finally {
+            try {
+                if (pstm != null){
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                System.err.println("Erreur de fermeture du preparedStatement " + e);
+            }
+        }
+        return "Erreur de suppression";
+    }
+
 
 }
