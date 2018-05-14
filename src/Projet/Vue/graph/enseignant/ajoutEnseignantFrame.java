@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Projet.Vue.graph;
+package Projet.Vue.graph.enseignant;
 
 /**
  *
@@ -27,14 +27,14 @@ public class ajoutEnseignantFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ajoutEnseignant1 = new Projet.Vue.graph.ajoutEnseignant();
+        ajoutEnseignant1 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
         jPanel1 = new javax.swing.JPanel();
-        ajoutEnseignant2 = new Projet.Vue.graph.ajoutEnseignant();
-        ajoutEnseignant3 = new Projet.Vue.graph.ajoutEnseignant();
-        ajoutEnseignant7 = new Projet.Vue.graph.ajoutEnseignant();
-        ajoutEnseignant4 = new Projet.Vue.graph.ajoutEnseignant();
-        ajoutEnseignant5 = new Projet.Vue.graph.ajoutEnseignant();
-        ajoutEnseignant6 = new Projet.Vue.graph.ajoutEnseignant();
+        ajoutEnseignant2 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
+        ajoutEnseignant3 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
+        ajoutEnseignant7 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
+        ajoutEnseignant4 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
+        ajoutEnseignant5 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
+        ajoutEnseignant6 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -185,13 +185,13 @@ public class ajoutEnseignantFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Projet.Vue.graph.ajoutEnseignant ajoutEnseignant1;
-    private Projet.Vue.graph.ajoutEnseignant ajoutEnseignant2;
-    private Projet.Vue.graph.ajoutEnseignant ajoutEnseignant3;
-    private Projet.Vue.graph.ajoutEnseignant ajoutEnseignant4;
-    private Projet.Vue.graph.ajoutEnseignant ajoutEnseignant5;
-    private Projet.Vue.graph.ajoutEnseignant ajoutEnseignant6;
-    private Projet.Vue.graph.ajoutEnseignant ajoutEnseignant7;
+    private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant1;
+    private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant2;
+    private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant3;
+    private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant4;
+    private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant5;
+    private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant6;
+    private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

@@ -68,11 +68,8 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         String query = "select * from ENSEIGNANT order by MATRICULE";
         List<Enseignant> le = new ArrayList<>();
-        Statement stm = null;
-        ResultSet rs = null;
-        try {
-            stm = dbconnect.createStatement();
-            rs = stm.executeQuery(query);
+        try (Statement stm = dbconnect.createStatement(); ResultSet rs = stm.executeQuery(query)) {
+
             while (rs.next()) {
                 String matricule = rs.getString(1);
                 String titulaire = rs.getString(2);
@@ -86,9 +83,8 @@ public class ClasseModeleJDBC extends ClasseModele {
                     if (titulaire != null) {
                         Classe c = getClasse(new Classe(titulaire));
                         e.setTitulaire(c);
-                    }
-                    else{
-                        Classe c = getClasse(new Classe(remplacant)); 
+                    } else {
+                        Classe c = getClasse(new Classe(remplacant));
                         e.setRemplacant(c);
                     }
 
@@ -99,22 +95,8 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
         } catch (SQLException ex) {
             System.err.println("erreur lors de la recherche de l'enseignant " + ex);
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.err.println("erreur de fermeture de resultset " + ex);
-            }
-            try {
-                if (stm != null) {
-                    stm.close();
-                }
-            } catch (SQLException ex) {
-                System.err.println("erreur de fermeture de statement " + ex);
-            }
         }
+
         return le;
     }
 
@@ -124,11 +106,10 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         String query = "select * from ATTRIBUTION";
         List<Attribution> la = new ArrayList<>();
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            stm = dbconnect.prepareStatement(query);
-            rs = stm.executeQuery();
+
+        try (PreparedStatement stm = dbconnect.prepareStatement(query);
+                ResultSet rs = stm.executeQuery();) {
+
             while (rs.next()) {
                 String matricule = rs.getString(1);
                 String sigle = rs.getString(2);
@@ -142,21 +123,6 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
         } catch (SQLException ex) {
             System.err.println("erreur lors de la recherche de l'enseignant " + ex);
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.err.println("erreur de fermeture de resultset " + ex);
-            }
-            try {
-                if (stm != null) {
-                    stm.close();
-                }
-            } catch (SQLException ex) {
-                System.err.println("erreur de fermeture de statement " + ex);
-            }
         }
         return la;
     }
@@ -171,11 +137,10 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         String query = "select * from CLASSE order by SIGLE";
         List<Classe> lc = new ArrayList<>();
-        Statement stm = null;
-        ResultSet rs = null;
-        try {
-            stm = dbconnect.createStatement();
-            rs = stm.executeQuery(query);
+
+        try (Statement stm = dbconnect.createStatement();
+                ResultSet rs = stm.executeQuery(query);) {
+
             while (rs.next()) {
                 String sigle = rs.getString(1);
                 int annee = rs.getInt(2);
@@ -195,21 +160,6 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
         } catch (SQLException e) {
             System.err.println("erreur lors de la recherche de la classe " + e);
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de resultset " + e);
-            }
-            try {
-                if (stm != null) {
-                    stm.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de statement " + e);
-            }
         }
         return lc;
     }
@@ -224,10 +174,9 @@ public class ClasseModeleJDBC extends ClasseModele {
     public Enseignant getEnseignant(Enseignant aRech) {
 
         String query = "SELECT * FROM ENSEIGNANT WHERE MATRICULE = ?";
-        PreparedStatement pstm = null;
         ResultSet rs = null;
-        try {
-            pstm = dbconnect.prepareStatement(query);
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+
             pstm.setString(1, aRech.getMatricule());
             rs = pstm.executeQuery();
             if (rs.next()) {
@@ -239,19 +188,18 @@ public class ClasseModeleJDBC extends ClasseModele {
                 String mail = rs.getString(6);
 
                 Enseignant e = new Enseignant(matricule, nom, prenom, mail);
-                
-                 if (titulaire != null || remplacant != null) {
+
+                if (titulaire != null || remplacant != null) {
                     if (titulaire != null) {
                         Classe c = getClasse(new Classe(titulaire));
                         e.setTitulaire(c);
-                    }
-                    else{
-                        Classe c = getClasse(new Classe(remplacant)); 
+                    } else {
+                        Classe c = getClasse(new Classe(remplacant));
                         e.setRemplacant(c);
                     }
 
                 }
-                 //voir pour faire une méthode
+                //voir pour faire une méthode
                 return e;
 
             } else {
@@ -268,13 +216,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             } catch (SQLException e) {
                 System.err.println("erreur de fermeture de resultset " + e);
             }
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de preparedstatement " + e);
-            }
+
         }
     }
 
@@ -289,10 +231,10 @@ public class ClasseModeleJDBC extends ClasseModele {
         //Faire switch pour recherche sur 2 critères
         Classe classe = null;
         String query = "SELECT * FROM CLASSE WHERE SIGLE = ?";
-        PreparedStatement pstm = null;
+
         ResultSet rs = null;
-        try {
-            pstm = dbconnect.prepareStatement(query);
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query);) {
+
             pstm.setString(1, aRech.getSigle());
             rs = pstm.executeQuery();
             if (rs.next()) {
@@ -321,13 +263,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             } catch (SQLException e) {
                 System.err.println("erreur de fermeture de resultset " + e);
             }
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de preparedstatement " + e);
-            }
+
         }
 
     }
@@ -336,10 +272,10 @@ public class ClasseModeleJDBC extends ClasseModele {
     public Attribution getAttribution(Attribution aRech) {
         //Faire switch pour recherche sur 2 critères
         String query = "SELECT * FROM ATTRIBUTION WHERE MATRICULE = ? AND SIGLE = ?";
-        PreparedStatement pstm = null;
+
         ResultSet rs = null;
-        try {
-            pstm = dbconnect.prepareStatement(query);
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+
             pstm.setString(1, aRech.getEnseignant().getMatricule());
             pstm.setString(2, aRech.getClasse().getSigle());
 
@@ -366,13 +302,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             } catch (SQLException e) {
                 System.err.println("erreur de fermeture de resultset " + e);
             }
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de preparedstatement " + e);
-            }
+
         }
 
     }
@@ -382,9 +312,9 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         String msg;
         String query = "insert into ATTRIBUTION(MATRICULE,SIGLE) values(?,?)";
-        PreparedStatement pstm = null;
-        try {
-            pstm = dbconnect.prepareStatement(query);
+
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query);) {
+
             pstm.setString(1, a.getEnseignant().getMatricule());
             pstm.setString(2, a.getClasse().getSigle());
             pstm.executeUpdate();
@@ -431,9 +361,9 @@ public class ClasseModeleJDBC extends ClasseModele {
     public String ajouterClasse(Classe c) {
         String msg;
         String query = "insert into CLASSE(sigle,annee,orientation) values(?,?,?)";
-        PreparedStatement pstm = null;
-        try {
-            pstm = dbconnect.prepareStatement(query);
+
+        try(PreparedStatement pstm = dbconnect.prepareStatement(query);) {
+          
             pstm.setString(1, c.getSigle());
             pstm.setInt(2, c.getAnnee());
             pstm.setString(3, c.getOrientation());
@@ -461,9 +391,8 @@ public class ClasseModeleJDBC extends ClasseModele {
     public String ajouterEnseignant(Enseignant e) {
         String msg;
         String query = "insert into ENSEIGNANT(matricule,nom,prenom,mail) values(?,?,?,?)";
-        PreparedStatement pstm = null;
-        try {
-            pstm = dbconnect.prepareStatement(query);
+        try(PreparedStatement pstm = dbconnect.prepareStatement(query)){
+           
             pstm.setString(1, e.getMatricule());
             pstm.setString(2, e.getNom());
             pstm.setString(3, e.getPrenom());
@@ -492,10 +421,10 @@ public class ClasseModeleJDBC extends ClasseModele {
     @Override
     public String deleteE(Enseignant ens) {
         String query = "DELETE FROM ENSEIGNANT WHERE MATRICULE = ? ";
-        PreparedStatement pstm = null;
+
         String msg;
-        try {
-            pstm = dbconnect.prepareStatement(query);
+        try(PreparedStatement pstm = dbconnect.prepareStatement(query)){
+            
             pstm.setString(1, ens.getMatricule());
             int n = pstm.executeUpdate();
             if (n == 1) {
@@ -506,27 +435,17 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         } catch (SQLException e) {
             msg = "erreur lors de la suppression " + e;
-        } finally {
-
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                msg = "erreur de fermeture de preparedstatement " + e;
-            }
-
-        }
+        } 
         return msg;
     }
 
     @Override
     public String deleteCl(Classe cl) {
         String query = "DELETE FROM CLASSE WHERE SIGLE = ? ";
-        PreparedStatement pstm = null;
+
         String msg;
-        try {
-            pstm = dbconnect.prepareStatement(query);
+        try(PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+            
             pstm.setString(1, cl.getSigle());
             int n = pstm.executeUpdate();
             if (n == 1) {
@@ -537,17 +456,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         } catch (SQLException e) {
             msg = "erreur lors de la suppression " + e;
-        } finally {
-
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                msg = "erreur de fermeture de preparedstatement " + e;
-            }
-
-        }
+        } 
         return msg;
     }
 
@@ -557,15 +466,14 @@ public class ClasseModeleJDBC extends ClasseModele {
         //nvClasse = la nouvelle classe 
         //tmpC = l'ancienne classe à modifier 
         String query = "update classe set SIGLE = ?, ANNEE = ? , ORIENTATION = ? where SIGLE = ?";
-        PreparedStatement pstm = null;
         ResultSet rs = null;
         String msg;
         int annee = nvClasse.getAnnee();
         String sigle = nvClasse.getSigle();
         String orientation = nvClasse.getOrientation();
 
-        try {
-            pstm = dbconnect.prepareStatement(query);
+        try(PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+            
             pstm.setString(1, sigle);
             pstm.setInt(2, annee);
             pstm.setString(3, orientation);
@@ -583,17 +491,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             return "Erreur de PK (" + pk + ")";
         } catch (SQLException e) {
             msg = "erreur  " + e;
-        } finally {
-
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                msg = "erreur de fermeture de preparedstatement " + e;
-            }
-
-        }
+        } 
         return msg;
 
     }
@@ -604,16 +502,15 @@ public class ClasseModeleJDBC extends ClasseModele {
         //nvClasse = la nouvelle classe 
         //tmpC = l'ancienne classe à modifier 
         String query = "update enseignant set MATRICULE = ?, NOM = ? , PRENOM = ?, MAIL = ? where MATRICULE = ?";
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
+
         String msg;
         String matricule = nvEns.getMatricule();
         String nom = nvEns.getNom();
         String prenom = nvEns.getPrenom();
         String mail = nvEns.getMail();
 
-        try {
-            pstm = dbconnect.prepareStatement(query);
+        try(PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+            
             pstm.setString(1, matricule);
             pstm.setString(2, nom);
             pstm.setString(3, prenom);
@@ -630,17 +527,8 @@ public class ClasseModeleJDBC extends ClasseModele {
             return "Erreur de PK" + pk;
         } catch (SQLException e) {
             msg = "erreur " + e;
-        } finally {
-
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException e) {
-                msg = "erreur de fermeture de preparedstatement " + e;
-            }
-
-        }
+        } 
+        
         return msg;
     }
 
