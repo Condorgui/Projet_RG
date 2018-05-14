@@ -26,6 +26,8 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     Connection dbconnect;
 //Connexion à la BDD
+    
+    private static ClasseModeleJDBC cm = null; 
 
     /**
      * Constructeur du JDBC Se charge de la connexion à la BDD
@@ -38,6 +40,14 @@ public class ClasseModeleJDBC extends ClasseModele {
             System.exit(1);
         } else {
             System.out.println("Connexion établie");
+        }
+    }
+    
+        public static ClasseModeleJDBC getInstance() {
+        if (cm == null) {
+            return cm = new ClasseModeleJDBC();
+        } else {
+            return cm;
         }
     }
 
@@ -390,7 +400,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     @Override
     public String ajouterEnseignant(Enseignant e) {
         String msg;
-        String query = "insert into ENSEIGNANT(matricule,nom,prenom,mail) values(?,?,?,?)";
+        String query = "insert into ENSEIGNANT(matricule,nom,prenom,mail) values(?,?,?,?) ";
         try(PreparedStatement pstm = dbconnect.prepareStatement(query)){
            
             pstm.setString(1, e.getMatricule());
@@ -528,7 +538,6 @@ public class ClasseModeleJDBC extends ClasseModele {
         } catch (SQLException e) {
             msg = "erreur " + e;
         } 
-        
         return msg;
     }
 
