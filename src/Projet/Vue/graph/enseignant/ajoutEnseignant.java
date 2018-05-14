@@ -5,11 +5,23 @@
  */
 package Projet.Vue.graph.enseignant;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import Projet.Modele.*;
+import Projet.Metier.*;
+
 /**
  *
  * @author Guillaume.Rigaux
  */
 public class ajoutEnseignant extends javax.swing.JPanel {
+
+    private ClasseModele cm;
+
+    public void setModele(ClasseModele cm) {
+
+        this.cm = cm;
+    }
 
     /**
      * Creates new form ajoutEnseignant
@@ -27,126 +39,113 @@ public class ajoutEnseignant extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
-        nomEns = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        nomEns = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         prenomEns = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        mailEns = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         matEns = new javax.swing.JTextField();
-        mailEns = new javax.swing.JTextField();
-        valider = new javax.swing.JButton();
-        annuler = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-        jLabel5.setText("jLabel5");
+        setLayout(new java.awt.GridLayout(6, 5, 7, 8));
 
-        nomEns.setText("jTextField1");
-        nomEns.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Entrez le nom de l'enseignant : ");
+        add(jLabel1);
+        add(nomEns);
+
+        jLabel2.setText("Entrez le prénom de l'enseignant : ");
+        add(jLabel2);
+        add(prenomEns);
+
+        jLabel3.setText("Entrez l'adresse email : ");
+        add(jLabel3);
+        add(mailEns);
+
+        jLabel4.setText("Entrez le matricule de l'enseignant :");
+        add(jLabel4);
+        add(matEns);
+
+        jButton1.setText("Valider");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomEnsActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
+        add(jButton1);
 
-        jLabel1.setText("Nom de l'enseignant : ");
-
-        jLabel2.setText("Prénom de l'enseignant : ");
-
-        prenomEns.setText("jTextField2");
-
-        jLabel3.setText("Matricule de l'enseignant : ");
-
-        jLabel4.setText("Mail de l'enseignant : ");
-
-        matEns.setText("jTextField3");
-
-        mailEns.setText("jTextField4");
-
-        valider.setText("Valider");
-        valider.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Annuler");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                validerActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-
-        annuler.setText("Annuler");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(valider, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nomEns, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(prenomEns)
-                            .addComponent(matEns)
-                            .addComponent(mailEns)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(annuler, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomEns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(prenomEns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(matEns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(mailEns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valider)
-                    .addComponent(annuler))
-                .addContainerGap())
-        );
+        add(jButton2);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomEnsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomEnsActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        nomEns.setText("");
+        prenomEns.setText("");
+        mailEns.setText("");
+        matEns.setText("");
+        nomEns.setBackground(Color.white);
+        prenomEns.setBackground(Color.white);
+        mailEns.setBackground(Color.white);
+        matEns.setBackground(Color.white);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_validerActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        nomEns.setBackground(Color.white);
+        prenomEns.setBackground(Color.white);
+        mailEns.setBackground(Color.white);
+        matEns.setBackground(Color.white);
+
+        boolean erreur = false;
+        String nom = nomEns.getText();
+        if (nom.trim().equals("")) {
+            erreur = true;
+            nomEns.setBackground(Color.red);
+        }
+        String prenom = prenomEns.getText();
+        if (prenom.trim().equals("")) {
+            erreur = true;
+            prenomEns.setBackground(Color.red);
+        }
+        String mail = mailEns.getText();
+        if (mail.trim().equals("")) {
+            erreur = true;
+            mailEns.setBackground(Color.red);
+        }
+        String mat = matEns.getText();
+        if (mat.trim().equals("")) {
+            erreur = true;
+            matEns.setBackground(Color.red);
+        }
+
+        if (!erreur) {
+            Enseignant e = new Enseignant(mat, nom, prenom, mail);
+            //JOptionPane.showMessageDialog(this, e);
+            String msg = cm.ajouterEnseignant(e);
+            JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton annuler;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField mailEns;
     private javax.swing.JTextField matEns;
     private javax.swing.JTextField nomEns;
     private javax.swing.JTextField prenomEns;
-    private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,21 +5,19 @@
  */
 package Projet.Vue.graph;
 import Projet.Modele.*;
-
 /**
  *
  * @author Guillaume.Rigaux
  */
-public class vueprincipal extends javax.swing.JFrame {
+public class FenetrePrincipale extends javax.swing.JFrame {
 
     /**
-     * Creates new form vueprincipal
+     * Creates new form FenetrePrincipale
      */
-    public vueprincipal() {
+    public FenetrePrincipale() {
         initComponents();
         ClasseModele cm = ClasseModeleJDBC.getInstance();
-        ajoutEnseignant2.setModele(cm);
-        //set modele à faire pour chaque panneau ! ctrl + espace pour completer
+        ajoutEnseignant1.setModele(cm);
     }
 
     /**
@@ -31,32 +29,32 @@ public class vueprincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ajoutEnseignant2 = new Projet.Vue.graph.enseignant.AjoutEnseignant();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        ajoutEnseignant1 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
+        jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
+        setBackground(new java.awt.Color(255, 153, 102));
         getContentPane().setLayout(new java.awt.CardLayout());
-        getContentPane().add(ajoutEnseignant2, "ajoutEnseignant ");
+        getContentPane().add(ajoutEnseignant1, "card2");
 
-        jMenu3.setText("File");
+        jMenu1.setText("File");
 
         jMenuItem1.setText("jMenuItem1");
-        jMenu3.add(jMenuItem1);
+        jMenu1.add(jMenuItem1);
 
-        jMenuBar2.add(jMenu3);
+        jMenuBar1.add(jMenu1);
 
-        jMenu4.setText("Edit");
-        jMenuBar2.add(jMenu4);
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
-        jMenu1.setText("jMenu1");
-        jMenuBar2.add(jMenu1);
+        jMenu3.setText("jMenu3");
+        jMenuBar1.add(jMenu3);
 
-        setJMenuBar(jMenuBar2);
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,30 +76,28 @@ public class vueprincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vueprincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetrePrincipale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vueprincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetrePrincipale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vueprincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetrePrincipale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vueprincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetrePrincipale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new vueprincipal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FenetrePrincipale().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Projet.Vue.graph.enseignant.AjoutEnseignant ajoutEnseignant2;
+    private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
