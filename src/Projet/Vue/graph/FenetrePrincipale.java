@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package Projet.Vue.graph;
+
 import Projet.Modele.*;
+import java.awt.CardLayout;
+
 /**
  *
  * @author Guillaume.Rigaux
@@ -29,35 +32,139 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        accueil = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        boutonentrer = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
         ajoutEnseignant1 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
+        ajoutClasse1 = new Projet.Vue.graph.classe.ajoutClasse();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        ajoutEnseignant = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        ajoutClasse = new javax.swing.JMenu();
+        ajoutclasse = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 102));
         getContentPane().setLayout(new java.awt.CardLayout());
+
+        accueil.setLayout(new java.awt.GridLayout(2, 10));
+        accueil.add(jSeparator1);
+
+        jLabel2.setText("Cliquez pour vous connecter ");
+        jLabel2.setMaximumSize(new java.awt.Dimension(15, 16));
+        accueil.add(jLabel2);
+        accueil.add(jSeparator4);
+        accueil.add(jSeparator2);
+
+        boutonentrer.setText("Entrer");
+        boutonentrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonentrerActionPerformed(evt);
+            }
+        });
+        accueil.add(boutonentrer);
+        accueil.add(jSeparator5);
+
+        getContentPane().add(accueil, "card4");
         getContentPane().add(ajoutEnseignant1, "card2");
+        getContentPane().add(ajoutClasse1, "card3");
 
-        jMenu1.setText("File");
+        jMenu1.setText(" Enseignants");
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenu1.add(jMenuItem1);
+        ajoutEnseignant.setText("Ajout");
+        ajoutEnseignant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ajoutEnseignantActionPerformed(evt);
+            }
+        });
+        jMenu1.add(ajoutEnseignant);
+
+        jMenuItem2.setText("Recherche");
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        ajoutClasse.setText(" Classes");
 
-        jMenu3.setText("jMenu3");
+        ajoutclasse.setText("Ajout");
+        ajoutclasse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ajoutclasseActionPerformed(evt);
+            }
+        });
+        ajoutClasse.add(ajoutclasse);
+
+        jMenuItem5.setText("Recherche");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        ajoutClasse.add(jMenuItem5);
+
+        jMenuBar1.add(ajoutClasse);
+
+        jMenu3.setText("Attributions");
+
+        jMenuItem7.setText("Ajout");
+        jMenu3.add(jMenuItem7);
+        jMenu3.add(jMenuItem9);
+
         jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Affichages");
+
+        jMenuItem10.setText("Enseignants");
+        jMenu4.add(jMenuItem10);
+
+        jMenuItem11.setText("Classes");
+        jMenu4.add(jMenuItem11);
+
+        jMenuItem12.setText("Attributions");
+        jMenu4.add(jMenuItem12);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ajoutEnseignantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutEnseignantActionPerformed
+       CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+       cardLayout.show(this.getContentPane(), "card2");
+    }//GEN-LAST:event_ajoutEnseignantActionPerformed
+
+    private void ajoutclasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutclasseActionPerformed
+       CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+       cardLayout.show(this.getContentPane(), "card3");
+    }//GEN-LAST:event_ajoutclasseActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void boutonentrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonentrerActionPerformed
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+       cardLayout.show(this.getContentPane(), "card2");       
+    }//GEN-LAST:event_boutonentrerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,11 +200,30 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel accueil;
+    private javax.swing.JMenu ajoutClasse;
+    private Projet.Vue.graph.classe.ajoutClasse ajoutClasse1;
+    private javax.swing.JMenuItem ajoutEnseignant;
     private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant1;
+    private javax.swing.JMenuItem ajoutclasse;
+    private javax.swing.JButton boutonentrer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     // End of variables declaration//GEN-END:variables
 }
