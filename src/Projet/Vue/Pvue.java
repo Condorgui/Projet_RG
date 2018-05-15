@@ -200,14 +200,16 @@ public class Pvue {
                 if (chA == 1) {
                     for (Attribution a : toutesLesAttributions) {
                         Enseignant eAtt = a.getEnseignant();
-                        if (eAtt.getTitulaire() == c) {
-                            affichageMessage("Il y a déjà un titulaire attitré");
+                        if (eAtt.getTitulaire() != null) {
+                            if (eAtt.getTitulaire().equals(c)) {
+                                affichageMessage("Il y a déjà un titulaire attitré");
+                                return null;
+                            }
+                        }
+                        if (eAtt.equals(e) && !eAtt.getMatricule().equals(e.getMatricule())) {
                             return null;
                         }
-                        if (eAtt == e && !eAtt.getMatricule().equals(e.
-                                getMatricule())) {
-                            return null;
-                        }
+
                     }
                     e.setTitulaire(c);
                 } else if (chA == 2) {
@@ -362,7 +364,7 @@ public class Pvue {
     public Attribution rechAttribution() {
 
         Classe cRech = null;
-        Enseignant ens = null;
+        Enseignant ens = null ;
         boolean flag;
         do {
             String matricule = getMessagePK("Recherchez le matricule : ");
@@ -384,7 +386,8 @@ public class Pvue {
             System.out.println("Erreur de création" + e);
         }
 
-        Attribution aRech = new Attribution(cRech, ens);
+        Attribution aRech;
+        aRech = new Attribution(cRech, ens);
         return aRech;
     }
 

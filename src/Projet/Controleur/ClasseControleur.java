@@ -91,7 +91,7 @@ public class ClasseControleur {
                         pv.affichageMessage("Choix invalide");
                 }
 
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 // pv.affichageMessage(e);
                 pv.affichageMessage(e + "Entrez un nombre valide !");
             }
@@ -177,7 +177,14 @@ public class ClasseControleur {
                 Attribution att = cm.getAttribution(aRech);
                 pv.affichageMessage(cm.getAttribution(att));
                 // pv.affichageMessage(a);
-                pv.affichageMessage(cm.deleteA(att));
+                if (la.contains(att)) {
+                    
+                    pv.affichageMessage(cm.deleteA(att));
+
+                } else {
+                    pv.affichageMessage("Attribution introuvable");
+                }
+               
             }
         } catch (NumberFormatException e) {
             pv.affichageMessage(e.getMessage() + "Entrez un nombre");
@@ -336,7 +343,7 @@ public class ClasseControleur {
                     pv.affichageMessage("--- Suppression de la classe --- ");
                     pv.affichageMessage(tmpC);
                     pv.affichageMessage(cm.deleteCl(tmpC));
-                }else{
+                } else {
                     pv.affichageMessage("Classe introuvable");
                 }
                 break;

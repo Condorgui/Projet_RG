@@ -146,6 +146,7 @@ public class ajoutClasse extends javax.swing.JPanel {
             } catch (Exception e) {
                 System.out.println("Erreur de création" + e);
             }
+            //Pas oublier modèle
             String msg = cm.ajouterClasse(classe);
             JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
         } else {

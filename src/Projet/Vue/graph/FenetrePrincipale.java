@@ -7,6 +7,7 @@ package Projet.Vue.graph;
 
 import Projet.Modele.*;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +22,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         initComponents();
         ClasseModele cm = ClasseModeleJDBC.getInstance();
         ajoutEnseignant1.setModele(cm);
+        ajoutClasse1.setModele(cm); 
     }
 
     /**
@@ -34,13 +36,13 @@ public class FenetrePrincipale extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        accueil = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        boutonentrer = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
+        accueil = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        boutonentrer = new javax.swing.JButton();
         ajoutEnseignant1 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
         ajoutClasse1 = new Projet.Vue.graph.classe.ajoutClasse();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -65,22 +67,18 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.CardLayout());
 
         accueil.setLayout(new java.awt.GridLayout(2, 10));
-        accueil.add(jSeparator1);
 
-        jLabel2.setText("Cliquez pour vous connecter ");
+        jLabel2.setText("Bienvenue sur la page d'accueil du gestionnaire ");
         jLabel2.setMaximumSize(new java.awt.Dimension(15, 16));
         accueil.add(jLabel2);
-        accueil.add(jSeparator4);
-        accueil.add(jSeparator2);
 
-        boutonentrer.setText("Entrer");
+        boutonentrer.setText("Accéder au gestionnaire");
         boutonentrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonentrerActionPerformed(evt);
             }
         });
         accueil.add(boutonentrer);
-        accueil.add(jSeparator5);
 
         getContentPane().add(accueil, "card4");
         getContentPane().add(ajoutEnseignant1, "card2");
@@ -163,7 +161,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
 
     private void boutonentrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonentrerActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-       cardLayout.show(this.getContentPane(), "card2");       
+       cardLayout.show(this.getContentPane(), "card2"); 
+        JOptionPane.showMessageDialog(this, "Bienvenue", "Résultat", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_boutonentrerActionPerformed
 
     /**

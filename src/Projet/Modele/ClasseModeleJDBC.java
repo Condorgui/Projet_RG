@@ -127,7 +127,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 Enseignant ens = getEnseignant(new Enseignant(matricule));
                 Classe classe = getClasse(new Classe(sigle));
                 Attribution a = new Attribution(classe, ens);
-                
+
                 la.add(a);
 
             }
@@ -281,38 +281,44 @@ public class ClasseModeleJDBC extends ClasseModele {
     @Override
     public Attribution getAttribution(Attribution aRech) {
         //Faire switch pour recherche sur 2 critères
-        String query = "SELECT * FROM ATTRIBUTION WHERE MATRICULE = ? AND SIGLE = ?";
+        if (aRech != null) {
+            String query = "SELECT * FROM ATTRIBUTION WHERE MATRICULE = ? AND SIGLE = ?";
 
-        ResultSet rs = null;
-        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+            ResultSet rs = null;
 
-            pstm.setString(1, aRech.getEnseignant().getMatricule());
-            pstm.setString(2, aRech.getClasse().getSigle());
+            try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
 
-            rs = pstm.executeQuery();
-            if (rs.next()) {
-                String matricule = rs.getString(1);
-                String sigle = rs.getString(2);
+                pstm.setString(1, aRech.getEnseignant().getMatricule());
+                pstm.setString(2, aRech.getClasse().getSigle());
 
-                Enseignant ens = getEnseignant(new Enseignant(matricule));
-                Classe c = getClasse(new Classe(sigle));
-                Attribution a = new Attribution(c, ens);
-                return a;
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            System.err.println("erreur de recherche de l'attribution " + e);
+                rs = pstm.executeQuery();
+                if (rs.next()) {
+                    String matricule = rs.getString(1);
+                    String sigle = rs.getString(2);
 
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
+                    Enseignant ens = getEnseignant(new Enseignant(matricule));
+                    Classe c = getClasse(new Classe(sigle));
+                    Attribution a = new Attribution(c, ens);
+
+                    return a;
+
+                } else {
+                    return null;
                 }
-            } catch (SQLException e) {
-                System.err.println("erreur de fermeture de resultset " + e);
-            }
 
+            } catch (SQLException e) {
+                System.err.println("erreur de recherche de l'attribution " + e);
+
+            } finally {
+                try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                } catch (SQLException e) {
+                    System.err.println("erreur de fermeture de resultset " + e);
+                }
+
+            }
         }
         return null;
     }
@@ -330,7 +336,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                     PreparedStatement pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = ? WHERE MATRICULE = ?");
                     pst.setString(1, a.getClasse().getSigle());
                     pst.setString(2, a.getEnseignant().getMatricule());
-                    
+                    pst.executeUpdate();
 
                 } else if (a.getEnseignant().getRemplacant() != null) {
                     PreparedStatement pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = ? WHERE MATRICULE = ?");
