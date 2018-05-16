@@ -573,47 +573,59 @@ public class ClasseModeleJDBC extends ClasseModele {
         //nvClasse = la nouvelle classe 
         //tmpC = l'ancienne classe à modifier 
         String query = "update ATTRIBUTION set MATRICULE = ?, SIGLE = ? where MATRICULE = ? AND SIGLE = ?";
-        PreparedStatement pst = null; 
-        String msg; 
-        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-            String mat = nvA.getEnseignant().getMatricule();
-            String sigle = nvA.getClasse().getSigle();
-            String ancMat = tmpA.getEnseignant().getMatricule();
-            String ancSigle = tmpA.getClasse().getSigle();
-            pstm.setString(1, mat);
-            pstm.setString(2, sigle);
-            pstm.setString(3, ancMat);
-            pstm.setString(4, ancSigle);   
-            int n = pstm.executeUpdate();
-            pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
-            pstm.setString(1, ancMat); 
-            n = pstm.executeUpdate(); 
-            if (n == 1) {
-                msg = "Enseignant remis à 0 ";
-            } else {
-                msg = "Erreur modif attribution";
-            }
-            pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
-            pstm.setString(1, ancMat); 
-            n = pstm.executeUpdate(); 
-            if (n == 1) {
-                msg = "Enseignant remis à 0 ";
-            } else {
-                msg = "Erreur modif attribution";
-            }
-            
-            
-            
-            
-            
-            
-            
+        PreparedStatement pst = null;
+        String msg;
+        if (nvA != null) {
+            try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+                String mat = nvA.getEnseignant().getMatricule();
+                String sigle = nvA.getClasse().getSigle();
+                String ancMat = tmpA.getEnseignant().getMatricule();
+                String ancSigle = tmpA.getClasse().getSigle();
+                pstm.setString(1, mat);
+                pstm.setString(2, sigle);
+                pstm.setString(3, ancMat);
+                pstm.setString(4, ancSigle);
+                int n = pstm.executeUpdate();
 
-        } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK" + pk;
-        } catch (SQLException e) {
-            msg = "erreur " + e;
+                if (nvA.getEnseignant().getTitulaire() != null) {
+                    pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = ? WHERE MATRICULE = ?");
+                    pst.setString(1, sigle);
+                    pst.setString(2, mat);
+                    pst.executeUpdate();
+
+                } else if (nvA.getEnseignant().getRemplacant() != null) {
+                    pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = ? WHERE MATRICULE = ?");
+                    pst.setString(1, sigle);
+                    pst.setString(2, mat);
+                    pst.executeUpdate();
+                }
+
+                pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
+                pstm.setString(1, ancMat);
+                n = pstm.executeUpdate();
+                if (n == 1) {
+                    msg = "Enseignant remis à 0 ";
+                } else {
+                    msg = "Erreur modif attribution";
+                }
+                pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
+                pstm.setString(1, ancMat);
+                n = pstm.executeUpdate();
+                if (n == 1) {
+                    msg = "Enseignant remis à 0 ";
+                } else {
+                    msg = "Erreur modif attribution";
+                }
+
+                return "Attribution modifiée";
+
+            } catch (SQLIntegrityConstraintViolationException pk) {
+                return "Erreur de PK" + pk;
+            } catch (SQLException e) {
+                msg = "erreur " + e;
+            }
+            return msg;
         }
-        return msg;
+        return null;
     }
 }
