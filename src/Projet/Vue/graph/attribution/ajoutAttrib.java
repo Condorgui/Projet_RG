@@ -7,10 +7,13 @@ package Projet.Vue.graph.attribution;
 
 import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
+import Projet.Metier.Attribution;
 import Projet.Modele.ClasseModele;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +23,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
     public List<Enseignant> enseignants;
     public List<Classe> classes;
+    public List<Attribution> attributions;
 
     private ClasseModele cm;
 
@@ -87,20 +91,22 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
         classes = new ArrayList<>(cm.toutesClasses());
         enseignants = new ArrayList<>(cm.tousEns());
-
+        attributions = new ArrayList<>(cm.toutesLesAttributions());
 
         listEns.removeAllItems();
         listClasse.removeAllItems();
-      
 
         enseignants.forEach((Enseignant e) -> {
-            listEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
+            if (e.getTitulaire() == null) {
+                listEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
+            }
         });
 
         classes.forEach((c) -> {
-            listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
-        });
 
+            listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+
+        });
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
