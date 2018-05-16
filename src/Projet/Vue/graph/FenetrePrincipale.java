@@ -7,7 +7,12 @@ package Projet.Vue.graph;
 
 import Projet.Modele.*;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+
+
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -20,13 +25,24 @@ public class FenetrePrincipale extends javax.swing.JFrame {
      */
     public FenetrePrincipale() {
         initComponents();
+        this.setBackground(Color.ORANGE);
         ClasseModele cm = ClasseModeleJDBC.getInstance();
         ajoutEnseignant1.setModele(cm);
         ajoutClasse1.setModele(cm);
         affichage3.setModele(cm);
+        affichage3.initPanel();
         rechEnseignant1.setModele(cm);
+        rechEnseignant1.initPanel();
         rechClasse3.setModele(cm);
-        ajoutAttrib1.setModele(cm);
+        rechClasse3.initPanel();
+        ajoutAttrib2.setModele(cm);
+        ajoutAttrib2.initPanel();
+        rechAttrib5.setModele(cm);
+        rechAttrib5.initPanel();
+        
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Projet Java");
+     
 
     }
 
@@ -58,6 +74,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         ajoutAttrib3 = new Projet.Vue.graph.attribution.ajoutAttrib();
         ajoutAttrib4 = new Projet.Vue.graph.attribution.ajoutAttrib();
         accueil = new javax.swing.JPanel();
+        panelAccueil1 = new Projet.Vue.graph.panelAccueil();
         jLabel2 = new javax.swing.JLabel();
         boutonentrer = new javax.swing.JButton();
         ajoutEnseignant1 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
@@ -66,6 +83,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         rechEnseignant1 = new Projet.Vue.graph.enseignant.rechEnseignant();
         rechClasse3 = new Projet.Vue.graph.classe.rechClasse();
         ajoutAttrib2 = new Projet.Vue.graph.attribution.ajoutAttrib();
+        rechAttrib5 = new Projet.Vue.graph.attribution.rechAttrib();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuEnseignant = new javax.swing.JMenu();
         ajoutEnseignant = new javax.swing.JMenuItem();
@@ -113,7 +131,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 153, 102));
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        accueil.setLayout(new java.awt.GridLayout(2, 10));
+        accueil.setLayout(new java.awt.GridLayout(4, 2, 5, 0));
+        accueil.add(panelAccueil1);
 
         jLabel2.setText("                       Bienvenue sur la page d'accueil du gestionnaire ");
         jLabel2.setMaximumSize(new java.awt.Dimension(15, 16));
@@ -134,9 +153,11 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         getContentPane().add(rechEnseignant1, "card6");
         getContentPane().add(rechClasse3, "card7");
         getContentPane().add(ajoutAttrib2, "card8");
+        getContentPane().add(rechAttrib5, "card9");
 
         MenuEnseignant.setText(" Enseignants");
 
+        ajoutEnseignant.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone.png")); // NOI18N
         ajoutEnseignant.setText("Ajout");
         ajoutEnseignant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +166,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         MenuEnseignant.add(ajoutEnseignant);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
         jMenuItem2.setText("Recherche");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,6 +179,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
 
         MenuClasse.setText(" Classes");
 
+        ajoutclasse.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone3.png")); // NOI18N
         ajoutclasse.setText("Ajout");
         ajoutclasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +188,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         MenuClasse.add(ajoutclasse);
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
         jMenuItem5.setText("Recherche");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +201,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
 
         MenuAttributions.setText("Attributions");
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone4.png")); // NOI18N
         jMenuItem7.setText("Ajout");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,13 +210,20 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         MenuAttributions.add(jMenuItem7);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
         jMenuItem3.setText("Recherche");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         MenuAttributions.add(jMenuItem3);
 
         jMenuBar1.add(MenuAttributions);
 
         affichage.setText("Affichages");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone5.png")); // NOI18N
         jMenuItem1.setText("Affichage des listes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,11 +260,6 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         cardLayout.show(this.getContentPane(), "card6");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void ajoutEnseignantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutEnseignantActionPerformed
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(this.getContentPane(), "card2");
-    }//GEN-LAST:event_ajoutEnseignantActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card5");
@@ -242,6 +269,16 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card8");
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(this.getContentPane(), "card9");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void ajoutEnseignantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutEnseignantActionPerformed
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(this.getContentPane(), "card2");
+    }//GEN-LAST:event_ajoutEnseignantActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,10 +347,12 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private Projet.Vue.graph.panelAccueil panelAccueil1;
     private Projet.Vue.graph.attribution.rechAttrib rechAttrib1;
     private Projet.Vue.graph.attribution.rechAttrib rechAttrib2;
     private Projet.Vue.graph.attribution.rechAttrib rechAttrib3;
     private Projet.Vue.graph.attribution.rechAttrib rechAttrib4;
+    private Projet.Vue.graph.attribution.rechAttrib rechAttrib5;
     private Projet.Vue.graph.classe.rechClasse rechClasse3;
     private Projet.Vue.graph.enseignant.rechEnseignant rechEnseignant1;
     // End of variables declaration//GEN-END:variables

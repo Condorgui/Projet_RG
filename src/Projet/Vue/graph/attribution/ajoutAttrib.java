@@ -5,8 +5,11 @@
  */
 package Projet.Vue.graph.attribution;
 
+import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
 import Projet.Modele.ClasseModele;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,18 +18,19 @@ import java.util.List;
  */
 public class ajoutAttrib extends javax.swing.JPanel {
 
-     public List<Enseignant> enseignants;
-    
+    public List<Enseignant> enseignants;
+    public List<Classe> classes;
+
     private ClasseModele cm;
 
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;
     }
-    
-  
+
     public ajoutAttrib() {
         initComponents();
+        this.setBackground(Color.ORANGE);
     }
 
     /**
@@ -41,9 +45,9 @@ public class ajoutAttrib extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        listEns = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        listClasse = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -54,14 +58,14 @@ public class ajoutAttrib extends javax.swing.JPanel {
         jLabel2.setText("Liste des enseignants");
         add(jLabel2);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1);
+        listEns.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(listEns);
 
         jLabel3.setText("Liste des classes");
         add(jLabel3);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox2);
+        listClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(listClasse);
 
         jButton1.setText("Ajouter");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -79,15 +83,34 @@ public class ajoutAttrib extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void initPanel() {
 
+        classes = new ArrayList<>(cm.toutesClasses());
+        enseignants = new ArrayList<>(cm.tousEns());
+
+
+        listEns.removeAllItems();
+        listClasse.removeAllItems();
+      
+
+        enseignants.forEach((Enseignant e) -> {
+            listEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
+        });
+
+        classes.forEach((c) -> {
+            listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+        });
+
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JComboBox<String> listClasse;
+    private javax.swing.JComboBox<String> listEns;
     // End of variables declaration//GEN-END:variables
 }

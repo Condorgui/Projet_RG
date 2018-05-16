@@ -4,21 +4,31 @@
  * and open the template in the editor.
  */
 package Projet.Vue.graph;
+
 import Projet.Vue.graph.*;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Guillaume.Rigaux
  */
 public class panelAccueil extends javax.swing.JPanel {
 
+    private JLabel logo;
+
     /**
      * Creates new form panelAccueil
      */
     public panelAccueil() {
         initComponents();
-        this.setBackground(Color.RED);
-  
+        logo = new JLabel();
+
+        logo.setIcon(new ImageIcon(getClass().getResource("/Images/logo1.png")));
+
+        add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 150, 160));
+
     }
 
     /**

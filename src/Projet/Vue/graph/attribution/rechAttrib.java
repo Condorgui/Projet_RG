@@ -5,6 +5,14 @@
  */
 package Projet.Vue.graph.attribution;
 
+import Projet.Metier.Attribution;
+import Projet.Metier.Classe;
+import Projet.Metier.Enseignant;
+import Projet.Modele.ClasseModele;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Guillaume.Rigaux
@@ -14,8 +22,29 @@ public class rechAttrib extends javax.swing.JPanel {
     /**
      * Creates new form rechAttrib
      */
+    public List<Attribution> attributions;
+    
+    private ClasseModele cm; 
+    
+    public void setModele(ClasseModele cm) {
+
+        this.cm = cm;
+    }
+
     public rechAttrib() {
         initComponents();
+        this.setBackground(Color.ORANGE);
+    }
+
+    public void initPanel() {
+
+       attributions = new ArrayList<>(cm.toutesLesAttributions());
+
+        listAtt.removeAllItems();
+
+        attributions.forEach((a) -> {
+            listAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de la classe : " + a.getEnseignant().getMatricule());
+        });
     }
 
     /**
@@ -28,7 +57,7 @@ public class rechAttrib extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        listAtt = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -37,8 +66,8 @@ public class rechAttrib extends javax.swing.JPanel {
         jLabel1.setText("Sélectionner l'attribution parmis la liste");
         add(jLabel1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1);
+        listAtt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(listAtt);
 
         jButton1.setText("Modifier");
         add(jButton1);
@@ -51,7 +80,7 @@ public class rechAttrib extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> listAtt;
     // End of variables declaration//GEN-END:variables
 }

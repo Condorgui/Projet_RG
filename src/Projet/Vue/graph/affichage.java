@@ -11,6 +11,8 @@ import Projet.Metier.Enseignant;
 import java.util.*;
 import Projet.Modele.ClasseModele;
 import java.awt.Color;
+import java.util.function.Consumer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,15 +21,7 @@ import java.awt.Color;
 public class affichage extends javax.swing.JPanel {
 
     public List<Enseignant> enseignants;
-
-    /**
-     * Liste de toutes les classes
-     */
     public List<Classe> classes;
-
-    /**
-     * Listes des attributions
-     */
     public List<Attribution> attributions;
 
     /**
@@ -41,9 +35,10 @@ public class affichage extends javax.swing.JPanel {
     }
 
     public affichage() {
-        
+
         initComponents();
         this.setBackground(Color.ORANGE);
+ 
     }
 
     /**
@@ -102,7 +97,6 @@ public class affichage extends javax.swing.JPanel {
         jLabel1.setText("Affichage des enseignants : ");
         add(jLabel1);
 
-        listeEns.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listeEns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listeEnsActionPerformed(evt);
@@ -114,6 +108,11 @@ public class affichage extends javax.swing.JPanel {
         add(jLabel2);
 
         listClasses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listClasses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listClassesActionPerformed(evt);
+            }
+        });
         add(listClasses);
 
         jLabel4.setText("Affichage des attributions :");
@@ -124,36 +123,41 @@ public class affichage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listeEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeEnsActionPerformed
-        
+
 
     }//GEN-LAST:event_listeEnsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void listClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listClassesActionPerformed
+ 
+    }//GEN-LAST:event_listClassesActionPerformed
     public void initPanel() {
 
-        classes = new ArrayList<>(cm.toutesLesClasses);
-        enseignants = new ArrayList<>(cm.tousLesEns);
-        attributions = new ArrayList<>(cm.toutesLesAttributions);
+        classes = new ArrayList<>(cm.toutesClasses());
+        enseignants = new ArrayList<>(cm.tousEns());
+        attributions = new ArrayList<>(cm.toutesLesAttributions());
 
         listeEns.removeAllItems();
         listClasses.removeAllItems();
         ListAtt.removeAllItems();
 
-        enseignants.forEach((e) -> {
-            listeEns.addItem("Enseignant " + e.getMatricule() + " nom : " + e.getNom() + " prenom : " + e.getPrenom() + "" + " adresse mail " + e.getMail() + " titulaire " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
+        enseignants.forEach((Enseignant e) -> {
+            listeEns.addItem(e.getNom() + " "+  e.getPrenom() + " au matricule "+e.getMatricule()+ ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
         });
 
         classes.forEach((c) -> {
-            listClasses.addItem("Classe : " + c.getSigle() + " année : " + c.getAnnee() + " orientation : " + c.getOrientation());
+            listClasses.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
         });
         attributions.forEach((a) -> {
-            ListAtt.addItem("Attribution : " + a.getClasse().getSigle() + " " + a.getEnseignant().getMatricule());
+            ListAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de la classe : " + a.getEnseignant().getMatricule());
         });
+       
 
-     
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ListAtt;

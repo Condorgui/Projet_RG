@@ -6,6 +6,10 @@
 package Projet.Vue.graph.classe;
 
 import Projet.Modele.ClasseModele;
+import java.awt.Color;
+import java.util.ArrayList;
+import Projet.Metier.Classe;
+import java.util.List;
 
 /**
  *
@@ -13,15 +17,30 @@ import Projet.Modele.ClasseModele;
  */
 public class rechClasse extends javax.swing.JPanel {
 
-      private ClasseModele cm;
+    private ClasseModele cm;
+
+    public List<Classe> classes;
 
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;
     }
-    
+
     public rechClasse() {
         initComponents();
+        this.setBackground(Color.ORANGE);
+    }
+
+    public void initPanel() {
+
+        classes = new ArrayList<>(cm.toutesClasses());
+
+        listClasse.removeAllItems();
+
+        classes.forEach((c) -> {
+            listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+        });
+
     }
 
     /**
@@ -34,7 +53,7 @@ public class rechClasse extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        listClasse = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -43,8 +62,8 @@ public class rechClasse extends javax.swing.JPanel {
         jLabel1.setText("Sélectionner la classe parmis la liste");
         add(jLabel1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1);
+        listClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(listClasse);
 
         jButton1.setText("Modifier");
         add(jButton1);
@@ -58,7 +77,7 @@ public class rechClasse extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> listClasse;
     // End of variables declaration//GEN-END:variables
 }

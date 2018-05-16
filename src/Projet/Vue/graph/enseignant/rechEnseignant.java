@@ -7,6 +7,7 @@ package Projet.Vue.graph.enseignant;
 
 import Projet.Metier.Enseignant;
 import Projet.Modele.ClasseModele;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,19 +31,19 @@ public class rechEnseignant extends javax.swing.JPanel {
     
     public rechEnseignant() {
         initComponents();
+        this.setBackground(Color.ORANGE);
     }
     
     public void initPanel() {
 
 
-        enseignants = new ArrayList<>(cm.tousLesEns);
+        enseignants = new ArrayList<>(cm.tousEns());
 
         listEns.removeAllItems();  
 
         enseignants.forEach((e) -> {
-            listEns.addItem("Enseignant " + e.getMatricule() + " nom : " + e.getNom() + " prenom : " + e.getPrenom() + "" + " adresse mail " + e.getMail() + " titulaire " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
+            listEns.addItem(e.getNom() + " "+  e.getPrenom() + " au matricule "+e.getMatricule()+ ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
         });
-
       
 
      
