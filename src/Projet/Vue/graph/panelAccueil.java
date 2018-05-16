@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package Projet.Vue.graph;
-
+import Projet.Vue.graph.*;
+import java.awt.Color;
 /**
  *
  * @author Guillaume.Rigaux
@@ -16,6 +17,8 @@ public class panelAccueil extends javax.swing.JPanel {
      */
     public panelAccueil() {
         initComponents();
+        this.setBackground(Color.RED);
+  
     }
 
     /**

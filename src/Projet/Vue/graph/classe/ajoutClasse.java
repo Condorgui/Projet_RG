@@ -28,6 +28,7 @@ public class ajoutClasse extends javax.swing.JPanel {
      */
     public ajoutClasse() {
         initComponents();
+        this.setBackground(Color.ORANGE);
     }
 
     /**
