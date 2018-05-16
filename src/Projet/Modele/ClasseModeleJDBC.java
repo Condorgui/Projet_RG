@@ -572,27 +572,42 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         //nvClasse = la nouvelle classe 
         //tmpC = l'ancienne classe à modifier 
-        String query = "update enseignant set MATRICULE = ?, NOM = ? , PRENOM = ?, MAIL = ? where MATRICULE = ?";
-
-        String msg;
-        String matricule = nvEns.getMatricule();
-        String nom = nvEns.getNom();
-        String prenom = nvEns.getPrenom();
-        String mail = nvEns.getMail();
-
+        String query = "update ATTRIBUTION set MATRICULE = ?, SIGLE = ? where MATRICULE = ? AND SIGLE = ?";
+        PreparedStatement pst = null; 
+        String msg; 
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-
-            pstm.setString(1, matricule);
-            pstm.setString(2, nom);
-            pstm.setString(3, prenom);
-            pstm.setString(4, mail);
-            pstm.setString(5, tmpE.getMatricule());
+            String mat = nvA.getEnseignant().getMatricule();
+            String sigle = nvA.getClasse().getSigle();
+            String ancMat = tmpA.getEnseignant().getMatricule();
+            String ancSigle = tmpA.getClasse().getSigle();
+            pstm.setString(1, mat);
+            pstm.setString(2, sigle);
+            pstm.setString(3, ancMat);
+            pstm.setString(4, ancSigle);   
             int n = pstm.executeUpdate();
+            pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
+            pstm.setString(1, ancMat); 
+            n = pstm.executeUpdate(); 
             if (n == 1) {
-                msg = "changement d'enseignant effectué";
+                msg = "Enseignant remis à 0 ";
             } else {
-                msg = "changement d'enseignant non effectué";
+                msg = "Erreur modif attribution";
             }
+            pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
+            pstm.setString(1, ancMat); 
+            n = pstm.executeUpdate(); 
+            if (n == 1) {
+                msg = "Enseignant remis à 0 ";
+            } else {
+                msg = "Erreur modif attribution";
+            }
+            
+            
+            
+            
+            
+            
+            
 
         } catch (SQLIntegrityConstraintViolationException pk) {
             return "Erreur de PK" + pk;
