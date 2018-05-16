@@ -5,15 +5,26 @@
  */
 package Projet.Vue.graph.attribution;
 
+import Projet.Metier.Enseignant;
+import Projet.Modele.ClasseModele;
+import java.util.List;
+
 /**
  *
  * @author Guillaume.Rigaux
  */
 public class ajoutAttrib extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ajoutAttrib
-     */
+     public List<Enseignant> enseignants;
+    
+    private ClasseModele cm;
+
+    public void setModele(ClasseModele cm) {
+
+        this.cm = cm;
+    }
+    
+  
     public ajoutAttrib() {
         initComponents();
     }

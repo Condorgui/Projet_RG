@@ -114,11 +114,6 @@ public class affichage extends javax.swing.JPanel {
         add(jLabel2);
 
         listClasses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listClasses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listClassesActionPerformed(evt);
-            }
-        });
         add(listClasses);
 
         jLabel4.setText("Affichage des attributions :");
@@ -136,10 +131,6 @@ public class affichage extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void listClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listClassesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listClassesActionPerformed
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesLesClasses);
@@ -161,6 +152,7 @@ public class affichage extends javax.swing.JPanel {
             ListAtt.addItem("Attribution : " + a.getClasse().getSigle() + " " + a.getEnseignant().getMatricule());
         });
 
+     
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
