@@ -103,6 +103,7 @@ public class ajoutEnseignant extends javax.swing.JPanel {
         matEns.setBackground(Color.white);
 
         boolean erreur = false;
+        boolean erreurmail = false; 
         String nom = nomEns.getText();
         if (nom.trim().equals("")) {
             erreur = true;
@@ -117,21 +118,25 @@ public class ajoutEnseignant extends javax.swing.JPanel {
         if (mail.trim().equals("")) {
             erreur = true;
             mailEns.setBackground(Color.red);
+        } else if (!mail.matches("^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[A-Za-z]{2,3}$")) {
+            erreurmail = true;
+            mailEns.setBackground(Color.red);
         }
-        String mat = matEns.getText();
+        String mat = matEns.getText().toUpperCase();
         if (mat.trim().equals("")) {
             erreur = true;
             matEns.setBackground(Color.red);
         }
 
-        if (!erreur) {
+        if (!erreur && !erreurmail) {
             Enseignant e = new Enseignant(mat, nom, prenom, mail);
             //JOptionPane.showMessageDialog(this, e);
             String msg = cm.ajouterEnseignant(e);
             JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
-
+        } 
+         else {
+            if(erreur) JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+            if(erreurmail) JOptionPane.showMessageDialog(this, "L'adresse mail doit être au format text@domaine.com", "Erreur du mail", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

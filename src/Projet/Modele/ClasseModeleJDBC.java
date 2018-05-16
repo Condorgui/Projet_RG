@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import myconnections.DBConnection;
 import Projet.Metier.*;
-import java.sql.CallableStatement;
 import java.sql.*;
 
 /**
@@ -568,4 +567,38 @@ public class ClasseModeleJDBC extends ClasseModele {
         return "Erreur de suppression";
     }
 
+    @Override
+    public String modifyA(Attribution nvA, Attribution tmpA) {
+
+        //nvClasse = la nouvelle classe 
+        //tmpC = l'ancienne classe à modifier 
+        String query = "update enseignant set MATRICULE = ?, NOM = ? , PRENOM = ?, MAIL = ? where MATRICULE = ?";
+
+        String msg;
+        String matricule = nvEns.getMatricule();
+        String nom = nvEns.getNom();
+        String prenom = nvEns.getPrenom();
+        String mail = nvEns.getMail();
+
+        try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+
+            pstm.setString(1, matricule);
+            pstm.setString(2, nom);
+            pstm.setString(3, prenom);
+            pstm.setString(4, mail);
+            pstm.setString(5, tmpE.getMatricule());
+            int n = pstm.executeUpdate();
+            if (n == 1) {
+                msg = "changement d'enseignant effectué";
+            } else {
+                msg = "changement d'enseignant non effectué";
+            }
+
+        } catch (SQLIntegrityConstraintViolationException pk) {
+            return "Erreur de PK" + pk;
+        } catch (SQLException e) {
+            msg = "erreur " + e;
+        }
+        return msg;
+    }
 }
