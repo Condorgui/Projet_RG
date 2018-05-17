@@ -10,7 +10,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
-
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
@@ -39,10 +38,9 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         ajoutAttrib2.initPanel();
         rechAttrib5.setModele(cm);
         rechAttrib5.initPanel();
-        
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Projet Java");
-     
 
     }
 
@@ -85,17 +83,16 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         ajoutAttrib2 = new Projet.Vue.graph.attribution.ajoutAttrib();
         rechAttrib5 = new Projet.Vue.graph.attribution.rechAttrib();
         jMenuBar1 = new javax.swing.JMenuBar();
-        MenuEnseignant = new javax.swing.JMenu();
+        MenuAjout = new javax.swing.JMenu();
         ajoutEnseignant = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        MenuClasse = new javax.swing.JMenu();
-        ajoutclasse = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        MenuAttributions = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        ajoutClasse = new javax.swing.JMenuItem();
+        ajoutAtt = new javax.swing.JMenuItem();
+        MenuModif = new javax.swing.JMenu();
+        modifEns = new javax.swing.JMenuItem();
+        modifClasse = new javax.swing.JMenuItem();
+        modifAtt = new javax.swing.JMenuItem();
         affichage = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        affListe = new javax.swing.JMenuItem();
 
         jLabel1.setText("jLabel1");
 
@@ -155,82 +152,78 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         getContentPane().add(ajoutAttrib2, "card8");
         getContentPane().add(rechAttrib5, "card9");
 
-        MenuEnseignant.setText(" Enseignants");
+        MenuAjout.setText("Ajout");
 
         ajoutEnseignant.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone.png")); // NOI18N
-        ajoutEnseignant.setText("Ajout");
+        ajoutEnseignant.setText("Enseignant");
         ajoutEnseignant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ajoutEnseignantActionPerformed(evt);
             }
         });
-        MenuEnseignant.add(ajoutEnseignant);
+        MenuAjout.add(ajoutEnseignant);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
-        jMenuItem2.setText("Recherche");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        ajoutClasse.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone3.png")); // NOI18N
+        ajoutClasse.setText("Classe");
+        ajoutClasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                ajoutClasseActionPerformed(evt);
             }
         });
-        MenuEnseignant.add(jMenuItem2);
+        MenuAjout.add(ajoutClasse);
 
-        jMenuBar1.add(MenuEnseignant);
-
-        MenuClasse.setText(" Classes");
-
-        ajoutclasse.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone3.png")); // NOI18N
-        ajoutclasse.setText("Ajout");
-        ajoutclasse.addActionListener(new java.awt.event.ActionListener() {
+        ajoutAtt.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone4.png")); // NOI18N
+        ajoutAtt.setText("Attributions");
+        ajoutAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ajoutclasseActionPerformed(evt);
+                ajoutAttActionPerformed(evt);
             }
         });
-        MenuClasse.add(ajoutclasse);
+        MenuAjout.add(ajoutAtt);
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
-        jMenuItem5.setText("Recherche");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(MenuAjout);
+
+        MenuModif.setText("Modifications");
+
+        modifEns.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
+        modifEns.setText("Enseignants");
+        modifEns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                modifEnsActionPerformed(evt);
             }
         });
-        MenuClasse.add(jMenuItem5);
+        MenuModif.add(modifEns);
 
-        jMenuBar1.add(MenuClasse);
-
-        MenuAttributions.setText("Attributions");
-
-        jMenuItem7.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone4.png")); // NOI18N
-        jMenuItem7.setText("Ajout");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        modifClasse.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
+        modifClasse.setText("Classe");
+        modifClasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                modifClasseActionPerformed(evt);
             }
         });
-        MenuAttributions.add(jMenuItem7);
+        MenuModif.add(modifClasse);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
-        jMenuItem3.setText("Recherche");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        modifAtt.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
+        modifAtt.setText("Attribution");
+        modifAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                modifAttActionPerformed(evt);
             }
         });
-        MenuAttributions.add(jMenuItem3);
+        MenuModif.add(modifAtt);
 
-        jMenuBar1.add(MenuAttributions);
+        jMenuBar1.add(MenuModif);
 
         affichage.setText("Affichages");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone5.png")); // NOI18N
-        jMenuItem1.setText("Affichage des listes");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        affListe.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone5.png")); // NOI18N
+        affListe.setText("Affichage des listes");
+        affListe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                affListeActionPerformed(evt);
             }
         });
-        affichage.add(jMenuItem1);
+        affichage.add(affListe);
 
         jMenuBar1.add(affichage);
 
@@ -239,15 +232,15 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ajoutclasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutclasseActionPerformed
+    private void modifEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifEnsActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(this.getContentPane(), "card3");
-    }//GEN-LAST:event_ajoutclasseActionPerformed
+        cardLayout.show(this.getContentPane(), "card6");
+    }//GEN-LAST:event_modifEnsActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void modifClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifClasseActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card7");
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_modifClasseActionPerformed
 
     private void boutonentrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonentrerActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
@@ -255,30 +248,30 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Bienvenue", "Résultat", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_boutonentrerActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(this.getContentPane(), "card6");
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void affListeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_affListeActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card5");
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(this.getContentPane(), "card8");
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(this.getContentPane(), "card9");
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_affListeActionPerformed
 
     private void ajoutEnseignantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutEnseignantActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card2");
     }//GEN-LAST:event_ajoutEnseignantActionPerformed
+
+    private void ajoutClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutClasseActionPerformed
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(this.getContentPane(), "card3");
+    }//GEN-LAST:event_ajoutClasseActionPerformed
+
+    private void ajoutAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutAttActionPerformed
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(this.getContentPane(), "card8");
+    }//GEN-LAST:event_ajoutAttActionPerformed
+
+    private void modifAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifAttActionPerformed
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(this.getContentPane(), "card9");        // TODO add your handling code here:
+    }//GEN-LAST:event_modifAttActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,22 +307,23 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MenuAttributions;
-    private javax.swing.JMenu MenuClasse;
-    private javax.swing.JMenu MenuEnseignant;
+    private javax.swing.JMenu MenuAjout;
+    private javax.swing.JMenu MenuModif;
     private javax.swing.JPanel accueil;
+    private javax.swing.JMenuItem affListe;
     private javax.swing.JMenu affichage;
     private Projet.Vue.graph.affichage affichage1;
     private Projet.Vue.graph.affichage affichage2;
     private Projet.Vue.graph.affichage affichage3;
+    private javax.swing.JMenuItem ajoutAtt;
     private Projet.Vue.graph.attribution.ajoutAttrib ajoutAttrib1;
     private Projet.Vue.graph.attribution.ajoutAttrib ajoutAttrib2;
     private Projet.Vue.graph.attribution.ajoutAttrib ajoutAttrib3;
     private Projet.Vue.graph.attribution.ajoutAttrib ajoutAttrib4;
+    private javax.swing.JMenuItem ajoutClasse;
     private Projet.Vue.graph.classe.ajoutClasse ajoutClasse1;
     private javax.swing.JMenuItem ajoutEnseignant;
     private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant1;
-    private javax.swing.JMenuItem ajoutclasse;
     private javax.swing.JButton boutonentrer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -337,16 +331,14 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JMenuItem modifAtt;
+    private javax.swing.JMenuItem modifClasse;
+    private javax.swing.JMenuItem modifEns;
     private Projet.Vue.graph.panelAccueil panelAccueil1;
     private Projet.Vue.graph.attribution.rechAttrib rechAttrib1;
     private Projet.Vue.graph.attribution.rechAttrib rechAttrib2;

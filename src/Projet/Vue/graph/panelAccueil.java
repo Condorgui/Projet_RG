@@ -16,7 +16,7 @@ import javax.swing.JLabel;
  */
 public class panelAccueil extends javax.swing.JPanel {
 
-    private JLabel logo;
+    private final JLabel logo;
 
     /**
      * Creates new form panelAccueil
@@ -26,8 +26,7 @@ public class panelAccueil extends javax.swing.JPanel {
         logo = new JLabel();
 
         logo.setIcon(new ImageIcon(getClass().getResource("/Images/logo1.png")));
-
-        add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 150, 160));
+        add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 130, 10));
 
     }
 

@@ -102,10 +102,10 @@ public class ajoutAttrib extends javax.swing.JPanel {
             }
         });
 
+        
         classes.forEach((c) -> {
-
-            listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
-
+          
+                 listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
         });
 
     }

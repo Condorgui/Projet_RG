@@ -38,7 +38,7 @@ public class affichage extends javax.swing.JPanel {
 
         initComponents();
         this.setBackground(Color.ORANGE);
- 
+
     }
 
     /**
@@ -132,7 +132,7 @@ public class affichage extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void listClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listClassesActionPerformed
- 
+
     }//GEN-LAST:event_listClassesActionPerformed
     public void initPanel() {
 
@@ -145,16 +145,19 @@ public class affichage extends javax.swing.JPanel {
         ListAtt.removeAllItems();
 
         enseignants.forEach((Enseignant e) -> {
-            listeEns.addItem(e.getNom() + " "+  e.getPrenom() + " au matricule "+e.getMatricule()+ ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
+            listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
         });
 
+        /* for (Classe c : classes){
+            listClasses.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+        };
+         */
         classes.forEach((c) -> {
             listClasses.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
         });
         attributions.forEach((a) -> {
             ListAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de la classe : " + a.getEnseignant().getMatricule());
         });
-       
 
     }
 
