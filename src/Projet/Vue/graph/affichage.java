@@ -60,12 +60,17 @@ public class affichage extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         listeEns = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         listClasses = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         ListAtt = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -91,6 +96,26 @@ public class affichage extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jList3.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList3);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable1);
 
         setLayout(new java.awt.GridLayout(6, 2, 5, 5));
 
@@ -120,6 +145,14 @@ public class affichage extends javax.swing.JPanel {
 
         ListAtt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(ListAtt);
+
+        jButton2.setText("Actualiser");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
     }// </editor-fold>//GEN-END:initComponents
 
     private void listeEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeEnsActionPerformed
@@ -134,6 +167,11 @@ public class affichage extends javax.swing.JPanel {
     private void listClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listClassesActionPerformed
 
     }//GEN-LAST:event_listClassesActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        initPanel(); 
+    }//GEN-LAST:event_jButton2ActionPerformed
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());
@@ -165,6 +203,7 @@ public class affichage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ListAtt;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -172,11 +211,15 @@ public class affichage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> listClasses;
     private javax.swing.JComboBox<String> listeEns;
     // End of variables declaration//GEN-END:variables

@@ -13,6 +13,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 
 /**
@@ -67,6 +68,11 @@ public class ajoutAttrib extends javax.swing.JPanel {
         add(listEns);
 
         btnTitu.setText("Titulaire");
+        btnTitu.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                btnTituStateChanged(evt);
+            }
+        });
         btnTitu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTituActionPerformed(evt);
@@ -75,6 +81,11 @@ public class ajoutAttrib extends javax.swing.JPanel {
         add(btnTitu);
 
         btnRemp.setText("Remplacant");
+        btnRemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRempActionPerformed(evt);
+            }
+        });
         add(btnRemp);
 
         jLabel3.setText("Liste des classes");
@@ -173,6 +184,14 @@ public class ajoutAttrib extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTituActionPerformed
 
+    private void btnRempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRempActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRempActionPerformed
+
+    private void btnTituStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnTituStateChanged
+     
+    }//GEN-LAST:event_btnTituStateChanged
+
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());
@@ -182,7 +201,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
         listEns.removeAllItems();
         listClasse.removeAllItems();
 
-        enseignants.forEach((e) -> {
+        enseignants.forEach((Enseignant e) -> {
             if (e.getTitulaire() == null) {
                 listEns.addItem(e);
             }

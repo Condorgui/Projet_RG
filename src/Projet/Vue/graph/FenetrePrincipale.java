@@ -39,7 +39,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         ajoutAttrib2.initPanel();
         rechAttrib5.setModele(cm);
         rechAttrib5.initPanel();
-
+        
         setTitle("Projet Java");
 
 
