@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
+import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -171,10 +172,13 @@ public class rechClasse extends javax.swing.JPanel {
         Object cla = listClasse.getSelectedItem();
         Classe aRech = cm.getClasse((Classe) cla);
         Classe tmpC = cm.getClasse(aRech);
-        
-        String msg = cm.deleteCl(tmpC);
+        try {
+            String msg = cm.deleteCl(tmpC);
+            JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Erreur de suppression", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+        }
 
-        JOptionPane.showMessageDialog(this, msg, "Erreur", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_deleteActionPerformed
 
 

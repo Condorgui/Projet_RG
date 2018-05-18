@@ -205,7 +205,7 @@ public class affichage extends javax.swing.JPanel {
         ListAtt.removeAllItems();
 
         enseignants.forEach((Enseignant e) -> {
-            listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + "  ||  titulaire : " + e.getTitulaire() + " || remplacant : " + e.getRemplacant());
+            listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " \n  TITULAIRE : " + e.getTitulaire() + " \n  REMPLACANT : " + e.getRemplacant());
         });
 
         /* for (Classe c : classes){

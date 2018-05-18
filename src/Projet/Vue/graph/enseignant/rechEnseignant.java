@@ -9,6 +9,7 @@ import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
 import Projet.Modele.ClasseModele;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -155,9 +156,15 @@ public class rechEnseignant extends javax.swing.JPanel {
         Enseignant eRech = cm.getEnseignant((Enseignant) ens);
         Enseignant tmpE = cm.getEnseignant(eRech);
 
-        String msg = cm.deleteE(tmpE);
+        try {
+            String msg = cm.deleteE(tmpE);
 
-        JOptionPane.showMessageDialog(this, msg, "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Erreur de suppression", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
 
 
     }//GEN-LAST:event_SupprimerActionPerformed

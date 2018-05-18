@@ -10,6 +10,7 @@ import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
 import Projet.Modele.ClasseModele;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -86,7 +87,7 @@ public class rechAttrib extends javax.swing.JPanel {
         btnRemp = new javax.swing.JCheckBox();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        suppression = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(13, 3));
 
@@ -134,8 +135,13 @@ public class rechAttrib extends javax.swing.JPanel {
         });
         add(jButton1);
 
-        jButton2.setText("Supprimer");
-        add(jButton2);
+        suppression.setText("Supprimer");
+        suppression.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suppressionActionPerformed(evt);
+            }
+        });
+        add(suppression);
     }// </editor-fold>//GEN-END:initComponents
 
     private void listAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listAttActionPerformed
@@ -159,13 +165,12 @@ public class rechAttrib extends javax.swing.JPanel {
         Object att = listAtt.getSelectedItem();
         Attribution attri = cm.getAttribution((Attribution) att);
         Enseignant eAtt = attri.getEnseignant();
-        
-        
+
         boolean error = false;
 
         if (btnTitu.isSelected()) {
             for (Attribution a : attributions) {
-  
+
                 if (eAtt.getTitulaire() != null) {
                     if (eAtt.getTitulaire().equals(nvClasse)) {
                         error = true;
@@ -175,13 +180,14 @@ public class rechAttrib extends javax.swing.JPanel {
 
             }
             if (!error) {
+                eRech.setTitulaire(null);
                 nvEns.setTitulaire(nvClasse);
-                eAtt.setTitulaire(classe);
+
             }
         } else if (btnRemp.isSelected()) {
-
+            eRech.setRemplacant(null);
             nvEns.setRemplacant(nvClasse);
-            eAtt.setRemplacant(null);
+
         } else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
 
             error = true;
@@ -189,7 +195,7 @@ public class rechAttrib extends javax.swing.JPanel {
 
         }
         if (!error) {
-            Attribution nvAttribution = new Attribution(nvClasse,nvEns); 
+            Attribution nvAttribution = new Attribution(nvClasse, nvEns);
             String msg = cm.modifyA(nvAttribution, attri);
 
             JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE
@@ -198,12 +204,26 @@ public class rechAttrib extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void suppressionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppressionActionPerformed
+        Object att = listAtt.getSelectedItem();
+        Attribution attri = cm.getAttribution((Attribution) att);
+
+        try {
+            String msg = cm.deleteA(attri);
+            JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Erreur de suppression", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+
+    }//GEN-LAST:event_suppressionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox btnRemp;
     private javax.swing.JCheckBox btnTitu;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -213,5 +233,6 @@ public class rechAttrib extends javax.swing.JPanel {
     private javax.swing.JComboBox<Attribution> listAtt;
     private javax.swing.JComboBox<Classe> listClasse;
     private javax.swing.JComboBox<Enseignant> listEnseignant;
+    private javax.swing.JButton suppression;
     // End of variables declaration//GEN-END:variables
 }
