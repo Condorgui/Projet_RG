@@ -121,8 +121,9 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
             enseignant.setRemplacant(classe);
         } else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
+            
             error = true;
-            JOptionPane.showMessageDialog(this, "Sélectionner le statut ", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
         if (!error) {
