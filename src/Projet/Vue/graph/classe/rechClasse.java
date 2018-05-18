@@ -9,6 +9,7 @@ import Projet.Modele.ClasseModele;
 import java.awt.Color;
 import java.util.ArrayList;
 import Projet.Metier.Classe;
+import Projet.Metier.Enseignant;
 import java.util.List;
 
 /**
@@ -34,11 +35,12 @@ public class rechClasse extends javax.swing.JPanel {
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());
-
+        classes = new ArrayList<>(cm.toutesClasses());
         listClasse.removeAllItems();
 
         classes.forEach((c) -> {
-            listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+
+            listClasse.addItem(c);
         });
 
     }
@@ -62,7 +64,6 @@ public class rechClasse extends javax.swing.JPanel {
         jLabel1.setText("Sélectionner la classe parmis la liste");
         add(jLabel1);
 
-        listClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listClasse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listClasseMouseClicked(evt);
@@ -76,6 +77,11 @@ public class rechClasse extends javax.swing.JPanel {
         add(listClasse);
 
         jButton1.setText("Modifier");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1);
 
         jButton2.setText("Supprimer");
@@ -91,11 +97,18 @@ public class rechClasse extends javax.swing.JPanel {
         initPanel();
     }//GEN-LAST:event_listClasseMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Object cla = listClasse.getSelectedItem();
+        Classe classe = cm.getClasse((Classe) cla);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JComboBox<String> listClasse;
+    private javax.swing.JComboBox<Classe> listClasse;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,6 +25,11 @@
     </Component>
     <Component class="java.awt.Choice" name="choice1">
     </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel6"/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -40,8 +45,8 @@
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-    <Property name="columns" type="int" value="1"/>
-    <Property name="rows" type="int" value="4"/>
+    <Property name="columns" type="int" value="3"/>
+    <Property name="rows" type="int" value="6"/>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -68,15 +73,61 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JLabel" name="nvNom">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Entrez le nouveau nom : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="nomEns">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nvPren">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Entrez le nouveau pr&#xe9;nom : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="prenomEns">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nvMat">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Entrez le matricule :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="matEns">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nvMail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Entrez l&apos;adresse e-mail"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="mailEns">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField4"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="modif">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modifier"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Supprimer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Supprimer"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SupprimerActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
