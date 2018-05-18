@@ -119,7 +119,7 @@ public class ajoutClasse extends javax.swing.JPanel {
         anneeClasse.setBackground(Color.white);
 
         boolean erreur = false;
-        String sigle = sigleClasse.getText();
+        String sigle = sigleClasse.getText().toUpperCase();
         if (sigle.trim().equals("")) {
             erreur = true;
             sigleClasse.setBackground(Color.red);

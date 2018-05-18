@@ -43,7 +43,7 @@ public class rechEnseignant extends javax.swing.JPanel {
         listEns.removeAllItems();
 
         enseignants.forEach((e) -> {
-            listEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
+            listEns.addItem(e);
         });
 
     }
@@ -91,7 +91,6 @@ public class rechEnseignant extends javax.swing.JPanel {
         jLabel3.setText("Sélectionner l'enseignant parmis la liste");
         add(jLabel3);
 
-        listEns.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listEns.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listEnsMouseClicked(evt);
@@ -107,25 +106,23 @@ public class rechEnseignant extends javax.swing.JPanel {
         nvNom.setText("Entrez le nouveau nom : ");
         add(nvNom);
 
-        nomEns.setText("jTextField1");
+        nomEns.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomEnsActionPerformed(evt);
+            }
+        });
         add(nomEns);
 
         nvPren.setText("Entrez le nouveau prénom : ");
         add(nvPren);
-
-        prenomEns.setText("jTextField2");
         add(prenomEns);
 
         nvMat.setText("Entrez le matricule :");
         add(nvMat);
-
-        matEns.setText("jTextField3");
         add(matEns);
 
         nvMail.setText("Entrez l'adresse e-mail");
         add(nvMail);
-
-        mailEns.setText("jTextField4");
         add(mailEns);
 
         modif.setText("Modifier");
@@ -157,11 +154,18 @@ public class rechEnseignant extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_SupprimerActionPerformed
 
-   
+
     private void modifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifActionPerformed
+
+        Object ens = listEns.getSelectedItem();
+        Enseignant eRech = cm.getEnseignant((Enseignant) ens);
+        Enseignant tmpE = cm.getEnseignant(eRech);
+       
 
         boolean erreur = false;
         boolean erreurmail = false;
+        
+ 
         String nom = nomEns.getText();
         if (nom.trim().equals("")) {
             erreur = true;
@@ -187,9 +191,12 @@ public class rechEnseignant extends javax.swing.JPanel {
         }
 
         if (!erreur && !erreurmail) {
-            //JOptionPane.showMessageDialog(this, e);
-          //  String msg = cm.modifyE(ens,newEns);
-         //   JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+
+            Enseignant newEns = new Enseignant(mat, nom, prenom, mail);
+            //JOptionPane.showMessageDialog(this, newEns, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(this, e, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+            String msg = cm.modifyE(newEns,tmpE);
+            JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (erreur) {
                 JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -201,9 +208,10 @@ public class rechEnseignant extends javax.swing.JPanel {
 
     }//GEN-LAST:event_modifActionPerformed
 
-    public void modif() {
+    private void nomEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomEnsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomEnsActionPerformed
 
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Modifier;
@@ -216,7 +224,7 @@ public class rechEnseignant extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JComboBox<String> listEns;
+    private javax.swing.JComboBox<Enseignant> listEns;
     private javax.swing.JTextField mailEns;
     private javax.swing.JTextField matEns;
     private javax.swing.JButton modif;

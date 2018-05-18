@@ -57,12 +57,7 @@
     <Component class="javax.swing.JComboBox" name="listEns">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
@@ -70,7 +65,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listEnsActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Enseignant&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="nvNom">
@@ -79,9 +74,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nomEns">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomEnsActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nvPren">
       <Properties>
@@ -89,9 +84,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="prenomEns">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="nvMat">
       <Properties>
@@ -99,9 +91,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="matEns">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="nvMail">
       <Properties>
@@ -109,9 +98,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="mailEns">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="modif">
       <Properties>
