@@ -12,6 +12,7 @@ import Projet.Modele.ClasseModele;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,10 +23,12 @@ public class rechAttrib extends javax.swing.JPanel {
     /**
      * Creates new form rechAttrib
      */
+    public List<Enseignant> enseignants;
+    public List<Classe> classes;
     public List<Attribution> attributions;
-    
-    private ClasseModele cm; 
-    
+
+    private ClasseModele cm;
+
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;
@@ -38,13 +41,28 @@ public class rechAttrib extends javax.swing.JPanel {
 
     public void initPanel() {
 
-       attributions = new ArrayList<>(cm.toutesLesAttributions());
+        classes = new ArrayList<>(cm.toutesClasses());
+        enseignants = new ArrayList<>(cm.tousEns());
+        attributions = new ArrayList<>(cm.toutesLesAttributions());
 
+        listEnseignant.removeAllItems();
+        listClasse.removeAllItems();
         listAtt.removeAllItems();
 
-        attributions.forEach((a) -> {
-            listAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de la classe : " + a.getEnseignant().getMatricule());
+        enseignants.forEach((Enseignant e) -> {
+            listEnseignant.addItem(e);
         });
+        /* for (Classe c : classes){
+            listClasses.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+        };
+         */
+        classes.forEach((c) -> {
+            listClasse.addItem(c);
+        });
+        attributions.forEach((a) -> {
+            listAtt.addItem(a);
+        });
+
     }
 
     /**
@@ -58,15 +76,23 @@ public class rechAttrib extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         listAtt = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        listClasse = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        listEnseignant = new javax.swing.JComboBox<>();
+        btnTitu = new javax.swing.JCheckBox();
+        btnRemp = new javax.swing.JCheckBox();
+        jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(4, 2));
+        setLayout(new java.awt.GridLayout(13, 3));
 
-        jLabel1.setText("Sélectionner l'attribution parmis la liste");
+        jLabel1.setText("Sélectionner l'attribution à modifier parmis la liste :");
         add(jLabel1);
 
-        listAtt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listAtt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listAttMouseClicked(evt);
@@ -78,8 +104,34 @@ public class rechAttrib extends javax.swing.JPanel {
             }
         });
         add(listAtt);
+        add(jSeparator1);
+
+        jLabel2.setText("Choisissez la nouvelle attribution : ");
+        add(jLabel2);
+
+        jLabel3.setText("Liste des classes : ");
+        add(jLabel3);
+
+        add(listClasse);
+
+        jLabel4.setText("Liste des enseignants : ");
+        add(jLabel4);
+
+        add(listEnseignant);
+
+        btnTitu.setText("Titulaire");
+        add(btnTitu);
+
+        btnRemp.setText("Remplacant");
+        add(btnRemp);
+        add(jSeparator2);
 
         jButton1.setText("Modifier");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1);
 
         jButton2.setText("Supprimer");
@@ -94,11 +146,65 @@ public class rechAttrib extends javax.swing.JPanel {
         //initPanel();
     }//GEN-LAST:event_listAttMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Object ens = listEnseignant.getSelectedItem();
+        Enseignant eRech = cm.getEnseignant((Enseignant) ens);
+        Enseignant tmpE = cm.getEnseignant(eRech);
+        
+        
+        Classe classe = null;
+        Object cla = listClasse.getSelectedItem();
+        Classe aRech = cm.getClasse((Classe) cla);
+        Classe tmpC = cm.getClasse(aRech);
+
+        boolean error = false;
+
+        if (btnTitu.isSelected()) {
+            for (Attribution a : attributions) {
+                Enseignant eAtt = a.getEnseignant();
+                if (eAtt.getTitulaire() != null) {
+                    if (eAtt.getTitulaire().equals(classe)) {
+                        error = true;
+                        JOptionPane.showMessageDialog(this, "Il y a déjà un titulaire attitré", "Titulaire", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+            }
+            if (!error) {
+                tmpE.setTitulaire(classe);
+            }
+        } else if (btnRemp.isSelected()) {
+
+            tmpE.setRemplacant(classe);
+        } else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
+
+            error = true;
+            JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
+        if (!error) {
+            String msg = modifyA(nvA, tmpA);
+
+            JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE
+            );
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox btnRemp;
+    private javax.swing.JCheckBox btnTitu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JComboBox<String> listAtt;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JComboBox<Attribution> listAtt;
+    private javax.swing.JComboBox<Classe> listClasse;
+    private javax.swing.JComboBox<Enseignant> listEnseignant;
     // End of variables declaration//GEN-END:variables
 }
