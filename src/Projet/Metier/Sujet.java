@@ -42,8 +42,8 @@ public abstract class Sujet {
      * @param texte
      */
     public void notifie(String texte){
-        for(Observateur o:observateurs){
+        observateurs.forEach((o) -> {
             o.actualise(texte);
-        }
+        });
     }
 }

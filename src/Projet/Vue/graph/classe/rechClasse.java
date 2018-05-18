@@ -63,6 +63,16 @@ public class rechClasse extends javax.swing.JPanel {
         add(jLabel1);
 
         listClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listClasse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listClasseMouseClicked(evt);
+            }
+        });
+        listClasse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listClasseActionPerformed(evt);
+            }
+        });
         add(listClasse);
 
         jButton1.setText("Modifier");
@@ -72,6 +82,14 @@ public class rechClasse extends javax.swing.JPanel {
         jButton2.setToolTipText("");
         add(jButton2);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listClasseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listClasseActionPerformed
+
+    private void listClasseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClasseMouseClicked
+        initPanel();
+    }//GEN-LAST:event_listClasseMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

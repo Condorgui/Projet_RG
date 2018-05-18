@@ -168,7 +168,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
             error = true;
             JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
-
+            
         }
         if (!error) {
             Attribution a = new Attribution(classe, enseignant);

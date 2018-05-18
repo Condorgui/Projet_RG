@@ -82,6 +82,16 @@ public class rechEnseignant extends javax.swing.JPanel {
         add(jLabel3);
 
         listEns.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listEns.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listEnsMouseClicked(evt);
+            }
+        });
+        listEns.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listEnsActionPerformed(evt);
+            }
+        });
         add(listEns);
 
         jButton1.setText("Modifier");
@@ -90,6 +100,14 @@ public class rechEnseignant extends javax.swing.JPanel {
         Supprimer.setText("Supprimer");
         add(Supprimer);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listEnsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listEnsActionPerformed
+
+    private void listEnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEnsMouseClicked
+        initPanel();
+    }//GEN-LAST:event_listEnsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -38,6 +38,7 @@ public class affichage extends javax.swing.JPanel {
 
         initComponents();
         this.setBackground(Color.ORANGE);
+      
 
     }
 
@@ -70,7 +71,6 @@ public class affichage extends javax.swing.JPanel {
         listClasses = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         ListAtt = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -122,6 +122,11 @@ public class affichage extends javax.swing.JPanel {
         jLabel1.setText("Affichage des enseignants : ");
         add(jLabel1);
 
+        listeEns.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listeEnsMouseClicked(evt);
+            }
+        });
         listeEns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listeEnsActionPerformed(evt);
@@ -133,6 +138,11 @@ public class affichage extends javax.swing.JPanel {
         add(jLabel2);
 
         listClasses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listClasses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listClassesMouseClicked(evt);
+            }
+        });
         listClasses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listClassesActionPerformed(evt);
@@ -144,19 +154,20 @@ public class affichage extends javax.swing.JPanel {
         add(jLabel4);
 
         ListAtt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(ListAtt);
-
-        jButton2.setText("Actualiser");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        ListAtt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListAttMouseClicked(evt);
             }
         });
-        add(jButton2);
+        ListAtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListAttActionPerformed(evt);
+            }
+        });
+        add(ListAtt);
     }// </editor-fold>//GEN-END:initComponents
 
     private void listeEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeEnsActionPerformed
-
 
     }//GEN-LAST:event_listeEnsActionPerformed
 
@@ -168,10 +179,21 @@ public class affichage extends javax.swing.JPanel {
 
     }//GEN-LAST:event_listClassesActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ListAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListAttActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListAttActionPerformed
 
-        initPanel(); 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void listeEnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listeEnsMouseClicked
+        initPanel();
+    }//GEN-LAST:event_listeEnsMouseClicked
+
+    private void listClassesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClassesMouseClicked
+        initPanel();
+    }//GEN-LAST:event_listClassesMouseClicked
+
+    private void ListAttMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListAttMouseClicked
+        initPanel();
+    }//GEN-LAST:event_ListAttMouseClicked
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());
@@ -203,7 +225,6 @@ public class affichage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ListAtt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
