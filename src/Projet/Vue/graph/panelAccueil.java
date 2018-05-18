@@ -24,6 +24,7 @@ public class panelAccueil extends javax.swing.JPanel {
     public panelAccueil() {
         initComponents();
         logo = new JLabel();
+        
 
         logo.setIcon(new ImageIcon(getClass().getResource("/Images/logo1.png")));
         add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 130, 10));

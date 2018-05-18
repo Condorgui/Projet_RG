@@ -50,20 +50,33 @@ public class ajoutAttrib extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         listEns = new javax.swing.JComboBox<>();
+        btnTitu = new javax.swing.JCheckBox();
+        btnRemp = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         listClasse = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        ajoutAttrib = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
         setLayout(new java.awt.GridLayout(5, 5, 4, 33));
 
-        jLabel2.setText("Liste des enseignants");
+        jLabel2.setText("Liste des enseignants disponibles");
         add(jLabel2);
 
         listEns.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(listEns);
+
+        btnTitu.setText("Titulaire");
+        btnTitu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTituActionPerformed(evt);
+            }
+        });
+        add(btnTitu);
+
+        btnRemp.setText("Remplacant");
+        add(btnRemp);
 
         jLabel3.setText("Liste des classes");
         add(jLabel3);
@@ -71,21 +84,54 @@ public class ajoutAttrib extends javax.swing.JPanel {
         listClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(listClasse);
 
-        jButton1.setText("Ajouter");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ajoutAttrib.setText("Ajouter");
+        ajoutAttrib.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ajoutAttribActionPerformed(evt);
             }
         });
-        add(jButton1);
+        add(ajoutAttrib);
 
         jButton2.setText("Annuler");
         add(jButton2);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ajoutAttribActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutAttribActionPerformed
+        
+        Object ens = listEns.getSelectedObjects();
+        Enseignant e = (Enseignant) ens;
+        Enseignant enseignant = cm.getEnseignant(e);
+
+        Object cla = listClasse.getSelectedObjects();
+        Classe c = (Classe) cla;
+        Classe classe = cm.getClasse(c);
+        boolean error = false; 
+        
+        if (btnTitu.isSelected()) {
+
+            enseignant.setTitulaire(classe);
+            enseignant.setRemplacant(null);
+        }else{
+            error = true; 
+        }
+        if(btnRemp.isSelected()){
+            enseignant.setRemplacant(classe);
+        }else{
+            error = true;
+        }
+        if(!error){
+            Attribution a = new Attribution(classe,enseignant); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez  choisir titulaire ou remplaçant", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+    }//GEN-LAST:event_ajoutAttribActionPerformed
+
+    private void btnTituActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTituActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnTituActionPerformed
 
     public void initPanel() {
 
@@ -102,15 +148,16 @@ public class ajoutAttrib extends javax.swing.JPanel {
             }
         });
 
-        
         classes.forEach((c) -> {
-          
-                 listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+
+            listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
         });
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ajoutAttrib;
+    private javax.swing.JCheckBox btnRemp;
+    private javax.swing.JCheckBox btnTitu;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

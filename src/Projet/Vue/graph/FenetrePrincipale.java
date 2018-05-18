@@ -9,6 +9,7 @@ import Projet.Modele.*;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.ImageIcon;
 
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
@@ -39,8 +40,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         rechAttrib5.setModele(cm);
         rechAttrib5.initPanel();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Projet Java");
+
 
     }
 
