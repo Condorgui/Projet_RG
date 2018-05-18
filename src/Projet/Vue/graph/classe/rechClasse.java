@@ -104,6 +104,11 @@ public class rechClasse extends javax.swing.JPanel {
 
         delete.setText("Supprimer");
         delete.setToolTipText("");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
         add(delete);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -160,6 +165,17 @@ public class rechClasse extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_modifActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+
+        Object cla = listClasse.getSelectedItem();
+        Classe aRech = cm.getClasse((Classe) cla);
+        Classe tmpC = cm.getClasse(aRech);
+        
+        String msg = cm.deleteCl(tmpC);
+
+        JOptionPane.showMessageDialog(this, msg, "Erreur", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_deleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
