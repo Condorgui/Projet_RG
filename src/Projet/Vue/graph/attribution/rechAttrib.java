@@ -91,7 +91,7 @@ public class rechAttrib extends javax.swing.JPanel {
     }//GEN-LAST:event_listAttActionPerformed
 
     private void listAttMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listAttMouseClicked
-        initPanel();
+        //initPanel();
     }//GEN-LAST:event_listAttMouseClicked
 
 

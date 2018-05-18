@@ -143,15 +143,23 @@ public class rechEnseignant extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listEnsActionPerformed
-        // TODO add your handling code here:
+        //TODO add your handling code here:
     }//GEN-LAST:event_listEnsActionPerformed
 
     private void listEnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEnsMouseClicked
-        initPanel();
+        //initPanel();
     }//GEN-LAST:event_listEnsMouseClicked
 
     private void SupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupprimerActionPerformed
-        // TODO add your handling code here:
+        Object ens = listEns.getSelectedItem();
+        Enseignant eRech = cm.getEnseignant((Enseignant) ens);
+        Enseignant tmpE = cm.getEnseignant(eRech);
+
+        String msg = cm.deleteE(tmpE);
+
+        JOptionPane.showMessageDialog(this, msg, "Erreur", JOptionPane.ERROR_MESSAGE);
+
+
     }//GEN-LAST:event_SupprimerActionPerformed
 
 
@@ -160,12 +168,10 @@ public class rechEnseignant extends javax.swing.JPanel {
         Object ens = listEns.getSelectedItem();
         Enseignant eRech = cm.getEnseignant((Enseignant) ens);
         Enseignant tmpE = cm.getEnseignant(eRech);
-       
 
         boolean erreur = false;
         boolean erreurmail = false;
-        
- 
+
         String nom = nomEns.getText();
         if (nom.trim().equals("")) {
             erreur = true;
@@ -195,7 +201,7 @@ public class rechEnseignant extends javax.swing.JPanel {
             Enseignant newEns = new Enseignant(mat, nom, prenom, mail);
             //JOptionPane.showMessageDialog(this, newEns, "Résultat", JOptionPane.INFORMATION_MESSAGE);
             //JOptionPane.showMessageDialog(this, e, "Résultat", JOptionPane.INFORMATION_MESSAGE);
-            String msg = cm.modifyE(newEns,tmpE);
+            String msg = cm.modifyE(newEns, tmpE);
             JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (erreur) {

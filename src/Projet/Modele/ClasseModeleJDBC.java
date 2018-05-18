@@ -376,7 +376,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 msg = "Classe non ajoutée ";
             }
         } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK (" + pk + ")";
+            return "Le sigle doit être unique ! ";
         } catch (SQLException ec) {
             return "Erreur d'ajout de la classe " + ec;
         }
@@ -406,7 +406,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 msg = "Enseignant non ajouté ";
             }
         } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK (" + pk + ")";
+            return "Le matricule doit être unique ! ";
         } catch (SQLException ec) {
             return "Erreur d'ajout de l'enseignant" + ec;
         }
@@ -436,7 +436,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
 
         } catch (SQLException e) {
-            msg = "erreur lors de la suppression " + e;
+            msg = "Erreur de suppression! \n Supprimez d'abord les attributions ";
         }
         return msg;
     }
@@ -490,7 +490,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
 
         } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK (" + pk + ")";
+            return "Le sigle doit être unique ! ";
         } catch (SQLException e) {
             msg = "erreur  " + e;
         }
@@ -526,7 +526,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             }
 
         } catch (SQLIntegrityConstraintViolationException pk) {
-            return "Erreur de PK" + pk;
+            return "Le matricule doit être unique !";
         } catch (SQLException e) {
             msg = "erreur " + e;
         }

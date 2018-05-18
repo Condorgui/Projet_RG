@@ -184,15 +184,15 @@ public class affichage extends javax.swing.JPanel {
     }//GEN-LAST:event_ListAttActionPerformed
 
     private void listeEnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listeEnsMouseClicked
-        initPanel();
+       // initPanel();
     }//GEN-LAST:event_listeEnsMouseClicked
 
     private void listClassesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClassesMouseClicked
-        initPanel();
+       // initPanel();
     }//GEN-LAST:event_listClassesMouseClicked
 
     private void ListAttMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListAttMouseClicked
-        initPanel();
+       // initPanel();
     }//GEN-LAST:event_ListAttMouseClicked
     public void initPanel() {
 

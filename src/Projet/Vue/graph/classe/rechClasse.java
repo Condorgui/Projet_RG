@@ -94,7 +94,7 @@ public class rechClasse extends javax.swing.JPanel {
     }//GEN-LAST:event_listClasseActionPerformed
 
     private void listClasseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClasseMouseClicked
-        initPanel();
+        //initPanel();
     }//GEN-LAST:event_listClasseMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -239,11 +239,13 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private void modifEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifEnsActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card6");
+        rechEnseignant1.initPanel();
     }//GEN-LAST:event_modifEnsActionPerformed
 
     private void modifClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifClasseActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card7");
+        rechClasse3.initPanel();
     }//GEN-LAST:event_modifClasseActionPerformed
 
     private void boutonentrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonentrerActionPerformed
@@ -255,6 +257,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private void affListeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_affListeActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card5");
+        affichage3.initPanel();
     }//GEN-LAST:event_affListeActionPerformed
 
     private void ajoutEnseignantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutEnseignantActionPerformed
@@ -270,6 +273,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private void ajoutAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutAttActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card8");
+         ajoutAttrib2.initPanel();
     }//GEN-LAST:event_ajoutAttActionPerformed
 
     private void modifAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifAttActionPerformed
