@@ -25,21 +25,39 @@ public class rechAttrib extends javax.swing.JPanel {
      * Creates new form rechAttrib
      */
     public List<Enseignant> enseignants;
+
+    /**
+     *
+     */
     public List<Classe> classes;
+
+    /**
+     *
+     */
     public List<Attribution> attributions;
 
     private ClasseModele cm;
 
+    /**
+     *
+     * @param cm
+     */
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;
     }
 
+    /**
+     *
+     */
     public rechAttrib() {
         initComponents();
         this.setBackground(Color.ORANGE);
     }
 
+    /**
+     *
+     */
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());

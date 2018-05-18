@@ -18,6 +18,10 @@ public class ajoutClasse extends javax.swing.JPanel {
 
     private ClasseModele cm;
 
+    /**
+     *
+     * @param cm
+     */
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;

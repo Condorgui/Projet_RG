@@ -20,8 +20,19 @@ import javax.swing.JOptionPane;
  */
 public class affichage extends javax.swing.JPanel {
 
+    /**
+     *
+     */
     public List<Enseignant> enseignants;
+
+    /**
+     *
+     */
     public List<Classe> classes;
+
+    /**
+     *
+     */
     public List<Attribution> attributions;
 
     /**
@@ -29,11 +40,18 @@ public class affichage extends javax.swing.JPanel {
      */
     private ClasseModele cm;
 
+    /**
+     *
+     * @param cm
+     */
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;
     }
 
+    /**
+     *
+     */
     public affichage() {
 
         initComponents();
@@ -194,6 +212,10 @@ public class affichage extends javax.swing.JPanel {
     private void ListAttMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListAttMouseClicked
        // initPanel();
     }//GEN-LAST:event_ListAttMouseClicked
+
+    /**
+     *
+     */
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());

@@ -27,16 +27,26 @@ public class rechEnseignant extends javax.swing.JPanel {
 
     private ClasseModele cm;
 
+    /**
+     *
+     * @param cm
+     */
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;
     }
 
+    /**
+     *
+     */
     public rechEnseignant() {
         initComponents();
         this.setBackground(Color.ORANGE);
     }
 
+    /**
+     *
+     */
     public void initPanel() {
 
         enseignants = new ArrayList<>(cm.tousEns());

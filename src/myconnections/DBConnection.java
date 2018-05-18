@@ -14,7 +14,7 @@ public class DBConnection {
   private DBConnection(){}   
      
     /**
-     *
+     * Méthode connection à Oracle
      * @return
      */
     public static Connection getConnection() {
@@ -41,7 +41,7 @@ public class DBConnection {
     }
     
     /**
-     *
+     * Ferme la connexion en cours
      */
     public static void closeConnection(){
        

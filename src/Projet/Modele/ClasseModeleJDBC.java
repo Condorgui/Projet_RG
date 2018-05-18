@@ -42,6 +42,10 @@ public class ClasseModeleJDBC extends ClasseModele {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static ClasseModeleJDBC getInstance() {
         if (cm == null) {
             return cm = new ClasseModeleJDBC();

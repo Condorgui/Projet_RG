@@ -22,17 +22,35 @@ import javax.swing.JOptionPane;
  */
 public class ajoutAttrib extends javax.swing.JPanel {
 
+    /**
+     *
+     */
     public List<Enseignant> enseignants;
+
+    /**
+     *
+     */
     public List<Classe> classes;
+
+    /**
+     *
+     */
     public List<Attribution> attributions;
 
     private ClasseModele cm;
 
+    /**
+     *
+     * @param cm
+     */
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;
     }
 
+    /**
+     *
+     */
     public ajoutAttrib() {
         initComponents();
         this.setBackground(Color.ORANGE);
@@ -192,6 +210,9 @@ public class ajoutAttrib extends javax.swing.JPanel {
      
     }//GEN-LAST:event_btnTituStateChanged
 
+    /**
+     *
+     */
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());

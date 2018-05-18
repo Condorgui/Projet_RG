@@ -22,18 +22,31 @@ public class rechClasse extends javax.swing.JPanel {
 
     private ClasseModele cm;
 
+    /**
+     * Liste des classes
+     */
     public List<Classe> classes;
 
+    /**
+     * set le modèle JDBC
+     * @param cm
+     */
     public void setModele(ClasseModele cm) {
 
         this.cm = cm;
     }
 
+    /**
+     * 
+     */
     public rechClasse() {
         initComponents();
         this.setBackground(Color.ORANGE);
     }
 
+    /**
+     *
+     */
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());

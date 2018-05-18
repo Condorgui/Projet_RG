@@ -53,6 +53,9 @@ public class Pvue {
         return choix;
     }
 
+    /**
+     *
+     */
     public void notif() {
         affichageMessage("===><====");
     }
@@ -268,6 +271,10 @@ public class Pvue {
         return msg;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessagePK() {
         String msg = sc.nextLine();
         return msg.toUpperCase();
@@ -293,6 +300,11 @@ public class Pvue {
         return getMessage();
     }
 
+    /**
+     *
+     * @param msg
+     * @return
+     */
     public String getMessagePK(String msg) {
         affichageMessage(msg);
         return getMessagePK();

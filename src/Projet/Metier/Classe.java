@@ -19,7 +19,10 @@ public class Classe {
     private int n_etudiants;
     private Enseignant e;
 
-    
+    /**
+     *
+     * @param sigle
+     */
     public Classe(String sigle){
         this.sigle = sigle; 
     }
