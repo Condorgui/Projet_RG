@@ -108,24 +108,31 @@ public class ajoutAttrib extends javax.swing.JPanel {
                 Enseignant eAtt = a.getEnseignant();
                 if (eAtt.getTitulaire() != null) {
                     if (eAtt.getTitulaire().equals(classe)) {
-                        JOptionPane.showMessageDialog(this, "La classe à déja un titulaire", "Titulaire", JOptionPane.ERROR_MESSAGE);
+                        error = true;
+                        JOptionPane.showMessageDialog(this, "Il y a déjà un titulaire attitré", "Titulaire", JOptionPane.ERROR_MESSAGE);
                     }
                 }
 
             }
-            enseignant.setTitulaire(classe);
-        } else if (btnRemp.isSelected()) {
-           
-                enseignant.setRemplacant(classe);
+            if (!error) {
+                enseignant.setTitulaire(classe);
             }
+        } else if (btnRemp.isSelected()) {
 
+            enseignant.setRemplacant(classe);
+        } else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
+            error = true;
+            JOptionPane.showMessageDialog(this, "Sélectionner le statut ", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
+        if (!error) {
             Attribution a = new Attribution(classe, enseignant);
             cm.ajouterAttribution(a);
-           JOptionPane.showMessageDialog(this, "Attribution ajoutée", "Succès", JOptionPane.INFORMATION_MESSAGE
-           );
+            JOptionPane.showMessageDialog(this, "Attribution ajoutée", "Succès", JOptionPane.INFORMATION_MESSAGE
+            );
+        }
 
 
-        
     }//GEN-LAST:event_ajoutAttribActionPerformed
 
     private void btnTituActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTituActionPerformed
