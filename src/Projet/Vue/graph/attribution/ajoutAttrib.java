@@ -100,7 +100,40 @@ public class ajoutAttrib extends javax.swing.JPanel {
         Enseignant enseignant = cm.getEnseignant((Enseignant) ens);
         Object cla = listClasse.getSelectedItem();
         Classe classe = cm.getClasse((Classe) cla);
+        
+        /*Modèle de la vue 
+        if ((e.getTitulaire() != null || e.getRemplacant() != null)) {
+                affichageMessage("Cet enseignant est déjà titulaire ou remplacant");
+                return null;
+            } else {
+                if (chA == 1) {
+                    for (Attribution a : toutesLesAttributions) {
+                        Enseignant eAtt = a.getEnseignant();
+                        if (eAtt.getTitulaire() != null) {
+                            if (eAtt.getTitulaire().equals(c)) {
+                                affichageMessage("Il y a déjà un titulaire attitré");
+                                return null;
+                            }
+                        }
+                        if (eAtt.equals(e) && !eAtt.getMatricule().equals(e.getMatricule())) {
+                            return null;
+                        }
 
+                    }
+                    e.setTitulaire(c);
+                } else if (chA == 2) {
+                    for (Attribution a : toutesLesAttributions) {
+                        Enseignant eAtt = a.getEnseignant();
+                        if (eAtt == e && !eAtt.getMatricule().equals(e.getMatricule())) {
+                            return null;
+                        }
+                    }
+                    e.setRemplacant(c);
+                }
+            }
+            Attribution a = new Attribution(c, e);
+
+         */
         boolean error = false;
 
         if (btnTitu.isSelected()) {
@@ -121,7 +154,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
             enseignant.setRemplacant(classe);
         } else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
-            
+
             error = true;
             JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
 
