@@ -150,6 +150,9 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         getContentPane().add(affichage3, "card5");
         getContentPane().add(rechEnseignant1, "card6");
         getContentPane().add(rechClasse3, "card7");
+
+        ajoutAttrib2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ajoutAttrib2.setToolTipText("");
         getContentPane().add(ajoutAttrib2, "card8");
         getContentPane().add(rechAttrib5, "card9");
 

@@ -64,7 +64,6 @@ public class ajoutAttrib extends javax.swing.JPanel {
         jLabel2.setText("Liste des enseignants disponibles");
         add(jLabel2);
 
-        listEns.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(listEns);
 
         btnTitu.setText("Titulaire");
@@ -81,7 +80,6 @@ public class ajoutAttrib extends javax.swing.JPanel {
         jLabel3.setText("Liste des classes");
         add(jLabel3);
 
-        listClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(listClasse);
 
         ajoutAttrib.setText("Ajouter");
@@ -97,35 +95,36 @@ public class ajoutAttrib extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ajoutAttribActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutAttribActionPerformed
-        
-        Object ens = listEns.getSelectedObjects();
-        Enseignant e = (Enseignant) ens;
-        Enseignant enseignant = cm.getEnseignant(e);
 
-        Object cla = listClasse.getSelectedObjects();
-        Classe c = (Classe) cla;
-        Classe classe = cm.getClasse(c);
-        boolean error = false; 
-        
+        Object ens = listEns.getSelectedItem();
+        Enseignant enseignant = cm.getEnseignant((Enseignant) ens);
+        Object cla = listClasse.getSelectedItem();
+        Classe classe = cm.getClasse((Classe) cla);
+
+        boolean error = false;
+
         if (btnTitu.isSelected()) {
+            for (Attribution a : attributions) {
+                Enseignant eAtt = a.getEnseignant();
+                if (eAtt.getTitulaire() != null) {
+                    if (eAtt.getTitulaire().equals(classe)) {
+                        JOptionPane.showMessageDialog(this, "La classe à déja un titulaire", "Titulaire", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
+            }
             enseignant.setTitulaire(classe);
-            enseignant.setRemplacant(null);
-        }else{
-            error = true; 
-        }
-        if(btnRemp.isSelected()){
-            enseignant.setRemplacant(classe);
-        }else{
-            error = true;
-        }
-        if(!error){
-            Attribution a = new Attribution(classe,enseignant); 
-        } else {
-            JOptionPane.showMessageDialog(this, "Veuillez  choisir titulaire ou remplaçant", "Erreur", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        
+        } else if (btnRemp.isSelected()) {
+           
+                enseignant.setRemplacant(classe);
+            }
+
+            Attribution a = new Attribution(classe, enseignant);
+            cm.ajouterAttribution(a);
+           JOptionPane.showMessageDialog(this, "Attribution ajoutée", "Succès", JOptionPane.INFORMATION_MESSAGE
+           );
+
+
         
     }//GEN-LAST:event_ajoutAttribActionPerformed
 
@@ -142,15 +141,15 @@ public class ajoutAttrib extends javax.swing.JPanel {
         listEns.removeAllItems();
         listClasse.removeAllItems();
 
-        enseignants.forEach((Enseignant e) -> {
+        enseignants.forEach((e) -> {
             if (e.getTitulaire() == null) {
-                listEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire() + " remplacant : " + e.getRemplacant());
+                listEns.addItem(e);
             }
         });
 
         classes.forEach((c) -> {
 
-            listClasse.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+            listClasse.addItem(c);
         });
 
     }
@@ -163,7 +162,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JComboBox<String> listClasse;
-    private javax.swing.JComboBox<String> listEns;
+    private javax.swing.JComboBox<Classe> listClasse;
+    private javax.swing.JComboBox<Enseignant> listEns;
     // End of variables declaration//GEN-END:variables
 }
