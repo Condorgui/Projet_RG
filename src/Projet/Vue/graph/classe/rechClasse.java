@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,7 +36,6 @@ public class rechClasse extends javax.swing.JPanel {
     public void initPanel() {
 
         classes = new ArrayList<>(cm.toutesClasses());
-        classes = new ArrayList<>(cm.toutesClasses());
         listClasse.removeAllItems();
 
         classes.forEach((c) -> {
@@ -56,10 +56,16 @@ public class rechClasse extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         listClasse = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        sigleClasse = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        anneeClasse = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        orientationClasse = new javax.swing.JTextField();
+        modif = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(4, 2));
+        setLayout(new java.awt.GridLayout(6, 3));
 
         jLabel1.setText("Sélectionner la classe parmis la liste");
         add(jLabel1);
@@ -76,17 +82,29 @@ public class rechClasse extends javax.swing.JPanel {
         });
         add(listClasse);
 
-        jButton1.setText("Modifier");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel3.setText("Entrez le sigle : ");
+        add(jLabel3);
+        add(sigleClasse);
+
+        jLabel2.setText("Entrez l'année : ");
+        add(jLabel2);
+        add(anneeClasse);
+
+        jLabel4.setText("Entrez l'orientation : ");
+        add(jLabel4);
+        add(orientationClasse);
+
+        modif.setText("Modifier");
+        modif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                modifActionPerformed(evt);
             }
         });
-        add(jButton1);
+        add(modif);
 
-        jButton2.setText("Supprimer");
-        jButton2.setToolTipText("");
-        add(jButton2);
+        delete.setText("Supprimer");
+        delete.setToolTipText("");
+        add(delete);
     }// </editor-fold>//GEN-END:initComponents
 
     private void listClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listClasseActionPerformed
@@ -97,18 +115,63 @@ public class rechClasse extends javax.swing.JPanel {
         //initPanel();
     }//GEN-LAST:event_listClasseMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void modifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifActionPerformed
 
+        Classe classe = null;
         Object cla = listClasse.getSelectedItem();
-        Classe classe = cm.getClasse((Classe) cla);
+        Classe aRech = cm.getClasse((Classe) cla);
+        Classe tmpC = cm.getClasse(aRech);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        boolean erreur = false;
+        String sigle = sigleClasse.getText().toUpperCase();
+        if (sigle.trim().equals("")) {
+            erreur = true;
+            sigleClasse.setBackground(Color.red);
+        }
+        String orientation = orientationClasse.getText();
+        if (orientation.trim().equals("")) {
+            erreur = true;
+            orientationClasse.setBackground(Color.red);
+        }
+        int annee = 0;
+        String year = anneeClasse.getText();
+        try {
+            annee = Integer.parseInt(year);
+        } catch (NumberFormatException e) {
+            erreur = true;
+            anneeClasse.setBackground(Color.red);
+        }
+
+        if (!erreur) {
+
+            Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+            c.setSigle(sigle).setOrientation(orientation).setAnnee(annee);
+            try {
+                classe = c.build();
+            } catch (Exception e) {
+                System.out.println("Erreur de création" + e);
+            }
+
+            String msg = cm.modifyC(classe, tmpC);
+            JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_modifActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField anneeClasse;
+    private javax.swing.JButton delete;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JComboBox<Classe> listClasse;
+    private javax.swing.JButton modif;
+    private javax.swing.JTextField orientationClasse;
+    private javax.swing.JTextField sigleClasse;
     // End of variables declaration//GEN-END:variables
 }
