@@ -279,6 +279,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private void modifAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifAttActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card9");        // TODO add your handling code here:
+        rechAttrib5.initPanel();
     }//GEN-LAST:event_modifAttActionPerformed
 
     /**

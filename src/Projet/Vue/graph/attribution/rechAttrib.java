@@ -149,21 +149,25 @@ public class rechAttrib extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Object ens = listEnseignant.getSelectedItem();
         Enseignant eRech = cm.getEnseignant((Enseignant) ens);
-        Enseignant tmpE = cm.getEnseignant(eRech);
-        
-        
+        Enseignant nvEns = cm.getEnseignant(eRech);
+
         Classe classe = null;
         Object cla = listClasse.getSelectedItem();
         Classe aRech = cm.getClasse((Classe) cla);
-        Classe tmpC = cm.getClasse(aRech);
+        Classe nvClasse = cm.getClasse(aRech);
 
+        Object att = listAtt.getSelectedItem();
+        Attribution attri = cm.getAttribution((Attribution) att);
+        Enseignant eAtt = attri.getEnseignant();
+        
+        
         boolean error = false;
 
         if (btnTitu.isSelected()) {
             for (Attribution a : attributions) {
-                Enseignant eAtt = a.getEnseignant();
+  
                 if (eAtt.getTitulaire() != null) {
-                    if (eAtt.getTitulaire().equals(classe)) {
+                    if (eAtt.getTitulaire().equals(nvClasse)) {
                         error = true;
                         JOptionPane.showMessageDialog(this, "Il y a déjà un titulaire attitré", "Titulaire", JOptionPane.ERROR_MESSAGE);
                     }
@@ -171,11 +175,13 @@ public class rechAttrib extends javax.swing.JPanel {
 
             }
             if (!error) {
-                tmpE.setTitulaire(classe);
+                nvEns.setTitulaire(nvClasse);
+                eAtt.setTitulaire(classe);
             }
         } else if (btnRemp.isSelected()) {
 
-            tmpE.setRemplacant(classe);
+            nvEns.setRemplacant(nvClasse);
+            eAtt.setRemplacant(null);
         } else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
 
             error = true;
@@ -183,7 +189,8 @@ public class rechAttrib extends javax.swing.JPanel {
 
         }
         if (!error) {
-            String msg = modifyA(nvA, tmpA);
+            Attribution nvAttribution = new Attribution(nvClasse,nvEns); 
+            String msg = cm.modifyA(nvAttribution, attri);
 
             JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE
             );
