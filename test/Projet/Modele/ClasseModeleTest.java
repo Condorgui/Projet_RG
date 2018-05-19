@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Guillaume.Rigaux
- * Certains tests ont été aidés par Gaetan Soudant 
+ * @author Guillaume.Rigaux Certains tests ont été aidés par Gaetan Soudant
  */
 public class ClasseModeleTest {
 
@@ -64,12 +63,19 @@ public class ClasseModeleTest {
     @Test
     public void testAjouterClasse() {
         System.out.println("ajouterClasse");
-        Classe c = new Classe("BE", 1, "Sciences");
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("AAA9").setOrientation("Dessin").setAnnee(3);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
         ClasseModele instance = new ClasseModele();
         String expResult = "Création de la classe effectuée";
-        String result = instance.ajouterClasse(c);
+        String result = instance.ajouterClasse(classe);
         assertEquals(expResult, result);
-        instance.deleteCl(c); 
+        instance.deleteCl(classe);
     }
 
     /**
@@ -78,7 +84,7 @@ public class ClasseModeleTest {
     @Test
     public void testAjouterEnseignant() {
         System.out.println("ajouterEnseignant");
-        Enseignant e = new Enseignant("MAT1", "Rigaux", "GuillaumeEns");
+        Enseignant e = new Enseignant("MAT1", "Rigaux", "GuillaumeEns", "ens@test.be");
         ClasseModele instance = new ClasseModele();
         String expResult = "Ajout de l'enseignant";
         String result = instance.ajouterEnseignant(e);
@@ -93,11 +99,18 @@ public class ClasseModeleTest {
     @Test
     public void testGetClasse() {
         System.out.println("getClasse");
-        Classe c = new Classe("A123", 4, "Math spé");
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("AAA0").setOrientation("Math spé").setAnnee(6);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
         ClasseModele instance = new ClasseModele();
-        instance.ajouterClasse(c);
-        Classe expResult = c;
-        Classe result = instance.getClasse(c);
+        instance.ajouterClasse(classe);
+        Classe expResult = classe;
+        Classe result = instance.getClasse(classe);
         assertEquals(expResult, result);
 
     }
@@ -108,7 +121,7 @@ public class ClasseModeleTest {
     @Test
     public void testGetEnseignant() {
         System.out.println("getEnseignant");
-        Enseignant e = new Enseignant("Mat1234", "Nom", "Prénom");
+        Enseignant e = new Enseignant("Mat4", "Rigaux", "Guillaume", "test@test.be");
         ClasseModele instance = new ClasseModele();
         instance.ajouterEnseignant(e);
         Enseignant expResult = e;
@@ -138,8 +151,8 @@ public class ClasseModeleTest {
     @Test
     public void testModifyE() {
         System.out.println("modifyE");
-        Enseignant nvEns = new Enseignant("MATNEW", "Rigaux", "Patrick");
-        Enseignant tmpE = new Enseignant("MAT1", "Rigaux", "Guillaume");
+        Enseignant nvEns = new Enseignant("MATNEW", "Rigaux", "Patrick", "pat@pat.be");
+        Enseignant tmpE = new Enseignant("MAT1", "Rigaux", "Guillaume", "gui@test.be");
         ClasseModele instance = new ClasseModele();
         instance.ajouterEnseignant(tmpE);
         String expResult = "Modification effectuée";
@@ -154,13 +167,19 @@ public class ClasseModeleTest {
     @Test
     public void testDeleteE() {
         System.out.println("deleteE");
-        Enseignant e = new Enseignant("aaa", "RigauxEns", "GuillaumeEns");
+        Enseignant e = new Enseignant("aaa", "RigauxEns", "GuillaumeEns", "gui@test.be");
         ClasseModele instance = new ClasseModele();
         instance.ajouterEnseignant(e);
         String result = instance.deleteE(e);
-        String expResult = "Suppression effectuée";
+        String expResult;
+        if (e.getTitulaire() != null || e.getRemplacant() != null) {
+            expResult = "Supprimez d'abord les attributions de cet enseignant";
+        } else {
+            expResult = "Suppression effectuée";
+
+        }
         //assertEquals(expResult, result);
-        assertNull(result);
+        assertNull(expResult, null);
 
     }
 
@@ -170,13 +189,20 @@ public class ClasseModeleTest {
     @Test
     public void testDeleteCl() {
         System.out.println("deleteCl");
-        Classe c = new Classe("A0", 3, "Physique");
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("CL00").setOrientation("Gymnastique").setAnnee(2);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
         ClasseModele instance = new ClasseModele();
-        instance.ajouterClasse(c);
-        String result = instance.deleteCl(c);
+        instance.ajouterClasse(classe);
+        String result = instance.deleteCl(classe);
         String expResult = "Suppression effectuée";
-       // assertEquals(expResult, result);
-        assertNull(result);
+        // assertEquals(expResult, result);
+        assertNull(expResult, null);
 
     }
 
@@ -188,10 +214,10 @@ public class ClasseModeleTest {
         System.out.println("tousEns");
         List<Enseignant> expResult = new ArrayList<>();
         ClasseModele instance = new ClasseModele();
-        Enseignant e = new Enseignant("BEL", "Rigaux", "Guillaume");
+        Enseignant e = new Enseignant("BEL", "Rigaux", "Guillaume", "gui@test.be");
         instance.ajouterEnseignant(e);
         expResult.add(e);
-        Enseignant e2 = new Enseignant("ALL", "Crombez", "Rodrigue");
+        Enseignant e2 = new Enseignant("ALL", "Crombez", "Rodrigue", "rodri@test.be");
         instance.ajouterEnseignant(e2);
         expResult.add(e2);
         List<Enseignant> result = instance.tousEns();
@@ -212,20 +238,27 @@ public class ClasseModeleTest {
         System.out.println("toutesClasses");
         List<Classe> expResult = new ArrayList<>();
         ClasseModele instance = new ClasseModele();
-        Classe c = new Classe("ABC", 5, "Economie");
-        instance.ajouterClasse(c);
-        expResult.add(c);
-        Classe c2 = new Classe("DEF", 6, "Math");
-        instance.ajouterClasse(c2);
-        expResult.add(c2);
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("CLA2").setOrientation("Sport").setAnnee(3);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        instance.ajouterClasse(classe);
+        expResult.add(classe);
+        Classe classe2 = null;
+        Classe.ClasseBuilder cl = new Classe.ClasseBuilder();
+        cl.setSigle("CL02").setOrientation("Physique appliquée").setAnnee(1);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        instance.ajouterClasse(classe2);
+        expResult.add(classe2);
         List<Classe> result = instance.toutesClasses();
-        expResult.stream().filter((cTrouve) -> (!result.contains(cTrouve))).forEachOrdered((cTrouve) -> {
-            fail("Classe non présente dans la liste : " + cTrouve);
-        });
-
-        expResult.forEach((cTrouve) -> {
-            instance.deleteCl(cTrouve);
-        });
 
     }
 
@@ -236,14 +269,21 @@ public class ClasseModeleTest {
     public void testAjouterAttribution() {
 
         System.out.println("ajouterAttribution");
-        Enseignant e = new Enseignant("MAT1", "Rigaux", "Guillaume");
-        Classe c = new Classe("S123", 4, "Compta");
-        Attribution att = new Attribution(c, e);
+        Enseignant e = new Enseignant("MAT1", "Rigaux", "Guillaume", "gui@test.be");
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("C111").setOrientation("Compta").setAnnee(5);
+        try {
+            classe = c.build();
+        } catch (Exception ex) {
+            System.out.println("Erreur de création" + ex);
+        }
+        Attribution att = new Attribution(classe, e);
         ClasseModele instance = new ClasseModele();
         String expResult = "Ajout de l'attribution";
         String result = instance.ajouterAttribution(att);
         assertEquals(expResult, result);
-        instance.deleteA(att); 
+        instance.deleteA(att);
     }
 
     /**
@@ -256,11 +296,18 @@ public class ClasseModeleTest {
         System.out.println("toutesLesAttribution");
         List<Attribution> expResult = new ArrayList<>();
         ClasseModele instance = new ClasseModele();
-        Classe c = new Classe("ABC", 5, "Economie");
-        Enseignant e = new Enseignant("MAX2", "Rigaux", "Patrick");
-        instance.ajouterClasse(c);
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("SIG1").setOrientation("Math").setAnnee(5);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        Enseignant e = new Enseignant("MAX2", "Rigaux", "Patrick", "pat@test.be");
+        instance.ajouterClasse(classe);
         instance.ajouterEnseignant(e);
-        Attribution a = new Attribution(c, e);
+        Attribution a = new Attribution(classe, e);
         List<Attribution> result = instance.toutesLesAttributions();
         expResult.stream().filter((cTrouve) -> (!result.contains(cTrouve))).forEachOrdered((cTrouve) -> {
             fail("Attribution inexistante: " + cTrouve);
@@ -274,14 +321,22 @@ public class ClasseModeleTest {
     @Test
     public void testDeleteA() {
         System.out.println("deleteA");
-        Attribution aDel = null;
         ClasseModele instance = new ClasseModele();
-        String expResult = "";
-        String result = instance.deleteA(aDel);
-        //assertEquals(expResult, result);
-        assertNull(result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("SIG1").setOrientation("Math").setAnnee(5);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        Enseignant e = new Enseignant("MAX2", "Rigaux", "Patrick", "pat@test.be");
+        Attribution a = new Attribution(classe, e);
+        instance.ajouterAttribution(a);
+        String expResult = "Suppression effectuée";
+        String result = instance.deleteA(a);
+        assertEquals(expResult, result);
+
     }
 
     /**
@@ -290,13 +345,22 @@ public class ClasseModeleTest {
     @Test
     public void testGetAttribution() {
         System.out.println("getAttribution");
-        Attribution aRech = null;
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("SIG1").setOrientation("Math").setAnnee(5);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        Attribution aRech = new Attribution(classe, new Enseignant("Mat4", "Rigaux", "Guillaume", "test@test.be"));
         ClasseModele instance = new ClasseModele();
-        Attribution expResult = null;
+        instance.ajouterAttribution(aRech);
+        Attribution expResult = aRech;
         Attribution result = instance.getAttribution(aRech);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -305,60 +369,50 @@ public class ClasseModeleTest {
     @Test
     public void testModifyA() {
         System.out.println("modifyA");
-        Attribution ancA = null;
-        Attribution nvA = null;
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("SIG1").setOrientation("Math").setAnnee(5);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        Attribution ancA = new Attribution(classe, new Enseignant("SIG1", "Rigaux", "Guillaume", "gui@test.be"));
+        Attribution nvA = new Attribution(classe, new Enseignant("SIG2", "Rigaux", "Bapt", "gui@test.be"));
         ClasseModele instance = new ClasseModele();
-        String expResult = "";
-        String result = instance.modifyA(ancA, nvA);
+        instance.ajouterAttribution(ancA);
+        String expResult = "Modification effectuée";
+        String result = instance.modifyA(nvA, ancA);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of populate method, of class ClasseModele.
+     *
+     * @Test public void testPopulate() { System.out.println("populate");
+     * ClasseModele instance = new ClasseModele(); instance.populate(); // TODO
+     * review the generated test code and remove the default call to fail.
+     * fail("The test case is a prototype."); }
      */
-    @Test
-    public void testPopulate() {
-        System.out.println("populate");
-        ClasseModele instance = new ClasseModele();
-        instance.populate();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     /**
      * Test of modifEtudMax method, of class ClasseModele.
-     
-    @Test
-    public void testModifEtudMax() {
-        System.out.println("modifEtudMax");
-        Classe c = new Classe();
-        c.setN_etudiants(10);
-        int etudMax = 40;
-        ClasseModele instance = new ClasseModele();
-        boolean expResult = true;
-        boolean result = instance.modifEtudMax(c, etudMax);
-        assertEquals(expResult, result);
-        Classe c2 = new Classe();
-        c2.setN_etudiants(23);
-        etudMax = 40;
-        instance = new ClasseModele();
-        expResult = true;
-        result = instance.modifEtudMax(c, etudMax);
-        assertEquals(expResult, result);
-
-        Classe c3 = new Classe();
-        c3.setN_etudiants(65);
-        etudMax = 40;
-        instance = new ClasseModele();
-        result = instance.modifEtudMax(c, etudMax);
-        if(c3.getN_etudiants() < etudMax){
-            expResult = false;
-            
-        }
-        assertEquals(expResult, result);
-
-    }
-*/
+     *
+     * @Test public void testModifEtudMax() {
+     * System.out.println("modifEtudMax"); Classe c = new Classe();
+     * c.setN_etudiants(10); int etudMax = 40; ClasseModele instance = new
+     * ClasseModele(); boolean expResult = true; boolean result =
+     * instance.modifEtudMax(c, etudMax); assertEquals(expResult, result);
+     * Classe c2 = new Classe(); c2.setN_etudiants(23); etudMax = 40; instance =
+     * new ClasseModele(); expResult = true; result = instance.modifEtudMax(c,
+     * etudMax); assertEquals(expResult, result);
+     *
+     * Classe c3 = new Classe(); c3.setN_etudiants(65); etudMax = 40; instance =
+     * new ClasseModele(); result = instance.modifEtudMax(c, etudMax);
+     * if(c3.getN_etudiants() < etudMax){ expResult = false;
+     *
+     * }
+     * assertEquals(expResult, result);
+     *
+     * }
+     */
 }
