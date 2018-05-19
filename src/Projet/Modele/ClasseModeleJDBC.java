@@ -29,7 +29,8 @@ public class ClasseModeleJDBC extends ClasseModele {
     private static ClasseModeleJDBC cm = null;
 
     /**
-     * Constructeur du JDBC Se charge de la connexion à la BDD
+     * Constructeur 
+     * Se charge de la connexion à la BDD 
      */
     public ClasseModeleJDBC() {
         dbconnect = DBConnection.getConnection();
@@ -43,7 +44,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     }
 
     /**
-     *
+     * Méthode qui récupère l'instance du modèle (ici JDBC) 
      * @return
      */
     public static ClasseModeleJDBC getInstance() {
@@ -113,6 +114,11 @@ public class ClasseModeleJDBC extends ClasseModele {
         return le;
     }
 
+    /**
+     * Méthode affichage de la liste des attributions
+     *
+     * @return la liste
+     */
     @Override
     public List<Attribution> toutesLesAttributions() {
         //mode = soit tri par numéro chassis soit par prix soit par prenom
@@ -281,6 +287,14 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     }
 
+    /**
+     * Méthode qui recherche une attribution
+     *
+     * @param aRech l'attribution à rechercher la recherche se fait sur base du
+     * matricule et du sigle dans la table attribution
+     * @return msg le résultat de la recherche (a = l'attribution ou null si
+     * aucune)
+     */
     @Override
     public Attribution getAttribution(Attribution aRech) {
         //Faire switch pour recherche sur 2 critères
@@ -326,6 +340,12 @@ public class ClasseModeleJDBC extends ClasseModele {
         return null;
     }
 
+    /**
+     * Méthode qui ajoute une attribution
+     *
+     * @param a l'attribution à ajouter
+     * @return msg le résultat de l'ajout
+     */
     @Override
     public String ajouterAttribution(Attribution a) {
 
@@ -337,12 +357,14 @@ public class ClasseModeleJDBC extends ClasseModele {
                 pstm.executeUpdate();
                 if (a.getEnseignant().getTitulaire() != null) {
                     PreparedStatement pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = ? WHERE MATRICULE = ?");
+                    //On update l'enseignant et son statut titulaire
                     pst.setString(1, a.getClasse().getSigle());
                     pst.setString(2, a.getEnseignant().getMatricule());
                     pst.executeUpdate();
 
                 } else if (a.getEnseignant().getRemplacant() != null) {
                     PreparedStatement pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = ? WHERE MATRICULE = ?");
+                    //On update l'enseignant et son statut remplacant
                     pst.setString(1, a.getClasse().getSigle());
                     pst.setString(2, a.getEnseignant().getMatricule());
                     pst.executeUpdate();
@@ -445,6 +467,12 @@ public class ClasseModeleJDBC extends ClasseModele {
         return msg;
     }
 
+    /**
+     * Méthode qui supprime un classe
+     *
+     * @param cl le sigle de la classe à supprimer
+     * @return msg le résultat de la suppression
+     */
     @Override
     public String deleteCl(Classe cl) {
         String query = "DELETE FROM CLASSE WHERE SIGLE = ? ";
@@ -466,6 +494,13 @@ public class ClasseModeleJDBC extends ClasseModele {
         return msg;
     }
 
+    /**
+     * Méthode qui modifie une classe
+     *
+     * @param nvClasse la nouvelle classe
+     * @param tmpC la classe à supprimer
+     * @return msg le résultat de la suppression
+     */
     @Override
     public String modifyC(Classe nvClasse, Classe tmpC) {
         boolean flag;
@@ -502,6 +537,13 @@ public class ClasseModeleJDBC extends ClasseModele {
 
     }
 
+    /**
+     * Méthode qui modifie un enseignant
+     *
+     * @param nvEns l'enseignant après modification
+     * @param tmpE l'ancien enseignant
+     * @return msg le résultat de la modification
+     */
     @Override
     public String modifyE(Enseignant nvEns, Enseignant tmpE) {
 
@@ -533,10 +575,17 @@ public class ClasseModeleJDBC extends ClasseModele {
             return "Le matricule doit être unique !";
         } catch (SQLException e) {
             msg = "erreur " + e;
+
         }
         return msg;
     }
 
+    /**
+     * Méthode qui supprime une attribution
+     *
+     * @param aDel l'attribution à supprimer
+     * @return msg le résultat de la suppression
+     */
     @Override
     public String deleteA(Attribution aDel) {
 
@@ -549,9 +598,11 @@ public class ClasseModeleJDBC extends ClasseModele {
             pstm.setString(2, aDel.getClasse().getSigle());
             pstm.executeUpdate();
             pstm = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
+            //Remise du titulaire de l'attribution à null pour la suppression
             pstm.setString(1, aDel.getEnseignant().getMatricule());
             pstm.executeUpdate();
             pstm = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
+            //Remis du/des remplacant(s) de l'attribution à null pour la suppression
             pstm.setString(1, aDel.getEnseignant().getMatricule());
             pstm.executeUpdate();
 
@@ -571,6 +622,13 @@ public class ClasseModeleJDBC extends ClasseModele {
         return "Erreur de suppression";
     }
 
+    /**
+     * Méthode qui modifie une attribution
+     *
+     * @param nvA la nouvelle attribution après modif
+     * @param tmpA l'ancienne attribution à modifier
+     * @return msg le résultat de la modification
+     */
     @Override
     public String modifyA(Attribution nvA, Attribution tmpA) {
 
@@ -593,12 +651,14 @@ public class ClasseModeleJDBC extends ClasseModele {
 
                 if (nvA.getEnseignant().getTitulaire() != null) {
                     pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = ? WHERE MATRICULE = ?");
+                    //On modifie le titulaire la nouvelle attribution
                     pst.setString(1, sigle);
                     pst.setString(2, mat);
                     pst.executeUpdate();
 
                 } else if (nvA.getEnseignant().getRemplacant() != null) {
                     pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = ? WHERE MATRICULE = ?");
+                    //On modifie le remplacant de la nouvelle attrib
                     pst.setString(1, sigle);
                     pst.setString(2, mat);
                     pst.executeUpdate();

@@ -50,8 +50,8 @@ public class ajoutClasse extends javax.swing.JPanel {
         orientationClasse = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         anneeClasse = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        valider = new javax.swing.JButton();
+        annuler = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(5, 5, 5, 5));
 
@@ -82,21 +82,21 @@ public class ajoutClasse extends javax.swing.JPanel {
         anneeClasse.setToolTipText("");
         add(anneeClasse);
 
-        jButton2.setText("Valider");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        valider.setText("Valider");
+        valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                validerActionPerformed(evt);
             }
         });
-        add(jButton2);
+        add(valider);
 
-        jButton1.setText("Annuler");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        annuler.setText("Annuler");
+        annuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                annulerActionPerformed(evt);
             }
         });
-        add(jButton1);
+        add(annuler);
     }// </editor-fold>//GEN-END:initComponents
 
     private void sigleClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigleClasseActionPerformed
@@ -107,7 +107,7 @@ public class ajoutClasse extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_orientationClasseActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
         sigleClasse.setText("");
         orientationClasse.setText("");
         anneeClasse.setText("");
@@ -115,9 +115,9 @@ public class ajoutClasse extends javax.swing.JPanel {
         orientationClasse.setBackground(Color.white);
         anneeClasse.setBackground(Color.white);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_annulerActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
         sigleClasse.setBackground(Color.white);
         orientationClasse.setBackground(Color.white);
         anneeClasse.setBackground(Color.white);
@@ -158,17 +158,17 @@ public class ajoutClasse extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_validerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anneeClasse;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton annuler;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField orientationClasse;
     private javax.swing.JTextField sigleClasse;
+    private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 }
