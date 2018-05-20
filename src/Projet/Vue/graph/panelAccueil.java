@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Projet.Vue.graph;
 
 import Projet.Vue.graph.*;
@@ -28,8 +24,12 @@ public class panelAccueil extends javax.swing.JPanel {
         
 
         logo.setIcon(new ImageIcon(getClass().getResource("/Images/logo1.png")));
-        add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 130, 10));
+        add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 10, 10));
+        
+      
+   
 
+  
     }
 
     /**

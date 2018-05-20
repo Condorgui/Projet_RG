@@ -374,7 +374,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 }
                 return "Attribution ajoutée";
             } catch (SQLIntegrityConstraintViolationException Pk) {
-                return "Erreur de PK " ;
+                return "Erreur de PK le sigle et le matricule doivent être uniques" ;
             } catch (SQLException e) {
                 System.err.println("Erreur d'ajout de l'attribution " + e);
             }
@@ -447,7 +447,7 @@ public class ClasseModeleJDBC extends ClasseModele {
      * Méthode deleteE supprime un enseignant sur base de son matricule
      *
      * @param ens
-     * @return
+     * @return le message de résultat
      */
     @Override
     public String deleteE(Enseignant ens) {
@@ -696,7 +696,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 return "Attribution modifiée";
 
             } catch (SQLIntegrityConstraintViolationException pk) {
-                return "Erreur de PK" + pk;
+                return "Erreur de PK le matricule et sigle doivent être uniques";
             } catch (SQLException e) {
                 msg = "erreur " + e;
             }

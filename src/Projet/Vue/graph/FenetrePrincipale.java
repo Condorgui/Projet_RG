@@ -231,6 +231,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void modifEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifEnsActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card6");
