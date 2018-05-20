@@ -29,8 +29,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     private static ClasseModeleJDBC cm = null;
 
     /**
-     * Constructeur 
-     * Se charge de la connexion à la BDD 
+     * Constructeur Se charge de la connexion à la BDD
      */
     public ClasseModeleJDBC() {
         dbconnect = DBConnection.getConnection();
@@ -44,7 +43,8 @@ public class ClasseModeleJDBC extends ClasseModele {
     }
 
     /**
-     * Méthode qui récupère l'instance du modèle (ici JDBC) 
+     * Méthode qui récupère l'instance du modèle (ici JDBC)
+     *
      * @return
      */
     public static ClasseModeleJDBC getInstance() {
@@ -195,7 +195,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         String query = "SELECT * FROM ENSEIGNANT WHERE MATRICULE = ?";
         ResultSet rs = null;
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, aRech.getMatricule());
             rs = pstm.executeQuery();
             if (rs.next()) {
@@ -253,7 +253,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         ResultSet rs = null;
         try (PreparedStatement pstm = dbconnect.prepareStatement(query);) {
-
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, aRech.getSigle());
             rs = pstm.executeQuery();
             if (rs.next()) {
@@ -304,7 +304,7 @@ public class ClasseModeleJDBC extends ClasseModele {
             ResultSet rs = null;
 
             try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-
+                dbconnect.setAutoCommit(true);
                 pstm.setString(1, aRech.getEnseignant().getMatricule());
                 pstm.setString(2, aRech.getClasse().getSigle());
 
@@ -352,12 +352,14 @@ public class ClasseModeleJDBC extends ClasseModele {
         String query = "insert into ATTRIBUTION(MATRICULE,SIGLE) values(?,?)";
         if (a != null) {
             try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+                dbconnect.setAutoCommit(true);
                 pstm.setString(1, a.getEnseignant().getMatricule());
                 pstm.setString(2, a.getClasse().getSigle());
                 pstm.executeUpdate();
                 if (a.getEnseignant().getTitulaire() != null) {
                     PreparedStatement pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = ? WHERE MATRICULE = ?");
                     //On update l'enseignant et son statut titulaire
+                    dbconnect.setAutoCommit(true);
                     pst.setString(1, a.getClasse().getSigle());
                     pst.setString(2, a.getEnseignant().getMatricule());
                     pst.executeUpdate();
@@ -365,6 +367,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 } else if (a.getEnseignant().getRemplacant() != null) {
                     PreparedStatement pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = ? WHERE MATRICULE = ?");
                     //On update l'enseignant et son statut remplacant
+                    dbconnect.setAutoCommit(true);
                     pst.setString(1, a.getClasse().getSigle());
                     pst.setString(2, a.getEnseignant().getMatricule());
                     pst.executeUpdate();
@@ -391,7 +394,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         String query = "insert into CLASSE(sigle,annee,orientation) values(?,?,?)";
 
         try (PreparedStatement pstm = dbconnect.prepareStatement(query);) {
-
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, c.getSigle());
             pstm.setInt(2, c.getAnnee());
             pstm.setString(3, c.getOrientation());
@@ -420,7 +423,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         String msg;
         String query = "insert into ENSEIGNANT(matricule,nom,prenom,mail) values(?,?,?,?) ";
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, e.getMatricule());
             pstm.setString(2, e.getNom());
             pstm.setString(3, e.getPrenom());
@@ -452,7 +455,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         String msg;
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, ens.getMatricule());
             int n = pstm.executeUpdate();
             if (n == 1) {
@@ -479,7 +482,7 @@ public class ClasseModeleJDBC extends ClasseModele {
 
         String msg;
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, cl.getSigle());
             int n = pstm.executeUpdate();
             if (n == 1) {
@@ -514,7 +517,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         String orientation = nvClasse.getOrientation();
 
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, sigle);
             pstm.setInt(2, annee);
             pstm.setString(3, orientation);
@@ -558,7 +561,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         String mail = nvEns.getMail();
 
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, matricule);
             pstm.setString(2, nom);
             pstm.setString(3, prenom);
@@ -593,16 +596,19 @@ public class ClasseModeleJDBC extends ClasseModele {
         PreparedStatement pstm = null;
         String msg;
         try {
+            dbconnect.setAutoCommit(true);
             pstm = dbconnect.prepareStatement(query);
             pstm.setString(1, aDel.getEnseignant().getMatricule());
             pstm.setString(2, aDel.getClasse().getSigle());
             pstm.executeUpdate();
             pstm = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
             //Remise du titulaire de l'attribution à null pour la suppression
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, aDel.getEnseignant().getMatricule());
             pstm.executeUpdate();
             pstm = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
             //Remis du/des remplacant(s) de l'attribution à null pour la suppression
+            dbconnect.setAutoCommit(true);
             pstm.setString(1, aDel.getEnseignant().getMatricule());
             pstm.executeUpdate();
 
@@ -639,6 +645,7 @@ public class ClasseModeleJDBC extends ClasseModele {
         String msg;
         if (nvA != null) {
             try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
+                dbconnect.setAutoCommit(true);
                 String mat = nvA.getEnseignant().getMatricule();
                 String sigle = nvA.getClasse().getSigle();
                 String ancMat = tmpA.getEnseignant().getMatricule();
@@ -652,11 +659,13 @@ public class ClasseModeleJDBC extends ClasseModele {
                 if (nvA.getEnseignant().getTitulaire() != null) {
                     pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = ? WHERE MATRICULE = ?");
                     //On modifie le titulaire la nouvelle attribution
+                    dbconnect.setAutoCommit(true);
                     pst.setString(1, sigle);
                     pst.setString(2, mat);
                     pst.executeUpdate();
 
                 } else if (nvA.getEnseignant().getRemplacant() != null) {
+                    dbconnect.setAutoCommit(true);
                     pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = ? WHERE MATRICULE = ?");
                     //On modifie le remplacant de la nouvelle attrib
                     pst.setString(1, sigle);
@@ -665,6 +674,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 }
 
                 pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
+                dbconnect.setAutoCommit(true);
                 pstm.setString(1, ancMat);
                 n = pstm.executeUpdate();
                 if (n == 1) {
@@ -673,6 +683,8 @@ public class ClasseModeleJDBC extends ClasseModele {
                     msg = "Erreur modif attribution";
                 }
                 pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
+
+                dbconnect.setAutoCommit(true);
                 pstm.setString(1, ancMat);
                 n = pstm.executeUpdate();
                 if (n == 1) {
