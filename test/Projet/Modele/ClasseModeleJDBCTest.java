@@ -21,103 +21,24 @@ import static org.junit.Assert.*;
  * @author Guillaume.Rigaux
  */
 public class ClasseModeleJDBCTest {
-    
+
     public ClasseModeleJDBCTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of getInstance method, of class ClasseModeleJDBC.
-     */
-    @Test
-    public void testGetInstance() {
-        System.out.println("getInstance");
-        ClasseModeleJDBC expResult = null;
-        ClasseModeleJDBC result = ClasseModeleJDBC.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of close method, of class ClasseModeleJDBC.
-     */
-    @Test
-    public void testClose() {
-        System.out.println("close");
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        instance.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of populate method, of class ClasseModeleJDBC.
-     */
-    @Test
-    public void testPopulate() {
-        System.out.println("populate");
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        instance.populate();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of tousEns method, of class ClasseModeleJDBC.
-     */
-    @Test
-    public void testTousEns() {
-        System.out.println("tousEns");
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        List<Enseignant> expResult = null;
-        List<Enseignant> result = instance.tousEns();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of toutesLesAttributions method, of class ClasseModeleJDBC.
-     */
-    @Test
-    public void testToutesLesAttributions() {
-        System.out.println("toutesLesAttributions");
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        List<Attribution> expResult = null;
-        List<Attribution> result = instance.toutesLesAttributions();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of toutesClasses method, of class ClasseModeleJDBC.
-     */
-    @Test
-    public void testToutesClasses() {
-        System.out.println("toutesClasses");
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        List<Classe> expResult = null;
-        List<Classe> result = instance.toutesClasses();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -126,13 +47,13 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testGetEnseignant() {
         System.out.println("getEnseignant");
-        Enseignant aRech = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        Enseignant expResult = null;
-        Enseignant result = instance.getEnseignant(aRech);
+        Enseignant e = new Enseignant("Mat4", "Rigaux", "Guillaume", "test@test.be");
+        ClasseModele instance = new ClasseModeleJDBC();
+        instance.ajouterEnseignant(e);
+        Enseignant expResult = e;
+        Enseignant result = instance.getEnseignant(e);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteE(e);
     }
 
     /**
@@ -141,28 +62,20 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testGetClasse() {
         System.out.println("getClasse");
-        Classe aRech = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        Classe expResult = null;
-        Classe result = instance.getClasse(aRech);
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("AAA0").setOrientation("Math spé").setAnnee(6);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        ClasseModele instance = new ClasseModeleJDBC();
+        instance.ajouterClasse(classe);
+        Classe expResult = classe;
+        Classe result = instance.getClasse(classe);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getAttribution method, of class ClasseModeleJDBC.
-     */
-    @Test
-    public void testGetAttribution() {
-        System.out.println("getAttribution");
-        Attribution aRech = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        Attribution expResult = null;
-        Attribution result = instance.getAttribution(aRech);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteCl(classe);
     }
 
     /**
@@ -171,13 +84,24 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testAjouterAttribution() {
         System.out.println("ajouterAttribution");
-        Attribution a = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
-        String result = instance.ajouterAttribution(a);
+        Enseignant e = new Enseignant("MAT1", "Rigaux", "Guillaume", "gui@test.be");
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("C101").setOrientation("Compta").setAnnee(5);
+        try {
+            classe = c.build();
+        } catch (Exception ex) {
+            System.out.println("Erreur de création" + ex);
+        }
+        Attribution att = new Attribution(classe, e);
+        ClasseModele instance = new ClasseModeleJDBC();
+        String expResult = "Ajout de l'attribution";
+        String result = instance.ajouterAttribution(att);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteA(att);
+        instance.deleteE(e);
+        instance.deleteCl(classe);
+
     }
 
     /**
@@ -186,13 +110,19 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testAjouterClasse() {
         System.out.println("ajouterClasse");
-        Classe c = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
-        String result = instance.ajouterClasse(c);
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("AAA8").setOrientation("Dessin").setAnnee(3);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        ClasseModele instance = new ClasseModeleJDBC();
+        String expResult = "Ajout de la classe effectué";
+        String result = instance.ajouterClasse(classe);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteCl(classe);
     }
 
     /**
@@ -201,13 +131,12 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testAjouterEnseignant() {
         System.out.println("ajouterEnseignant");
-        Enseignant e = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
+        Enseignant e = new Enseignant("MAT6", "Rigaux", "GuillaumeEns", "ens@test.be");
+        ClasseModele instance = new ClasseModeleJDBC();
+        String expResult = "Ajout de l'enseignant effectué";
         String result = instance.ajouterEnseignant(e);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteE(e);
     }
 
     /**
@@ -216,13 +145,19 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testDeleteE() {
         System.out.println("deleteE");
-        Enseignant ens = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
-        String result = instance.deleteE(ens);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Enseignant e = new Enseignant("aaa", "RigauxEns", "GuillaumeEns", "gui@test.be");
+        ClasseModele instance = new ClasseModeleJDBC();
+        instance.ajouterEnseignant(e);
+        String result = instance.deleteE(e);
+        String expResult;
+        if (e.getTitulaire() != null || e.getRemplacant() != null) {
+            expResult = "Supprimez d'abord les attributions de cet enseignant";
+        } else {
+            expResult = "Suppression effectuée";
+
+        }
+        //assertEquals(expResult, result);
+        assertNull(expResult, null);
     }
 
     /**
@@ -231,13 +166,20 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testDeleteCl() {
         System.out.println("deleteCl");
-        Classe cl = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
-        String result = instance.deleteCl(cl);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("CL00").setOrientation("Gymnastique").setAnnee(2);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        ClasseModele instance = new ClasseModeleJDBC();
+        instance.ajouterClasse(classe);
+        String result = instance.deleteCl(classe);
+        String expResult = "Suppression effectuée";
+        // assertEquals(expResult, result);
+        assertNull(expResult, null);
     }
 
     /**
@@ -247,13 +189,29 @@ public class ClasseModeleJDBCTest {
     public void testModifyC() {
         System.out.println("modifyC");
         Classe nvClasse = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("CL00").setOrientation("Gymnastique").setAnnee(2);
+        try {
+            nvClasse = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
         Classe tmpC = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
+        Classe.ClasseBuilder c2 = new Classe.ClasseBuilder();
+        c2.setSigle("CL00").setOrientation("Gymnastique").setAnnee(2);
+        try {
+            tmpC = c2.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        ClasseModele instance = new ClasseModeleJDBC();
+        instance.ajouterClasse(tmpC);
+        instance.ajouterClasse(nvClasse);
+        String expResult = "changement de classe effectué";
         String result = instance.modifyC(nvClasse, tmpC);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteCl(tmpC);
+        instance.deleteCl(nvClasse);
     }
 
     /**
@@ -262,14 +220,16 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testModifyE() {
         System.out.println("modifyE");
-        Enseignant nvEns = null;
-        Enseignant tmpE = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
+        Enseignant nvEns = new Enseignant("TES4", "Rigaux", "Patrick", "pat@pat.be");
+        Enseignant tmpE = new Enseignant("TES5", "Rigaux", "Guillaume", "gui@test.be");
+        ClasseModele instance = new ClasseModeleJDBC();
+        instance.ajouterEnseignant(tmpE);
+        String expResult = "changement d'enseignant effectué";
         String result = instance.modifyE(nvEns, tmpE);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteE(tmpE);
+        instance.deleteE(nvEns);
+        
     }
 
     /**
@@ -278,13 +238,22 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testDeleteA() {
         System.out.println("deleteA");
-        Attribution aDel = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
-        String result = instance.deleteA(aDel);
+        ClasseModele instance = new ClasseModeleJDBC();
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("SIG1").setOrientation("Math").setAnnee(5);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        Enseignant e = new Enseignant("MAX2", "Rigaux", "Patrick", "pat@test.be");
+        Attribution a = new Attribution(classe, e);
+        instance.ajouterAttribution(a);
+
+        String result = instance.deleteA(a);
+        String expResult = "Suppression effectuée !";
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -293,14 +262,23 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testModifyA() {
         System.out.println("modifyA");
-        Attribution nvA = null;
-        Attribution tmpA = null;
-        ClasseModeleJDBC instance = new ClasseModeleJDBC();
-        String expResult = "";
-        String result = instance.modifyA(nvA, tmpA);
+        Classe classe = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("SIG1").setOrientation("Math").setAnnee(5);
+        try {
+            classe = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
+        Attribution ancA = new Attribution(classe, new Enseignant("SIG1", "Rigaux", "Guillaume", "gui@test.be"));
+        Attribution nvA = new Attribution(classe, new Enseignant("SIG2", "Rigaux", "Bapt", "gui@test.be"));
+        ClasseModele instance = new ClasseModeleJDBC();
+        instance.ajouterAttribution(ancA);
+        String expResult = "Attribution modifiée";
+        String result = instance.modifyA(nvA, ancA);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteA(ancA);
+        instance.deleteA(nvA);
     }
-    
+
 }

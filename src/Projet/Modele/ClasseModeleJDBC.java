@@ -374,7 +374,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 }
                 return "Attribution ajoutée";
             } catch (SQLIntegrityConstraintViolationException Pk) {
-                return "Erreur de PK " + Pk;
+                return "Erreur de PK " ;
             } catch (SQLException e) {
                 System.err.println("Erreur d'ajout de l'attribution " + e);
             }

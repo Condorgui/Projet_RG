@@ -137,9 +137,25 @@ public class ClasseModeleTest {
     public void testModifyC() {
         System.out.println("modifyC");
         Classe nvClasse = null;
+        Classe.ClasseBuilder c = new Classe.ClasseBuilder();
+        c.setSigle("CL00").setOrientation("Gymnastique").setAnnee(2);
+        try {
+            nvClasse = c.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
         Classe tmpC = null;
+        Classe.ClasseBuilder c2 = new Classe.ClasseBuilder();
+        c2.setSigle("CL00").setOrientation("Gymnastique").setAnnee(2);
+        try {
+            tmpC = c2.build();
+        } catch (Exception e) {
+            System.out.println("Erreur de création" + e);
+        }
         ClasseModele instance = new ClasseModele();
-        String expResult = "Classe introuvable";
+        instance.ajouterClasse(tmpC);
+        instance.ajouterClasse(nvClasse);
+        String expResult = "Modification effectuée";
         String result = instance.modifyC(nvClasse, tmpC);
         assertEquals(expResult, result);
 
