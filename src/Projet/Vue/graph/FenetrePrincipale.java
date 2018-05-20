@@ -26,23 +26,9 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     public FenetrePrincipale() {
         initComponents();
         this.setBackground(Color.ORANGE);
-        ClasseModele cm = ClasseModeleJDBC.getInstance();
-        ajoutEnseignant1.setModele(cm);
-        ajoutClasse1.setModele(cm);
-        affichage3.setModele(cm);
-        affichage3.initPanel();
-        rechEnseignant1.setModele(cm);
-        rechEnseignant1.initPanel();
-        rechClasse3.setModele(cm);
-        rechClasse3.initPanel();
-        ajoutAttrib2.setModele(cm);
-        ajoutAttrib2.initPanel();
-        rechAttrib5.setModele(cm);
-        rechAttrib5.initPanel();
-        
         setTitle("Projet Java");
 
-
+   
     }
 
     /**
@@ -75,7 +61,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         accueil = new javax.swing.JPanel();
         panelAccueil1 = new Projet.Vue.graph.panelAccueil();
         jLabel2 = new javax.swing.JLabel();
-        boutonentrer = new javax.swing.JButton();
+        modeJDBC = new javax.swing.JButton();
+        modeListe = new javax.swing.JButton();
         ajoutEnseignant1 = new Projet.Vue.graph.enseignant.ajoutEnseignant();
         ajoutClasse1 = new Projet.Vue.graph.classe.ajoutClasse();
         affichage3 = new Projet.Vue.graph.affichage();
@@ -136,13 +123,21 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         jLabel2.setMaximumSize(new java.awt.Dimension(15, 16));
         accueil.add(jLabel2);
 
-        boutonentrer.setText("Accéder au gestionnaire");
-        boutonentrer.addActionListener(new java.awt.event.ActionListener() {
+        modeJDBC.setText("Accéder au gestionnaire BDD");
+        modeJDBC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boutonentrerActionPerformed(evt);
+                modeJDBCActionPerformed(evt);
             }
         });
-        accueil.add(boutonentrer);
+        accueil.add(modeJDBC);
+
+        modeListe.setText("Accéder au gestionnaire Liste");
+        modeListe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modeListeActionPerformed(evt);
+            }
+        });
+        accueil.add(modeListe);
 
         getContentPane().add(accueil, "card4");
         getContentPane().add(ajoutEnseignant1, "card2");
@@ -248,11 +243,25 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         rechClasse3.initPanel();
     }//GEN-LAST:event_modifClasseActionPerformed
 
-    private void boutonentrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonentrerActionPerformed
+    private void modeJDBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeJDBCActionPerformed
+
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card2");
-        JOptionPane.showMessageDialog(this, "Bienvenue", "Résultat", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_boutonentrerActionPerformed
+        JOptionPane.showMessageDialog(this, "Bienvenue sur le mode JDBC", "Résultat", JOptionPane.INFORMATION_MESSAGE);
+        ClasseModele cm = ClasseModeleJDBC.getInstance();
+        ajoutEnseignant1.setModele(cm);
+        ajoutClasse1.setModele(cm);
+        affichage3.setModele(cm);
+        affichage3.initPanel();
+        rechEnseignant1.setModele(cm);
+        rechEnseignant1.initPanel();
+        rechClasse3.setModele(cm);
+        rechClasse3.initPanel();
+        ajoutAttrib2.setModele(cm);
+        ajoutAttrib2.initPanel();
+        rechAttrib5.setModele(cm);
+        rechAttrib5.initPanel();
+    }//GEN-LAST:event_modeJDBCActionPerformed
 
     private void affListeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_affListeActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
@@ -273,7 +282,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private void ajoutAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutAttActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card8");
-         ajoutAttrib2.initPanel();
+        ajoutAttrib2.initPanel();
     }//GEN-LAST:event_ajoutAttActionPerformed
 
     private void modifAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifAttActionPerformed
@@ -281,6 +290,26 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         cardLayout.show(this.getContentPane(), "card9");        // TODO add your handling code here:
         rechAttrib5.initPanel();
     }//GEN-LAST:event_modifAttActionPerformed
+
+    private void modeListeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeListeActionPerformed
+        ClasseModele cm = ClasseModele.getInstance();
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(this.getContentPane(), "card2");
+        cm.populate();
+        ajoutEnseignant1.setModele(cm);
+        ajoutClasse1.setModele(cm);
+        affichage3.setModele(cm);
+        affichage3.initPanel();
+        rechEnseignant1.setModele(cm);
+        rechEnseignant1.initPanel();
+        rechClasse3.setModele(cm);
+        rechClasse3.initPanel();
+        ajoutAttrib2.setModele(cm);
+        ajoutAttrib2.initPanel();
+        rechAttrib5.setModele(cm);
+        rechAttrib5.initPanel();
+        JOptionPane.showMessageDialog(this, "Bienvenue sur le mode liste", "Résultat", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_modeListeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,7 +362,6 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private Projet.Vue.graph.classe.ajoutClasse ajoutClasse1;
     private javax.swing.JMenuItem ajoutEnseignant;
     private Projet.Vue.graph.enseignant.ajoutEnseignant ajoutEnseignant1;
-    private javax.swing.JButton boutonentrer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -345,6 +373,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JButton modeJDBC;
+    private javax.swing.JButton modeListe;
     private javax.swing.JMenuItem modifAtt;
     private javax.swing.JMenuItem modifClasse;
     private javax.swing.JMenuItem modifEns;

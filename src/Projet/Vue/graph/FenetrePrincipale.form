@@ -231,12 +231,20 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="boutonentrer">
+        <Component class="javax.swing.JButton" name="modeJDBC">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Acc&#xe9;der au gestionnaire"/>
+            <Property name="text" type="java.lang.String" value="Acc&#xe9;der au gestionnaire BDD"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonentrerActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modeJDBCActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="modeListe">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Acc&#xe9;der au gestionnaire Liste"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modeListeActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
