@@ -129,7 +129,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
         Enseignant enseignant = cm.getEnseignant((Enseignant) ens);
         Object cla = listClasse.getSelectedItem();
         Classe classe = cm.getClasse((Classe) cla);
-        
+
         /*Modèle de la vue 
         if ((e.getTitulaire() != null || e.getRemplacant() != null)) {
                 affichageMessage("Cet enseignant est déjà titulaire ou remplacant");
@@ -182,11 +182,16 @@ public class ajoutAttrib extends javax.swing.JPanel {
         } else if (btnRemp.isSelected()) {
 
             enseignant.setRemplacant(classe);
-        } else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
+        }
+        if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
 
             error = true;
             JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
-            
+
+        }
+        if (btnTitu.isSelected() && btnRemp.isSelected()) {
+            error = true;
+            JOptionPane.showMessageDialog(this, "Un seul statut à la fois ! ", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
         if (!error) {
             Attribution a = new Attribution(classe, enseignant);
@@ -207,7 +212,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRempActionPerformed
 
     private void btnTituStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnTituStateChanged
-     
+
     }//GEN-LAST:event_btnTituStateChanged
 
     /**
