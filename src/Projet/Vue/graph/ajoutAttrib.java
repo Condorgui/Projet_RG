@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Projet.Vue.graph.attribution;
+package Projet.Vue.graph;
 
 import Projet.Metier.Classe;
 import Projet.Metier.Enseignant;
 import Projet.Metier.Attribution;
 import Projet.Modele.ClasseModele;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 
 /**

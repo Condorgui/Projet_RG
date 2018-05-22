@@ -189,6 +189,7 @@ public class Pvue {
         }
         if (drap) {
 
+           
             return newAttribution(toutesLesClasses, tousEns, toutesLesAttributions);
 
         } else {

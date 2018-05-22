@@ -39,9 +39,9 @@
     </Component>
     <Component class="Projet.Vue.graph.affichage" name="affichage2">
     </Component>
-    <Component class="Projet.Vue.graph.attribution.ajoutAttrib" name="ajoutAttrib1">
+    <Component class="Projet.Vue.graph.ajoutAttrib" name="ajoutAttrib1">
     </Component>
-    <Container class="Projet.Vue.graph.attribution.rechAttrib" name="rechAttrib1">
+    <Container class="Projet.Vue.graph.rechAttrib" name="rechAttrib1">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -56,7 +56,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="Projet.Vue.graph.attribution.rechAttrib" name="rechAttrib2">
+    <Container class="Projet.Vue.graph.rechAttrib" name="rechAttrib2">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -71,13 +71,13 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="Projet.Vue.graph.attribution.rechAttrib" name="rechAttrib3">
+    <Component class="Projet.Vue.graph.rechAttrib" name="rechAttrib3">
     </Component>
-    <Component class="Projet.Vue.graph.attribution.rechAttrib" name="rechAttrib4">
+    <Component class="Projet.Vue.graph.rechAttrib" name="rechAttrib4">
     </Component>
-    <Component class="Projet.Vue.graph.attribution.ajoutAttrib" name="ajoutAttrib3">
+    <Component class="Projet.Vue.graph.ajoutAttrib" name="ajoutAttrib3">
     </Component>
-    <Component class="Projet.Vue.graph.attribution.ajoutAttrib" name="ajoutAttrib4">
+    <Component class="Projet.Vue.graph.ajoutAttrib" name="ajoutAttrib4">
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
@@ -249,14 +249,14 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="Projet.Vue.graph.enseignant.ajoutEnseignant" name="ajoutEnseignant1">
+    <Component class="Projet.Vue.graph.ajoutEnseignant" name="ajoutEnseignant1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
           <CardConstraints cardName="card2"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Projet.Vue.graph.classe.ajoutClasse" name="ajoutClasse1">
+    <Component class="Projet.Vue.graph.ajoutClasse" name="ajoutClasse1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
           <CardConstraints cardName="card3"/>
@@ -270,21 +270,21 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Projet.Vue.graph.enseignant.rechEnseignant" name="rechEnseignant1">
+    <Component class="Projet.Vue.graph.rechEnseignant" name="rechEnseignant1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
           <CardConstraints cardName="card6"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Projet.Vue.graph.classe.rechClasse" name="rechClasse3">
+    <Component class="Projet.Vue.graph.rechClasse" name="rechClasse3">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
           <CardConstraints cardName="card7"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Projet.Vue.graph.attribution.ajoutAttrib" name="ajoutAttrib2">
+    <Component class="Projet.Vue.graph.ajoutAttrib" name="ajoutAttrib2">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -299,7 +299,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Projet.Vue.graph.attribution.rechAttrib" name="rechAttrib5">
+    <Component class="Projet.Vue.graph.rechAttrib" name="rechAttrib5">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
           <CardConstraints cardName="card9"/>

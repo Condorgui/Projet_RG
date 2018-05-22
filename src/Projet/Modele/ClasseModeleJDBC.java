@@ -70,7 +70,6 @@ public class ClasseModeleJDBC extends ClasseModele {
     public void populate() {
         //ne rien faire car données déjà présentes dans DB
     }
-
     /**
      * Méthode affichage de la liste des enseignants
      *

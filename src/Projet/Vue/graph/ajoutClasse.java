@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Projet.Vue.graph.classe;
+package Projet.Vue.graph;
 
 import Projet.Metier.*;
 import java.awt.Color;
