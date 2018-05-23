@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,7 +64,9 @@ public class rechAttrib extends javax.swing.JPanel {
         classes = new ArrayList<>(cm.toutesClasses());
         enseignants = new ArrayList<>(cm.tousEns());
         attributions = new ArrayList<>(cm.toutesLesAttributions());
-
+        ButtonGroup group = new ButtonGroup();
+        group.add(btnRemp);
+        group.add(btnTitu);
         listEnseignant.removeAllItems();
         listClasse.removeAllItems();
         listAtt.removeAllItems();
@@ -206,12 +209,12 @@ public class rechAttrib extends javax.swing.JPanel {
             eRech.setRemplacant(null);
             nvEns.setRemplacant(nvClasse);
 
-        } else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
+        } /*else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
 
             error = true;
             JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
 
-        }
+        }*/
         if (!error) {
             Attribution nvAttribution = new Attribution(nvClasse, nvEns);
             String msg = cm.modifyA(nvAttribution, attri);
