@@ -188,6 +188,7 @@ public class rechEnseignant extends javax.swing.JPanel {
 
         boolean erreur = false;
         boolean erreurmail = false;
+        boolean erreurmat = false; 
 
         String nom = nomEns.getText();
         if (nom.trim().equals("")) {
@@ -211,6 +212,11 @@ public class rechEnseignant extends javax.swing.JPanel {
         if (mat.trim().equals("")) {
             erreur = true;
             matEns.setBackground(Color.red);
+        }
+        if(mat.length()>4){
+            erreurmat = true;
+            matEns.setBackground(Color.red);
+            matEns.setText("Le matricule doit faire 4 caractères !");
         }
 
         if (!erreur && !erreurmail) {

@@ -29,6 +29,7 @@ public class rechClasse extends javax.swing.JPanel {
 
     /**
      * set le modèle JDBC
+     *
      * @param cm
      */
     public void setModele(ClasseModele cm) {
@@ -37,7 +38,7 @@ public class rechClasse extends javax.swing.JPanel {
     }
 
     /**
-     * 
+     *
      */
     public rechClasse() {
         initComponents();
@@ -142,9 +143,17 @@ public class rechClasse extends javax.swing.JPanel {
         Classe tmpC = cm.getClasse(aRech);
 
         boolean erreur = false;
+        boolean erreursigle = false;
+
         String sigle = sigleClasse.getText().toUpperCase();
-        if (sigle.trim().equals("")) {
+        if (sigle.length()>4) {
             erreur = true;
+            sigleClasse.setBackground(Color.red);
+            sigleClasse.setText("Le sigle doit contenir 4 caractères maximum !");
+            
+        }
+        if (sigle.length() > 4) {
+            erreursigle = true;
             sigleClasse.setBackground(Color.red);
         }
         String orientation = orientationClasse.getText();
@@ -161,6 +170,7 @@ public class rechClasse extends javax.swing.JPanel {
             anneeClasse.setBackground(Color.red);
         }
 
+        
         if (!erreur) {
 
             Classe.ClasseBuilder c = new Classe.ClasseBuilder();

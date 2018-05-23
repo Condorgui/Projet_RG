@@ -84,10 +84,10 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testAjouterAttribution() {
         System.out.println("ajouterAttribution");
-        Enseignant e = new Enseignant("MAT1", "Rigaux", "Guillaume", "gui@test.be");
+        Enseignant e = new Enseignant("MUT1", "Rigaux", "Guillaume", "gui@test.be");
         Classe classe = null;
         Classe.ClasseBuilder c = new Classe.ClasseBuilder();
-        c.setSigle("C101").setOrientation("Compta").setAnnee(5);
+        c.setSigle("C111").setOrientation("Compta").setAnnee(5);
         try {
             classe = c.build();
         } catch (Exception ex) {

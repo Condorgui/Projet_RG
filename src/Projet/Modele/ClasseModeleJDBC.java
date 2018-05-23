@@ -21,7 +21,7 @@ import java.sql.*;
  *
  * @author guill
  */
-public class ClasseModeleJDBC extends ClasseModele {
+public class ClasseModeleJDBC extends ClasseModele  {
 
     Connection dbconnect;
 //Connexion à la BDD
@@ -418,7 +418,7 @@ public class ClasseModeleJDBC extends ClasseModele {
      * @return msg le résultat de l'ajout
      */
     @Override
-    public String ajouterEnseignant(Enseignant e) {
+    public String ajouterEnseignant(Enseignant e){
         String msg;
         String query = "insert into ENSEIGNANT(matricule,nom,prenom,mail) values(?,?,?,?) ";
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
@@ -436,8 +436,9 @@ public class ClasseModeleJDBC extends ClasseModele {
         } catch (SQLIntegrityConstraintViolationException pk) {
             return "Le matricule doit être unique ! ";
         } catch (SQLException ec) {
-            return "Erreur d'ajout de l'enseignant" + ec;
+            return "Erreur d'ajout de l'enseignant"; //+ec
         }
+     
 
         return msg;
     }

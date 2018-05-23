@@ -128,6 +128,12 @@ public class ajoutClasse extends javax.swing.JPanel {
             erreur = true;
             sigleClasse.setBackground(Color.red);
         }
+         if (sigle.length()>4) {
+            erreur = true;
+            sigleClasse.setBackground(Color.red);
+            sigleClasse.setText("Le sigle doit contenir 4 caractères maximum !");
+            
+        }
         String orientation = orientationClasse.getText();
         if (orientation.trim().equals("")) {
             erreur = true;

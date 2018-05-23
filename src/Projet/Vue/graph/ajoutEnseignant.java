@@ -67,6 +67,9 @@ public class ajoutEnseignant extends javax.swing.JPanel {
 
         jLabel3.setText("Entrez l'adresse email : ");
         add(jLabel3);
+
+        mailEns.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
+        mailEns.setText("exemple@domaine.com");
         add(mailEns);
 
         jLabel4.setText("Entrez le matricule de l'enseignant :");
@@ -108,7 +111,8 @@ public class ajoutEnseignant extends javax.swing.JPanel {
         matEns.setBackground(Color.white);
 
         boolean erreur = false;
-        boolean erreurmail = false; 
+        boolean erreurmail = false;
+        boolean erreurmat = false;
         String nom = nomEns.getText();
         if (nom.trim().equals("")) {
             erreur = true;
@@ -131,17 +135,27 @@ public class ajoutEnseignant extends javax.swing.JPanel {
         if (mat.trim().equals("")) {
             erreur = true;
             matEns.setBackground(Color.red);
-        }
 
+        }
+        if(mat.length()>4){
+            erreurmat = true;
+            matEns.setBackground(Color.red);
+            matEns.setText("Le matricule doit faire 4 caractères !");
+        }
         if (!erreur && !erreurmail) {
             Enseignant e = new Enseignant(mat, nom, prenom, mail);
             //JOptionPane.showMessageDialog(this, e);
             String msg = cm.ajouterEnseignant(e);
             JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
-        } 
-         else {
-            if(erreur) JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
-            if(erreurmail) JOptionPane.showMessageDialog(this, "L'adresse mail doit être au format text@domaine.com", "Erreur du mail", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            if (erreur) {
+                JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+            if (erreurmail) {
+                JOptionPane.showMessageDialog(this, "L'adresse mail doit être au format text@domaine.com", "Erreur du mail", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
