@@ -12,6 +12,7 @@ import Projet.Modele.ClasseModele;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /**
@@ -65,6 +66,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         listEns = new javax.swing.JComboBox<>();
         btnTitu = new javax.swing.JCheckBox();
@@ -164,6 +166,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
         boolean error = false;
 
         if (btnTitu.isSelected()) {
+            
             for (Attribution a : attributions) {
                 Enseignant eAtt = a.getEnseignant();
                 if (eAtt.getTitulaire() != null) {
@@ -187,10 +190,12 @@ public class ajoutAttrib extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
+        /*
         if (btnTitu.isSelected() && btnRemp.isSelected()) {
             error = true;
             JOptionPane.showMessageDialog(this, "Un seul statut à la fois ! ", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
+        */
         if (!error) {
             Attribution a = new Attribution(classe, enseignant);
             cm.ajouterAttribution(a);
@@ -205,13 +210,13 @@ public class ajoutAttrib extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTituActionPerformed
 
-    private void btnRempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRempActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRempActionPerformed
-
     private void btnTituStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnTituStateChanged
 
     }//GEN-LAST:event_btnTituStateChanged
+
+    private void btnRempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRempActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRempActionPerformed
 
     /**
      *
@@ -221,7 +226,9 @@ public class ajoutAttrib extends javax.swing.JPanel {
         classes = new ArrayList<>(cm.toutesClasses());
         enseignants = new ArrayList<>(cm.tousEns());
         attributions = new ArrayList<>(cm.toutesLesAttributions());
-
+        ButtonGroup group = new ButtonGroup();
+        group.add(btnRemp);
+        group.add(btnTitu);
         listEns.removeAllItems();
         listClasse.removeAllItems();
 
@@ -241,6 +248,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
     private javax.swing.JButton ajoutAttrib;
     private javax.swing.JCheckBox btnRemp;
     private javax.swing.JCheckBox btnTitu;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

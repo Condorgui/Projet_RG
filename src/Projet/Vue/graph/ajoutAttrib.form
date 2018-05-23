@@ -9,6 +9,8 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup3">
+    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
