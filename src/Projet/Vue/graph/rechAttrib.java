@@ -107,8 +107,8 @@ public class rechAttrib extends javax.swing.JPanel {
         btnTitu = new javax.swing.JCheckBox();
         btnRemp = new javax.swing.JCheckBox();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        suppression = new javax.swing.JButton();
+        modifAtt = new javax.swing.JButton();
+        suppAtt = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(13, 3));
 
@@ -148,21 +148,21 @@ public class rechAttrib extends javax.swing.JPanel {
         add(btnRemp);
         add(jSeparator2);
 
-        jButton1.setText("Modifier");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        modifAtt.setText("Modifier");
+        modifAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                modifAttActionPerformed(evt);
             }
         });
-        add(jButton1);
+        add(modifAtt);
 
-        suppression.setText("Supprimer");
-        suppression.addActionListener(new java.awt.event.ActionListener() {
+        suppAtt.setText("Supprimer");
+        suppAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                suppressionActionPerformed(evt);
+                suppAttActionPerformed(evt);
             }
         });
-        add(suppression);
+        add(suppAtt);
     }// </editor-fold>//GEN-END:initComponents
 
     private void listAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listAttActionPerformed
@@ -173,7 +173,7 @@ public class rechAttrib extends javax.swing.JPanel {
         //initPanel();
     }//GEN-LAST:event_listAttMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void modifAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifAttActionPerformed
         Object ens = listEnseignant.getSelectedItem();
         Enseignant eRech = cm.getEnseignant((Enseignant) ens);
         Enseignant nvEns = cm.getEnseignant(eRech);
@@ -222,10 +222,11 @@ public class rechAttrib extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE
             );
         }
+        initPanel(); 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_modifAttActionPerformed
 
-    private void suppressionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppressionActionPerformed
+    private void suppAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppAttActionPerformed
         Object att = listAtt.getSelectedItem();
         Attribution attri = cm.getAttribution((Attribution) att);
 
@@ -237,14 +238,14 @@ public class rechAttrib extends javax.swing.JPanel {
 
         }
 
+        initPanel(); 
 
-    }//GEN-LAST:event_suppressionActionPerformed
+    }//GEN-LAST:event_suppAttActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox btnRemp;
     private javax.swing.JCheckBox btnTitu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -254,6 +255,7 @@ public class rechAttrib extends javax.swing.JPanel {
     private javax.swing.JComboBox<Attribution> listAtt;
     private javax.swing.JComboBox<Classe> listClasse;
     private javax.swing.JComboBox<Enseignant> listEnseignant;
-    private javax.swing.JButton suppression;
+    private javax.swing.JButton modifAtt;
+    private javax.swing.JButton suppAtt;
     // End of variables declaration//GEN-END:variables
 }

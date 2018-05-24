@@ -202,7 +202,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Attribution ajoutée", "Succès", JOptionPane.INFORMATION_MESSAGE
             );
         }
-
+        initPanel();
 
     }//GEN-LAST:event_ajoutAttribActionPerformed
 

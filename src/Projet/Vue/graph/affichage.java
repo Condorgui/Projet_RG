@@ -56,7 +56,6 @@ public class affichage extends javax.swing.JPanel {
 
         initComponents();
         this.setBackground(Color.ORANGE);
-      
 
     }
 
@@ -202,15 +201,15 @@ public class affichage extends javax.swing.JPanel {
     }//GEN-LAST:event_ListAttActionPerformed
 
     private void listeEnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listeEnsMouseClicked
-       // initPanel();
+        // initPanel();
     }//GEN-LAST:event_listeEnsMouseClicked
 
     private void listClassesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClassesMouseClicked
-       // initPanel();
+        // initPanel();
     }//GEN-LAST:event_listClassesMouseClicked
 
     private void ListAttMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListAttMouseClicked
-       // initPanel();
+        // initPanel();
     }//GEN-LAST:event_ListAttMouseClicked
 
     /**
@@ -237,11 +236,20 @@ public class affichage extends javax.swing.JPanel {
         classes.forEach((c) -> {
             listClasses.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
         });
-        attributions.forEach((a) -> {
-            ListAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de la classe : " + a.getEnseignant().getMatricule());
+        attributions.forEach((Attribution a) -> {
+            if (a.getEnseignant().getTitulaire()!=null) {
+                ListAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de l'enseignant titulaire : " + a.getEnseignant().getMatricule() + " > " + a.getEnseignant().getNom() + " " + a.getEnseignant().getPrenom());
+
+            }
+            if (a.getEnseignant().getRemplacant()!=null) {
+                ListAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de l'enseignant remplacant : " + a.getEnseignant().getMatricule() + " > " + a.getEnseignant().getNom() + " " + a.getEnseignant().getPrenom());
+
+            }
         });
 
     }
+    ;
+                
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
