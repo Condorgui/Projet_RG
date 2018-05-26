@@ -55,8 +55,8 @@ public class affichage extends javax.swing.JPanel {
     public affichage() {
 
         initComponents();
-        Color font = new Color(247,223,154);
-        Color b = new Color(147,216,136);
+        Color font = new Color(247, 223, 154);
+        Color b = new Color(147, 216, 136);
         this.setBackground(font);
 
     }
@@ -228,7 +228,18 @@ public class affichage extends javax.swing.JPanel {
         ListAtt.removeAllItems();
 
         enseignants.forEach((Enseignant e) -> {
-            listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " \n  TITULAIRE : " + e.getTitulaire() + " \n  REMPLACANT : " + e.getRemplacant());
+            if (e.getTitulaire() != null) {
+                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + " l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire());
+
+            }
+            if (e.getRemplacant() != null) {
+                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + " l'adresse mail : " + e.getMail() + " remplaçant : " + e.getRemplacant());
+
+            }
+            if (e.getRemplacant() == null && e.getTitulaire() == null) {
+                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " sans attributions ");
+
+            }
         });
 
         /* for (Classe c : classes){
@@ -239,19 +250,16 @@ public class affichage extends javax.swing.JPanel {
             listClasses.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
         });
         attributions.forEach((Attribution a) -> {
-            if (a.getEnseignant().getTitulaire()!=null) {
+            if (a.getEnseignant().getTitulaire() != null) {
                 ListAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de l'enseignant titulaire : " + a.getEnseignant().getMatricule() + " > " + a.getEnseignant().getNom() + " " + a.getEnseignant().getPrenom());
 
             }
-            if (a.getEnseignant().getRemplacant()!=null) {
+            if (a.getEnseignant().getRemplacant() != null) {
                 ListAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de l'enseignant remplacant : " + a.getEnseignant().getMatricule() + " > " + a.getEnseignant().getNom() + " " + a.getEnseignant().getPrenom());
 
             }
         });
-
     }
-    ;
-                
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

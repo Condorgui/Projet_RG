@@ -52,12 +52,12 @@ public class ajoutAttrib extends javax.swing.JPanel {
      */
     public ajoutAttrib() {
         initComponents();
-        Color font = new Color(247,223,154);
-        Color b = new Color(147,216,136);
-        Color a = new Color(247,104,104);
+        Color font = new Color(247, 223, 154);
+        Color b = new Color(147, 216, 136);
+        Color a = new Color(247, 104, 104);
         this.setBackground(font);
         ajoutAttrib.setBackground(b);
-        bAnnuler.setBackground(a); 
+        bAnnuler.setBackground(a);
     }
 
     /**
@@ -130,7 +130,6 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
     private void ajoutAttribActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutAttribActionPerformed
 
-        this.setBackground(Color.red);
         Object ens = listEns.getSelectedItem();
         Enseignant enseignant = cm.getEnseignant((Enseignant) ens);
         Object cla = listClasse.getSelectedItem();
@@ -172,9 +171,14 @@ public class ajoutAttrib extends javax.swing.JPanel {
         boolean error = false;
 
         if (btnTitu.isSelected()) {
-            
+
             for (Attribution a : attributions) {
                 Enseignant eAtt = a.getEnseignant();
+                if (eAtt.getRemplacant() != null) {
+                    error = true;
+                    JOptionPane.showMessageDialog(this, "Un enseignant ne peut être que titulaire ou remplaçant", "Titulaire", JOptionPane.ERROR_MESSAGE);
+
+                }
                 if (eAtt.getTitulaire() != null) {
                     if (eAtt.getTitulaire().equals(classe)) {
                         error = true;
@@ -185,10 +189,17 @@ public class ajoutAttrib extends javax.swing.JPanel {
             }
             if (!error) {
                 enseignant.setTitulaire(classe);
+                enseignant.setRemplacant(null);
             }
         } else if (btnRemp.isSelected()) {
 
-            enseignant.setRemplacant(classe);
+            if (enseignant.getRemplacant() != null) {
+                error = true;
+                JOptionPane.showMessageDialog(this, "Un enseignant ne peut être remplaçant que d'une classe", "Remplaçant", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                enseignant.setRemplacant(classe);
+            }
         }
         if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
 
@@ -201,7 +212,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
             error = true;
             JOptionPane.showMessageDialog(this, "Un seul statut à la fois ! ", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-        */
+         */
         if (!error) {
             Attribution a = new Attribution(classe, enseignant);
             cm.ajouterAttribution(a);

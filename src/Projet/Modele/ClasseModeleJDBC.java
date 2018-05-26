@@ -21,7 +21,7 @@ import java.sql.*;
  *
  * @author guill
  */
-public class ClasseModeleJDBC extends ClasseModele  {
+public class ClasseModeleJDBC extends ClasseModele {
 
     Connection dbconnect;
 //Connexion à la BDD
@@ -70,6 +70,7 @@ public class ClasseModeleJDBC extends ClasseModele  {
     public void populate() {
         //ne rien faire car données déjà présentes dans DB
     }
+
     /**
      * Méthode affichage de la liste des enseignants
      *
@@ -373,7 +374,7 @@ public class ClasseModeleJDBC extends ClasseModele  {
                 }
                 return "Attribution ajoutée";
             } catch (SQLIntegrityConstraintViolationException Pk) {
-                return "Erreur de PK le sigle et le matricule doivent être uniques" ;
+                return "Erreur de PK le sigle et le matricule doivent être uniques";
             } catch (SQLException e) {
                 System.err.println("Erreur d'ajout de l'attribution " + e);
             }
@@ -418,7 +419,7 @@ public class ClasseModeleJDBC extends ClasseModele  {
      * @return msg le résultat de l'ajout
      */
     @Override
-    public String ajouterEnseignant(Enseignant e){
+    public String ajouterEnseignant(Enseignant e) {
         String msg;
         String query = "insert into ENSEIGNANT(matricule,nom,prenom,mail) values(?,?,?,?) ";
         try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
@@ -438,7 +439,6 @@ public class ClasseModeleJDBC extends ClasseModele  {
         } catch (SQLException ec) {
             return "Erreur d'ajout de l'enseignant"; //+ec
         }
-     
 
         return msg;
     }
@@ -643,9 +643,9 @@ public class ClasseModeleJDBC extends ClasseModele  {
         String query = "update ATTRIBUTION set MATRICULE = ?, SIGLE = ? where MATRICULE = ? AND SIGLE = ?";
         PreparedStatement pst = null;
         String msg;
-        if (nvA != null) {
+        Attribution a = getAttribution(tmpA);
+        if (a != null) {
             try (PreparedStatement pstm = dbconnect.prepareStatement(query)) {
-                dbconnect.setAutoCommit(true);
                 String mat = nvA.getEnseignant().getMatricule();
                 String sigle = nvA.getClasse().getSigle();
                 String ancMat = tmpA.getEnseignant().getMatricule();
@@ -654,9 +654,16 @@ public class ClasseModeleJDBC extends ClasseModele  {
                 pstm.setString(2, sigle);
                 pstm.setString(3, ancMat);
                 pstm.setString(4, ancSigle);
-                int n = pstm.executeUpdate();
+                pstm.executeUpdate();
+                pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
+                pst.setString(1, ancMat);
+                pst.executeUpdate();
+                pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
+                pst.setString(1, ancMat);
+                pst.executeUpdate();
 
                 if (nvA.getEnseignant().getTitulaire() != null) {
+
                     pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = ? WHERE MATRICULE = ?");
                     //On modifie le titulaire la nouvelle attribution
                     dbconnect.setAutoCommit(true);
@@ -673,32 +680,20 @@ public class ClasseModeleJDBC extends ClasseModele  {
                     pst.executeUpdate();
                 }
 
-                pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
-                dbconnect.setAutoCommit(true);
-                pstm.setString(1, ancMat);
-                n = pstm.executeUpdate();
-                if (n == 1) {
-                    msg = "Enseignant remis à 0 ";
-                } else {
-                    msg = "Erreur modif attribution";
-                }
-                pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");
-
-                dbconnect.setAutoCommit(true);
-                pstm.setString(1, ancMat);
-                n = pstm.executeUpdate();
-                if (n == 1) {
-                    msg = "Enseignant remis à 0 ";
-                } else {
-                    msg = "Erreur modif attribution";
-                }
-
                 return "Attribution modifiée";
 
             } catch (SQLIntegrityConstraintViolationException pk) {
                 return "Erreur de PK le matricule et sigle doivent être uniques";
             } catch (SQLException e) {
                 msg = "erreur " + e;
+            } finally {
+                try {
+                    if (pst != null) {
+                        pst.close();
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erreur de fermeture du preparedStatement " + e);
+                }
             }
             return msg;
         }

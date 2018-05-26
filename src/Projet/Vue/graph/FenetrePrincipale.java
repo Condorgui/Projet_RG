@@ -24,6 +24,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
      * Creates new form FenetrePrincipale
      */
     public FenetrePrincipale() {
+        setIconImage(new ImageIcon(this.getClass().getResource("/Images/icon.png")).getImage());
         initComponents();
         setTitle("Projet Java");
         this.MenuAjout.setEnabled(false);

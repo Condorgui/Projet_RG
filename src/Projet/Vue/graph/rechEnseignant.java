@@ -174,7 +174,7 @@ public class rechEnseignant extends javax.swing.JPanel {
         try {
             String msg = cm.deleteE(tmpE);
 
-            JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, msg, "Suppression", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Erreur de suppression", "Erreur", JOptionPane.ERROR_MESSAGE);

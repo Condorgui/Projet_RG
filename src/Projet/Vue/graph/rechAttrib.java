@@ -36,7 +36,7 @@ public class rechAttrib extends javax.swing.JPanel {
      *
      */
     public List<Attribution> attributions;
-
+    private Attribution m;
     private ClasseModele cm;
 
     /**
@@ -53,12 +53,17 @@ public class rechAttrib extends javax.swing.JPanel {
      */
     public rechAttrib() {
         initComponents();
-        Color font = new Color(247,223,154);
+        Color font = new Color(247, 223, 154);
         Color b = new Color(147, 216, 136);
         Color a = new Color(247, 104, 104);
         this.setBackground(font);
         modifAtt.setBackground(b);
         suppAtt.setBackground(a);
+    }
+
+    public void setAttribution(Attribution modif) {
+
+        this.m = modif;
     }
 
     /**
@@ -212,10 +217,8 @@ public class rechAttrib extends javax.swing.JPanel {
 
         }
         /*else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
-
             error = true;
             JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
-
         }*/
         if (!error) {
             Attribution nvAttribution = new Attribution(nvClasse, nvEns);
@@ -225,6 +228,7 @@ public class rechAttrib extends javax.swing.JPanel {
             );
         }
         initPanel();
+
 
     }//GEN-LAST:event_modifAttActionPerformed
 
