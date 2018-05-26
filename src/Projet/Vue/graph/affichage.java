@@ -258,6 +258,7 @@ public class affichage extends javax.swing.JPanel {
                 ListAtt.addItem(" Sigle de la classe : " + a.getClasse().getSigle() + " | Matricule de l'enseignant remplacant : " + a.getEnseignant().getMatricule() + " > " + a.getEnseignant().getNom() + " " + a.getEnseignant().getPrenom());
 
             }
+            
         });
     }
 

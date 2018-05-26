@@ -207,13 +207,18 @@ public class rechAttrib extends javax.swing.JPanel {
 
             }
             if (!error) {
-                eRech.setTitulaire(null);
                 nvEns.setTitulaire(nvClasse);
+                eRech.setTitulaire(null);
+                
 
             }
         } else if (btnRemp.isSelected()) {
-            eRech.setRemplacant(null);
-            nvEns.setRemplacant(nvClasse);
+            
+              nvEns.setRemplacant(nvClasse);
+              nvEns.setTitulaire(null);
+            
+            
+            
 
         }
         /*else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {

@@ -84,10 +84,10 @@ public class ClasseModeleJDBCTest {
     @Test
     public void testAjouterAttribution() {
         System.out.println("ajouterAttribution");
-        Enseignant e = new Enseignant("MUT1", "Rigaux", "Guillaume", "gui@test.be");
+        Enseignant e = new Enseignant("MT1", "Rigaux", "Guillaume", "gui@test.be");
         Classe classe = null;
         Classe.ClasseBuilder c = new Classe.ClasseBuilder();
-        c.setSigle("C111").setOrientation("Compta").setAnnee(5);
+        c.setSigle("CP91").setOrientation("Compta").setAnnee(5);
         try {
             classe = c.build();
         } catch (Exception ex) {
@@ -95,7 +95,9 @@ public class ClasseModeleJDBCTest {
         }
         Attribution att = new Attribution(classe, e);
         ClasseModele instance = new ClasseModeleJDBC();
-        String expResult = "Ajout de l'attribution";
+        instance.ajouterClasse(classe);
+        instance.ajouterEnseignant(e);
+        String expResult = "Attribution ajoutée";
         String result = instance.ajouterAttribution(att);
         assertEquals(expResult, result);
         instance.deleteA(att);
@@ -229,7 +231,7 @@ public class ClasseModeleJDBCTest {
         assertEquals(expResult, result);
         instance.deleteE(tmpE);
         instance.deleteE(nvEns);
-        
+
     }
 
     /**
