@@ -53,7 +53,12 @@ public class rechAttrib extends javax.swing.JPanel {
      */
     public rechAttrib() {
         initComponents();
-        this.setBackground(Color.ORANGE);
+        Color font = new Color(247,223,154);
+        Color b = new Color(147, 216, 136);
+        Color a = new Color(247, 104, 104);
+        this.setBackground(font);
+        modifAtt.setBackground(b);
+        suppAtt.setBackground(a);
     }
 
     /**
@@ -98,7 +103,6 @@ public class rechAttrib extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         listAtt = new javax.swing.JComboBox<>();
-        jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         listClasse = new javax.swing.JComboBox<>();
@@ -106,11 +110,10 @@ public class rechAttrib extends javax.swing.JPanel {
         listEnseignant = new javax.swing.JComboBox<>();
         btnTitu = new javax.swing.JCheckBox();
         btnRemp = new javax.swing.JCheckBox();
-        jSeparator2 = new javax.swing.JSeparator();
         modifAtt = new javax.swing.JButton();
         suppAtt = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(13, 3));
+        setLayout(new java.awt.GridLayout(11, 2));
 
         jLabel1.setText("Sélectionner l'attribution à modifier parmis la liste :");
         add(jLabel1);
@@ -126,7 +129,6 @@ public class rechAttrib extends javax.swing.JPanel {
             }
         });
         add(listAtt);
-        add(jSeparator1);
 
         jLabel2.setText("Choisissez la nouvelle attribution : ");
         add(jLabel2);
@@ -146,7 +148,6 @@ public class rechAttrib extends javax.swing.JPanel {
 
         btnRemp.setText("Remplacant");
         add(btnRemp);
-        add(jSeparator2);
 
         modifAtt.setText("Modifier");
         modifAtt.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +210,8 @@ public class rechAttrib extends javax.swing.JPanel {
             eRech.setRemplacant(null);
             nvEns.setRemplacant(nvClasse);
 
-        } /*else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
+        }
+        /*else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
 
             error = true;
             JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -222,7 +224,7 @@ public class rechAttrib extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, msg, "Succès", JOptionPane.INFORMATION_MESSAGE
             );
         }
-        initPanel(); 
+        initPanel();
 
     }//GEN-LAST:event_modifAttActionPerformed
 
@@ -238,7 +240,7 @@ public class rechAttrib extends javax.swing.JPanel {
 
         }
 
-        initPanel(); 
+        initPanel();
 
     }//GEN-LAST:event_suppAttActionPerformed
 
@@ -250,8 +252,6 @@ public class rechAttrib extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JComboBox<Attribution> listAtt;
     private javax.swing.JComboBox<Classe> listClasse;
     private javax.swing.JComboBox<Enseignant> listEnseignant;

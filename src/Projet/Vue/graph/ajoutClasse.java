@@ -32,7 +32,12 @@ public class ajoutClasse extends javax.swing.JPanel {
      */
     public ajoutClasse() {
         initComponents();
-        this.setBackground(Color.ORANGE);
+        Color font = new Color(247, 223, 154);
+        Color b = new Color(147, 216, 136);
+        Color a = new Color(247, 104, 104);
+        this.setBackground(font);
+        valider.setBackground(b);
+        annuler.setBackground(a);
     }
 
     /**
@@ -53,7 +58,7 @@ public class ajoutClasse extends javax.swing.JPanel {
         valider = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(5, 5, 5, 5));
+        setLayout(new java.awt.GridLayout(4, 2, 2, 2));
 
         jLabel2.setText("Entrez le sigle de la classe :");
         add(jLabel2);
@@ -128,11 +133,11 @@ public class ajoutClasse extends javax.swing.JPanel {
             erreur = true;
             sigleClasse.setBackground(Color.red);
         }
-         if (sigle.length()>4) {
+        if (sigle.length() > 4) {
             erreur = true;
             sigleClasse.setBackground(Color.red);
             sigleClasse.setText("Le sigle doit contenir 4 caractères maximum !");
-            
+
         }
         String orientation = orientationClasse.getText();
         if (orientation.trim().equals("")) {
@@ -149,7 +154,7 @@ public class ajoutClasse extends javax.swing.JPanel {
         }
 
         if (!erreur) {
-            Classe classe = null; 
+            Classe classe = null;
             Classe.ClasseBuilder c = new Classe.ClasseBuilder();
             c.setSigle(sigle).setOrientation(orientation).setAnnee(annee);
             try {

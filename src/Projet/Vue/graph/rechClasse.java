@@ -42,7 +42,12 @@ public class rechClasse extends javax.swing.JPanel {
      */
     public rechClasse() {
         initComponents();
-        this.setBackground(Color.ORANGE);
+        Color font = new Color(247,223,154);
+        Color b = new Color(147, 216, 136);
+        Color a = new Color(247, 104, 104);
+        this.setBackground(font);
+        modif.setBackground(b);
+        delete.setBackground(a);
     }
 
     /**
@@ -80,7 +85,7 @@ public class rechClasse extends javax.swing.JPanel {
         modif = new javax.swing.JButton();
         delete = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(6, 3));
+        setLayout(new java.awt.GridLayout(5, 3));
 
         jLabel1.setText("Sélectionner la classe parmis la liste");
         add(jLabel1);
@@ -187,10 +192,12 @@ public class rechClasse extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
+        initPanel(); 
 
     }//GEN-LAST:event_modifActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+
 
         Object cla = listClasse.getSelectedItem();
         Classe aRech = cm.getClasse((Classe) cla);
@@ -201,7 +208,7 @@ public class rechClasse extends javax.swing.JPanel {
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Erreur de suppression", "Erreur", JOptionPane.INFORMATION_MESSAGE);
         }
-
+        initPanel();
     }//GEN-LAST:event_deleteActionPerformed
 
 

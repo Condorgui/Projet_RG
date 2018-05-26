@@ -79,11 +79,11 @@
     </Component>
     <Component class="Projet.Vue.graph.ajoutAttrib" name="ajoutAttrib4">
     </Component>
-    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+    <Menu class="javax.swing.JMenuBar" name="menub">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="MenuAjout">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ajout"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Ajout&lt;/b&gt;&lt;/html&gt;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="ajoutEnseignant">
@@ -91,7 +91,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\guill\Pictures\icone.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Enseignant"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Enseignant&lt;/b&gt;&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ajoutEnseignantActionPerformed"/>
@@ -102,7 +102,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\guill\Pictures\icone3.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Classe"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Classes&lt;/b&gt;&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ajoutClasseActionPerformed"/>
@@ -113,7 +113,8 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\guill\Pictures\icone4.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Attributions"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Attributions&lt;/b&gt;&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ajoutAttActionPerformed"/>
@@ -123,7 +124,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuModif">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Modifications"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Modifications&lt;/b&gt;&lt;/html&gt;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="modifEns">
@@ -131,7 +132,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\guill\Pictures\icone2.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Enseignants"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Enseignants&lt;/b&gt;&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifEnsActionPerformed"/>
@@ -142,7 +143,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\guill\Pictures\icone2.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Classe"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Classes&lt;/b&gt;&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifClasseActionPerformed"/>
@@ -153,7 +154,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\guill\Pictures\icone2.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Attribution"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Attributions&lt;/b&gt;&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifAttActionPerformed"/>
@@ -163,7 +164,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="affichage">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Affichages"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Affichages&lt;/b&gt;&lt;/html&gt;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="affListe">
@@ -171,7 +172,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\guill\Pictures\icone5.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Affichage des listes"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Affichage des listes&lt;/b&gt;&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="affListeActionPerformed"/>
@@ -189,7 +190,7 @@
     </Property>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="menub"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -216,8 +217,8 @@
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="2"/>
-        <Property name="horizontalGap" type="int" value="5"/>
+        <Property name="columns" type="int" value="3"/>
+        <Property name="horizontalGap" type="int" value="2"/>
         <Property name="rows" type="int" value="4"/>
       </Layout>
       <SubComponents>
@@ -225,15 +226,19 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="                       Bienvenue sur la page d&apos;accueil du gestionnaire "/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;b&gt;&lt;h1&gt; Bienvenue sur la page d&apos;accueil du gestionnaire &lt;/h1&gt;&lt;/b&gt; &lt;/html&gt;"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[15, 16]"/>
             </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="&lt;html&gt; &lt;b&gt;Bienvenue sur la page d&apos;accueil du gestionnaire &lt;/b&gt; &lt;/html&gt;"/>
+          </AccessibilityProperties>
         </Component>
         <Component class="javax.swing.JButton" name="modeJDBC">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Acc&#xe9;der au gestionnaire BDD"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Acc&#xe9;der au gestionnaire BDD&lt;/b&gt;&lt;/html&gt;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modeJDBCActionPerformed"/>
@@ -241,7 +246,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="modeListe">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Acc&#xe9;der au gestionnaire Liste"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Acc&#xe9;der au gestionnaire Liste&lt;/b&gt;&lt;/html&gt;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modeListeActionPerformed"/>

@@ -19,17 +19,11 @@ public class panelAccueil extends javax.swing.JPanel {
      */
     public panelAccueil() {
         initComponents();
-        logo = new JLabel();
-        
-        
+           logo = new JLabel();
+   
 
         logo.setIcon(new ImageIcon(getClass().getResource("/Images/logo1.png")));
         add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 10, 10));
-        
-      
-   
-
-  
     }
 
     /**
@@ -46,7 +40,7 @@ public class panelAccueil extends javax.swing.JPanel {
         jTextPane1 = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
 
         textField1.setText("textField1");
 
@@ -66,16 +60,22 @@ public class panelAccueil extends javax.swing.JPanel {
 
         jButton2.setText("Quitter");
 
-        setLayout(new java.awt.GridLayout(5, 5, 2, 5));
-        add(jSeparator1);
+        setLayout(null);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logoc.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(291, 188));
+        jLabel1.setMinimumSize(new java.awt.Dimension(291, 188));
+        jLabel1.setPreferredSize(new java.awt.Dimension(291, 188));
+        add(jLabel1);
+        jLabel1.setBounds(0, -20, 300, 120);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextPane jTextPane1;
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables

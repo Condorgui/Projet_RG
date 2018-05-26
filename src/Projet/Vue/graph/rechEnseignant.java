@@ -41,7 +41,12 @@ public class rechEnseignant extends javax.swing.JPanel {
      */
     public rechEnseignant() {
         initComponents();
-        this.setBackground(Color.ORANGE);
+        Color font = new Color(247,223,154);
+        Color b = new Color(147, 216, 136);
+        Color a = new Color(247, 104, 104);
+        this.setBackground(font);
+        modif.setBackground(b);
+        Supprimer.setBackground(a);
     }
 
     /**
@@ -175,6 +180,7 @@ public class rechEnseignant extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Erreur de suppression", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
+        initPanel(); 
 
 
     }//GEN-LAST:event_SupprimerActionPerformed
@@ -234,6 +240,7 @@ public class rechEnseignant extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "L'adresse mail doit être au format text@domaine.com", "Erreur du mail", JOptionPane.INFORMATION_MESSAGE);
             }
         }
+        initPanel();
 
     }//GEN-LAST:event_modifActionPerformed
 

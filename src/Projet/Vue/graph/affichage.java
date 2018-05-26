@@ -55,7 +55,9 @@ public class affichage extends javax.swing.JPanel {
     public affichage() {
 
         initComponents();
-        this.setBackground(Color.ORANGE);
+        Color font = new Color(247,223,154);
+        Color b = new Color(147,216,136);
+        this.setBackground(font);
 
     }
 

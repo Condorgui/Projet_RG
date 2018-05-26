@@ -32,7 +32,12 @@ public class ajoutEnseignant extends javax.swing.JPanel {
      */
     public ajoutEnseignant() {
         initComponents();
-        this.setBackground(Color.ORANGE);
+        Color font = new Color(247,223,154);
+        Color b = new Color(147, 216, 136);
+        Color a = new Color(247, 104, 104);
+        this.setBackground(font);
+        valider.setBackground(b);
+        annuler.setBackground(a);
     }
 
     /**
@@ -52,10 +57,10 @@ public class ajoutEnseignant extends javax.swing.JPanel {
         mailEns = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         matEns = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        valider = new javax.swing.JButton();
+        annuler = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(6, 5, 7, 8));
+        setLayout(new java.awt.GridLayout(5, 2, 7, 3));
 
         jLabel1.setText("Entrez le nom de l'enseignant : ");
         add(jLabel1);
@@ -76,24 +81,24 @@ public class ajoutEnseignant extends javax.swing.JPanel {
         add(jLabel4);
         add(matEns);
 
-        jButton1.setText("Valider");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        valider.setText("Valider");
+        valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                validerActionPerformed(evt);
             }
         });
-        add(jButton1);
+        add(valider);
 
-        jButton2.setText("Annuler");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        annuler.setText("Annuler");
+        annuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                annulerActionPerformed(evt);
             }
         });
-        add(jButton2);
+        add(annuler);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
         nomEns.setText("");
         prenomEns.setText("");
         mailEns.setText("");
@@ -102,9 +107,9 @@ public class ajoutEnseignant extends javax.swing.JPanel {
         prenomEns.setBackground(Color.white);
         mailEns.setBackground(Color.white);
         matEns.setBackground(Color.white);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_annulerActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
         nomEns.setBackground(Color.white);
         prenomEns.setBackground(Color.white);
         mailEns.setBackground(Color.white);
@@ -137,7 +142,7 @@ public class ajoutEnseignant extends javax.swing.JPanel {
             matEns.setBackground(Color.red);
 
         }
-        if(mat.length()>4){
+        if (mat.length() > 4) {
             erreurmat = true;
             matEns.setBackground(Color.red);
             matEns.setText("Le matricule doit faire 4 caractères !");
@@ -146,6 +151,7 @@ public class ajoutEnseignant extends javax.swing.JPanel {
             Enseignant e = new Enseignant(mat, nom, prenom, mail);
             //JOptionPane.showMessageDialog(this, e);
             String msg = cm.ajouterEnseignant(e);
+
             JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (erreur) {
@@ -154,15 +160,13 @@ public class ajoutEnseignant extends javax.swing.JPanel {
             if (erreurmail) {
                 JOptionPane.showMessageDialog(this, "L'adresse mail doit être au format text@domaine.com", "Erreur du mail", JOptionPane.INFORMATION_MESSAGE);
             }
-            
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_validerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton annuler;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -171,5 +175,6 @@ public class ajoutEnseignant extends javax.swing.JPanel {
     private javax.swing.JTextField matEns;
     private javax.swing.JTextField nomEns;
     private javax.swing.JTextField prenomEns;
+    private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 }

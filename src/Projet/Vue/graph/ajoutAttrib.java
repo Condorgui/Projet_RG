@@ -52,7 +52,12 @@ public class ajoutAttrib extends javax.swing.JPanel {
      */
     public ajoutAttrib() {
         initComponents();
-        this.setBackground(Color.ORANGE);
+        Color font = new Color(247,223,154);
+        Color b = new Color(147,216,136);
+        Color a = new Color(247,104,104);
+        this.setBackground(font);
+        ajoutAttrib.setBackground(b);
+        bAnnuler.setBackground(a); 
     }
 
     /**
@@ -74,11 +79,11 @@ public class ajoutAttrib extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         listClasse = new javax.swing.JComboBox<>();
         ajoutAttrib = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        bAnnuler = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
-        setLayout(new java.awt.GridLayout(5, 5, 4, 33));
+        setLayout(new java.awt.GridLayout(4, 5, 4, 33));
 
         jLabel2.setText("Liste des enseignants disponibles");
         add(jLabel2);
@@ -119,12 +124,13 @@ public class ajoutAttrib extends javax.swing.JPanel {
         });
         add(ajoutAttrib);
 
-        jButton2.setText("Annuler");
-        add(jButton2);
+        bAnnuler.setText("Annuler");
+        add(bAnnuler);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ajoutAttribActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutAttribActionPerformed
 
+        this.setBackground(Color.red);
         Object ens = listEns.getSelectedItem();
         Enseignant enseignant = cm.getEnseignant((Enseignant) ens);
         Object cla = listClasse.getSelectedItem();
@@ -246,10 +252,10 @@ public class ajoutAttrib extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ajoutAttrib;
+    private javax.swing.JButton bAnnuler;
     private javax.swing.JCheckBox btnRemp;
     private javax.swing.JCheckBox btnTitu;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

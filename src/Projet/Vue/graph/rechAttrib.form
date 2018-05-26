@@ -15,8 +15,8 @@
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-    <Property name="columns" type="int" value="3"/>
-    <Property name="rows" type="int" value="13"/>
+    <Property name="columns" type="int" value="2"/>
+    <Property name="rows" type="int" value="11"/>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -37,8 +37,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Attribution&gt;"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -84,8 +82,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Remplacant"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
     <Component class="javax.swing.JButton" name="modifAtt">
       <Properties>

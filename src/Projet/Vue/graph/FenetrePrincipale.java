@@ -25,10 +25,15 @@ public class FenetrePrincipale extends javax.swing.JFrame {
      */
     public FenetrePrincipale() {
         initComponents();
-        this.setBackground(Color.ORANGE);
         setTitle("Projet Java");
+        this.MenuAjout.setEnabled(false);
+        this.MenuModif.setEnabled(false);
+        this.affichage.setEnabled(false);
+        Color c1 = new Color(234,204,89);
+        Color c2 = new Color(170,234,147);
+        modeJDBC.setBackground(c1);
+        modeListe.setBackground(c2);
 
-   
     }
 
     /**
@@ -70,7 +75,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         rechClasse3 = new Projet.Vue.graph.rechClasse();
         ajoutAttrib2 = new Projet.Vue.graph.ajoutAttrib();
         rechAttrib5 = new Projet.Vue.graph.rechAttrib();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menub = new javax.swing.JMenuBar();
         MenuAjout = new javax.swing.JMenu();
         ajoutEnseignant = new javax.swing.JMenuItem();
         ajoutClasse = new javax.swing.JMenuItem();
@@ -116,14 +121,16 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 153, 102));
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        accueil.setLayout(new java.awt.GridLayout(4, 2, 5, 0));
+        accueil.setLayout(new java.awt.GridLayout(4, 3, 2, 0));
         accueil.add(panelAccueil1);
 
-        jLabel2.setText("                       Bienvenue sur la page d'accueil du gestionnaire ");
+        jLabel2.setText("<html> <b><h1> Bienvenue sur la page d'accueil du gestionnaire </h1></b> </html>");
+        jLabel2.setAutoscrolls(true);
         jLabel2.setMaximumSize(new java.awt.Dimension(15, 16));
         accueil.add(jLabel2);
+        jLabel2.getAccessibleContext().setAccessibleName("<html> <b>Bienvenue sur la page d'accueil du gestionnaire </b> </html>");
 
-        modeJDBC.setText("Accéder au gestionnaire BDD");
+        modeJDBC.setText("<html><b>Accéder au gestionnaire BDD</b></html>");
         modeJDBC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modeJDBCActionPerformed(evt);
@@ -131,7 +138,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         accueil.add(modeJDBC);
 
-        modeListe.setText("Accéder au gestionnaire Liste");
+        modeListe.setText("<html><b>Accéder au gestionnaire Liste</b></html>");
         modeListe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modeListeActionPerformed(evt);
@@ -151,10 +158,10 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         getContentPane().add(ajoutAttrib2, "card8");
         getContentPane().add(rechAttrib5, "card9");
 
-        MenuAjout.setText("Ajout");
+        MenuAjout.setText("<html><b>Ajout</b></html>");
 
         ajoutEnseignant.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone.png")); // NOI18N
-        ajoutEnseignant.setText("Enseignant");
+        ajoutEnseignant.setText("<html><b>Enseignant</b></html>");
         ajoutEnseignant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ajoutEnseignantActionPerformed(evt);
@@ -163,7 +170,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         MenuAjout.add(ajoutEnseignant);
 
         ajoutClasse.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone3.png")); // NOI18N
-        ajoutClasse.setText("Classe");
+        ajoutClasse.setText("<html><b>Classes</b></html>");
         ajoutClasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ajoutClasseActionPerformed(evt);
@@ -172,7 +179,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         MenuAjout.add(ajoutClasse);
 
         ajoutAtt.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone4.png")); // NOI18N
-        ajoutAtt.setText("Attributions");
+        ajoutAtt.setText("<html><b>Attributions</b></html>");
+        ajoutAtt.setToolTipText("");
         ajoutAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ajoutAttActionPerformed(evt);
@@ -180,12 +188,12 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         MenuAjout.add(ajoutAtt);
 
-        jMenuBar1.add(MenuAjout);
+        menub.add(MenuAjout);
 
-        MenuModif.setText("Modifications");
+        MenuModif.setText("<html><b>Modifications</b></html>");
 
         modifEns.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
-        modifEns.setText("Enseignants");
+        modifEns.setText("<html><b>Enseignants</b></html>");
         modifEns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modifEnsActionPerformed(evt);
@@ -194,7 +202,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         MenuModif.add(modifEns);
 
         modifClasse.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
-        modifClasse.setText("Classe");
+        modifClasse.setText("<html><b>Classes</b></html>");
         modifClasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modifClasseActionPerformed(evt);
@@ -203,7 +211,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         MenuModif.add(modifClasse);
 
         modifAtt.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone2.png")); // NOI18N
-        modifAtt.setText("Attribution");
+        modifAtt.setText("<html><b>Attributions</b></html>");
         modifAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modifAttActionPerformed(evt);
@@ -211,12 +219,12 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         MenuModif.add(modifAtt);
 
-        jMenuBar1.add(MenuModif);
+        menub.add(MenuModif);
 
-        affichage.setText("Affichages");
+        affichage.setText("<html><b>Affichages</b></html>");
 
         affListe.setIcon(new javax.swing.ImageIcon("C:\\Users\\guill\\Pictures\\icone5.png")); // NOI18N
-        affListe.setText("Affichage des listes");
+        affListe.setText("<html><b>Affichage des listes</b></html>");
         affListe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 affListeActionPerformed(evt);
@@ -224,18 +232,19 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         affichage.add(affListe);
 
-        jMenuBar1.add(affichage);
+        menub.add(affichage);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menub);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void modifEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifEnsActionPerformed
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card6");
         rechEnseignant1.initPanel();
+
     }//GEN-LAST:event_modifEnsActionPerformed
 
     private void modifClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifClasseActionPerformed
@@ -245,7 +254,10 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     }//GEN-LAST:event_modifClasseActionPerformed
 
     private void modeJDBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeJDBCActionPerformed
-
+        setTitle("Projet Java - JDBC");
+        this.MenuAjout.setEnabled(true);
+        this.MenuModif.setEnabled(true);
+        this.affichage.setEnabled(true);
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card2");
         JOptionPane.showMessageDialog(this, "Bienvenue sur le mode JDBC", "Résultat", JOptionPane.INFORMATION_MESSAGE);
@@ -262,6 +274,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         ajoutAttrib2.initPanel();
         rechAttrib5.setModele(cm);
         rechAttrib5.initPanel();
+
+
     }//GEN-LAST:event_modeJDBCActionPerformed
 
     private void affListeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_affListeActionPerformed
@@ -293,7 +307,11 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     }//GEN-LAST:event_modifAttActionPerformed
 
     private void modeListeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeListeActionPerformed
+        setTitle("Projet Java - Liste");
         ClasseModele cm = ClasseModele.getInstance();
+        this.MenuAjout.setEnabled(true);
+        this.MenuModif.setEnabled(true);
+        this.affichage.setEnabled(true);
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(this.getContentPane(), "card2");
         cm.populate();
@@ -367,13 +385,13 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JMenuBar menub;
     private javax.swing.JButton modeJDBC;
     private javax.swing.JButton modeListe;
     private javax.swing.JMenuItem modifAtt;
