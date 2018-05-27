@@ -9,6 +9,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import Projet.Modele.*;
 import Projet.Metier.*;
+import java.awt.HeadlessException;
 
 /**
  *
@@ -31,13 +32,15 @@ public class ajoutEnseignant extends javax.swing.JPanel {
      * Creates new form ajoutEnseignant
      */
     public ajoutEnseignant() {
+
         initComponents();
-        Color font = new Color(247,223,154);
+        Color font = new Color(247, 223, 154);
         Color b = new Color(147, 216, 136);
         Color a = new Color(247, 104, 104);
         this.setBackground(font);
         valider.setBackground(b);
         annuler.setBackground(a);
+     
     }
 
     /**
@@ -147,13 +150,21 @@ public class ajoutEnseignant extends javax.swing.JPanel {
             matEns.setBackground(Color.red);
             matEns.setText("Le matricule doit faire 4 caractères !");
         }
-        if (!erreur && !erreurmail) {
-            Enseignant e = new Enseignant(mat, nom, prenom, mail);
-            //JOptionPane.showMessageDialog(this, e);
-            String msg = cm.ajouterEnseignant(e);
 
-            JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
-        } else {
+        if (!erreur && !erreurmail) {
+            try {
+                Enseignant e = new Enseignant(mat, nom, prenom, mail);
+                //JOptionPane.showMessageDialog(this, e);
+                String msg = cm.ajouterEnseignant(e);
+
+                JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "Erreur d'ajout", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+            }
+    }//GEN-LAST:event_validerActionPerformed
+        else {
             if (erreur) {
                 JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
@@ -162,9 +173,8 @@ public class ajoutEnseignant extends javax.swing.JPanel {
             }
 
         }
-    }//GEN-LAST:event_validerActionPerformed
 
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private javax.swing.JLabel jLabel1;

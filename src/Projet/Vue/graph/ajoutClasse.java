@@ -145,12 +145,19 @@ public class ajoutClasse extends javax.swing.JPanel {
             orientationClasse.setBackground(Color.red);
         }
         int annee = 0;
+        
         String year = anneeClasse.getText();
         try {
+            
             annee = Integer.parseInt(year);
+            if(annee <1 || annee > 8){
+                erreur = true; 
+                anneeClasse.setBackground(Color.red);
+            }
         } catch (NumberFormatException e) {
             erreur = true;
             anneeClasse.setBackground(Color.red);
+            JOptionPane.showMessageDialog(this, "L'année doit être un chiffre entre 1 et 8", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
 
         if (!erreur) {

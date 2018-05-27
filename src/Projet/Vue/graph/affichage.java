@@ -229,15 +229,15 @@ public class affichage extends javax.swing.JPanel {
 
         enseignants.forEach((Enseignant e) -> {
             if (e.getTitulaire() != null) {
-                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + " l'adresse mail : " + e.getMail() + " titulaire : " + e.getTitulaire());
+                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " | n° " + e.getMatricule() + " | mail : " + e.getMail() + " | titulaire : " + e.getTitulaire());
 
             }
             if (e.getRemplacant() != null) {
-                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + " l'adresse mail : " + e.getMail() + " remplaçant : " + e.getRemplacant());
+                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " | n° " + e.getMatricule() + " | mail : " + e.getMail() + " | remplaçant : " + e.getRemplacant());
 
             }
             if (e.getRemplacant() == null && e.getTitulaire() == null) {
-                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " au matricule " + e.getMatricule() + ", l'adresse mail : " + e.getMail() + " sans attributions ");
+                listeEns.addItem(e.getNom() + " " + e.getPrenom() + " | n° " + e.getMatricule() + " | mail : " + e.getMail() + " | sans attributions ");
 
             }
         });
@@ -247,7 +247,7 @@ public class affichage extends javax.swing.JPanel {
         };
          */
         classes.forEach((c) -> {
-            listClasses.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " et d'orientation " + c.getOrientation());
+            listClasses.addItem("Classe :  " + c.getSigle() + " de " + c.getAnnee() + "ème/ère année " + " | Orientation " + c.getOrientation());
         });
         attributions.forEach((Attribution a) -> {
             if (a.getEnseignant().getTitulaire() != null) {

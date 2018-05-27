@@ -115,7 +115,7 @@ public class Attribution {
      */
     @Override
     public String toString() {
-        return "Classe : "+Classe+" dont l'enseignant est : "+Enseignant + "\n";
+        return " "+Classe+" son enseignant est : "+Enseignant + "\n";
     }
 
 }

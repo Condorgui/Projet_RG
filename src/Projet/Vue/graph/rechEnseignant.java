@@ -41,9 +41,10 @@ public class rechEnseignant extends javax.swing.JPanel {
      */
     public rechEnseignant() {
         initComponents();
-        Color font = new Color(247,223,154);
+        Color font = new Color(247, 223, 154);
         Color b = new Color(147, 216, 136);
         Color a = new Color(247, 104, 104);
+
         this.setBackground(font);
         modif.setBackground(b);
         Supprimer.setBackground(a);
@@ -61,6 +62,15 @@ public class rechEnseignant extends javax.swing.JPanel {
         enseignants.forEach((e) -> {
             listEns.addItem(e);
         });
+        nomEns.setText("");
+        prenomEns.setText("");
+        mailEns.setText("");
+        matEns.setText("");
+        nomEns.setBackground(Color.white);
+        prenomEns.setBackground(Color.white);
+        mailEns.setBackground(Color.white);
+        matEns.setBackground(Color.white);
+      
 
     }
 
@@ -107,6 +117,9 @@ public class rechEnseignant extends javax.swing.JPanel {
         jLabel3.setText("Sélectionner l'enseignant parmis la liste");
         add(jLabel3);
 
+        listEns.setForeground(new java.awt.Color(255, 110, 3));
+        listEns.setMaximumRowCount(15);
+        listEns.setAutoscrolls(true);
         listEns.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listEnsMouseClicked(evt);
@@ -180,7 +193,7 @@ public class rechEnseignant extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Erreur de suppression", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
-        initPanel(); 
+        initPanel();
 
 
     }//GEN-LAST:event_SupprimerActionPerformed
@@ -194,7 +207,8 @@ public class rechEnseignant extends javax.swing.JPanel {
 
         boolean erreur = false;
         boolean erreurmail = false;
-        boolean erreurmat = false; 
+        boolean erreurmat = false;
+        boolean erreurattrib = false; 
 
         String nom = nomEns.getText();
         if (nom.trim().equals("")) {
@@ -219,19 +233,29 @@ public class rechEnseignant extends javax.swing.JPanel {
             erreur = true;
             matEns.setBackground(Color.red);
         }
-        if(mat.length()>4){
+        if (mat.length() > 4) {
             erreurmat = true;
             matEns.setBackground(Color.red);
             matEns.setText("Le matricule doit faire 4 caractères !");
         }
+        if(tmpE.getRemplacant() != null || tmpE.getTitulaire() != null){
+            erreurattrib = true; 
+            
+        }
 
-        if (!erreur && !erreurmail) {
+        if (!erreur && !erreurmail && !erreurmat && !erreurattrib) {
+            try {
+                Enseignant newEns = new Enseignant(mat, nom, prenom, mail);
+                //JOptionPane.showMessageDialog(this, newEns, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(this, e, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+                String msg = cm.modifyE(newEns, tmpE);
+                JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+                
 
-            Enseignant newEns = new Enseignant(mat, nom, prenom, mail);
-            //JOptionPane.showMessageDialog(this, newEns, "Résultat", JOptionPane.INFORMATION_MESSAGE);
-            //JOptionPane.showMessageDialog(this, e, "Résultat", JOptionPane.INFORMATION_MESSAGE);
-            String msg = cm.modifyE(newEns, tmpE);
-            JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "Erreur d'ajout", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+            }
         } else {
             if (erreur) {
                 JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -239,6 +263,15 @@ public class rechEnseignant extends javax.swing.JPanel {
             if (erreurmail) {
                 JOptionPane.showMessageDialog(this, "L'adresse mail doit être au format text@domaine.com", "Erreur du mail", JOptionPane.INFORMATION_MESSAGE);
             }
+            if (erreurmat) {
+                    JOptionPane.showMessageDialog(this, "Le matricule doit être composé de 4 chiffres !", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+            if(erreurattrib){
+                JOptionPane.showMessageDialog(this,"Supprimez d'abord les attributions ", "Résultat", JOptionPane.INFORMATION_MESSAGE);
+  
+            }
+
         }
         initPanel();
 

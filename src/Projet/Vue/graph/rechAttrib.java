@@ -120,7 +120,7 @@ public class rechAttrib extends javax.swing.JPanel {
 
         setLayout(new java.awt.GridLayout(11, 2));
 
-        jLabel1.setText("Sélectionner l'attribution à modifier parmis la liste :");
+        jLabel1.setText("<html><b>Sélectionner l'attribution à modifier parmis la liste :</b></html>");
         add(jLabel1);
 
         listAtt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,7 +135,7 @@ public class rechAttrib extends javax.swing.JPanel {
         });
         add(listAtt);
 
-        jLabel2.setText("Choisissez la nouvelle attribution : ");
+        jLabel2.setText("<html><b>Choisissez la nouvelle attribution : </b></html>");
         add(jLabel2);
 
         jLabel3.setText("Liste des classes : ");
@@ -219,6 +219,12 @@ public class rechAttrib extends javax.swing.JPanel {
             
             
             
+
+        }
+         if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
+
+            error = true;
+            JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
         /*else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {

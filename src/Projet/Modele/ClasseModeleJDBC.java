@@ -80,7 +80,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     public List<Enseignant> tousEns() {
         //mode = soit tri par numéro chassis soit par prix soit par prenom
 
-        String query = "select * from ENSEIGNANT order by MATRICULE";
+        String query = "select * from ENSEIGNANT order by NOM";
         List<Enseignant> le = new ArrayList<>();
         try (Statement stm = dbconnect.createStatement(); ResultSet rs = stm.executeQuery(query)) {
 
@@ -123,7 +123,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     public List<Attribution> toutesLesAttributions() {
         //mode = soit tri par numéro chassis soit par prix soit par prenom
 
-        String query = "select * from ATTRIBUTION";
+        String query = "select * from ATTRIBUTION order by MATRICULE";
         List<Attribution> la = new ArrayList<>();
 
         try (PreparedStatement stm = dbconnect.prepareStatement(query);
@@ -154,7 +154,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     @Override
     public List<Classe> toutesClasses() {
 
-        String query = "select * from CLASSE order by SIGLE";
+        String query = "select * from CLASSE order by ORIENTATION";
         List<Classe> lc = new ArrayList<>();
 
         try (Statement stm = dbconnect.createStatement();

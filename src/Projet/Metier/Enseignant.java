@@ -185,9 +185,9 @@ public class Enseignant extends Sujet{
      */
     @Override
     public String toString() {
-        return "  Enseignant " + nom + " " + prenom + " son adresse mail : "+mail+ " et son matricule " + matricule + "\n" +
-                " -- Titulaire de la classe : " + Titulaire +"\n" +
-                " -- Remplacant de la classe : " + Remplacant +"\n\n";
+        return "  " + nom + " " + prenom + " | mail : "+mail+ " | n° " + matricule + "\n" +
+                " | Titulaire : " + Titulaire +"\n" +
+                " | Remplacant : " + Remplacant +"\n\n";
     }
 
     /**

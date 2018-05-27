@@ -170,6 +170,10 @@ public class rechClasse extends javax.swing.JPanel {
         String year = anneeClasse.getText();
         try {
             annee = Integer.parseInt(year);
+            if(annee <1 || annee > 8){
+                erreur = true; 
+                anneeClasse.setBackground(Color.red);
+            }
         } catch (NumberFormatException e) {
             erreur = true;
             anneeClasse.setBackground(Color.red);

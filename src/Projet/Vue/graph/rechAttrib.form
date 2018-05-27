@@ -21,7 +21,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xe9;lectionner l&apos;attribution &#xe0; modifier parmis la liste :"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;S&#xe9;lectionner l&apos;attribution &#xe0; modifier parmis la liste :&lt;/b&gt;&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="listAtt">
@@ -40,7 +40,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Choisissez la nouvelle attribution : "/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Choisissez la nouvelle attribution : &lt;/b&gt;&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
