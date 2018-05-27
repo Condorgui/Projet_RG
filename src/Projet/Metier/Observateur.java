@@ -12,7 +12,7 @@ public interface Observateur {
     
     /**
      *
-     * @param texte
+     * @param texte à envoyer
      */
     public void actualise(String texte);
     

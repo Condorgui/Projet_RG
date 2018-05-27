@@ -50,10 +50,10 @@ public class Enseignant extends Sujet{
     /**
      * Constructeur paramétré
      *
-     * @param matricule
-     * @param nom
+     * @param matricule le matricule de l'ens
+     * @param nom le nom de l'ens
      * @param prenom Le statut Titulaire ou Remplacant doit lui être affecté
-     * @param mail
+     * @param mail le mail de l'ens
      */
     public Enseignant(String matricule, String nom, String prenom, String mail) {
         this.matricule = matricule;
@@ -144,8 +144,8 @@ public class Enseignant extends Sujet{
     }
 
     /**
-     *
-     * @param mail
+     * setter du mail
+     * @param mail le mail 
      */
     public void setMail(String mail) {
         this.mail = mail;
@@ -205,7 +205,7 @@ public class Enseignant extends Sujet{
     /**
      * Méthode equals
      *
-     * @param obj
+     * @param obj l'objet à comparer
      * @return résultat de la comparaison
      */
     @Override

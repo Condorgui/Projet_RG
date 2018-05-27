@@ -28,9 +28,9 @@ public class rechClasse extends javax.swing.JPanel {
     public List<Classe> classes;
 
     /**
-     * set le modèle JDBC
+     * set le modèle 
      *
-     * @param cm
+     * @param cm le modèle à set
      */
     public void setModele(ClasseModele cm) {
 
@@ -42,7 +42,7 @@ public class rechClasse extends javax.swing.JPanel {
      */
     public rechClasse() {
         initComponents();
-        Color font = new Color(247,223,154);
+        Color font = new Color(247, 223, 154);
         Color b = new Color(147, 216, 136);
         Color a = new Color(247, 104, 104);
         this.setBackground(font);
@@ -115,6 +115,14 @@ public class rechClasse extends javax.swing.JPanel {
         add(orientationClasse);
 
         modif.setText("Modifier");
+        modif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modifMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modifMouseExited(evt);
+            }
+        });
         modif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modifActionPerformed(evt);
@@ -123,7 +131,15 @@ public class rechClasse extends javax.swing.JPanel {
         add(modif);
 
         delete.setText("Supprimer");
-        delete.setToolTipText("");
+        delete.setToolTipText("La suppression est définitive  ");
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteMouseExited(evt);
+            }
+        });
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteActionPerformed(evt);
@@ -151,11 +167,11 @@ public class rechClasse extends javax.swing.JPanel {
         boolean erreursigle = false;
 
         String sigle = sigleClasse.getText().toUpperCase();
-        if (sigle.length()>4) {
+        if (sigle.length() > 4) {
             erreur = true;
             sigleClasse.setBackground(Color.red);
             sigleClasse.setText("Le sigle doit contenir 4 caractères maximum !");
-            
+
         }
         if (sigle.length() > 4) {
             erreursigle = true;
@@ -170,8 +186,8 @@ public class rechClasse extends javax.swing.JPanel {
         String year = anneeClasse.getText();
         try {
             annee = Integer.parseInt(year);
-            if(annee <1 || annee > 8){
-                erreur = true; 
+            if (annee < 1 || annee > 8) {
+                erreur = true;
                 anneeClasse.setBackground(Color.red);
             }
         } catch (NumberFormatException e) {
@@ -179,7 +195,6 @@ public class rechClasse extends javax.swing.JPanel {
             anneeClasse.setBackground(Color.red);
         }
 
-        
         if (!erreur) {
 
             Classe.ClasseBuilder c = new Classe.ClasseBuilder();
@@ -196,12 +211,11 @@ public class rechClasse extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
-        initPanel(); 
+        initPanel();
 
     }//GEN-LAST:event_modifActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-
 
         Object cla = listClasse.getSelectedItem();
         Classe aRech = cm.getClasse((Classe) cla);
@@ -214,6 +228,26 @@ public class rechClasse extends javax.swing.JPanel {
         }
         initPanel();
     }//GEN-LAST:event_deleteActionPerformed
+
+    private void modifMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifMouseEntered
+        Color b = new Color(138, 254, 71);
+        modif.setBackground(b);
+    }//GEN-LAST:event_modifMouseEntered
+
+    private void modifMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifMouseExited
+        Color b = new Color(147, 216, 136);
+        modif.setBackground(b);
+    }//GEN-LAST:event_modifMouseExited
+
+    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
+        Color a = new Color(243, 49, 49);
+        delete.setBackground(a);
+    }//GEN-LAST:event_deleteMouseEntered
+
+    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
+        Color a = new Color(247, 104, 104);
+        delete.setBackground(a);
+    }//GEN-LAST:event_deleteMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

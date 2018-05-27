@@ -19,8 +19,8 @@ public class ajoutClasse extends javax.swing.JPanel {
     private ClasseModele cm;
 
     /**
-     *
-     * @param cm
+     * Setter du modèle
+     * @param cm le modèle à set
      */
     public void setModele(ClasseModele cm) {
 
@@ -88,6 +88,14 @@ public class ajoutClasse extends javax.swing.JPanel {
         add(anneeClasse);
 
         valider.setText("Valider");
+        valider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                validerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                validerMouseExited(evt);
+            }
+        });
         valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 validerActionPerformed(evt);
@@ -96,6 +104,14 @@ public class ajoutClasse extends javax.swing.JPanel {
         add(valider);
 
         annuler.setText("Annuler");
+        annuler.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                annulerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                annulerMouseExited(evt);
+            }
+        });
         annuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 annulerActionPerformed(evt);
@@ -145,13 +161,13 @@ public class ajoutClasse extends javax.swing.JPanel {
             orientationClasse.setBackground(Color.red);
         }
         int annee = 0;
-        
+
         String year = anneeClasse.getText();
         try {
-            
+
             annee = Integer.parseInt(year);
-            if(annee <1 || annee > 8){
-                erreur = true; 
+            if (annee < 1 || annee > 8) {
+                erreur = true;
                 anneeClasse.setBackground(Color.red);
             }
         } catch (NumberFormatException e) {
@@ -177,6 +193,27 @@ public class ajoutClasse extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_validerActionPerformed
+
+    private void validerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_validerMouseEntered
+
+        Color b = new Color(138, 254, 71);
+        valider.setBackground(b);
+    }//GEN-LAST:event_validerMouseEntered
+
+    private void validerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_validerMouseExited
+        Color b = new Color(147, 216, 136);
+        valider.setBackground(b);
+    }//GEN-LAST:event_validerMouseExited
+
+    private void annulerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_annulerMouseEntered
+        Color a = new Color(243, 49, 49);
+        annuler.setBackground(a);
+    }//GEN-LAST:event_annulerMouseEntered
+
+    private void annulerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_annulerMouseExited
+        Color a = new Color(247, 104, 104);
+        annuler.setBackground(a);
+    }//GEN-LAST:event_annulerMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

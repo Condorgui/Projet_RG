@@ -37,10 +37,12 @@ public class ajoutAttrib extends javax.swing.JPanel {
     public List<Attribution> attributions;
 
     private ClasseModele cm;
+    
+
 
     /**
-     *
-     * @param cm
+     * Setter du modèle
+     * @param cm le modèle à set
      */
     public void setModele(ClasseModele cm) {
 
@@ -51,6 +53,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
      *
      */
     public ajoutAttrib() {
+     
         initComponents();
         Color font = new Color(247, 223, 154);
         Color b = new Color(147, 216, 136);
@@ -83,7 +86,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
         jLabel1.setText("jLabel1");
 
-        setLayout(new java.awt.GridLayout(4, 5, 4, 33));
+        setLayout(new java.awt.GridLayout(4, 5, 2, 8));
 
         jLabel2.setText("Liste des enseignants disponibles");
         add(jLabel2);
@@ -117,6 +120,15 @@ public class ajoutAttrib extends javax.swing.JPanel {
         add(listClasse);
 
         ajoutAttrib.setText("Ajouter");
+        ajoutAttrib.setToolTipText("");
+        ajoutAttrib.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ajoutAttribMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ajoutAttribMouseExited(evt);
+            }
+        });
         ajoutAttrib.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ajoutAttribActionPerformed(evt);
@@ -125,6 +137,14 @@ public class ajoutAttrib extends javax.swing.JPanel {
         add(ajoutAttrib);
 
         bAnnuler.setText("Annuler");
+        bAnnuler.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bAnnulerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bAnnulerMouseExited(evt);
+            }
+        });
         add(bAnnuler);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -224,7 +244,8 @@ public class ajoutAttrib extends javax.swing.JPanel {
     }//GEN-LAST:event_ajoutAttribActionPerformed
 
     private void btnTituActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTituActionPerformed
-        // TODO add your handling code here:
+     
+        
     }//GEN-LAST:event_btnTituActionPerformed
 
     private void btnTituStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnTituStateChanged
@@ -234,6 +255,27 @@ public class ajoutAttrib extends javax.swing.JPanel {
     private void btnRempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRempActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRempActionPerformed
+
+    private void ajoutAttribMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ajoutAttribMouseEntered
+        Color b = new Color(138, 254, 71);
+        ajoutAttrib.setBackground(b);
+    }//GEN-LAST:event_ajoutAttribMouseEntered
+
+    private void ajoutAttribMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ajoutAttribMouseExited
+        Color b = new Color(147, 216, 136);
+        ajoutAttrib.setBackground(b);
+    }//GEN-LAST:event_ajoutAttribMouseExited
+
+    private void bAnnulerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bAnnulerMouseEntered
+
+        Color a = new Color(243, 49, 49);
+        bAnnuler.setBackground(a);
+    }//GEN-LAST:event_bAnnulerMouseEntered
+
+    private void bAnnulerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bAnnulerMouseExited
+        Color a = new Color(247, 104, 104);
+        bAnnuler.setBackground(a);
+    }//GEN-LAST:event_bAnnulerMouseExited
 
     /**
      *

@@ -241,7 +241,7 @@ public class ClasseModele {
      *
      * @param aDel l'attribution à supprimer La méthode vérifie que
      * l'attribution existe Si un enseignant est titulaire ou remplacant de
-     * l'attribution -> réinitialise le statut de titulaire ou remplacant de
+     * l'attribution réinitialise le statut de titulaire ou remplacant de
      * l'enseignant à null
      * @return le résultat de la suppression Aide de Gaetan Soudant pour la
      * suppression

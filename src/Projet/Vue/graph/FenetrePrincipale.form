@@ -241,15 +241,9 @@
             <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Acc&#xe9;der au gestionnaire BDD&lt;/b&gt;&lt;/html&gt;"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="modeJDBCMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="modeJDBCMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modeJDBCActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="modeListe">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Acc&#xe9;der au gestionnaire Liste&lt;/b&gt;&lt;/html&gt;"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modeListeActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

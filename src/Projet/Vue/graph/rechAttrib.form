@@ -88,14 +88,19 @@
         <Property name="text" type="java.lang.String" value="Modifier"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="modifAttMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="modifAttMouseExited"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifAttActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="suppAtt">
       <Properties>
         <Property name="text" type="java.lang.String" value="Supprimer"/>
+        <Property name="toolTipText" type="java.lang.String" value="La suppression est d&#xe9;finitive  "/>
       </Properties>
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suppAttMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="suppAttMouseExited"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="suppAttActionPerformed"/>
       </Events>
     </Component>

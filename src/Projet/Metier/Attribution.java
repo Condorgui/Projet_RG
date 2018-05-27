@@ -30,8 +30,8 @@ public class Attribution {
     
     /**
      * Constructeur paramétré 
-     * @param classe
-     * @param enseignant
+     * @param classe la classe à attribuer
+     * @param enseignant l'enseignant à attribuer
      */
     public Attribution (Classe classe, Enseignant enseignant){
         
@@ -51,7 +51,7 @@ public class Attribution {
     /**
      * Setter de la classe
      *
-     * @param Classe
+     * @param Classe la classe à set
      */
     public void setClasse(Classe Classe) {
         this.Classe = Classe;
@@ -69,7 +69,7 @@ public class Attribution {
     /**
      * Setter de l'enseignant
      *
-     * @param enseignant
+     * @param enseignant l'enseignant à set
      */
     public void setEnseignant(Enseignant enseignant) {
         this.Enseignant = enseignant;
@@ -88,9 +88,9 @@ public class Attribution {
     }
 
     /**
-     * Méthode equals param obj
+     * Méthode equals
      *
-     * @param obj
+     * @param obj l'object à comparer
      * @return résultat de comparaison de l'obj
      */
     @Override

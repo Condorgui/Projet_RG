@@ -41,8 +41,8 @@ public class affichage extends javax.swing.JPanel {
     private ClasseModele cm;
 
     /**
-     *
-     * @param cm
+     * Setter du modèle
+     * @param cm le modèle à set
      */
     public void setModele(ClasseModele cm) {
 

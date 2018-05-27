@@ -15,7 +15,7 @@ public class DBConnection {
      
     /**
      * Méthode connection à Oracle
-     * @return
+     * @return la connexion ou null
      */
     public static Connection getConnection() {
         if (dbConnect!=null)return dbConnect;

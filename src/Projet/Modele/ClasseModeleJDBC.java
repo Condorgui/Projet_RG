@@ -45,7 +45,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     /**
      * Méthode qui récupère l'instance du modèle (ici JDBC)
      *
-     * @return
+     * @return le modèle à instancier
      */
     public static ClasseModeleJDBC getInstance() {
         if (cm == null) {
@@ -446,7 +446,7 @@ public class ClasseModeleJDBC extends ClasseModele {
     /**
      * Méthode deleteE supprime un enseignant sur base de son matricule
      *
-     * @param ens
+     * @param ens l'enseignant à supprimer
      * @return le message de résultat
      */
     @Override

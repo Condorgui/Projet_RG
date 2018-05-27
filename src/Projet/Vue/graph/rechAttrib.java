@@ -40,8 +40,8 @@ public class rechAttrib extends javax.swing.JPanel {
     private ClasseModele cm;
 
     /**
-     *
-     * @param cm
+     * Setter du modèle
+     * @param cm le modèle à set
      */
     public void setModele(ClasseModele cm) {
 
@@ -61,6 +61,10 @@ public class rechAttrib extends javax.swing.JPanel {
         suppAtt.setBackground(a);
     }
 
+    /**
+     *
+     * @param modif
+     */
     public void setAttribution(Attribution modif) {
 
         this.m = modif;
@@ -155,6 +159,14 @@ public class rechAttrib extends javax.swing.JPanel {
         add(btnRemp);
 
         modifAtt.setText("Modifier");
+        modifAtt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modifAttMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modifAttMouseExited(evt);
+            }
+        });
         modifAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modifAttActionPerformed(evt);
@@ -163,6 +175,15 @@ public class rechAttrib extends javax.swing.JPanel {
         add(modifAtt);
 
         suppAtt.setText("Supprimer");
+        suppAtt.setToolTipText("La suppression est définitive  ");
+        suppAtt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                suppAttMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                suppAttMouseExited(evt);
+            }
+        });
         suppAtt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 suppAttActionPerformed(evt);
@@ -258,6 +279,26 @@ public class rechAttrib extends javax.swing.JPanel {
         initPanel();
 
     }//GEN-LAST:event_suppAttActionPerformed
+
+    private void modifAttMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifAttMouseEntered
+        Color b = new Color(138, 254, 71);
+        modifAtt.setBackground(b);
+    }//GEN-LAST:event_modifAttMouseEntered
+
+    private void modifAttMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifAttMouseExited
+         Color b = new Color(147, 216, 136);
+        modifAtt.setBackground(b);
+    }//GEN-LAST:event_modifAttMouseExited
+
+    private void suppAttMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppAttMouseEntered
+        Color a = new Color(243, 49, 49);
+        suppAtt.setBackground(a);
+    }//GEN-LAST:event_suppAttMouseEntered
+
+    private void suppAttMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppAttMouseExited
+        Color a = new Color(247, 104, 104);
+        suppAtt.setBackground(a);
+    }//GEN-LAST:event_suppAttMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

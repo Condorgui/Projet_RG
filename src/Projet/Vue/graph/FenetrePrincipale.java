@@ -30,10 +30,10 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         this.MenuAjout.setEnabled(false);
         this.MenuModif.setEnabled(false);
         this.affichage.setEnabled(false);
-        Color c1 = new Color(234,204,89);
-        Color c2 = new Color(170,234,147);
+        Color c1 = new Color(234, 204, 89);
+        Color c2 = new Color(170, 234, 147);
         modeJDBC.setBackground(c1);
-        modeListe.setBackground(c2);
+
 
     }
 
@@ -68,7 +68,6 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         panelAccueil1 = new Projet.Vue.graph.panelAccueil();
         jLabel2 = new javax.swing.JLabel();
         modeJDBC = new javax.swing.JButton();
-        modeListe = new javax.swing.JButton();
         ajoutEnseignant1 = new Projet.Vue.graph.ajoutEnseignant();
         ajoutClasse1 = new Projet.Vue.graph.ajoutClasse();
         affichage3 = new Projet.Vue.graph.affichage();
@@ -132,20 +131,20 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         jLabel2.getAccessibleContext().setAccessibleName("<html> <b>Bienvenue sur la page d'accueil du gestionnaire </b> </html>");
 
         modeJDBC.setText("<html><b>Accéder au gestionnaire BDD</b></html>");
+        modeJDBC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modeJDBCMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modeJDBCMouseExited(evt);
+            }
+        });
         modeJDBC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modeJDBCActionPerformed(evt);
             }
         });
         accueil.add(modeJDBC);
-
-        modeListe.setText("<html><b>Accéder au gestionnaire Liste</b></html>");
-        modeListe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modeListeActionPerformed(evt);
-            }
-        });
-        accueil.add(modeListe);
 
         getContentPane().add(accueil, "card4");
         getContentPane().add(ajoutEnseignant1, "card2");
@@ -307,29 +306,16 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         rechAttrib5.initPanel();
     }//GEN-LAST:event_modifAttActionPerformed
 
-    private void modeListeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeListeActionPerformed
-        setTitle("Projet Java - Liste");
-        ClasseModele cm = ClasseModele.getInstance();
-        this.MenuAjout.setEnabled(true);
-        this.MenuModif.setEnabled(true);
-        this.affichage.setEnabled(true);
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(this.getContentPane(), "card2");
-        cm.populate();
-        ajoutEnseignant1.setModele(cm);
-        ajoutClasse1.setModele(cm);
-        affichage3.setModele(cm);
-        affichage3.initPanel();
-        rechEnseignant1.setModele(cm);
-        rechEnseignant1.initPanel();
-        rechClasse3.setModele(cm);
-        rechClasse3.initPanel();
-        ajoutAttrib2.setModele(cm);
-        ajoutAttrib2.initPanel();
-        rechAttrib5.setModele(cm);
-        rechAttrib5.initPanel();
-        JOptionPane.showMessageDialog(this, "Bienvenue sur le mode liste", "Résultat", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_modeListeActionPerformed
+    private void modeJDBCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modeJDBCMouseEntered
+        Color c1 = new Color(253, 220, 4);
+        modeJDBC.setBackground(c1);
+    }//GEN-LAST:event_modeJDBCMouseEntered
+
+    private void modeJDBCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modeJDBCMouseExited
+        Color c1 = new Color(234, 204, 89);
+        modeJDBC.setBackground(c1);
+
+    }//GEN-LAST:event_modeJDBCMouseExited
 
     /**
      * @param args the command line arguments
@@ -394,7 +380,6 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JMenuBar menub;
     private javax.swing.JButton modeJDBC;
-    private javax.swing.JButton modeListe;
     private javax.swing.JMenuItem modifAtt;
     private javax.swing.JMenuItem modifClasse;
     private javax.swing.JMenuItem modifEns;

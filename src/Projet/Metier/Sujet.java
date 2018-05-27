@@ -22,24 +22,24 @@ public abstract class Sujet {
     protected ArrayList<Observateur> observateurs = new ArrayList<Observateur>();
     
     /**
-     *
-     * @param o
+     * ajoute aux observateurs
+     * @param o l'observateur à ajouter
      */
     public void ajoute(Observateur o){
         observateurs.add(o);
     }
     
     /**
-     *
-     * @param o
+     * retire de la liste observateur
+     * @param o l'observateur à retirer
      */
     public void retire(Observateur o){
         observateurs.remove(o);
     }
     
     /**
-     *
-     * @param texte
+     * Notification à envoyer
+     * @param texte le texte à envoyer aux obs
      */
     public void notifie(String texte){
         observateurs.forEach((o) -> {

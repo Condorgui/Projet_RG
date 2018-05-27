@@ -28,8 +28,8 @@ public class rechEnseignant extends javax.swing.JPanel {
     private ClasseModele cm;
 
     /**
-     *
-     * @param cm
+     * Setter du modèle
+     * @param cm le modèle à set
      */
     public void setModele(ClasseModele cm) {
 
@@ -70,7 +70,6 @@ public class rechEnseignant extends javax.swing.JPanel {
         prenomEns.setBackground(Color.white);
         mailEns.setBackground(Color.white);
         matEns.setBackground(Color.white);
-      
 
     }
 
@@ -155,6 +154,14 @@ public class rechEnseignant extends javax.swing.JPanel {
         add(mailEns);
 
         modif.setText("Modifier");
+        modif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modifMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modifMouseExited(evt);
+            }
+        });
         modif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modifActionPerformed(evt);
@@ -163,6 +170,15 @@ public class rechEnseignant extends javax.swing.JPanel {
         add(modif);
 
         Supprimer.setText("Supprimer");
+        Supprimer.setToolTipText("La suppression est définitive  ");
+        Supprimer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SupprimerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SupprimerMouseExited(evt);
+            }
+        });
         Supprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SupprimerActionPerformed(evt);
@@ -208,7 +224,7 @@ public class rechEnseignant extends javax.swing.JPanel {
         boolean erreur = false;
         boolean erreurmail = false;
         boolean erreurmat = false;
-        boolean erreurattrib = false; 
+        boolean erreurattrib = false;
 
         String nom = nomEns.getText();
         if (nom.trim().equals("")) {
@@ -238,9 +254,9 @@ public class rechEnseignant extends javax.swing.JPanel {
             matEns.setBackground(Color.red);
             matEns.setText("Le matricule doit faire 4 caractères !");
         }
-        if(tmpE.getRemplacant() != null || tmpE.getTitulaire() != null){
-            erreurattrib = true; 
-            
+        if (tmpE.getRemplacant() != null || tmpE.getTitulaire() != null) {
+            erreurattrib = true;
+
         }
 
         if (!erreur && !erreurmail && !erreurmat && !erreurattrib) {
@@ -250,7 +266,6 @@ public class rechEnseignant extends javax.swing.JPanel {
                 //JOptionPane.showMessageDialog(this, e, "Résultat", JOptionPane.INFORMATION_MESSAGE);
                 String msg = cm.modifyE(newEns, tmpE);
                 JOptionPane.showMessageDialog(this, msg, "Résultat", JOptionPane.INFORMATION_MESSAGE);
-                
 
             } catch (HeadlessException e) {
                 JOptionPane.showMessageDialog(this, "Erreur d'ajout", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -264,12 +279,12 @@ public class rechEnseignant extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "L'adresse mail doit être au format text@domaine.com", "Erreur du mail", JOptionPane.INFORMATION_MESSAGE);
             }
             if (erreurmat) {
-                    JOptionPane.showMessageDialog(this, "Le matricule doit être composé de 4 chiffres !", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Le matricule doit être composé de 4 chiffres !", "Erreur", JOptionPane.INFORMATION_MESSAGE);
 
-                }
-            if(erreurattrib){
-                JOptionPane.showMessageDialog(this,"Supprimez d'abord les attributions ", "Résultat", JOptionPane.INFORMATION_MESSAGE);
-  
+            }
+            if (erreurattrib) {
+                JOptionPane.showMessageDialog(this, "Supprimez d'abord les attributions ", "Résultat", JOptionPane.INFORMATION_MESSAGE);
+
             }
 
         }
@@ -280,6 +295,26 @@ public class rechEnseignant extends javax.swing.JPanel {
     private void nomEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomEnsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomEnsActionPerformed
+
+    private void modifMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifMouseEntered
+        Color b = new Color(138, 254, 71);
+        modif.setBackground(b);
+    }//GEN-LAST:event_modifMouseEntered
+
+    private void modifMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifMouseExited
+        Color b = new Color(147, 216, 136);
+        modif.setBackground(b);
+    }//GEN-LAST:event_modifMouseExited
+
+    private void SupprimerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimerMouseEntered
+        Color a = new Color(243, 49, 49);
+        Supprimer.setBackground(a);
+    }//GEN-LAST:event_SupprimerMouseEntered
+
+    private void SupprimerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimerMouseExited
+        Color a = new Color(247, 104, 104);
+        Supprimer.setBackground(a);
+    }//GEN-LAST:event_SupprimerMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

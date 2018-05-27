@@ -20,8 +20,8 @@ public class Classe {
     private Enseignant e;
 
     /**
-     *
-     * @param sigle
+     * constructeur avec un seul paramètre 
+     * @param sigle le sigle 
      */
     public Classe(String sigle){
         this.sigle = sigle; 
@@ -37,40 +37,40 @@ public class Classe {
 //Plus que des getters 
 
     /**
-     *
-     * @return
+     * getSigle
+     * @return le sigle
      */
     public String getSigle() {
         return sigle;
     }
 
     /**
-     *
-     * @return
+     * getAnnee
+     * @return l'année
      */
     public int getAnnee() {
         return annee;
     }
 
     /**
-     *
-     * @return
+     * getOrientation
+     * @return l'orientation
      */
     public String getOrientation() {
         return orientation;
     }
 
     /**
-     *
-     * @return
+     * getN_etudiants
+     * @return le nombre d'étudiants
      */
     public int getN_etudiants() {
         return n_etudiants;
     }
 
     /**
-     *
-     * @return
+     * getE
+     * @return l'enseignant
      */
     public Enseignant getE() {
         return e;
@@ -121,8 +121,8 @@ public class Classe {
         /**
          * Setter du sigle du classBuilder
          *
-         * @param sigle
-         * @return
+         * @param sigle le sigle
+         * @return le sigle
          */
         public ClasseBuilder setSigle(String sigle) {
             this.sigle = sigle;
@@ -132,8 +132,8 @@ public class Classe {
         /**
          * Setter de l'orientation du classBuilder
          *
-         * @param orientation
-         * @return
+         * @param orientation l'orientation
+         * @return l'orientation
          */
         public ClasseBuilder setOrientation(String orientation) {
             this.orientation = orientation;
@@ -143,8 +143,8 @@ public class Classe {
         /**
          * Setter du n_etudiants du classBuilder
          *
-         * @param n_etudiants
-         * @return
+         * @param n_etudiants nbr etudiant
+         * @return n_etudiants
          */
         public ClasseBuilder setN_etudiants(int n_etudiants) {
             this.n_etudiants = n_etudiants;
@@ -155,8 +155,8 @@ public class Classe {
         /**
          * Setter de l'enseignant du classBuilder
          *
-         * @param e
-         * @return
+         * @param e l'enseignant à set
+         * @return l'enseignant
          */
         public ClasseBuilder setEnseignant(Enseignant e) {
             this.e = e;
@@ -166,8 +166,8 @@ public class Classe {
         /**
          * Setter de l'année du classbuilder
          *
-         * @param annee
-         * @return
+         * @param annee l'annee a set
+         * @return l'annee
          */
         public ClasseBuilder setAnnee(int annee) {
             this.annee = annee;
@@ -194,7 +194,7 @@ public class Classe {
     /**
      * Méthode equals
      *
-     * @param obj
+     * @param obj l'objet à comparer
      * @return résultat de la comparaison de l'obj
      */
     @Override

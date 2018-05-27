@@ -273,8 +273,8 @@ public class Pvue {
     }
 
     /**
-     *
-     * @return
+     * Méthode getMessage permet d'encoder le matricule
+     * @return le message entré en majuscule
      */
     public String getMessagePK() {
         String msg = sc.nextLine();
@@ -302,9 +302,9 @@ public class Pvue {
     }
 
     /**
-     *
-     * @param msg
-     * @return
+     * Méthode getMsg PL
+     * @param msg le matricule à mettre en majuscule
+     * @return le matricule en maj
      */
     public String getMessagePK(String msg) {
         affichageMessage(msg);
