@@ -204,25 +204,33 @@ public class rechAttrib extends javax.swing.JPanel {
         Object ens = listEnseignant.getSelectedItem();
         Enseignant eRech = cm.getEnseignant((Enseignant) ens);
         Enseignant nvEns = cm.getEnseignant(eRech);
-
+        //nvEns = mon nouvel enseignant 
+        
         Classe classe = null;
         Object cla = listClasse.getSelectedItem();
         Classe aRech = cm.getClasse((Classe) cla);
         Classe nvClasse = cm.getClasse(aRech);
-
+        //nvClasse = ma nouvelle classe
+                
         Object att = listAtt.getSelectedItem();
         Attribution attri = cm.getAttribution((Attribution) att);
         Enseignant eAtt = attri.getEnseignant();
-
+        //eAtt = enseignant de l'ancienne attrib
+        //attri ma nouvelle attribution
+        
         boolean error = false;
 
         if (btnTitu.isSelected()) {
             for (Attribution a : attributions) {
-
                 if (eAtt.getTitulaire() != null) {
                     if (eAtt.getTitulaire().equals(nvClasse)) {
-                        error = true;
-                        JOptionPane.showMessageDialog(this, "Il y a déjà un titulaire attitré", "Titulaire", JOptionPane.ERROR_MESSAGE);
+                        /*eAtt.setTitulaire(null);
+                        nvEns.setTitulaire(nvClasse);
+                        */
+                        error = true; 
+                        JOptionPane.showMessageDialog(this, "Déjà un titulaire attitré ", "Erreur", JOptionPane.ERROR_MESSAGE);
+                        
+                        
                     }
                 }
 
@@ -230,17 +238,11 @@ public class rechAttrib extends javax.swing.JPanel {
             if (!error) {
                 nvEns.setTitulaire(nvClasse);
                 eRech.setTitulaire(null);
-                
-
             }
         } else if (btnRemp.isSelected()) {
             
               nvEns.setRemplacant(nvClasse);
               nvEns.setTitulaire(null);
-            
-            
-            
-
         }
          if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
 
@@ -248,10 +250,6 @@ public class rechAttrib extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
-        /*else if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
-            error = true;
-            JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
-        }*/
         if (!error) {
             Attribution nvAttribution = new Attribution(nvClasse, nvEns);
             String msg = cm.modifyA(nvAttribution, attri);

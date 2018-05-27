@@ -37,11 +37,10 @@ public class ajoutAttrib extends javax.swing.JPanel {
     public List<Attribution> attributions;
 
     private ClasseModele cm;
-    
-
 
     /**
      * Setter du modèle
+     *
      * @param cm le modèle à set
      */
     public void setModele(ClasseModele cm) {
@@ -53,7 +52,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
      *
      */
     public ajoutAttrib() {
-     
+
         initComponents();
         Color font = new Color(247, 223, 154);
         Color b = new Color(147, 216, 136);
@@ -194,7 +193,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
 
             for (Attribution a : attributions) {
                 Enseignant eAtt = a.getEnseignant();
-                if (eAtt.getRemplacant() != null) {
+                if (enseignant.getRemplacant() != null) {
                     error = true;
                     JOptionPane.showMessageDialog(this, "Un enseignant ne peut être que titulaire ou remplaçant", "Titulaire", JOptionPane.ERROR_MESSAGE);
 
@@ -204,6 +203,10 @@ public class ajoutAttrib extends javax.swing.JPanel {
                         error = true;
                         JOptionPane.showMessageDialog(this, "Il y a déjà un titulaire attitré", "Titulaire", JOptionPane.ERROR_MESSAGE);
                     }
+                }
+                if (eAtt.equals(enseignant) && !eAtt.getMatricule().equals(enseignant.getMatricule())) {
+                    error = true;
+                    JOptionPane.showMessageDialog(this, "Il y a déjà un titulaire attitré", "Titulaire", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -244,8 +247,8 @@ public class ajoutAttrib extends javax.swing.JPanel {
     }//GEN-LAST:event_ajoutAttribActionPerformed
 
     private void btnTituActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTituActionPerformed
-     
-        
+
+
     }//GEN-LAST:event_btnTituActionPerformed
 
     private void btnTituStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnTituStateChanged
@@ -292,7 +295,7 @@ public class ajoutAttrib extends javax.swing.JPanel {
         listClasse.removeAllItems();
 
         enseignants.forEach((Enseignant e) -> {
-            if (e.getTitulaire() == null) {
+            if (e.getTitulaire() == null && e.getRemplacant() == null) {
                 listEns.addItem(e);
             }
         });
