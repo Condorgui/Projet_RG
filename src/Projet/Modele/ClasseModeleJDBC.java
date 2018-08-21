@@ -655,7 +655,7 @@ public class ClasseModeleJDBC extends ClasseModele {
                 pstm.setString(3, ancMat);
                 pstm.setString(4, ancSigle);
                 pstm.executeUpdate();
-                pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL WHERE MATRICULE = ?");
+                pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET TITULAIRE = NULL  WHERE MATRICULE = ?");
                 pst.setString(1, ancMat);
                 pst.executeUpdate();
                 pst = dbconnect.prepareStatement("UPDATE ENSEIGNANT SET REMPLACANT = NULL WHERE MATRICULE = ?");

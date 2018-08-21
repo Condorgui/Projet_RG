@@ -2,8 +2,15 @@ package Projet.Modele;
 
 import Projet.Metier.Enseignant;
 
+/**
+ *
+ * @author guill
+ */
 public class Comparator {
 
+    /**
+     *
+     */
     public abstract class compareEns implements java.util.Comparator<Enseignant> {
 
         @Override

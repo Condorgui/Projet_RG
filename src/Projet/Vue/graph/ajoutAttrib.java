@@ -227,15 +227,9 @@ public class ajoutAttrib extends javax.swing.JPanel {
         if (!btnTitu.isSelected() && !btnRemp.isSelected()) {
 
             error = true;
-            JOptionPane.showMessageDialog(this, "Sélectionner titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Sélectionnez titulaire ou remplacant", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
-        /*
-        if (btnTitu.isSelected() && btnRemp.isSelected()) {
-            error = true;
-            JOptionPane.showMessageDialog(this, "Un seul statut à la fois ! ", "Erreur", JOptionPane.ERROR_MESSAGE);
-        }
-         */
         if (!error) {
             Attribution a = new Attribution(classe, enseignant);
             cm.ajouterAttribution(a);
@@ -294,6 +288,12 @@ public class ajoutAttrib extends javax.swing.JPanel {
         listEns.removeAllItems();
         listClasse.removeAllItems();
 
+        /*for(Enseignant e : enseignants){
+            if(e.getTitulaire() == null && e.getRemplacant() == null){
+                listEns.addItem(e);
+            }
+            
+        }*/
         enseignants.forEach((Enseignant e) -> {
             if (e.getTitulaire() == null && e.getRemplacant() == null) {
                 listEns.addItem(e);

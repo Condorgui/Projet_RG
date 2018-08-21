@@ -8,11 +8,8 @@ package Projet.Vue.graph;
 import Projet.Modele.*;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.ImageIcon;
-
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 
 /**
  *
